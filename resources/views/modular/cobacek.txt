@@ -1,0 +1,13 @@
+QUERY SELECT DISTINCT poso.ph,detail.jc_st_id,poso.po_customer,poso.so,doc.jc_st_detail_id,doc.category_id,poso.create_on 
+FROM job_t_so_ph AS poso 
+JOIN svc_t_doc_jc_st AS doc ON poso.ph=doc.doc_jc_st_no 
+JOIN svc_t_jc_st_detail AS detail on detail.jc_st_detail_id=doc.jc_st_detail_id 
+WHERE poso.flag=0 AND detail.document_number IS NOT NULL AND doc.category_id='1' AND poso.so = '1000687270';
+
+SELECT * FROM svc_t_jc_st_detail d WHERE d.JC_ST_ID = 'PLB-JC-1811043';
+SELECT * FROM svc_t_doc_jc_st t WHERE t.doc_jc_st_no='9220137646';
+
+UPDATE svc_t_jc_st_detail SET jc_st_detail_status = (SELECT * FROM (SELECT status_name FROM svc_m_status WHERE status_name = (SELECT jc_st_detail_status FROM svc_t_jc_st_detail WHERE jc_st_detail_id='p.JCSTDetailID') OR status_name='so' ORDER BY status_level DESC LIMIT 0,1) AS result) WHERE jc_st_detail_id=p.JCSTDetailID
+;
+SELECT * FROM svc_t_doc_jc_st s WHERE s.doc_jc_st_no = 'PO/18/09/0265';
+SELECT * FROM svc_t_doc_jc_st s WHERE 1 LIMIT 5;
