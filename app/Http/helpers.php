@@ -13,6 +13,23 @@ function debug($data,$die = 0)
 	if ($die) die;
 }
 
+function curl_api_lumen($url, $attr = NULL)
+{
+	$httpheader = $param = array();
+	$httpheader[] = 'Token: macbook';
+	
+	//
+	if (isset($attr['debug'])) $param['debug'] = $attr['debug'];
+	
+	$param['httpheader'] = $httpheader;
+	$param['useragent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/32.0.1700.107 Chrome/32.0.1700.107 Safari/537.36';
+	// $param[''] = ;
+	
+	$return = curl($url, $param);
+	
+	return $return;
+}
+
 function curl_api_grevia($url, $attr = NULL)
 {
 	$httpheader = $param = array();
