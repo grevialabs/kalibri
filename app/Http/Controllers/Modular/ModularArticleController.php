@@ -29,11 +29,19 @@ class ModularArticleController extends ModularController
 		// 	debug('invalid member<hr/>');
 		// }
 		
-		$url = env('API_URL').'article/get_list';
+		$api_param = NULL;
+		$api_param['secretkey'] = env('API_KEY');
+		
+		// $api['url'] = env('API_URL').'article/get_list';
+		$api['secretkey'] = env('API_SECRETKEY');
+		$api['url'] = env('API_URL').'article/get';
+		$api['method'] = 'get';
+		$api['param'] = $api_param;
 			
-		$obj = curl_api_lumen($url);
-		$obj = json_decode($obj,1);
-		// debug($obj,1);
+		// $obj = curl_api_lumen($url);
+		$obj = curl_api_grevia($api['url']);
+		// if (isset($obj)) $obj = json_decode($obj,1);
+		// if (isset($obj)) $obj = json_decode($obj,1);
 		
 		if ($_POST) 
 		{
@@ -71,8 +79,6 @@ class ModularArticleController extends ModularController
 				if (isset($obj['password']) && dodecrypt($obj['password']) == $post['password'])
 				{
 					// check if uri last page exist
-					
-					
 					// create cookie or session 
 					$cname = $cvalue = $cminutes = NULL;
 					$cname = 'tokenhash';
@@ -102,6 +108,7 @@ class ModularArticleController extends ModularController
 		}
 		
 		$param = NULL;
+		$param['api'] = $api;
 		$param['data'] = $obj;
 		$param['message'] = Lang::get('common.message');
 		$param['PAGE_TITLE'] = 'Halaman Artikel';

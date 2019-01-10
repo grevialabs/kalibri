@@ -13,10 +13,13 @@ function debug($data,$die = 0)
 	if ($die) die;
 }
 
-function curl_api_lumen($url, $attr = NULL)
+function curl_api_lumen($url, $attr = NULL, $data = NULL)
 {
 	$httpheader = $param = array();
-	$httpheader[] = 'Token: macbook';
+	// $httpheader[] = 'Token: macbook';
+	$httpheader[] = 'Secretkey: grevia';
+	
+	$data['secretkey'] = 'grevia';
 	
 	//
 	if (isset($attr['debug'])) $param['debug'] = $attr['debug'];
@@ -25,16 +28,18 @@ function curl_api_lumen($url, $attr = NULL)
 	$param['useragent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/32.0.1700.107 Chrome/32.0.1700.107 Safari/537.36';
 	// $param[''] = ;
 	
-	$return = curl($url, $param);
+	$return = curl($url, $param, $data);
 	
 	return $return;
 }
 
-function curl_api_grevia($url, $attr = NULL)
+function curl_api_grevia($url, $attr = NULL, $data = NULL)
 {
 	$httpheader = $param = array();
 	$httpheader[] = 'Secretkey: grevia';
 	
+	// $data['secretkey'] = 'grevia';
+	
 	//
 	if (isset($attr['debug'])) $param['debug'] = $attr['debug'];
 	
@@ -42,12 +47,12 @@ function curl_api_grevia($url, $attr = NULL)
 	$param['useragent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/32.0.1700.107 Chrome/32.0.1700.107 Safari/537.36';
 	// $param[''] = ;
 	
-	$return = curl($url, $param);
+	$return = curl($url, $param, $data);
 	
 	return $return;
 }
 
-function curl($url, $attr = NULL)
+function curl($url, $attr = NULL, $data = NULL)
 {
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
@@ -93,6 +98,25 @@ function curl($url, $attr = NULL)
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);    // Disabled SSL Cert checks
 	curl_setopt($ch, CURLOPT_VERBOSE 		, true);     // Show info
 	
+	if (! empty($data)) curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
+	
+	// get, post, put, delete
+	if (isset($attr['method'])) {		
+		
+		$post_arr = array('post','put','delete');
+		if (in_array($attr['method'],$post_arr)) {
+			
+			if ($attr['method'] == 'post') curl_setopt($ch, CURLOPT_POST, true);
+			else if ($attr['method'] == 'put') curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+			else if ($attr['method'] == 'delete') curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+			
+		}
+	} else {
+		// method get
+		
+		curl_setopt($ch, CURLOPT_POST, 0);
+		curl_setopt($ch, CURLOPT_HTTPGET, 1);
+	}
 	
 	if (isset($attr['debug'])) {
 		// debugging process
