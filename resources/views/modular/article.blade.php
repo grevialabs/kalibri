@@ -4,6 +4,8 @@
 // echo http_build_query($api['param']).'<hr/>';
 // die;
 ?>
+
+
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
 
@@ -21,43 +23,8 @@
 				{!! session('message') !!}
 			@endif
 			<div id="article">
-				<table class="table table-striped">
-					<tr>
-						<td>#</td>
-						<td>Name</td>
-						<td>Slug</td>
-						<td>Status</td>
-						<td>Option</td>
-					</tr>
-					<?php 
-					$dataraw = $listdata = $total_rows = NULL;
-					if (! empty($data)) $data = $dataraw = json_decode($data,1);
-					if (isset($data['data'])) $listdata = $data['data'];
-					if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
-					
-					if (! empty($dataraw)) 
-					{
-
-					?>
-					<tr v-for="(rs, key) in listdata">
-						<td>@{{ key + 1}}</td>
-						<td>@{{ rs.title}}</td>
-						<td>@{{ rs.category_name}}</td>
-						<td>@{{ rs.view}}</td>
-						<td>@{{ rs.view}}</td>
-					</tr>
-					<?php 
-					} 
-					else 
-					{
-						?>
-						<tr>
-							<td colspan="100%">Data tidak tersedia</td>
-						</tr>
-						<?php
-					}
-					?>
-				</table>
+				<div id="div_table_article"></div>
+				
 				
 			</div>
 			
@@ -88,107 +55,85 @@
 </div>
 
 <script>
-var listdata = <?php echo json_encode($listdata)?>;
-var vue = new Vue({
-  el:'#article',
-  // data: listdata
-});
+
+<?php 
+
+$dataraw = $listdata = $total_rows = NULL;
+if (! empty($data)) $data = $dataraw = json_decode($data,1);
+if (isset($data['data'])) $listdata = $data['data'];
+if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
+?>
 
 var api_secretkey = '<?php echo $api['secretkey'] ?>'
+var api_url = '<?php echo $api['url'] ?>'
 
-var data = [];
+var listdata = []
+
+var listdataa = <?php echo json_encode($listdata) ?>
+
 // let headers = {
 axios.defaults.headers = {
 	'Content-Type': 'application/json',
 	Secretkey: api_secretkey
 }
 
-var api_url = '<?php echo $api['url'] ?>'
-// var test = []
-// test['article_id'] = 1
-// console.log(test)
-const getListArticle = async () => {
-  var url = '<?php echo env('API_URL').'article/get_list'; ?>';
-  // var api_method = '<?php echo $api['method'] ?>'
-  try {
-    await axios.get(api_url)
-	.then(response => {
-		console.log('Response ', response.data)
-	})
-	.catch(e => {
-		console.log('Error: ', e.response.data)
-	})
+var vue = new Vue({
+  el:'#article', 
+})
 
-	
-  } catch (error) {
-    console.error(error)
-  }
-} 
+const getListArticle = async () => {
+	return await axios.get(api_url)
+	.then(response => {
+		// this.listdata = response.data
+		load_article(response.data,'div_table_article')
+	})
+}
 
 getListArticle()
-
-
-// --------------------------------------
-
-// const hitApi = async () => {
-  // var api_url = '<?php echo $api['url'] ?>?article_id=1';
-  // try {
-    // return await axios.get(api_url)
-  // } catch (error) {
-    // console.error(error)
-  // }
-// }
-
-// const getData = async () => {
-  // const listArticle = await hitApi()
-  // console.log(listArticle)
-  // if (listArticle.data.message) {
-    // console.log(`Got ${Object.entries(listArticle.data.message).length} listArticle`)
-  // }
-// }
-
-// getData()
-// --------------------------------------
-// const getBreeds = async () => {
-  // try {
-    // return await axios.get('https://dog.ceo/api/breeds/list/all')
-  // } catch (error) {
-    // console.error(error)
-  // }
-// }
-// getBreeds()
-
-// const countBreeds = async () => {
-  // const breeds = await getBreeds()
-  // console.log(breeds)
-  // if (breeds.data.message) {
-    // console.log(`Got ${Object.entries(breeds.data.message).length} breeds`)
-  // }
-// }
-
-// countBreeds()
-// --------------------------------------
-
-// const getBreeds = () => {
-  // try {
-    // return axios.get('https://dog.ceo/api/breeds/list/all')
-  // } catch (error) {
-    // console.error(error)
-  // }
-// }
-
-// const countBreeds = async () => {
-  // const breeds = getBreeds()
-    // .then(response => {
-      // if (response.data.message) {
-        // console.log(response.data)
-		// console.log(`Got ${Object.entries(response.data.message).length} breeds`)
-      // }
-    // })
-    // .catch(error => {
-      // console.log(error)
-    // })
-// }
-
-// countBreeds()
+  
+function load_article(objArticle, tableId = 'div_table_article') {
+	// var objArticle = this.listdata.data
+	// var objArticle = this.listdata.data
+	// var totalRows = this.listdata.total_rows
+	
+	var objlist = objArticle.data
+	var totalRows = objArticle.total_rows
+	
+	var append = ''
+	if (objlist) {
+		append += 'Total ' + totalRows + ' data'
+		append += '<table class="table table-striped" id="table_article">'
+		append += '<tr>'
+		append += '<td>#</td>'
+		append += '<td>Name</td>'
+		append += '<td>Slug</td>'
+		append += '<td>Status</td>'
+		append += '<td>Option</td>'
+		append += '</tr>'
+		
+		var cnt = 0
+		for (i in objlist)
+		{
+			cnt+=1
+			console.log('start loop')
+			append += '<tr>'
+			append += '<td>' + cnt + '</td>'
+			append += '<td>' + objlist[i].title + '</td>'
+			append += '<td>' + objlist[i].category_name + '</td>'
+			append += '<td>' + objlist[i].view + '</td>'
+			append += '<td>' + objlist[i].email + '</td>'
+			append += '</tr>'
+		}
+		append += '</table>'
+		console.log('end loop for load_article');
+		// $('#label_response').html(append)
+		// $('#table_article tr:last').html(append)
+		console.log('end append table');
+		
+	} else {
+		append += '<div class="alert alert-warning">Data tidak tersedia</div>'
+	}
+	$('#' + tableId).html(append)
+	
+}
 </script>
