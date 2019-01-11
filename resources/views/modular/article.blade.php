@@ -5,7 +5,6 @@
 // die;
 ?>
 
-
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
 
@@ -22,10 +21,12 @@
 			@if (session('message'))
 				{!! session('message') !!}
 			@endif
+			
 			<div id="article">
-				<div id="div_table_article"></div>
-				
-				
+				<div id="div_table_article">
+					<i class="fa fa-cog fa-spin fa-2x fa-fw"></i> Loading...
+					<span class="sr-only">Loading...</span>
+				</div>
 			</div>
 			
 			<!--
@@ -66,12 +67,8 @@ if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
 
 var api_secretkey = '<?php echo $api['secretkey'] ?>'
 var api_url = '<?php echo $api['url'] ?>'
-
 var listdata = []
 
-var listdataa = <?php echo json_encode($listdata) ?>
-
-// let headers = {
 axios.defaults.headers = {
 	'Content-Type': 'application/json',
 	Secretkey: api_secretkey
@@ -96,11 +93,14 @@ function load_article(objArticle, tableId = 'div_table_article') {
 	// var objArticle = this.listdata.data
 	// var totalRows = this.listdata.total_rows
 	
+	if (! objArticle) return false;
+	
 	var objlist = objArticle.data
 	var totalRows = objArticle.total_rows
 	
 	var append = ''
-	if (objlist) {
+	if (objlist) 
+	{
 		append += 'Total ' + totalRows + ' data'
 		append += '<table class="table table-striped" id="table_article">'
 		append += '<tr>'
@@ -112,10 +112,8 @@ function load_article(objArticle, tableId = 'div_table_article') {
 		append += '</tr>'
 		
 		var cnt = 0
-		for (i in objlist)
-		{
+		for (i in objlist) {
 			cnt+=1
-			console.log('start loop')
 			append += '<tr>'
 			append += '<td>' + cnt + '</td>'
 			append += '<td>' + objlist[i].title + '</td>'
@@ -125,10 +123,6 @@ function load_article(objArticle, tableId = 'div_table_article') {
 			append += '</tr>'
 		}
 		append += '</table>'
-		console.log('end loop for load_article');
-		// $('#label_response').html(append)
-		// $('#table_article tr:last').html(append)
-		console.log('end append table');
 		
 	} else {
 		append += '<div class="alert alert-warning">Data tidak tersedia</div>'

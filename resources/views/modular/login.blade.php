@@ -13,7 +13,6 @@
 				{!! session('message') !!}
 			@endif
 			
-			{!! Lang::get('common.please_login_info_from_api_grevia') !!}
 			<form method="post">
 				<div class="md-form">
 					<i class="fa fa-user prefix"></i>
@@ -25,6 +24,10 @@
 					<i class="fa fa-lock prefix"></i>
 					<input type="password" id="inputValidationEx2" class="form-control validate" name="password" required>
 					<label for="inputValidationEx2" data-error="wrong" data-success="right">Password</label>
+				</div>
+				
+				<div class="md-form" >
+					<a href="forgotpass" target="_blank">{{ Lang::get('modular/login.forgotpass') }}</a>
 				</div>
 				
 				<div>

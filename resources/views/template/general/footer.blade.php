@@ -1,4 +1,4 @@
 <div class="text-center">
     <hr/>
-    &copy; Kalibri
+    &copy; codename Kalibri
 </div>

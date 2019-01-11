@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'Modular\ModularController@index');
+// Route::get('/', 'Modular\ModularController@login');
 Route::get('/welcome', 'Modular\ModularController@welcome');
 Route::get('/about', 'Modular\ModularController@about');
 Route::get('/test_curl', 'Modular\ModularController@test_curl');
@@ -30,6 +31,7 @@ Route::get('/scrapeig', 'Scrapeig\ScrapeigController@scrapeig_index');
 // Route::get('/login', 'Modular\ModularController@login');
 Route::any('/login', 'Modular\ModularLoginController@login');
 Route::any('/article', 'Modular\ModularArticleController@article');
+Route::any('/forgotpass', 'Modular\ModularForgotpassController@forgotpass');
 
 
 Route::prefix('modular')->group(function () {

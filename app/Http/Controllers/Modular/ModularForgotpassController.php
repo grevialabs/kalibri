@@ -13,11 +13,11 @@ use Patriot\Http\Controllers\Modular\ModularController;
 use Cookie;
 use Lang;
 
-class ModularLoginController extends ModularController
+class ModularForgotpassController extends ModularController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 	
-	public function login()
+	public function forgotpass()
 	{
 		// Redirect guest to login
 		// if (is_member()) {
@@ -97,8 +97,8 @@ class ModularLoginController extends ModularController
 		
 		$param = NULL;
 		$param['message'] = Lang::get('common.message');
-		$param['PAGE_TITLE'] = Lang::get('modular/login.page_title');
-		$param['CONTENT'] = view('modular.login',$param);
+		$param['PAGE_TITLE'] = Lang::get('modular/forgotpass.page_title');
+		$param['CONTENT'] = view('modular.forgotpass',$param);
 		return view('template.general.index',$param);
 	}
 }

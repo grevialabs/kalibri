@@ -11,6 +11,9 @@ use Patriot\Http\Controllers\Controller;
 
 use Cookie;
 use Exception;
+use Lang;
+// use Redirect;
+use Illuminate\Support\Facades\Redirect;
 
 class ModularController extends Controller
 {
@@ -18,6 +21,13 @@ class ModularController extends Controller
 	
 	public function index()
 	{	
+		// Check if not login then show else show 
+		if (is_member()) {
+			return redirect('member/home');
+		} else {
+			return redirect('login');
+		}
+		
 		// echo "wkwk<hr/>";
 		// $url = 'http://localhost/patriot/public/api/v1/article/get?token=95948463848313&format=json';
 		// $url = 'http://172.16.52.145/patriot/public/api/v1/article/get?token=95948463848313&format=json';
@@ -33,22 +43,11 @@ class ModularController extends Controller
 		// debug('gokil<hr/>');
 		// debug($cookie,1);
 		
-		// try{
-			// // try code
-			// $ma ="-2(-10)";
-			// $p = eval('return '.$ma.';');
-		// } 
-		// catch(\Exception $e){
-			// // catch code
-			// debug($e->getMessage,1);
-		// }
-		// debug($p,1);
-		
-		$param = NULL;
-		$param['PAGE_TITLE'] = 'Halaman Modular index';
-		$param['BS_TEMPLATE'] = TRUE;
-		$param['CONTENT'] = view('modular.index',$param);
-		return view('template.general.index',$param);
+		// $param = NULL;
+		// $param['PAGE_TITLE'] = 'Halaman Modular index';
+		// $param['BS_TEMPLATE'] = TRUE;
+		// $param['CONTENT'] = view('modular.index',$param);
+		// return view('template.general.index',$param);
 	}
 
 	public function test_curl()
@@ -65,14 +64,6 @@ class ModularController extends Controller
 		
 	}
 	
-	// public function login()
-	// {	
-		// $param = NULL;
-		// $param['PAGE_TITLE'] = 'Halaman login';
-		// $param['content'] = view('modular.login',$param);
-		// return view('template.general.index',$param);
-	// }
-	
 	public function welcome()
 	{
 		return "halo welcome";
@@ -85,7 +76,9 @@ class ModularController extends Controller
 	
 	public function about()
 	{
-		return "halo about";
-		// die;
+		$param = NULL;
+		$param['PAGE_TITLE'] = 'Halaman About';
+		$param['CONTENT'] = view('modular.about',$param);
+		return view('template.general.index',$param);
 	}
 }
