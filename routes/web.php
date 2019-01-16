@@ -31,6 +31,7 @@ Route::get('/scrapeig', 'Scrapeig\ScrapeigController@scrapeig_index');
 // Route::get('/login', 'Modular\ModularController@login');
 Route::any('/login', 'Modular\ModularLoginController@login');
 Route::any('/article', 'Modular\ModularArticleController@article');
+Route::any('/article-vue', 'Modular\ModularController@article_vue');
 Route::any('/forgotpass', 'Modular\ModularForgotpassController@forgotpass');
 
 

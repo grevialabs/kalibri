@@ -15,6 +15,8 @@ use Lang;
 // use Redirect;
 use Illuminate\Support\Facades\Redirect;
 
+// define('GET','Getois');
+
 class ModularController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -79,6 +81,30 @@ class ModularController extends Controller
 		$param = NULL;
 		$param['PAGE_TITLE'] = 'Halaman About';
 		$param['CONTENT'] = view('modular.about',$param);
+		return view('template.general.index',$param);
+	}
+	
+	public function article_vue()
+	{
+	
+		$api_param = NULL;
+
+		$api['url'] = env('API_URL').'article/get';
+		// $api['method'] = Config::get();
+		$api['param'] = $api_param;
+		// $api['debug'] = 1;
+			
+		// $obj = curl_api_liquid($url);
+		$obj = curl_api_grevia($api['url'],$api,$api_param);
+		// debug($api_param,1);
+		// debug($obj,1);
+		
+		$param = NULL;
+		$param['api'] = $api;
+		$param['data'] = $obj;
+		$param['message'] = Lang::get('common.message');
+		$param['PAGE_TITLE'] = 'Halaman Artikel Vue';
+		$param['CONTENT'] = view('modular.article_vue',$param);
 		return view('template.general.index',$param);
 	}
 }
