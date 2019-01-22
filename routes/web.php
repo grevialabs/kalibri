@@ -17,20 +17,11 @@ Route::get('/welcome', 'Modular\ModularController@welcome');
 Route::get('/about', 'Modular\ModularController@about');
 Route::get('/test_curl', 'Modular\ModularController@test_curl');
 
-// get twitter
-Route::get('/scrapetw_cron', 'Scrapetw\ScrapetwCronController@scrapetw_cron');
-Route::get('/scrapetw_result', 'Scrapetw\ScrapetwResultController@scrapetw_result');
-// Route::get('/scrapetw_export', 'Scrapetw\ScrapetwController@scrapetw_export');
-
-// get IG
-Route::get('/scrapeig_cron', 'Scrapeig\ScrapeigCronController@scrapeig_cron');
-Route::get('/scrapeig_result', 'Scrapeig\ScrapeigResultController@scrapeig_result');
-Route::get('/scrapeig_sampledata', 'Scrapeig\ScrapeigController@scrapeig_sampledata');
-Route::get('/scrapeig', 'Scrapeig\ScrapeigController@scrapeig_index');
-
 // Route::get('/login', 'Modular\ModularController@login');
 Route::any('/login', 'Modular\ModularLoginController@login');
 Route::any('/article', 'Modular\ModularArticleController@article');
+Route::any('/company', 'Modular\ModularCompanyController@company');
+Route::any('/company_list', 'Modular\ModularCompanyController@company_list');
 Route::any('/article-vue', 'Modular\ModularController@article_vue');
 Route::any('/forgotpass', 'Modular\ModularForgotpassController@forgotpass');
 

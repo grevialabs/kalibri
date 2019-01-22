@@ -16,10 +16,10 @@ function debug($data,$die = 0)
 function curl_api_liquid($url, $attr = NULL, $data = NULL)
 {
 	$httpheader = $param = array();
-	// $httpheader[] = 'Token: macbook';
-	$httpheader[] = 'Secretkey: grevia';
+	$httpheader[] = 'Secretkey: macbook';
+	// $httpheader[] = 'Secretkey: grevia';
 	
-	$data['secretkey'] = 'grevia';
+	// $data['secretkey'] = 'grevia';
 	
 	//
 	if (isset($attr['debug'])) $param['debug'] = $attr['debug'];
