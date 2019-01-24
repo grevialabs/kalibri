@@ -22,6 +22,7 @@ Route::any('/login', 'Modular\ModularLoginController@login');
 Route::any('/article', 'Modular\ModularArticleController@article');
 Route::any('/company', 'Modular\ModularCompanyController@company');
 Route::any('/company_list', 'Modular\ModularCompanyController@company_list');
+Route::any('/company_form', 'Modular\ModularCompanyController@company_form');
 Route::any('/article-vue', 'Modular\ModularController@article_vue');
 Route::any('/forgotpass', 'Modular\ModularForgotpassController@forgotpass');
 

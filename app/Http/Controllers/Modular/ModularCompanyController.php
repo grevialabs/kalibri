@@ -110,7 +110,7 @@ class ModularCompanyController extends ModularController
 		$param['api'] = $api;
 		$param['data'] = $obj;
 		$param['message'] = Lang::get('common.message');
-		$param['PAGE_TITLE'] = 'Halaman Artikel';
+		$param['PAGE_TITLE'] = 'Halaman Company';
 		$param['CONTENT'] = view('modular.company',$param);
 		return view('template.general.index',$param);
 	}
@@ -136,8 +136,17 @@ class ModularCompanyController extends ModularController
 		// $param['data'] = $data;
 		// debug($data,1);
 		$param['message'] = Lang::get('common.message');
-		$param['PAGE_TITLE'] = 'Halaman Artikel';
+		$param['PAGE_TITLE'] = 'Halaman Company';
 		$param['CONTENT'] = view('modular.company_list',$param);
+		return view('template.general.index',$param);
+	}
+	
+	public function company_form()
+	{		
+		$param = NULL;
+		$param['message'] = Lang::get('common.message');
+		$param['PAGE_TITLE'] = 'Halaman Company';
+		$param['CONTENT'] = view('modular.company_form',$param);
 		return view('template.general.index',$param);
 	}
 }

@@ -17,7 +17,10 @@
                 <a class="nav-link" href="article">Article</a>
             </li>
 			<li class="nav-item">
-                <a class="nav-link" href="company_list">Company</a>
+                <a class="nav-link" href="company_list">Company List</a>
+            </li>
+			<li class="nav-item">
+                <a class="nav-link" href="company_form">Company Form</a>
             </li>
             @if (is_member())
             <li class="nav-item">

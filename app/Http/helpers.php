@@ -480,4 +480,9 @@ function base_url()
 	return URL::to('/').'/';
 }
 
+function get_ip()
+{
+	return $_SERVER['REMOTE_ADDR'];
+}
+
 ?>
