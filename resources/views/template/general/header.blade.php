@@ -10,14 +10,14 @@
             
         </ul>
 		<ul class="navbar-nav navbar-right">
-			<li class="nav-item active">
-                <a class="nav-link" href="{{ base_url() }}">Home <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="about">About</a>
             </li>
 			<li class="nav-item">
                 <a class="nav-link" href="article">Article</a>
+            </li>
+			<li class="nav-item">
+                <a class="nav-link" href="company_list">Company</a>
             </li>
             @if (is_member())
             <li class="nav-item">

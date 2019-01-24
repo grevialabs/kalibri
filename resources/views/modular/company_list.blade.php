@@ -1,16 +1,57 @@
 <?php 
+
+
+
+// debug(currentPageUrl(),1);
+
 // debug($data,1);
 // debug($api['param']);
 // echo http_build_query($api['param']).'<hr/>';
 // die;
 // <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-$data = '{"totaldata":3,"data":[{"company_id":1,"company_name":"PT Yamaha","company_address":"Jl PRJ","company_phone":"021123456","company_pic":"Bejo","status":1,"created_at":null,"created_by":null,"created_ip":null,"updated_at":null,"updated_by":null,"updated_ip":null},{"company_id":2,"company_name":"PT Honda Indah Pertama","company_address":"Jl bidara no 9","company_phone":"11021312","company_pic":"Astra","status":1,"created_at":null,"created_by":null,"created_ip":null,"updated_at":null,"updated_by":null,"updated_ip":null},{"company_id":3,"company_name":"Beogradiant","company_address":"Jl laksa","company_phone":"2250212312","company_pic":"Saiful","status":1,"created_at":null,"created_by":null,"created_ip":null,"updated_at":null,"updated_by":null,"updated_ip":null}]}';
+
+// $data = '{"total_rows":3,"data":[{"company_id":1,"company_name":"PT Yamaha","company_address":"Jl PRJ","company_phone":"021123456","company_pic":"Bejo","status":1,"created_at":null,"created_by":null,"created_ip":null,"updated_at":null,"updated_by":null,"updated_ip":null},{"company_id":2,"company_name":"PT Honda Indah Pertama","company_address":"Jl bidara no 9","company_phone":"11021312","company_pic":"Astra","status":1,"created_at":null,"created_by":null,"created_ip":null,"updated_at":null,"updated_by":null,"updated_ip":null},{"company_id":3,"company_name":"Beogradiant","company_address":"Jl laksa","company_phone":"2250212312","company_pic":"Saiful","status":1,"created_at":null,"created_by":null,"created_ip":null,"updated_at":null,"updated_by":null,"updated_ip":null}]}';
+
+// $data = '{"total_rows":3,"data":[{"company_id":1,"company_name":"PT Yamaha","company_address":"Jl PRJ","company_phone":"021123456","company_pic":"Bejo","status":1,"created_at":null,"created_by":null,"created_ip":null,"updated_at":null,"updated_by":null,"updated_ip":null}]}';
+
 // $json = 'awe';
 // $data = json_decode($data,1);
 // echo "from company list";
 // debug($data,1);
 // debug($PAGE_TITLE,1);
+
+// echo "mantap";die;
+
+$page = 1;
+if (isset($_GET['page']) && $_GET['page'] > 1) $page = $_GET['page'];
+
+$total_rows = $list_data = NULL;
+$dataperpage = 1;
+
+$api_param = NULL;
+// $api_param['secretkey'] = env('API_KEY');
+$api_param['token'] = env('API_KEY');
+$api_param['offset'] = 1;
+// $api_param['offset'] = OFFSET;
+$api_param['perpage'] = 1;
+
+$api_url = env('API_URL').'company/get_list';
+$api_method = 'get';
+// $api_header['debug'] = 1;
+
+$data = curl_api_liquid($api_url, $api_method, NULL, $api_param);
+debug($data);
+
+$obj_list_company = NULL;
+
+$obj_list_company = $data;
+
 ?>
+
+<style>
+.pagination{display:inline-block;padding-left:0;margin:20px 0;border-radius:4px}.pagination>li{display:inline}.pagination>li>a,.pagination>li>span{position:relative;float:left;padding:6px 12px;margin-left:-1px;line-height:1.42857143;color:#337ab7;text-decoration:none;background-color:#fff;border:1px solid #ddd}.pagination>li:first-child>a,.pagination>li:first-child>span{margin-left:0;border-top-left-radius:4px;border-bottom-left-radius:4px}.pagination>li:last-child>a,.pagination>li:last-child>span{border-top-right-radius:4px;border-bottom-right-radius:4px}.pagination>li>a:focus,.pagination>li>a:hover,.pagination>li>span:focus,.pagination>li>span:hover{z-index:2;color:#23527c;background-color:#eee;border-color:#ddd}.pagination>.active>a,.pagination>.active>a:focus,.pagination>.active>a:hover,.pagination>.active>span,.pagination>.active>span:focus,.pagination>.active>span:hover{z-index:3;color:#fff;cursor:default;background-color:#337ab7;border-color:#337ab7}.pagination>.disabled>a,.pagination>.disabled>a:focus,.pagination>.disabled>a:hover,.pagination>.disabled>span,.pagination>.disabled>span:focus,.pagination>.disabled>span:hover{color:#777;cursor:not-allowed;background-color:#fff;border-color:#ddd}.pagination-lg>li>a,.pagination-lg>li>span{padding:10px 16px;font-size:18px;line-height:1.3333333}.pagination-lg>li:first-child>a,.pagination-lg>li:first-child>span{border-top-left-radius:6px;border-bottom-left-radius:6px}.pagination-lg>li:last-child>a,.pagination-lg>li:last-child>span{border-top-right-radius:6px;border-bottom-right-radius:6px}.pagination-sm>li>a,.pagination-sm>li>span{padding:5px 10px;font-size:12px;line-height:1.5}.pagination-sm>li:first-child>a,.pagination-sm>li:first-child>span{border-top-left-radius:3px;border-bottom-left-radius:3px}.pagination-sm>li:last-child>a,.pagination-sm>li:last-child>span{border-top-right-radius:3px;border-bottom-right-radius:3px}
+</style>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
 
@@ -41,18 +82,23 @@ $data = '{"totaldata":3,"data":[{"company_id":1,"company_name":"PT Yamaha","comp
 				<?php 
 				$dataraw = $listdata = $total_rows = NULL;
 				if (! empty($data)) $data = json_decode($data,1);
-				// debug('yamete',1);
+				
 				if (isset($data['data'])) $listdata = $data['data'];
 				if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
 				
-				
-				// debug($listdata,1);
 				// debug($total_rows);
+				// debug($listdata,1);
 				if (! empty($listdata)) 
 				{
 
+					$i = 0;
+					if (is_numeric($page) && $page > 0) 
+					{
+						$i = ($page - 1) * $dataperpage;
+					}
 				?>
 				<tr v-for="(rs, key) in listdata">
+					<??>
 					<td>@{{ key + 1}}</td>
 					<td>@{{ rs.company_name}}</td>
 					<td>@{{ rs.company_address}}</td>
@@ -73,8 +119,11 @@ $data = '{"totaldata":3,"data":[{"company_id":1,"company_name":"PT Yamaha","comp
 				}
 				// debug($data,1);
 				?>
-			</-------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+			</table>
 			
+			<?php if ( ! empty($obj_list_company)) echo common_paging($total_rows, $dataperpage); ?>
+			
+			<!--
 			<div id="company">
 				<div id="div_table_company">
 					<i class="fa fa-cog fa-spin fa-2x fa-fw"></i> Loading...
@@ -82,7 +131,6 @@ $data = '{"totaldata":3,"data":[{"company_id":1,"company_name":"PT Yamaha","comp
 				</div>
 			</div>
 			
-			<!--
 			<form method="post">
 				<div class="md-form">
 					<i class="fa fa-user prefix"></i>
@@ -104,7 +152,7 @@ $data = '{"totaldata":3,"data":[{"company_id":1,"company_name":"PT Yamaha","comp
 			-->
 		</div>
 		<div class="col-sm-2">
-		<?php // debug($data); ?>
+
 		</div>
 	</div>
 </div>

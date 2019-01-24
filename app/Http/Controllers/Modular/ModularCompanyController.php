@@ -7,6 +7,8 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+
 use Patriot\Http\Controllers\Controller;
 use Patriot\Http\Controllers\Modular\ModularController;
 
@@ -32,9 +34,8 @@ class ModularCompanyController extends ModularController
 		$api_param = NULL;
 		$api_param['secretkey'] = env('API_KEY');
 		
-		// $api['url'] = env('API_URL').'company/get_list';
+		$api['url'] = env('API_URL').'company/get_list';
 		$api['secretkey'] = env('API_SECRETKEY');
-		$api['url'] = env('API_URL').'company/get';
 		$api['method'] = 'get';
 		$api['param'] = $api_param;
 		$api['debug'] = '1';
@@ -116,9 +117,24 @@ class ModularCompanyController extends ModularController
 	
 	public function company_list()
 	{		
+		// $api_param = NULL;
+		// // $api_param['secretkey'] = env('API_KEY');
+		// $api_param['token'] = env('API_KEY');
+		// // $api_param['offset'] = OFFSET;
+		// $api_param['perpage'] = 1;
+		
+		// $api_url = env('API_URL').'company/get_list';
+		// $api_method = 'get';
+		// // $api_header['debug'] = 1;
+		
+		// // debug($api_method,1);
+		// $data = curl_api_liquid($api_url, $api_method, NULL, $api_param);
+		// debug($data,1);
+		
 		$param = NULL;
 		// $param['api'] = $api;
-		// $param['data'] = $obj;
+		// $param['data'] = $data;
+		// debug($data,1);
 		$param['message'] = Lang::get('common.message');
 		$param['PAGE_TITLE'] = 'Halaman Artikel';
 		$param['CONTENT'] = view('modular.company_list',$param);

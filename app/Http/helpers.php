@@ -1,4 +1,8 @@
 <?php 
+
+define('OFFSET','0');
+define('PERPAGE','20');
+
 function get_datetime()
 {
 	return date('Y-m-d H:i:s');
@@ -13,7 +17,7 @@ function debug($data,$die = 0)
 	if ($die) die;
 }
 
-function curl_api_liquid($url, $attr = NULL, $data = NULL)
+function curl_api_liquid($url, $method = 'get', $attr = NULL, $data = NULL)
 {
 	$httpheader = $param = array();
 	$httpheader[] = 'Secretkey: macbook';
@@ -23,36 +27,152 @@ function curl_api_liquid($url, $attr = NULL, $data = NULL)
 	
 	//
 	if (isset($attr['debug'])) $param['debug'] = $attr['debug'];
-	
+	// if (isset($attr['method'])) $param['method'] = $attr['method'];
+		
 	$param['httpheader'] = $httpheader;
 	$param['useragent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/32.0.1700.107 Chrome/32.0.1700.107 Safari/537.36';
-	// $param[''] = ;
 	
-	$return = curl($url, $param, $data);
+	// debug($url);
+	// debug($method);
+	// debug($param);
+	// debug($data);
+	
+	$return = curl($url, $method, $param, $data);
+	// debug('start bro');
+	// debug($return,1);
+	
+	// if (isset($attr['debug'])) debug($return,1);
 	
 	return $return;
 }
 
-function curl_api_grevia($url, $attr = NULL, $data = NULL)
+function common_paging($totalRow = "",$dataPerPage = 10, $param = null)
 {
-	$httpheader = $param = array();
-	$httpheader[] = 'Secretkey: grevia';
+	$str = "";
+	$offset = 0;
+	$noPage = '';
+	$activePage = '';
 	
-	// $data['secretkey'] = 'grevia';
+	// $param['is_show_question_mark'] = TRUE;
+	// $param['is_show_total_row'] = FALSE;
 	
-	//
-	if (isset($attr['debug'])) $param['debug'] = $attr['debug'];
+	if (!isset($param['is_show_question_mark'])) $param['is_show_question_mark'] = TRUE;
+	if (!isset($param['is_show_total_row'])) $param['is_show_total_row'] = FALSE;
 	
-	$param['httpheader'] = $httpheader;
-	$param['useragent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/32.0.1700.107 Chrome/32.0.1700.107 Safari/537.36';
-	// $param[''] = ;
+	if(! isset($dataPerPage) || $dataPerPage<=0){
+		$dataPerPage = 20;
+	}
+	if (isset($_GET["page"])) {
+		$noPage = $activePage = $_GET["page"];
+	}
+	else
+
+	$noPage = 1;
 	
-	$return = curl($url, $param, $data);
+	$showPage = '0';
+	$jumData = $totalRow;
+	$jumPage = ceil($jumData/$dataPerPage);
+	if(!is_numeric($activePage) || $activePage > $jumPage || $activePage<=0){
+		$activePage = 1;
+	}
 	
-	return $return;
+	// AUTO REMOVE PARAMETER "PAGE"
+	$currentUrlParameter = currentPageUrl();
+	$i = 1;
+	if (!empty($_GET))
+	{
+		if (isset($_GET['page']))
+		{
+			unset($_GET['page']);
+		}
+
+		foreach($_GET as $key => $val)
+		{
+			if ($key == 0 && strpos($currentUrlParameter,'?') === FALSE) $currentUrlParameter.= '?';
+			
+			$currentUrlParameter.= $key.'='.$val;
+			if (count($_GET)!=$i) $currentUrlParameter.= '&';
+			$i++;
+		}
+	}
+	
+	if($noPage>=1){
+		$offset = ($noPage-1) * $dataPerPage;
+	}
+	
+	if ($jumData <= $dataPerPage) $dataPerPage = $jumData;
+
+	if ($noPage >= 1) {
+		$i = ($noPage-1) * $dataPerPage + 1;
+		$dataPerPage = $noPage * $dataPerPage;
+		if ($dataPerPage > $jumData) $dataPerPage = $jumData;
+	}
+	
+	if( $jumData!=0 ){
+		if (strpos($currentUrlParameter,'?') !== FALSE)
+		{
+			$currentUrlParameter.= "&";
+		}
+		else 
+		{
+			$currentUrlParameter.= "?";
+		}
+		$str.= "<nav>
+		<ul class='pagination'>";
+		//if ($param['is_show_total_row'] == TRUE ) {
+			$str.= "<li class=''><a>Show ". $i ." - ".$dataPerPage." of <strong>".$jumData."</strong> row(s)<span class='sr-only'>Total <strong>".$jumData."</strong> row(s)</span></a></li>";
+		//}
+		$str.= "<li class=''><a>Page ".$activePage." of ".$jumPage." <span class='sr-only'>Page ".$activePage." of ".$jumPage."</span> </a></li>
+		";
+		if($noPage>1){
+			$prev=($noPage-1);
+			$str.= "<li><a href=".$currentUrlParameter."page=".$prev."><span aria-hidden='true'>Prev</span><span class='sr-only'>Prev</span></a></li>" ;
+		}
+		else
+		$str.= "<li><a><span aria-hidden='true'>Prev</span><span class='sr-only'>Prev</span></a></li>" ;
+
+		for($page = 1; $page <= $jumPage; $page++){
+			if ((($page >= $noPage - 3) && ($page <= $noPage + 8)) || ($page == 1) || ($page == $jumPage)) {   
+				if (($showPage == 1) && ($page != 2))  $str.= "<li><a>... <span class='sr-only'>...</span></a><li>"; 
+				if (($showPage != ($jumPage - 1)) && ($page == $jumPage))  $str.= "<li><a>... <span class='sr-only'>...</span></a><li>";
+				if ($page == $noPage) $str.= "<li class='active'><a>".$page." <span class='sr-only'>".$page."</span></a><li>";
+				else 
+					$str.= "<li><a href='".$currentUrlParameter."page=".$page."'>".$page." <span class='sr-only'>".$page."</span></a><li>";
+					$showPage = $page;
+			}
+		}
+
+		if($noPage<$jumPage){
+			$next=($noPage+1);
+			$str.= "<li><a href='".$currentUrlParameter."page=".$next."'>Next <span class='sr-only'>Next</span></a><li>";
+		}
+		else
+		$str.= "<li><a>Next <span class='sr-only'>Next</span></a><li>";
+		$str .= "</ul></nav>";
+	}
+	return $str;
 }
 
-function curl($url, $attr = NULL, $data = NULL)
+// function curl_api_grevia($url, $attr = NULL, $data = NULL)
+// {
+	// $httpheader = $param = array();
+	// $httpheader[] = 'Secretkey: grevia';
+	
+	// // $data['secretkey'] = 'grevia';
+	
+	
+	// if (isset($attr['debug'])) $param['debug'] = $attr['debug'];
+	
+	// $param['httpheader'] = $httpheader;
+	// $param['useragent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/32.0.1700.107 Chrome/32.0.1700.107 Safari/537.36';
+	// // $param[''] = ;
+	
+	// $return = curl($url, $param, $data);
+	
+	// return $return;
+// }
+
+function curl($url, $method = 'get', $attr = NULL, $data = NULL)
 {
 	$ch = curl_init();
 	
@@ -99,19 +219,23 @@ function curl($url, $attr = NULL, $data = NULL)
 	
 	
 	// get, post, put, delete
-	if (isset($attr['method'])) {		
+	if (isset($method)) {		
 		
-		$attr['method'] = strtolower($attr['method']);
+		$method = strtolower($method);
 		
 		$post_arr = array('post','put','delete');
 		
-		if (in_array($attr['method'],$post_arr)) {
+		if (in_array($method,$post_arr)) {
 			
-			if ($attr['method'] == 'post') curl_setopt($ch, CURLOPT_POST, true);
-			else if ($attr['method'] == 'put') curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-			else if ($attr['method'] == 'delete') curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+			if ($method == 'post') curl_setopt($ch, CURLOPT_POST, true);
+			else if ($method == 'put') curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+			else if ($method == 'delete') curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
 			
 			if (! empty($data)) curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
+			
+		} else if ($method == 'get') {
+			
+			if (! empty($data)) $url .= '?'.http_build_query($data);
 		}
 	} else {
 		// method get
