@@ -15,8 +15,17 @@ return [
 
     'please_login_info_from_api_grevia' => 'Silakan login menggunakan Akun dari API Grevia.',
     'message' => 'Dari common nih.',
-    'sorry_error_try_again' => 'Mohon maaf terjadi kesalahan. Mohon coba beberapa saat lagi.',
+    
+	// 'sorry_error_try_again' => 'Mohon maaf terjadi kesalahan. Mohon coba beberapa saat lagi.',
+    'sorry_error_try_again' => 'Sorry error occurred. Please try again.',
+	
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'success' => 'success'
+    'success' => 'success',
+    'page' => 'halaman',
+    'add' => 'add',
+    'data_not_found' => 'Data not found',
+    'data_found' => 'Data found',
+    'found' => 'Found',
+    'search' => 'Search',
 
 ];

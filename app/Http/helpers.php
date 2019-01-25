@@ -2,6 +2,11 @@
 
 define('OFFSET','0');
 define('PERPAGE','20');
+define('DS','/');
+define('BR','<br/>');
+define('HR','</hr>');
+define('ASC','asc');
+define('DESC','desc');
 
 function get_datetime()
 {
@@ -77,12 +82,11 @@ function common_paging($totalRow = "",$dataPerPage = 10, $param = null)
 	}
 	
 	// AUTO REMOVE PARAMETER "PAGE"
-	$currentUrlParameter = currentPageUrl();
+	$currentUrlParameter = current_url();
 	$i = 1;
 	if (!empty($_GET))
 	{
-		if (isset($_GET['page']))
-		{
+		if (isset($_GET['page'])) {
 			unset($_GET['page']);
 		}
 
@@ -91,7 +95,7 @@ function common_paging($totalRow = "",$dataPerPage = 10, $param = null)
 			if ($key == 0 && strpos($currentUrlParameter,'?') === FALSE) $currentUrlParameter.= '?';
 			
 			$currentUrlParameter.= $key.'='.$val;
-			if (count($_GET)!=$i) $currentUrlParameter.= '&';
+			if (count($_GET) != $i) $currentUrlParameter.= '&';
 			$i++;
 		}
 	}
@@ -131,8 +135,8 @@ function common_paging($totalRow = "",$dataPerPage = 10, $param = null)
 		else
 		$str.= "<li><a><span aria-hidden='true'>Prev</span><span class='sr-only'>Prev</span></a></li>" ;
 
-		for($page = 1; $page <= $jumPage; $page++){
-			if ((($page >= $noPage - 3) && ($page <= $noPage + 8)) || ($page == 1) || ($page == $jumPage)) {   
+		for($page = 1; $page <= $jumPage; $page++) {
+			if ((($page >= $noPage - 3) && ($page <= $noPage + 8)) || ($page == 1) || ($page == $jumPage)) {
 				if (($showPage == 1) && ($page != 2))  $str.= "<li><a>... <span class='sr-only'>...</span></a><li>"; 
 				if (($showPage != ($jumPage - 1)) && ($page == $jumPage))  $str.= "<li><a>... <span class='sr-only'>...</span></a><li>";
 				if ($page == $noPage) $str.= "<li class='active'><a>".$page." <span class='sr-only'>".$page."</span></a><li>";
@@ -142,7 +146,7 @@ function common_paging($totalRow = "",$dataPerPage = 10, $param = null)
 			}
 		}
 
-		if($noPage<$jumPage){
+		if($noPage<$jumPage) {
 			$next=($noPage+1);
 			$str.= "<li><a href='".$currentUrlParameter."page=".$next."'>Next <span class='sr-only'>Next</span></a><li>";
 		}
@@ -334,7 +338,7 @@ function print_message($string, $type = 'info'){
 	return $return;
 }
 
-function currentPageUrl() {
+function current_full_url() {
     $curpageURL = 'http';
     //if ($_SERVER["HTTPS"] == "on") {$curpageURL.= "s";}
 		$curpageURL.= "://";
@@ -483,6 +487,16 @@ function base_url()
 function get_ip()
 {
 	return $_SERVER['REMOTE_ADDR'];
+}
+
+/* 
+ * 
+ * Return full url without query string (Return string)
+ * ex: when called in http://localhost/kalibri/company_list?page=4&order=ayam, the output will be 
+ * http://localhost/kalibri/company_list
+ */
+function current_url() {
+	return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 }
 
 ?>

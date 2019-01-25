@@ -1,54 +1,83 @@
 <?php 
-// debug(currentPageUrl(),1);
-
-// debug($data,1);
-// debug($api['param']);
-// echo http_build_query($api['param']).'<hr/>';
-// die;
-// <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-
-// $json = 'awe';
-// $data = json_decode($data,1);
-// echo "from company list";
-// debug($data,1);
-// debug($PAGE_TITLE,1);
-
+// getorder_list
+$arrsort = NULL;
+$get = $getkeyword = $getorder_allowed_list = $getorderby_allowed_list = $getorder_list = $getorder = $getorderby = $offset = $page = $dataperpage = NULL;
+$dataperpage = 2;
 $offset = 0;
 $page = 1;
-if (isset($_GET['page']) && $_GET['page'] > 1) $page = $_GET['page'];
+$getorder_allowed_list = array('company_id','company_name','company_phone','company_address','company_pic');
+$getorderby_allowed_list = array('desc','asc');
 
-$total_rows = $list_data = NULL;
-$dataperpage = 1;
+if (isset($_GET)) $get = $_GET;
+if (isset($get['page']) && $get['page'] > 1) $page = $get['page'];
+if (isset($get['keyword'])) $getkeyword = $get['keyword'];
+if (isset($get['order']) && in_array($get['order'],$getorder_allowed_list)) $getorder = $get['order'];
+if (isset($get['orderby']) && in_array($get['orderby'],$getorderby_allowed_list)) $getorderby = $get['orderby'];
+
 if ($page > 0) $offset = ($page - 1) * $dataperpage;
 
-$api_param = NULL;
-// $api_param['secretkey'] = env('API_KEY');
+// Hit api
+$api_url = $api_method = $api_param = $api_header = NULL;
 $api_param['token'] = env('API_KEY');
 $api_param['perpage'] = $dataperpage;
 $api_param['offset'] = $offset;
-// debug($api_param);
+if (isset($getkeyword)) $api_param['keyword'] = $getkeyword; 
+if (isset($getorder)) $api_param['order'] = $getorder; else $getorder = $getorder_allowed_list[0];
+if (isset($getorderby)) $api_param['orderby'] = $getorderby; else $getorderby = $getorderby_allowed_list[0];
 
 $api_url = env('API_URL').'company/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 
-$data = curl_api_liquid($api_url, $api_method, NULL, $api_param);
+$data = NULL;
+$data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 // debug($data);
 
-$obj_list_company = NULL;
+$dataraw = $listdata = $total_rows = NULL;
+if (! empty($data)) $data = json_decode($data,1);
 
-$obj_list_company = $data;
+if (isset($data['data'])) $listdata = $data['data'];
+if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
 
+// $arrsort
+foreach ($getorder_allowed_list as $k => $rso) {
+	$icon = '<i class="fa fa-arrow-down"></i>';
+	// $icon = 'ladwad';
+	$tmporderby = '';
+	$tmpget = NULL;
+	$tmpget = $get;
+	if (isset($getorder) && $getorder == $rso) {
+		if ($getorderby == ASC) {
+			$icon = '<i class="fa fa-arrow-down"></i>';
+			$tmpget['orderby'] = DESC;
+		} elseif ($getorderby == DESC) {
+			// debug($rso. ' : '.$getorder);
+			$icon = '<i class="fa fa-arrow-up"></i>';
+			$tmpget['orderby'] = ASC;
+		}
+	} else {
+		$tmpget['orderby'] = DESC;
+		$icon = '<i class="fa fa-arrow-down"></i>';
+	}
+	$tmpget['order'] = $rso;
+	$arrsort[$rso]['url'] = current_url().'?'.http_build_query($tmpget);
+	$arrsort[$rso]['icon'] = $icon;
+	$arrsort[$rso]['class'] = 'text_info b';
+	$arrsort[$rso]['title'] = 'Sort by ' . $rso . ' '. $tmpget['orderby'];
+// debug($arrsort,1);
+}
+
+// debug($current_full_url,1);
+
+$companylang = $commonlang = NULL;
+$companylang = Lang::get('modular/company');
+$commonlang = Lang::get('common');
+// debug($commonlang,1);
 ?>
-
-<style>
-.pagination{display:inline-block;padding-left:0;margin:20px 0;border-radius:4px}.pagination>li{display:inline}.pagination>li>a,.pagination>li>span{position:relative;float:left;padding:6px 12px;margin-left:-1px;line-height:1.42857143;color:#337ab7;text-decoration:none;background-color:#fff;border:1px solid #ddd}.pagination>li:first-child>a,.pagination>li:first-child>span{margin-left:0;border-top-left-radius:4px;border-bottom-left-radius:4px}.pagination>li:last-child>a,.pagination>li:last-child>span{border-top-right-radius:4px;border-bottom-right-radius:4px}.pagination>li>a:focus,.pagination>li>a:hover,.pagination>li>span:focus,.pagination>li>span:hover{z-index:2;color:#23527c;background-color:#eee;border-color:#ddd}.pagination>.active>a,.pagination>.active>a:focus,.pagination>.active>a:hover,.pagination>.active>span,.pagination>.active>span:focus,.pagination>.active>span:hover{z-index:3;color:#fff;cursor:default;background-color:#337ab7;border-color:#337ab7}.pagination>.disabled>a,.pagination>.disabled>a:focus,.pagination>.disabled>a:hover,.pagination>.disabled>span,.pagination>.disabled>span:focus,.pagination>.disabled>span:hover{color:#777;cursor:not-allowed;background-color:#fff;border-color:#ddd}.pagination-lg>li>a,.pagination-lg>li>span{padding:10px 16px;font-size:18px;line-height:1.3333333}.pagination-lg>li:first-child>a,.pagination-lg>li:first-child>span{border-top-left-radius:6px;border-bottom-left-radius:6px}.pagination-lg>li:last-child>a,.pagination-lg>li:last-child>span{border-top-right-radius:6px;border-bottom-right-radius:6px}.pagination-sm>li>a,.pagination-sm>li>span{padding:5px 10px;font-size:12px;line-height:1.5}.pagination-sm>li:first-child>a,.pagination-sm>li:first-child>span{border-top-left-radius:3px;border-bottom-left-radius:3px}.pagination-sm>li:last-child>a,.pagination-sm>li:last-child>span{border-top-right-radius:3px;border-bottom-right-radius:3px}
-</style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
 
-<!-- Article AREA -->
+<!-- CONTENT AREA -->
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12 talCnt" style="padding-top: 35px">
@@ -56,31 +85,32 @@ $obj_list_company = $data;
 		</div>
 		
 		<div class="col-sm-2">
+			
 		</div>
-		<div class="col-sm-8">
+		<div class="col-sm-10">
 			@if (session('message'))
 				{!! session('message') !!}
 			@endif
 			
+			<a href="<?php echo current_url().DS.'insert' ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i> {{ $companylang['add_new'] }}</a><br/><br/>
+			
+			<form method="get">
+				<input type="text" name="keyword" class="form-control wdt30-pct display-inline"  placeholder="{{ $commonlang['search'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
+				<button class="btn btn-default btn-sm" type="submit">{{ $commonlang['search'] }}</button>
+			</form>
+			
+			{{ $commonlang['found'] }} <?php echo $total_rows ?> {{ $commonlang['data_found'] }}
 			<table class="table table-striped" id="table_company">
 				<tr>
 					<td>#</td>
-					<td>Name</td>
-					<td>Address</td>
-					<td>Phone</td>
-					<td>PIC</td>
-					<td>Status</td>
+					<td><a class="{{ $arrsort['company_name']['class'] }}" title="{{ $arrsort['company_name']['title'] }}" href="{{ $arrsort['company_name']['url'] }}">CompanyName {!! $arrsort['company_name']['icon'] !!}</a></td>
+					<td><a class="{{ $arrsort['company_address']['class'] }}" title="{{ $arrsort['company_address']['title'] }}" href="{{ $arrsort['company_address']['url'] }}">CompanyAddress {!! $arrsort['company_address']['icon'] !!}</a></td>
+					<td><a class="{{ $arrsort['company_phone']['class'] }}" title="{{ $arrsort['company_phone']['title'] }}" href="{{ $arrsort['company_phone']['url'] }}">CompanyPhone {!! $arrsort['company_phone']['icon'] !!}</a></td>
+					<td><a class="{{ $arrsort['company_pic']['class'] }}" title="{{ $arrsort['company_pic']['title'] }}" href="{{ $arrsort['company_pic']['url'] }}">CompanyPIC {!! $arrsort['company_pic']['icon'] !!}</a></td>
+					<td><a class="{{ $arrsort['company_name']['class'] }}" title="{{ $arrsort['company_name']['title'] }}" href="{{ $arrsort['company_name']['url'] }}">Status</a></td>
 					<td>Option</td>
 				</tr>
 				<?php 
-				$dataraw = $listdata = $total_rows = NULL;
-				if (! empty($data)) $data = json_decode($data,1);
-				
-				if (isset($data['data'])) $listdata = $data['data'];
-				if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
-				
-				// debug($total_rows);
-				// debug($listdata,1);
 				if (! empty($listdata)) 
 				{
 
@@ -92,10 +122,11 @@ $obj_list_company = $data;
 					
 					foreach ($listdata as $key => $rs) 
 					{
+						$i++;
 				?>
 				
 				<tr>
-					<td>{{ $key + 1}}</td>
+					<td>{{ $i }}</td>
 					<td>{{ $rs['company_name'] }}</td>
 					<td>{{ $rs['company_address'] }}</td>
 					<td>{{ $rs['company_phone'] }}</td>
@@ -103,84 +134,26 @@ $obj_list_company = $data;
 					<td>{{ $rs['status'] }}</td>
 					<td>{{ $rs['status'] }}</td>
 				</tr>
-				<?php 
+				<?php
 					}
-				
-					// <tr v-for="(rs, key) in listdata">
-						// <td>@{{ key + 1}}</td>
-						// <td>@{{ rs.company_name}}</td>
-						// <td>@{{ rs.company_address}}</td>
-						// <td>@{{ rs.company_phone}}</td>
-						// <td>@{{ rs.company_pic}}</td>
-						// <td>@{{ rs.status}}</td>
-						// <td>@{{ rs.status}}</td>
-					// </tr>
 				} 
 				else 
 				{
 					?>
 					<tr>
-						<td colspan="100%">Data tidak tersedia</td>
+						<td colspan="100%">{{ $commonlang['data_not_found'] }}</td>
 					</tr>
 					<?php
 				}
-				// debug($data,1);
 				?>
 			</table>
 			
-			<?php if ( ! empty($obj_list_company)) echo common_paging($total_rows, $dataperpage); ?>
+			<?php if ( ! empty($listdata)) echo common_paging($total_rows, $dataperpage); ?>
 			
-			<!--
-			<div id="company">
-				<div id="div_table_company">
-					<i class="fa fa-cog fa-spin fa-2x fa-fw"></i> Loading...
-					<span class="sr-only">Loading...</span>
-				</div>
-			</div>
-			
-			<form method="post">
-				<div class="md-form">
-					<i class="fa fa-user prefix"></i>
-					<input type="text" id="email" class="form-control" name="email" required>
-					<label for="email" >Email</label>
-				</div>
-				
-				<div class="md-form">
-					<i class="fa fa-lock prefix"></i>
-					<input type="password" id="inputValidationEx2" class="form-control validate" name="password" required>
-					<label for="inputValidationEx2" data-error="wrong" data-success="right">Password</label>
-				</div>
-				
-				<div>
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					<input type="submit" class="btn btn-primary btn-md" />
-				</div>
-			</form>
-			-->
-		</div>
-		<div class="col-sm-2">
-
-		</div>
+		</div>	
 	</div>
 </div>
 
 <script>
-
-<?php 
-
-// $dataraw = $listdata = $total_rows = NULL;
-// if (! empty($data)) $data = $dataraw = json_decode($data,1);
-if (!empty($data['data'])) $listdata = $data['data'];
-// if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
-?>
-var listdata = <?php echo json_encode($listdata) ?>
-
-
-var vue = new Vue({
-  el:'#table_company', 
-  data: {
-	  
-  }
-})
 
 </script>
