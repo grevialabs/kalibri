@@ -25,6 +25,7 @@ return [
     'add' => 'add',
     'data_not_found' => 'Data not found',
     'data_found' => 'Data found',
+    'data' => 'data',
     'found' => 'Found',
     'search' => 'Search',
 

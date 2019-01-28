@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark indigo">
+<nav class="navbar navbar-expand-lg navbar-dark turquoise">
 
     <a class="navbar-brand" href="{{ base_url() }}">Kalibri KLBOX</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"

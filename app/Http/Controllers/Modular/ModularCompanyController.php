@@ -12,6 +12,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Patriot\Http\Controllers\Controller;
 use Patriot\Http\Controllers\Modular\ModularController;
 
+// use Patriot\Models\General as GeneralModel;
+// use Patriot\Models\CompanyModel;
+
 use Cookie;
 use Lang;
 
