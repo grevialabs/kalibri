@@ -1,3 +1,15 @@
+<script>
+// @target : string url, must ended with = to concat
+// @obj : html object
+// 
+// Redirect to target url, used for resubmit when element perpage clicked
+function resubmit(target, obj)
+{
+	var url = obj.value;
+	window.location = target + url;
+}
+</script>
+
 <nav class="navbar navbar-expand-lg navbar-dark turquoise">
 
     <a class="navbar-brand" href="{{ base_url() }}">Kalibri KLBOX</a>

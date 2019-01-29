@@ -17,6 +17,7 @@ use Patriot\Http\Controllers\Modular\ModularController;
 
 use Cookie;
 use Lang;
+use Request;
 
 class ModularCompanyController extends ModularController
 {
@@ -137,7 +138,6 @@ class ModularCompanyController extends ModularController
 		$param = NULL;
 		// $param['api'] = $api;
 		// $param['data'] = $data;
-		// debug($data,1);
 		$param['message'] = Lang::get('common.message');
 		$param['PAGE_TITLE'] = 'Halaman Company';
 		$param['CONTENT'] = view('modular.company_list',$param);

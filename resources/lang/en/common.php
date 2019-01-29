@@ -28,5 +28,7 @@ return [
     'data' => 'data',
     'found' => 'Found',
     'search' => 'Search',
+    'search_input' => 'Search keyword...',
+    'showing' => 'showing',
 
 ];

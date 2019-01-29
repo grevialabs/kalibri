@@ -1,5 +1,7 @@
 <?php 
 $jsv = '21012019';
+
+$base_url = 'http://localhost/grevia.com/';
 ?>
 <html>
 <head>
@@ -21,6 +23,15 @@ $jsv = '21012019';
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/css/mdb.min.css?{{ $jsv }}" rel="stylesheet">
 		
 		<link href="<?php echo URL::to('/');?>/public/css/style_default.css?{{ $jsv }}" rel="stylesheet">
+		
+		<!--
+		Placeholder dulu, ga wajib pake
+		<script type="text/javascript" src='<?php echo $base_url; ?>asset/js/jquery-ui-1.10.4.js'></script>
+		<script type="text/javascript" src='<?php echo $base_url; ?>asset/js/jquery.validate.js'></script>
+		<script type="text/javascript" src='<?php echo $base_url; ?>asset/js/ui/jquery.ui.core.js'></script>
+		<script type="text/javascript" src='<?php echo $base_url; ?>asset/js/bootstrap.js'></script>
+		
+		-->
 		
 	<!-- Package1 End -->
 	
@@ -57,4 +68,25 @@ $jsv = '21012019';
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/js/mdb.min.js?{{ $jsv }}"></script>
 	<!-- Package1 End -->
 </body>
+<script>
+function togglebox(){
+	if ($('.togglebox').prop('checked')) {
+		$('.chkbox').prop('checked',true);
+	}
+	if (!$('.togglebox').prop('checked')) {
+		$('.chkbox').prop('checked',false);
+	}
+}
+
+$('#group_action').hide();
+$('.chkbox').click(function(){
+	var count = $("[type='checkbox']:checked").length;
+	if (count >= 1) {
+		 $('#group_action').show();
+	} else if(count <= 0){
+		$('#group_action').hide();
+	}
+});
+
+</script>
 </html>
