@@ -25,97 +25,26 @@ class ModularCompanyController extends ModularController
 	
 	public function company()
 	{
-		// Redirect guest to login
-		// if (is_member()) {
-		// 	$url = base_url().'member/home';
-		// 	// return redirect($url);
-		// 	debug('valid member<hr/>');
-		// } else 
-		// {
-		// 	debug('invalid member<hr/>');
-		// }
+		$param = $content = $get = $commonlang = $companylang = NULL;
 		
-		$api_param = NULL;
-		$api_param['secretkey'] = env('API_KEY');
+		if ($_GET) $get = $_GET;
 		
-		$api['url'] = env('API_URL').'company/get_list';
-		$api['secretkey'] = env('API_SECRETKEY');
-		$api['method'] = 'get';
-		$api['param'] = $api_param;
-		$api['debug'] = '1';
-			
-		$obj = curl_api_liquid($url);
-		// debug($obj,1);
-		// $obj = curl_api_grevia($api['url']);
+		$commonlang = Lang::get('common');
+		$companylang = Lang::get('modular/company');
 		
-		if ($_POST) 
-		{
-			$post = NULL;
-			$post = $_POST;
-			
-			if (! isset($post['email'])) {
-				$message = 'Email harus diisi';
-				return redirect('login')->with('message', print_message($message));
-			}
-			
-			if (! isset($post['password'])) {
-				$message = 'Password harus diisi';
-				return redirect('login')->with('message', print_message($message));
-			}
-			
-			// $url = 'http://www.grevia.com/api/member';
-			// $url = env('API_URL').'company/get_list';
-			
-			// $obj = curl_api_lumen($url);
-			// debug($obj,1);
-
-			if (! empty($obj))
-			{
-				$obj = json_decode($obj,1);
-				if (isset($obj['is_error']))
-				{
-					$message = 'Mohon maaf, terjadi kesalahan';
-					return redirect('login')->with('message', print_message($message));
-				}
-				
-				// valid
-				if (isset($obj['password']) && dodecrypt($obj['password']) == $post['password'])
-				{
-					// check if uri last page exist
-					// create cookie or session 
-					$cname = $cvalue = $cminutes = NULL;
-					$cname = 'tokenhash';
-					// $tokenhash = $obj['member_id'].'||'.$obj['name'].'||'.$obj['email'];
-					$cvalue = $obj['member_id'].'||'.$obj['name'].'||'.$obj['email'];
-					$cminutes = 24 * 60;
-					Cookie::queue($cname, $cvalue, $cminutes);
-					
-					// cookie available on next request;
-					
-					// redirect to member 
-					return redirect('member/home');
-					
-				}
-				else 
-				{
-					$message = 'Email / Password tidak sesuai';
-					return redirect('login')->with('message', print_message($message));
-				}
-			}
-			else 
-			{
-				// $message = 'Mohon maaf terjadi kesalahan. Silakan coba lagi';
-				$message = 'Data anda tidak ditemukan';
-				return redirect('login')->with('message', print_message($message));
-			}
+		$param['commonlang'] = $commonlang;
+		$param['companylang'] = $companylang;
+		$param['PAGE_TITLE'] = 'Halaman ' . $companylang['module'];
+		
+		if (isset($get['do']) && $get['do'] == 'insert') {
+			$content = view('modular.company_form',$param);
+			// // $content = view('modular.company_list',$param);	
+		} else {
+			$content = view('modular.company_list',$param);	
 		}
+			
 		
-		$param = NULL;
-		$param['api'] = $api;
-		$param['data'] = $obj;
-		$param['message'] = Lang::get('common.message');
-		$param['PAGE_TITLE'] = 'Halaman Company';
-		$param['CONTENT'] = view('modular.company',$param);
+		$param['CONTENT'] = $content;
 		return view('template.general.index',$param);
 	}
 	
@@ -151,5 +80,47 @@ class ModularCompanyController extends ModularController
 		$param['PAGE_TITLE'] = 'Halaman Company';
 		$param['CONTENT'] = view('modular.company_form',$param);
 		return view('template.general.index',$param);
+	}
+	
+	public function insert()
+	{
+		$post = NULL;
+		if ($_POST)
+		{
+			$post = $_POST;
+			
+			$param = NULL;
+			// $param[''] = $post[''];
+			$param['company_name'] = $post['company_name'];
+			$param['company_address'] = $post['company_address'];
+			$param['company_phone'] = $post['company_phone'];
+			$param['company_pic'] = $post['company_pic'];
+			$param['created_at'] = get_datetime();
+			$param['created_by'] = 1;
+			$param['created_ip'] = get_ip();
+			// $param['company_token'] = env('API_KEY');
+			
+			$api_url = env('API_URL').'company';
+			$api_method = 'post';
+			
+			// $api_header['debug'] = 1;
+			$api_header['token'] = env('API_KEY');
+
+			$save = curl_api_liquid($api_url, $api_method, $api_header, $param);
+			
+			if (isset($save)) {
+				$save = json_decode($save,1);
+				
+				if ($save['is_success']) $message = 'Save success';
+				else $message = 'Save failed';
+				
+				return redirect('company')->with('message', print_message($message));
+			}
+		}
+	}
+	
+	public function update()
+	{
+		
 	}
 }

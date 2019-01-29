@@ -14,6 +14,7 @@ return [
     */
 
     'page_title' => 'Company',
+    'module' => 'Company',
     // 'forgotpass' => 'Lupa Password',
     'add_new' => 'Add new company',
     'p1' => '',

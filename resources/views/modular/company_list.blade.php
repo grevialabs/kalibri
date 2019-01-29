@@ -1,9 +1,10 @@
 <?php 
 $get = $getkeyword = $getorder_allowed_list = $getorderby_allowed_list = $getorder_list = $getorder = $getorderby = $offset = $page = $perpage = NULL;
 $perpage = 2;
+// $perpage = PERPAGE;
+// $offset = OFFSET;
 $offset = 0;
 $page = 1;
-// $getorder_allowed_list = array('company_id','company_name','company_phone','company_address','company_pic');
 
 // $perpage_allowed = array(2,40,60);
 $company_model = new CompanyModel();
@@ -30,64 +31,16 @@ $api_param['offset'] = $offset;
 if (isset($getkeyword)) $api_param['keyword'] = $getkeyword; 
 if (isset($getorder)) $api_param['order'] = $getorder; else $getorder = $getorder_allowed_list[0];
 if (isset($getorderby)) $api_param['orderby'] = $getorderby; else $getorderby = $getorderby_allowed_list[0];
+$arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_list);
 
 $api_url = env('API_URL').'company/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
-
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 
 if (! empty($data)) $data = json_decode($data,1);
-
 if (isset($data['data'])) $listdata = $data['data'];
 if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
-
-$arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_list);
-// debug($arrsort,1);
-
-//-----------------------------------------------------------
-// start
-// $arrsort = NULL;
-// foreach ($getorder_allowed_list as $k => $rso) 
-// {
-	// $icon = '<i class="fa fa-arrow-down"></i>';
-	// $tmporderby = '';
-	// $tmpget = NULL;
-	// $tmpget = $get;
-	
-	// $arrsort[$rso]['class'] = 'text-info b';
-	
-	// if (isset($getorder) && $getorder == $rso) {
-		
-		// $arrsort[$rso]['class'] = 'text-danger b';
-		// if ($getorderby == ASC) {
-			// $icon = '<i class="fa fa-arrow-down"></i>';
-			// $tmpget['orderby'] = DESC;
-		// } elseif ($getorderby == DESC) {
-			// // debug($rso. ' : '.$getorder);
-			// $icon = '<i class="fa fa-arrow-up"></i>';
-			// $tmpget['orderby'] = ASC;
-		// }
-	// } else {
-		// $tmpget['orderby'] = DESC;
-		// $icon = '<i class="fa fa-arrow-down"></i>';
-	// }
-	// $tmpget['order'] = $rso;
-	// $arrsort[$rso]['url'] = current_url().'?'.http_build_query($tmpget);
-	// $arrsort[$rso]['icon'] = $icon;
-	// $arrsort[$rso]['title'] = 'Sort by ' . $rso . ' '. $tmpget['orderby'];
-
-// }
-// end
-//-----------------------------------------------------------
-
-
-// debug($current_full_url,1);
-
-$companylang = $commonlang = NULL;
-$companylang = Lang::get('modular/company');
-$commonlang = Lang::get('common');
-// debug($commonlang,1);
 
 $reget = NULL;
 if (! empty($get)) {
@@ -102,19 +55,25 @@ if (isset($perpage)) {
 $reget = http_build_query($reget);
 
 $resubmit_url = current_url().'?'.$reget;
-$base_url = 'http://localhost/grevia.com/';
+
+$grevia_url = 'http://www.grevia.com/';
+$base_url = base_url();
 ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	
-<script type="text/javascript" src="<?php echo $base_url; ?>asset/js/jquery.shiftcheckbox.js"></script>
+<script type="text/javascript" src="{{ $base_url }}public/js/jquery.shiftcheckbox.js"></script>
+
+<style>
+
+</style>
 
 <!-- CONTENT AREA -->
 <div class="container">
 	<div class="row">
-		<div class="col-sm-12 talCnt" style="padding-top: 35px">
+		<div class="col-sm-12 talCnt" style="padding: 35px 0 15px 0">
 			<h3 class="b">{{ $PAGE_TITLE}}</h3>
 		</div>
 		
@@ -127,8 +86,8 @@ $base_url = 'http://localhost/grevia.com/';
 				{!! session('message') !!}
 			@endif
 			
-			<a href="<?php echo base_url().'company_form'.DS.'insert' ?>" class="btn btn-primary btn-sm add"><i class="fa fa-plus" aria-hidden="true"></i> {{ $companylang['add_new'] }}</a><br/><br/>
-			
+			<a href="<?php echo $base_url.Request::segment(1).'?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $companylang['add_new'] }}</a><br/><br/>
+
 			<form method="get" action="<?php echo current_full_url()?>">
 				<input type="search" name="keyword" class="form-control wdt30-pct display-inline"  placeholder="{{ $commonlang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
 				<button class="btn btn-default btn-sm" type="submit">{{ $commonlang['search'] }}</button><br/><br/>

@@ -8,41 +8,6 @@
 
 // echo "from company list";
 // debug($json,1);
-$post = NULL;
-if ($_POST)
-{
-	$post = $_POST;
-	
-	$param = NULL;
-	// $param[''] = $post[''];
-	$param['company_name'] = $post['name'];
-	$param['company_address'] = $post['address'];
-	$param['company_phone'] = $post['phone'];
-	$param['company_pic'] = $post['pic'];
-	$param['created_at'] = get_datetime();
-	$param['created_by'] = 1;
-	$param['created_ip'] = get_ip();
-	// $param['company_token'] = env('API_KEY');
-	
-	$api_url = env('API_URL').'company';
-	$api_method = 'post';
-	
-	// $api_header['debug'] = 1;
-	$api_header['token'] = env('API_KEY');
-
-	$save = curl_api_liquid($api_url, $api_method, $api_header, $param);
-	
-	if (isset($save)) {
-		$save = json_decode($save,1);
-		
-		if ($save['is_success']) 
-			debug('mantap jiwa');
-		else 
-			debug('gagal maning');
-	}
-	
-	// debug($save,1);
-}	
 // debug($);
 ?>
 
@@ -51,42 +16,45 @@ if ($_POST)
 <!-- Article AREA -->
 <div class="container">
 	<div class="row">
-		<div class="col-sm-12 talCnt" style="padding-top: 35px">
+		<div class="col-sm-12 talCnt" style="padding: 35px 0 15px 0">
 			<h3 class="b">{{ $PAGE_TITLE}}</h3>
 		</div>
 		
+		<!--
+		-->
 		<div class="col-sm-2">
 		</div>
-		<div class="col-sm-8">
+		
+		<div class="col-sm-8 col-sm-offset-2">
 			@if (session('message'))
 				{!! session('message') !!}
 			@endif
 			
-			<form method="post">
+			<form method="post" action="{{ base_url().Request::segment(1).DS.'insert' }}">
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="md-form">
-							<input type="text" id="name" name="name" class="form-control" required />
-							<label for="name" >Name</label>
+							<input type="text" id="company_name" name="company_name" class="form-control" required />
+							<label for="company_name" >Company Name</label>
 						</div>
 					</div>
 					<div class="col-sm-12">
 						<div class="md-form">
-							<textarea type="text" id="address" name="address" class="form-control md-textarea" required rows="2"></textarea>
-							<label for="address" >Address</label>
+							<textarea type="text" id="company_address" name="company_address" class="form-control md-textarea" required rows="2"></textarea>
+							<label for="company_address" >Company Address</label>
 						</div>
 					</div>
 					
 					<div class="col-sm-12">
 						<div class="md-form">
-							<input type="text" id="phone" name="phone" class="form-control" required />
-							<label for="phone" >Phone</label>
+							<input type="text" id="company_phone" name="company_phone" class="form-control" required />
+							<label for="company_phone" >Company Phone</label>
 						</div>
 					</div>
 					<div class="col-sm-12">
 						<div class="md-form">
-							<input type="text" id="pic" name="pic" class="form-control" required />
-							<label for="pic" >PIC</label>
+							<input type="text" id="company_pic" name="company_pic" class="form-control" required />
+							<label for="company_pic" >Company PIC</label>
 						</div>
 					</div>
 					
