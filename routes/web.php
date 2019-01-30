@@ -27,6 +27,7 @@ Route::any('/company_form', 'Modular\ModularCompanyController@company_form');
 Route::any('/company/insert', 'Modular\ModularCompanyController@insert');
 Route::any('/company/update', 'Modular\ModularCompanyController@update');
 Route::any('/company/delete', 'Modular\ModularCompanyController@delete');
+Route::any('/company/bulk', 'Modular\ModularCompanyController@bulk');
 
 Route::any('/article-vue', 'Modular\ModularController@article_vue');
 Route::any('/forgotpass', 'Modular\ModularForgotpassController@forgotpass');

@@ -12,9 +12,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Patriot\Http\Controllers\Controller;
 use Patriot\Http\Controllers\Modular\ModularController;
 
-// use Patriot\Models\General as GeneralModel;
-// use Patriot\Models\CompanyModel;
-
 use Cookie;
 use Lang;
 use Request;
@@ -85,10 +82,14 @@ class ModularCompanyController extends ModularController
 	public function insert()
 	{
 		$post = NULL;
+		$company_model = new Company_Model();
 		if ($_POST)
 		{
 			$post = $_POST;
 			
+			// Do validation here
+			
+			// Action start here
 			$param = NULL;
 			// $param[''] = $post[''];
 			$param['company_name'] = $post['company_name'];
@@ -121,6 +122,13 @@ class ModularCompanyController extends ModularController
 	
 	public function update()
 	{
-		
+		$message = 'Update success';
+		return redirect('company')->with('message', print_message($message));
+	}
+	
+	public function bulk()
+	{
+		$message = 'Bulk action success';
+		return redirect('company')->with('message', print_message($message));
 	}
 }
