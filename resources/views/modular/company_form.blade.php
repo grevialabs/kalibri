@@ -9,10 +9,14 @@ $api_url = env('API_URL').'company/get';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
-
+// debug('gebleg<hr/>');
+// debug($data);
+// debug('<br/>gebleg2<hr/>');
 if (! empty($data)) $data = json_decode($data,1);
+// debug($data,1);
 
 $action = '';
+
 // if ($get['do'] == 'insert') $action = $commonlang['add'];
 // else if ($get['do'] == 'edit') $action = $commonlang['edit'];
 
@@ -48,7 +52,7 @@ $action = '';
 							<input type="text" id="company_id" class="form-control" value="{{ $data['company_id'] }}" disabled />
 							<input type="hidden" name="company_id" value="{{ $data['company_id'] }}" />
 							
-							<label for="company_name" >Company ID</label>
+							<label for="company_id" >Company ID</label>
 						</div>
 					</div>
 					<?php } ?>
@@ -103,9 +107,18 @@ $action = '';
 <script>
 $(document).ready( function() {
 	
-	<?php foreach ($data as $key => $rs) { ?>
+	<?php 
+    if (! empty($data)) 
+    {
+        foreach ($data as $key => $rs) 
+        { 
+        ?>
 	$('#{{ $key }}').val('{{$rs}}');
 	$('#{{ $key }}').trigger('change');
-	<?php } ?>
+	<?php 
+        }
+    }
+
+    ?>
 })
 </script>

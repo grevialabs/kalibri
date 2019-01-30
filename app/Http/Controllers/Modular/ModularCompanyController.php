@@ -141,7 +141,11 @@ class ModularCompanyController extends ModularController
 			$post = $_POST;
 			unset($post['_token']);
 			
-			// Do validation here with model
+            // Do validation here with model
+            if (! isset($post['company_id'])) {
+                $message = 'company_id not exist';
+                return redirect('company')->with('message', print_message($message));
+            } 
 			
 			// Action start here
 			$param = NULL;
