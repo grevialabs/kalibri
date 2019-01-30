@@ -21,8 +21,7 @@ return [
 	
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'success' => 'success',
-    'page' => 'halaman',
-    'add' => 'add',
+    'page' => 'page',
     'data_not_found' => 'Data not found',
     'data_found' => 'Data found',
     'data' => 'data',
@@ -30,5 +29,10 @@ return [
     'search' => 'Search',
     'search_input' => 'Search keyword...',
     'showing' => 'showing',
+    'insert' => 'insert',
+    'add' => 'add',
+    'edit' => 'edit',
+    'update' => 'update',
+    'delete' => 'delete',
 
 ];

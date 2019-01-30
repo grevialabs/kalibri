@@ -153,11 +153,13 @@ $base_url = base_url();
 					?>
 					<tr>
 						<td colspan="100%">
-							<div id="group_action">With checked do <select class="input" name="lst_group_action">
-							<option class="" value="1">Active</option>
-							<option class="" value="0">Inactive</option>
-							<option class="" value="-1">Delete</option>
+							<div id="group_action">With checked do 
+							<select class="input" name="lst_group_action">
+								<option class="" value="1">Active</option>
+								<option class="" value="0">Inactive</option>
+								<option class="" value="-1">Delete</option>
 							</select>
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<button class="btn btn-default btn-sm" name="btn_group_action" value="1">Action</button></div>
 						</td>
 					</tr>	

@@ -1,14 +1,23 @@
 <?php 
-// debug($data,1);
-// debug($api['param']);
-// echo http_build_query($api['param']).'<hr/>';
-// die;
-// <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-// $json = '{"totaldata":3,"rowdata":[{"company_id":1,"company_name":"PT Yamaha","company_address":"Jl PRJ","company_phone":"021123456","company_pic":"Bejo","status":1,"created_at":null,"created_by":null,"created_ip":null,"updated_at":null,"updated_by":null,"updated_ip":null},{"company_id":2,"company_name":"PT Honda Indah Pertama","company_address":"Jl bidara no 9","company_phone":"11021312","company_pic":"Astra","status":1,"created_at":null,"created_by":null,"created_ip":null,"updated_at":null,"updated_by":null,"updated_ip":null},{"company_id":3,"company_name":"Beogradiant","company_address":"Jl laksa","company_phone":"2250212312","company_pic":"Saiful","status":1,"created_at":null,"created_by":null,"created_ip":null,"updated_at":null,"updated_by":null,"updated_ip":null}]}';
+// ---------------------------
+// Get data 
+$api_url = $api_method = $api_param = $api_header = $data = NULL;
+$api_param['token'] = env('API_KEY');
+$api_param['company_id'] = $get['company_id'];
 
-// echo "from company list";
-// debug($json,1);
-// debug($);
+$api_url = env('API_URL').'company/get';
+$api_method = 'get';
+// $api_header['debug'] = 1;
+$data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+
+if (! empty($data)) $data = json_decode($data,1);
+
+$action = '';
+// if ($get['do'] == 'insert') $action = $commonlang['add'];
+// else if ($get['do'] == 'edit') $action = $commonlang['edit'];
+
+// $PAGE_TITLE = $action .' '. $companylang['module']; 
+
 ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
@@ -17,12 +26,13 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12 talCnt" style="padding: 35px 0 15px 0">
-			<h3 class="b">{{ $PAGE_TITLE}}</h3>
+			<h3 class="b">{{ $PAGE_HEADER }}</h3>
 		</div>
 		
 		<!--
 		-->
 		<div class="col-sm-2">
+			
 		</div>
 		
 		<div class="col-sm-8 col-sm-offset-2">
@@ -30,8 +40,18 @@
 				{!! session('message') !!}
 			@endif
 			
-			<form method="post" action="{{ base_url().Request::segment(1).DS.'insert' }}">
+			<form method="post" action="{{ $form_url }}">
 				<div class="row">
+					<?php if (isset($data['company_id'])) { ?>
+					<div class="col-sm-12">
+						<div class="md-form">
+							<input type="text" id="company_id" class="form-control" value="{{ $data['company_id'] }}" disabled />
+							<input type="hidden" name="company_id" value="{{ $data['company_id'] }}" />
+							
+							<label for="company_name" >Company ID</label>
+						</div>
+					</div>
+					<?php } ?>
 					<div class="col-sm-12">
 						<div class="md-form">
 							<input type="text" id="company_name" name="company_name" class="form-control" required />
@@ -60,7 +80,17 @@
 					
 					<div>
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="submit" class="btn btn-primary btn-md" />
+						<?php 
+						if ($get['do'] == 'insert') {
+						?>
+						<button type="submit" class="btn btn-primary btn-md">{{ $commonlang['insert'] }}</button>
+						<?php 
+						} else if ($get['do'] == 'edit') {
+						?>
+						<button type="submit" class="btn btn-primary btn-md">{{ $commonlang['update'] }}</button>
+						<?php 
+						}
+						?>
 					</div>
 				</div>
 			</form>
@@ -71,5 +101,11 @@
 </div>
 
 <script>
-
+$(document).ready( function() {
+	
+	<?php foreach ($data as $key => $rs) { ?>
+	$('#{{ $key }}').val('{{$rs}}');
+	$('#{{ $key }}').trigger('change');
+	<?php } ?>
+})
 </script>
