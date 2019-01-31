@@ -1,4 +1,6 @@
 <?php
+// define('DS','/');
+define('SUGOI','sugoi iki');
 
 return [
 
@@ -32,7 +34,10 @@ return [
     'insert' => 'insert',
     'add' => 'add',
     'edit' => 'edit',
+    'save' => 'save',
     'update' => 'update',
     'delete' => 'delete',
+    'back' => 'back',
+    'back_icon' => '<i class="fa fa-arrow-left" aria-hidden="true"></i>',
 
 ];

@@ -22,26 +22,26 @@ class ModularCompanyController extends ModularController
 	
 	public function company()
 	{
-		$param = $content = $get = $commonlang = $companylang = NULL;
+		$param = $content = $get = $lang = $companylang = NULL;
 		
 		if ($_GET) $get = $_GET;
 		
-		$commonlang = Lang::get('common');
+		$lang = Lang::get('common');
 		$companylang = Lang::get('modular/company');
 		
 		$param['get'] = $get;
-		$param['commonlang'] = $commonlang;
+		$param['lang'] = $lang;
 		$param['companylang'] = $companylang;
 		$param['PAGE_HEADER'] = 'Halaman ' . $companylang['module'];
 		$param['PAGE_TITLE'] = 'Halaman ' . $companylang['module'];
 		
 		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['company_id']))) {
 			if ($get['do'] == 'insert') { 
-				$param['PAGE_HEADER'] = $commonlang['add'] . ' ' . $commonlang['page'] . ' ' . $companylang['module'];
+				$param['PAGE_HEADER'] = $lang['add'] . ' ' . $lang['page'] . ' ' . $companylang['module'];
 				$param['form_url'] = base_url().Request::segment(1).DS.'insert';
 			} 
 			else if($get['do'] == 'edit') { 
-				$param['PAGE_HEADER'] = $commonlang['edit'] . ' ' . $commonlang['page'] . ' ' . $companylang['module'];
+				$param['PAGE_HEADER'] = $lang['edit'] . ' ' . $lang['page'] . ' ' . $companylang['module'];
 				$param['form_url'] = base_url().Request::segment(1).DS.'update';
 			}
 			
@@ -51,7 +51,8 @@ class ModularCompanyController extends ModularController
 		}
 		
 		$param['CONTENT'] = $content;
-		return view('template.general.index',$param);
+		return view('template.' . env('THEMES','general') . '.index',$param);
+		// return view('template.firered.index',$param);
 	}
 	
 	// GAPAKE LAGI

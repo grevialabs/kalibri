@@ -56,6 +56,32 @@ Route::prefix('admin/')->group(function () {
 	
 });
 
+Route::prefix('client/')->group(function () {
+	
+	// return view
+	// Route::get('welcome', function () {
+		// return view('Modular\ModularController@welcome');
+	// });
+	
+	// Return to controller
+	Route::get('/', 'Client\ClientController@index');
+	Route::get('welcome', 'Client\ClientController@welcome');
+	Route::get('about', 'Client\ClientController@about');
+	Route::get('company', 'Client\ClientController@company');
+	Route::get('login', 'Client\ClientController@login');
+	
+});
+
+Route::prefix('testing/')->group(function () {
+	
+	// Return to controller
+	// Route::get('welcome', 'Testing\TestingController@welcome');
+	// Route::get('about', 'Testing\TestingController@about');
+	// Route::get('company', 'Testing\TestingController@company');
+	Route::get('matrix', 'Testing\TestingController@matrix');
+	
+});
+
 // Route::prefix('member')->group(['middleware' => ['check.member']], function () {
 	
 // 	// Return to controller
