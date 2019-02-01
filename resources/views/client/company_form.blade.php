@@ -20,13 +20,21 @@ if (isset($get['company_id'])) {
 
 $base_url = base_url();
 
+// Insert log
+// $postlog = NULL;
+// $postlog['name'] = current_url();
+// $postlog['url'] = current_url();
+// $postlog['data'] = json_encode(array('name' => 'ujang'));
+// $postlog['json'] = json_encode(array('name' => 'ujang'));
+// $log = new GeneralModel();
+// $log = $log->insert_log($postlog);
+// debug($postlog,1);
+
 // if ($get['do'] == 'insert') $action = $lang['add'];
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
 // $PAGE_TITLE = $action .' '. $companylang['module']; 
 ?>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
 
 <!-- Article AREA -->
 <div class="row">
@@ -43,45 +51,82 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<form method="post" action="{{ $form_url }}">
-					<div class="row">
-						<?php if (isset($data['company_id'])) { ?>
-						<div class="col-sm-12">
-							<div class="md-form">
-								<input type="text" id="company_id" class="form-control" value="{{ $data['company_id'] }}" disabled />
-								<input type="hidden" name="company_id" value="{{ $data['company_id'] }}" />
-								
-								<label for="company_id" >Company ID</label>
-							</div>
+				<form method="post" action="{{ $form_url }}" class="form-horizontal">
+
+					
+					<!--
+					<div class="row mb-3 align-items-center">
+						<div class="col-lg-3 col-md-12">
+							<span>Tooltip Input</span>
 						</div>
-						<?php } ?>
-						<div class="col-sm-12">
-							<div class="md-form">
-								<input type="text" id="company_name" name="company_name" class="form-control" required />
-								<label for="company_name" >Company Name</label>
-							</div>
+						<div class="col-lg-6 col-lg-offset-3 col-md-12">
+							<input type="text" data-toggle="tooltip" title="" class="form-control" id="validationDefault05" placeholder="Hover For tooltip" required="" data-original-title="A Tooltip for the input !">
 						</div>
-						<div class="col-sm-12">
-							<div class="md-form">
-								<textarea type="text" id="company_address" name="company_address" class="form-control md-textarea" required rows="2"></textarea>
-								<label for="company_address" >Company Address</label>
-							</div>
+					</div>
+					-->
+					
+				
+					<?php if (isset($data['company_id'])) { ?>
+					
+					<!--
+					<div class="col-lg-12 col-sm-12">
+						<div class="md-form">
+							<input type="text" id="company_id" class="form-control" value="{{ $data['company_id'] }}" disabled />
+							<input type="hidden" name="company_id" value="{{ $data['company_id'] }}" />
+							
+							<label for="company_id" >Company ID</label>
 						</div>
-						
-						<div class="col-sm-12">
-							<div class="md-form">
-								<input type="text" id="company_phone" name="company_phone" class="form-control" required />
-								<label for="company_phone" >Company Phone</label>
-							</div>
+					</div>
+					-->
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="" class="control-label col-form-label">CompanyID</label>
 						</div>
-						<div class="col-sm-12">
-							<div class="md-form">
-								<input type="text" id="company_pic" name="company_pic" class="form-control" required />
-								<label for="company_pic" >Company PIC</label>
-							</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $companylang['company_id'] }}" required="" data-original-title="" value="{{ $data['company_id'] }}" disabled />
+							<input type="hidden" name="company_id" value="{{ $data['company_id'] }}" />
 						</div>
-						
-						<div>
+					</div>
+					<?php } ?>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="company_name" class="control-label col-form-label">{!! $companylang['company_name'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $companylang['company_name'] }}" title="{{ $companylang['company_name'] }}" class="form-control datepicker" id="company_name" name="company_name" placeholder="{{ $companylang['company_name'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="company_address" class="control-label col-form-label">{!! $companylang['company_address'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<textarea type="text" data-toggle="{{ $companylang['company_address'] }}" title="" class="form-control" id="company_address" name="company_address" placeholder="{{ $companylang['company_address'] }}" required="" data-original-title="{{ $companylang['company_address'] }}"></textarea>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="company_phone" class="control-label col-form-label">{!! $companylang['company_phone'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="" title="" class="form-control" id="company_phone" name="company_phone" placeholder="{{ $companylang['company_phone'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="" class="control-label col-form-label">{!! $companylang['company_pic'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="" title="" class="form-control" id="company_pic" name="company_pic" placeholder="{{ $companylang['company_pic'] }}" required="" data-original-title="{{ $companylang['company_pic'] }}" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-sm-12">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<?php 
 							if ($get['do'] == 'insert') {
@@ -96,6 +141,7 @@ $base_url = base_url();
 							?>
 						</div>
 					</div>
+
 				</form>
 			</div>
 		</div>

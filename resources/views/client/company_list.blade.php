@@ -1,7 +1,7 @@
 <?php 
 $get = $getkeyword = $getorder_allowed_list = $getorderby_allowed_list = $getorder_list = $getorder = $getorderby = $offset = $page = $perpage = NULL;
-$perpage = 2;
-// $perpage = PERPAGE;
+// $perpage = 20;
+$perpage = PERPAGE;
 // $offset = OFFSET;
 $offset = 0;
 $page = 1;
@@ -95,7 +95,7 @@ $base_url = base_url();
 						<div class="pull-right">
 							{{ $lang['showing'] }}
 							<select name="perpage" class="input" onchange="return resubmit('{{ $resubmit_url }}',this)">
-								<option <?php if (isset($perpage) && $perpage == 2) echo "selected" ?>>2</option>
+								<option <?php if (isset($perpage) && $perpage == 20) echo "selected" ?>>20</option>
 								<option <?php if (isset($perpage) && $perpage == 40) echo "selected" ?>>40</option>
 								<option <?php if (isset($perpage) && $perpage == 60) echo "selected" ?>>60</option>
 							</select>
@@ -105,72 +105,76 @@ $base_url = base_url();
 				</form>
 				
 				<form method="post" action="{{ base_url().Request::segment(1).DS.'bulk' }}">
-					<table class="table table-striped" id="table_company">
-						<tr class="b">
-							<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
-							<td width=1>#</td>
-							<td><a class="{{ $arrsort['company_name']['class'] }}" title="{{ $arrsort['company_name']['title'] }}" href="{{ $arrsort['company_name']['url'] }}">CompanyName {!! $arrsort['company_name']['icon'] !!}</a></td>
-							<td><a class="{{ $arrsort['company_address']['class'] }}" title="{{ $arrsort['company_address']['title'] }}" href="{{ $arrsort['company_address']['url'] }}">CompanyAddress {!! $arrsort['company_address']['icon'] !!}</a></td>
-							<td><a class="{{ $arrsort['company_phone']['class'] }}" title="{{ $arrsort['company_phone']['title'] }}" href="{{ $arrsort['company_phone']['url'] }}">CompanyPhone {!! $arrsort['company_phone']['icon'] !!}</a></td>
-							<td><a class="{{ $arrsort['company_pic']['class'] }}" title="{{ $arrsort['company_pic']['title'] }}" href="{{ $arrsort['company_pic']['url'] }}">CompanyPIC {!! $arrsort['company_pic']['icon'] !!}</a></td>
-							<td>Status</td>
-							<td class="talCnt">Option</td>
-						</tr>
-						<?php 
-						if (! empty($listdata)) 
-						{
-							$i = 0;
-							if (is_numeric($page) && $page > 0) {
-								$i = ($page - 1) * $perpage;
-							}
-							
-							foreach ($listdata as $key => $rs) 
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered" id="table_company">
+							<tr class="b">
+								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
+								<td width=1>#</td>
+								<td width="150px"><a class="{{ $arrsort['company_id']['class'] }}" title="{{ $arrsort['company_id']['title'] }}" href="{{ $arrsort['company_id']['url'] }}">CompanyID {!! $arrsort['company_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['company_name']['class'] }}" title="{{ $arrsort['company_name']['title'] }}" href="{{ $arrsort['company_name']['url'] }}">CompanyName {!! $arrsort['company_name']['icon'] !!}</a></td>
+								<td><a class="{{ $arrsort['company_address']['class'] }}" title="{{ $arrsort['company_address']['title'] }}" href="{{ $arrsort['company_address']['url'] }}">CompanyAddress {!! $arrsort['company_address']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['company_phone']['class'] }}" title="{{ $arrsort['company_phone']['title'] }}" href="{{ $arrsort['company_phone']['url'] }}">CompanyPhone {!! $arrsort['company_phone']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['company_pic']['class'] }}" title="{{ $arrsort['company_pic']['title'] }}" href="{{ $arrsort['company_pic']['url'] }}">CompanyPIC {!! $arrsort['company_pic']['icon'] !!}</a></td>
+								<td width="2">Status</td>
+								<td width="50px" class="talCnt">Option</td>
+							</tr>
+							<?php 
+							if (! empty($listdata)) 
 							{
-								$i++;
-								$id = $rs['company_id'];
-								$idcol = 'company_id';
-						?>
-						
-						<tr>
-							<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
-							<td>{{ $i }}</td>
-							<td>{{ $rs['company_name'] }}</td>
-							<td>{{ $rs['company_address'] }}</td>
-							<td>{{ $rs['company_phone'] }}</td>
-							<td>{{ $rs['company_pic'] }}</td>
-							<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
-							<td class="talCnt">
-							<a style="margin-right:6px" href="<?php echo Request::segment(1).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg"></i></a> 
-							<a href="<?php echo Request::segment(1).'?do=delete&'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-times fa-lg" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
-							</td>
-						</tr>
-						<?php
-							}
-						?>
-						<tr>
-							<td colspan="100%">
-								<div id="group_action">With checked do 
-								<select class="input" name="lst_group_action">
-									<option class="" value="1">Active</option>
-									<option class="" value="0">Inactive</option>
-									<option class="" value="-1">Delete</option>
-								</select>
-								<input type="hidden" name="_token" value="{{ csrf_token() }}">
-								<button class="btn btn-default btn-sm" name="btn_group_action" value="1">Action</button></div>
-							</td>
-						</tr>	
-						<?php
-						}
-						else 
-						{
+								$i = 0;
+								if (is_numeric($page) && $page > 0) {
+									$i = ($page - 1) * $perpage;
+								}
+								
+								foreach ($listdata as $key => $rs) 
+								{
+									$i++;
+									$id = $rs['company_id'];
+									$idcol = 'company_id';
 							?>
+							
 							<tr>
-								<td colspan="100%">{{ $lang['data_not_found'] }}</td>
+								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
+								<td>{{ $i }}</td>
+								<td>{{ $rs['company_id'] }}</td>
+								<td>{{ $rs['company_name'] }}</td>
+								<td>{{ $rs['company_address'] }}</td>
+								<td>{{ $rs['company_phone'] }}</td>
+								<td>{{ $rs['company_pic'] }}</td>
+								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
+								<td class="talCnt">
+								<a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg"></i></a> 
+								<a href="<?php echo Request::segment(2).'?do=delete&'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-times fa-lg" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
+								</td>
 							</tr>
 							<?php
-						}
-						?>
-					</table>
+								}
+							?>
+							<tr>
+								<td colspan="100%">
+									<div id="group_action">With checked do 
+									<select class="input" name="lst_group_action">
+										<option class="" value="1">Active</option>
+										<option class="" value="0">Inactive</option>
+										<option class="" value="-1">Delete</option>
+									</select>
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<button class="btn btn-default btn-sm" name="btn_group_action" value="1">Action</button></div>
+								</td>
+							</tr>	
+							<?php
+							}
+							else 
+							{
+								?>
+								<tr>
+									<td colspan="100%">{{ $lang['data_not_found'] }}</td>
+								</tr>
+								<?php
+							}
+							?>
+						</table>
+					</div>
 				</form>
 				
 				<?php if ( ! empty($listdata)) echo common_paging($total_rows, $perpage); ?>

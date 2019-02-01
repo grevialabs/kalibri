@@ -1,5 +1,6 @@
 <?php 
-$jsv = '21012019';
+$jsv = time();
+// $jsv = '21012019';
 $themes = 'matrix';
 
 if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
@@ -15,28 +16,42 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../public/matrix/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../public/matrix/assets/images/favicon.png?{{ $jsv }}">
     <title>{{ $PAGE_TITLE }}</title>
     <!-- Custom CSS -->
-    <link href="../public/matrix/dist/css/style.min.css" rel="stylesheet">
 	
+	<link rel="stylesheet" type="text/css" href="../public/matrix/assets/libs/select2/dist/css/select2.min.css?{{ $jsv }}">
+	<link rel="stylesheet" type="text/css" href="../public/matrix/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css?{{ $jsv }}">
+
+	<link href="<?php echo URL::to('/');?>/public/css/style_default.css?{{ $jsv }}" rel="stylesheet">
+    <link href="../public/matrix/dist/css/style.min.css?{{ $jsv }}" rel="stylesheet">
 	
 	<!-- START OWN CUSTOM STYLE-->
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css?{{ $jsv }}">
-	<!-- Bootstrap core CSS -->
+	<!-- Bootstrap core CSS 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css?{{ $jsv }}" rel="stylesheet">
-	<!-- Material Design Bootstrap -->
+	-->
+	<!-- Material Design Bootstrap 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/css/mdb.min.css?{{ $jsv }}" rel="stylesheet">
+	-->
 	
-	<link href="<?php echo URL::to('/');?>/public/css/style_default.css?{{ $jsv }}" rel="stylesheet">
 	
+	<script src="../public/matrix/assets/libs/jquery/dist/jquery.min.js?{{ $jsv }}"></script>
+	<!-- CONFLICT BRO
 	<!-- JQuery -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js?{{ $jsv }}"></script>
 	<!-- Bootstrap tooltips -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js?{{ $jsv }}"></script>
 	<!-- Bootstrap core JavaScript -->
+	<!--
+	COMMENT SEMENTARA
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js?{{ $jsv }}"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js?{{ $jsv }}"></script>
+	
+	-->
+	
+	<!-- CONFLICT BRO
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js?{{ $jsv }}"></script>
+	-->
 	<!-- END OWN CUSTOM STYLE-->
 	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -146,35 +161,68 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../public/matrix/assets/libs/jquery/dist/jquery.min.js"></script>
+    
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../public/matrix/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="../public/matrix/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../public/matrix/assets/libs/popper.js/dist/umd/popper.min.js?{{ $jsv }}"></script>
+    <script src="../public/matrix/assets/libs/bootstrap/dist/js/bootstrap.min.js?{{ $jsv }}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="../public/matrix/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="../public/matrix/assets/extra-libs/sparkline/sparkline.js"></script>
+    <script src="../public/matrix/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js?{{ $jsv }}"></script>
+    <script src="../public/matrix/assets/extra-libs/sparkline/sparkline.js?{{ $jsv }}"></script>
     <!--Wave Effects -->
-    <script src="../public/matrix/dist/js/waves.js"></script>
+    <script src="../public/matrix/dist/js/waves.js?{{ $jsv }}"></script>
     <!--Menu sidebar -->
-    <script src="../public/matrix/dist/js/sidebarmenu.js"></script>
+    <script src="../public/matrix/dist/js/sidebarmenu.js?{{ $jsv }}"></script>
     <!--Custom JavaScript -->
-    <script src="../public/matrix/dist/js/custom.min.js"></script>
+    <script src="../public/matrix/dist/js/custom.min.js?{{ $jsv }}"></script>
 	
+	
+	<script src="../public/matrix/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js?{{ $jsv }}"></script>
+    <script src="../public/matrix/dist/js/pages/mask/mask.init.js?{{ $jsv }}"></script>
+    <script src="../public/matrix/assets/libs/select2/dist/js/select2.full.min.js?{{ $jsv }}"></script>
+    <script src="../public/matrix/assets/libs/select2/dist/js/select2.min.js?{{ $jsv }}"></script>
+    <script src="../public/matrix/assets/libs/jquery-asColor/dist/jquery-asColor.min.js?{{ $jsv }}"></script>
+    <script src="../public/matrix/assets/libs/jquery-asGradient/dist/jquery-asGradient.js?{{ $jsv }}"></script>
+    <script src="../public/matrix/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js?{{ $jsv }}"></script>
+    <script src="../public/matrix/assets/libs/jquery-minicolors/jquery.minicolors.min.js?{{ $jsv }}"></script>
+    <script src="../public/matrix/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js?{{ $jsv }}"></script>
+
+	
+	<script>
+	$(document).ready(function(){
 	<?php 
 	// Activate menu if uri segment 1 & 2 exist
 	if (Request::segment(1) && Request::segment(2)) { 
 	?>
-	<script>
-		$(document).ready(function(){
 			$('#{{ Request::segment(2) }}').parent('li').addClass('selected')
-		});
-	</script>
 	<?php 
 	}
 	?>
 	
-	<!-- MDB core JavaScript -->
+	
+	
+	});
+	
+    // For select 2
+	$(".select2").select2();
+
+
+	
+	// Datepicker
+	jQuery('.datepicker').datepicker();
+	jQuery('.datepicker-autoclose').datepicker({
+		autoclose: true,
+		todayHighlight: true
+	});
+
+	
+	</script>
+	<!-- MDB core JavaScript 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/js/mdb.min.js?{{ $jsv }}"></script>
+	
+	-->
+	
+	<?php 
+	?>
 	
 </body>
 

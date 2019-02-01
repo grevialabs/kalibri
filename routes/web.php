@@ -22,12 +22,9 @@ Route::any('/login', 'Modular\ModularLoginController@login');
 Route::any('/article', 'Modular\ModularArticleController@article');
 
 Route::any('/company', 'Modular\ModularCompanyController@company');
-Route::any('/company_list', 'Modular\ModularCompanyController@company_list');
-Route::any('/company_form', 'Modular\ModularCompanyController@company_form');
-Route::any('/company/insert', 'Modular\ModularCompanyController@insert');
-Route::any('/company/update', 'Modular\ModularCompanyController@update');
-Route::any('/company/delete', 'Modular\ModularCompanyController@delete');
-Route::any('/company/bulk', 'Modular\ModularCompanyController@bulk');
+// Route::any('/company_list', 'Modular\ModularCompanyController@company_list');
+// Route::any('/company_form', 'Modular\ModularCompanyController@company_form');
+
 
 Route::any('/article-vue', 'Modular\ModularController@article_vue');
 Route::any('/forgotpass', 'Modular\ModularForgotpassController@forgotpass');
@@ -67,8 +64,13 @@ Route::prefix('client/')->group(function () {
 	Route::get('/', 'Client\ClientController@index');
 	Route::get('welcome', 'Client\ClientController@welcome');
 	Route::get('about', 'Client\ClientController@about');
-	Route::get('company', 'Client\ClientController@company');
 	Route::get('login', 'Client\ClientController@login');
+	Route::get('example', 'Client\ClientController@example');
+	
+	Route::get('company', 'Client\ClientCompanyController@company');
+	Route::any('company/update', 'Client\ClientCompanyController@update');
+	Route::any('company/delete', 'Client\ClientCompanyController@delete');
+	Route::any('company/bulk', 'Client\ClientCompanyController@bulk');
 	
 });
 

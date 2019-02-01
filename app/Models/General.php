@@ -4,6 +4,8 @@ namespace Patriot\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Request;
+
 class General extends Model
 {
     // getorder_allowed_list
@@ -77,6 +79,57 @@ class General extends Model
 		if ($status == 1) $str = '<div class="btn-sm"><i class="fa fa-check-circle clrBlu" alt="Active" title="Active"></i> </div>';
 		if ($status == -1) $str = '<div class="btn-sm"><i class="fa fa-check-circle clrRed" alt="Deleted" title="Deleted"></i> </div>';
 		return $str;
+	}
+	
+	public function insert_log($attr)
+	{
+		$message = $url_back = $post = NULL;
+		
+		$message = 'No data insert';
+		// debug($message,1);
+		$url_back = 'test';
+		$url_back = Request::segment(1).DS.Request::segment(2);
+		if (! empty($attr))
+		{
+			$post = $attr;
+			unset($post['_token']);
+			
+            // Do validation here with model
+            // if (! isset($post['company_id'])) {
+                // $message = 'company_id not exist';
+                // return redirect($url_back)->with('message', print_message($message));
+            // }
+			
+			// Action start here
+			$param = NULL;			
+			$param['name'] = $post['name'];
+			$param['url'] = $post['url'];
+			$param['data'] = $post['data'];
+			$param['json'] = $post['json'];
+			$param['created_at'] = get_datetime();
+			$param['created_by'] = 'BOT'; // session user
+			$param['created_ip'] = get_ip();
+			
+			$api_url = env('API_URL').'log';
+			$api_method = 'post';
+			
+			// $api_header['debug'] = 1;
+			$api_header['token'] = env('API_KEY');
+
+			$save = curl_api_liquid($api_url, $api_method, $api_header, $param);
+			debug($save,1);
+			if (isset($save)) {
+				$save = json_decode($save,1);
+				
+				if (isset($save['is_success'])) $message = 'Update success';
+				else $message = 'Update failed. Please try again';
+
+			}
+		}
+		
+		// return redirect($url_back)->with('message', print_message($message));
+		echo json_encode($message);
+		die;
 	}
 	
 }
