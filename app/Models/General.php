@@ -77,7 +77,7 @@ class General extends Model
 		// $str = '<div class="btn-sm"><i class="fa fa-minus-circle clrRed" alt="Unpublish" title="Unpublish"></i></div>';
 		if ($status == 0) $str = '<div class="btn-sm"><i class="fa fa-check-circle clrBlk" alt="Inactive" title="Inactive"></i> </div>';
 		if ($status == 1) $str = '<div class="btn-sm"><i class="fa fa-check-circle clrBlu" alt="Active" title="Active"></i> </div>';
-		if ($status == -1) $str = '<div class="btn-sm"><i class="fa fa-check-circle clrRed" alt="Deleted" title="Deleted"></i> </div>';
+		if ($status == -1) $str = '<div class="btn-sm"><i class="fa fa-close clrRed" alt="Deleted" title="Deleted"></i> </div>';
 		return $str;
 	}
 	

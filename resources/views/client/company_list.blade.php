@@ -144,7 +144,7 @@ $base_url = base_url();
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
 								<a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg"></i></a> 
-								<a href="<?php echo Request::segment(2).'?do=delete&'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-times fa-lg" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
+								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-times fa-lg" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
 								</td>
 							</tr>
 							<?php

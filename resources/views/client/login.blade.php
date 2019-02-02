@@ -1,5 +1,7 @@
 <?php 
-$base_url = base_url().'public/matrix/';
+// $base_url = base_url().'public/matrix/';
+$jsv = '20012019';
+$base_url = base_url();
 ?>
 <!DOCTYPE html>
 <html dir="ltr">
@@ -12,10 +14,10 @@ $base_url = base_url().'public/matrix/';
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../public/matrix/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ $base_url }}/public/matrix/assets/images/favicon.png?{{ $jsv }}">
     <title>Matrix Template - The Ultimate Multipurpose admin template</title>
     <!-- Custom CSS -->
-    <link href="../public/matrix/dist/css/style.min.css" rel="stylesheet">
+    <link href="{{ $base_url }}/public/matrix/dist/css/style.min.css?{{ $jsv }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -45,7 +47,7 @@ $base_url = base_url().'public/matrix/';
             <div class="auth-box bg-dark border-top border-secondary">
                 <div id="loginform">
                     <div class="text-center p-t-20 p-b-20">
-                        <span class="db"><img src="../public/matrix/assets/images/logo.png" alt="logo" /></span>
+                        <span class="db"><img src="{{ $base_url }}/public/matrix/assets/images/logo.png?{{ $jsv }}" alt="logo" /></span>
                     </div>
                     <!-- Form -->
                     <form class="form-horizontal m-t-20" id="loginform" action="index.html">
@@ -122,10 +124,10 @@ $base_url = base_url().'public/matrix/';
     <!-- ============================================================== -->
     <!-- All Required js -->
     <!-- ============================================================== -->
-    <script src="../public/matrix/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="{{ $base_url }}/public/matrix/assets/libs/jquery/dist/jquery.min.js?{{ $jsv }}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../public/matrix/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="../public/matrix/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{{ $base_url }}/public/matrix/assets/libs/popper.js/dist/umd/popper.min.js?{{ $jsv }}"></script>
+    <script src="{{ $base_url }}/public/matrix/assets/libs/bootstrap/dist/js/bootstrap.min.js?{{ $jsv }}"></script>
     <!-- ============================================================== -->
     <!-- This page plugin js -->
     <!-- ============================================================== -->

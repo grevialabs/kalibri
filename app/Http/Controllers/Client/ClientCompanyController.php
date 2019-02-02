@@ -165,19 +165,20 @@ class ClientCompanyController extends ClientController
 		
 		$message = 'No data delete';
 		$url_back = Request::segment(1).DS.Request::segment(2);
-		if ($_POST)
+		if ($_GET)
 		{
-			$post = $_POST;
-			unset($post['_token']);
+			$get = $_GET;
+			// unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($post['company_id'])) {
+            if (! isset($get['company_id'])) {
                 $message = 'company_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
 			// Action start here
 			$param = NULL;
+			$param['company_id'] = $get['company_id'];
 			$param['status'] = -1;
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
