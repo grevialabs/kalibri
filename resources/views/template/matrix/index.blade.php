@@ -163,29 +163,29 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
     <!-- ============================================================== -->
     
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../public/matrix/assets/libs/popper.js/dist/umd/popper.min.js?{{ $jsv }}"></script>
-    <script src="../public/matrix/assets/libs/bootstrap/dist/js/bootstrap.min.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/assets/libs/popper.js/dist/umd/popper.min.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/assets/libs/bootstrap/dist/js/bootstrap.min.js?{{ $jsv }}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="../public/matrix/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js?{{ $jsv }}"></script>
-    <script src="../public/matrix/assets/extra-libs/sparkline/sparkline.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/assets/extra-libs/sparkline/sparkline.js?{{ $jsv }}"></script>
     <!--Wave Effects -->
-    <script src="../public/matrix/dist/js/waves.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/dist/js/waves.js?{{ $jsv }}"></script>
     <!--Menu sidebar -->
-    <script src="../public/matrix/dist/js/sidebarmenu.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/dist/js/sidebarmenu.js?{{ $jsv }}"></script>
     <!--Custom JavaScript -->
-    <script src="../public/matrix/dist/js/custom.min.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/dist/js/custom.min.js?{{ $jsv }}"></script>
 	
 	
-	<script src="../public/matrix/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js?{{ $jsv }}"></script>
-    <script src="../public/matrix/dist/js/pages/mask/mask.init.js?{{ $jsv }}"></script>
-    <script src="../public/matrix/assets/libs/select2/dist/js/select2.full.min.js?{{ $jsv }}"></script>
-    <script src="../public/matrix/assets/libs/select2/dist/js/select2.min.js?{{ $jsv }}"></script>
-    <script src="../public/matrix/assets/libs/jquery-asColor/dist/jquery-asColor.min.js?{{ $jsv }}"></script>
-    <script src="../public/matrix/assets/libs/jquery-asGradient/dist/jquery-asGradient.js?{{ $jsv }}"></script>
-    <script src="../public/matrix/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js?{{ $jsv }}"></script>
-    <script src="../public/matrix/assets/libs/jquery-minicolors/jquery.minicolors.min.js?{{ $jsv }}"></script>
-    <script src="../public/matrix/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js?{{ $jsv }}"></script>
-
+	<script type="text/javascript" src="../public/matrix/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/dist/js/pages/mask/mask.init.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/assets/libs/select2/dist/js/select2.full.min.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/assets/libs/select2/dist/js/select2.min.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/assets/libs/jquery-asColor/dist/jquery-asColor.min.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/assets/libs/jquery-asGradient/dist/jquery-asGradient.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/assets/libs/jquery-minicolors/jquery.minicolors.min.js?{{ $jsv }}"></script>
+    <script type="text/javascript" src="../public/matrix/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js?{{ $jsv }}"></script>
+	<script type="text/javascript" src="../public/js/jquery.shiftcheckbox.js"></script>
 	
 	<script>
 	$(document).ready(function(){
@@ -198,14 +198,10 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 	}
 	?>
 	
-	
-	
 	});
 	
     // For select 2
 	$(".select2").select2();
-
-
 	
 	// Datepicker
 	jQuery('.datepicker').datepicker();
@@ -214,15 +210,20 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 		todayHighlight: true
 	});
 
+	// Shift checkbox
+	$('.parentcheckbox').shiftcheckbox({
+		checkboxSelector : ':checkbox',
+		//selectAll        : $('.chkbox '),
+		ignoreClick      : 'a',
+	});
+
 	
 	</script>
 	<!-- MDB core JavaScript 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/js/mdb.min.js?{{ $jsv }}"></script>
 	
 	-->
-	
-	<?php 
-	?>
+
 	
 </body>
 
@@ -252,6 +253,14 @@ $('.chkbox').click(function(){
 		$('#group_action').hide();
 	}
 });
+
+function doConfirm(str = 'delete') {
+	if (str == 'delete') {
+		str = 'Yakin menghapus data ini ?'
+	} else 
+		str = 'Yakin melakukan aksi ini ?'
+	return confirm(str)
+}
 
 
 </script>

@@ -59,12 +59,6 @@ $resubmit_url = current_url().'?'.$reget;
 $base_url = base_url();
 ?>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
-	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	
-<script type="text/javascript" src="{{ $base_url }}public/js/jquery.shiftcheckbox.js"></script>
-
 <style>
 
 </style>
@@ -75,7 +69,7 @@ $base_url = base_url();
 		<div class="card">
 			<div class="card-body">
 				<div class="card-title">
-					<h3 class="b">{{ $PAGE_TITLE}}</h3>
+					<h3 class="b text-capitalize">{{ $PAGE_HEADER }}</h3>
 				</div>
 				
 				@if (session('message'))
@@ -84,9 +78,9 @@ $base_url = base_url();
 				
 				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $companylang['add_new'] }}</a><br/><br/>
 
-				<form method="get" action="<?php echo current_full_url()?>">
-					<input type="search" name="keyword" class="form-control wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
-					<button class="btn btn-default btn-sm" type="submit">{{ $lang['search'] }}</button><br/><br/>
+				<form method="get" action="{{ $current_url }}">
+					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
+					<button class="btn btn-default btn-md" type="submit">{{ $lang['search'] }}</button><br/><br/>
 				
 					<div>
 						<div class="pull-left" style="padding-top: 8px">
@@ -104,7 +98,7 @@ $base_url = base_url();
 					</div>
 				</form>
 				
-				<form method="post" action="{{ base_url().Request::segment(1).DS.'bulk' }}">
+				<form method="post" action="{{ $current_url . DS . 'bulk' }}">
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered" id="table_company">
 							<tr class="b">
@@ -184,20 +178,7 @@ $base_url = base_url();
 </div>
 
 <script>
-// Shift checkbox
-$('.parentcheckbox').shiftcheckbox({
-	checkboxSelector : ':checkbox',
-	//selectAll        : $('.chkbox '),
-	ignoreClick      : 'a',
-});
 
-function doConfirm(str = 'delete') {
-	if (str == 'delete') {
-		str = 'Yakin menghapus data ini ?'
-	} else 
-		str = 'Yakin melakukan aksi ini ?'
-	return confirm(str)
-}
 	
 // Placeholder
 $(document).ready( function() {

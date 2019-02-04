@@ -189,8 +189,18 @@
 		<!-- Sidebar navigation-->
 		<nav class="sidebar-nav">
 			<ul id="sidebarnav" class="p-t-30">
-				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="company" href="company" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Company</span></a></li>
+				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="user" href="user" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User</span></a></li>
+				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="user_attribute" href="user_attribute" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User attribute</span></a></li>
+				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="site" href="site" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Site</span></a></li>
+				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="pic" href="pic" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">PIC</span></a></li>
+				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="reason" href="reason" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason</span></a></li>
+				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="level" href="level" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Level</span></a></li>
+				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="reason_type" href="reason_type" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type Mapping</span></a></li>
+				<!--
+				DUMMY MENU AND ICON START
+				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+				
 				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="charts" href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Charts</span></a></li>
 				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Widgets</span></a></li>
 				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Tables</span></a></li>
@@ -232,6 +242,8 @@
 						<li class="sidebar-item"><a href="error-500.html" class="sidebar-link"><i class="mdi mdi-alert-octagon"></i><span class="hide-menu"> Error 500 </span></a></li>
 					</ul>
 				</li>
+				DUMMY MENU AND ICON END
+				-->
 			</ul>
 		</nav>
 		<!-- End Sidebar navigation -->

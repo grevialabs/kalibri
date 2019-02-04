@@ -31,6 +31,7 @@ return [
     'search' => 'Search',
     'search_input' => 'Search keyword...',
     'showing' => 'showing',
+    'list' => 'list',
     'insert' => 'insert',
     'add' => 'add',
     'edit' => 'edit',

@@ -34,6 +34,27 @@ $base_url = base_url();
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
 // $PAGE_TITLE = $action .' '. $companylang['module']; 
+
+function validate_column($arrsource,$arrtarget) {
+	
+	if (empty($arrsource) || empty($arrtarget)) {
+		return 'helper error: validate_column error parameter';
+	}	
+	
+	$temp = NULL;
+	foreach ($arrsource as $rs) {
+		if (isset($arrtarget[$rs])) $temp[$rs] = $arrtarget[$rs];
+	}
+	
+	return $temp;
+}
+
+// $source = array('company_id', 'company_name', 'company_address', 'company_phone', 'company_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
+// $target = array('mantap' => 'gokil', 'company_name' => 'harusmasuknih');
+// // $test = array('ayam','bebek');
+// // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
+// $a = validate_column($source,$target);
+// debug($a,1);
 ?>
 
 <!-- Article AREA -->
@@ -42,7 +63,7 @@ $base_url = base_url();
 		<div class="card">
 			<div class="card-body">
 				<div class="card-title">
-					<h3 class="b">{{ $PAGE_TITLE}}</h3>
+					<h3 class="b text-capitalize">{{ $PAGE_HEADER }}</h3>
 				</div>
 				
 				<div><a href="{{ base_url().''.Request::segment(1).DS.Request::segment(2) }}" class="btn btn-info">{!! $lang['back_icon'] . ' ' . $lang['back'] !!}</a></div>{!! BR.BR !!}
@@ -94,7 +115,7 @@ $base_url = base_url();
 							<label for="company_name" class="control-label col-form-label">{!! $companylang['company_name'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $companylang['company_name'] }}" title="{{ $companylang['company_name'] }}" class="form-control datepicker" id="company_name" name="company_name" placeholder="{{ $companylang['company_name'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $companylang['company_name'] }}" title="{{ $companylang['company_name'] }}" class="form-control" id="company_name" name="company_name" placeholder="{{ $companylang['company_name'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					

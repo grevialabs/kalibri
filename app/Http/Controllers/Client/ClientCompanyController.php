@@ -34,44 +34,45 @@ class ClientCompanyController extends ClientController
 		
 		$lang = Lang::get('common');
 		$companylang = Lang::get('modular/company');
-		$themes = env('THEMES','general');
 		$current_url = current_url();
 		// debug($companylang,1);
 		
 		$param['get'] = $get;
 		$param['lang'] = $lang;
 		$param['companylang'] = $companylang;
-		$param['PAGE_TITLE'] = ' Halaman' . $companylang['module'];
-		$param['PAGE_HEADER'] = $companylang['module'];
+		$param['PAGE_TITLE'] = $companylang['module'];
+		$param['MODULE'] = $companylang['module'];
 		
 		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['company_id']))) {
 			if ($get['do'] == 'insert') { 
-				$param['PAGE_HEADER'] = $lang['add'] . ' ' . $lang['page'] . ' ' . $companylang['module'];
+				$param['ACTION'] = $lang['insert'];
 				$param['form_url'] = $current_url.DS.'insert';
-			} 
-			else if($get['do'] == 'edit') { 
-				$param['PAGE_HEADER'] = $lang['edit'] . ' ' . $lang['page'] . ' ' . $companylang['module'];
+			} else if($get['do'] == 'edit') {
+				$param['ACTION'] = $lang['edit'];
 				$param['form_url'] = $current_url.DS.'update';
 			}
 			
 			$viewtarget = 'client.company_form';
 		} else {
+			$param['ACTION'] = $lang['list'];
 			$viewtarget = 'client.company_list';
 		}
+		
+		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $companylang['module'];
 		
 		$param['current_url'] = $current_url;
 		$content = view($viewtarget,$param);	
 		
 		$param['CONTENT'] = $content;
-		return view('template.' . $themes . '.index',$param);
+		return view('template.' . $this->themes . '.index',$param);
 		die;
 	}
 	
 	public function insert()
 	{
-		$post = $message = NULL;
-		$company_model = new Company_Model();
+		$post = $message = $url_back = NULL;
 		$message = 'No data insert';
+		$url_back = Request::segment(1).DS.Request::segment(2);
 		if ($_POST)
 		{
 			$post = $_POST;
@@ -80,11 +81,7 @@ class ClientCompanyController extends ClientController
 			
 			// Action start here
 			$param = NULL;
-			// $param[''] = $post[''];
-			$param['company_name'] = $post['company_name'];
-			$param['company_address'] = $post['company_address'];
-			$param['company_phone'] = $post['company_phone'];
-			$param['company_pic'] = $post['company_pic'];
+			$param = $post;
 			$param['created_at'] = get_datetime();
 			$param['created_by'] = 1;
 			$param['created_ip'] = get_ip();
@@ -108,13 +105,12 @@ class ClientCompanyController extends ClientController
 			}
 		}
 		
-		return redirect('company')->with('message', print_message($message));
+		return redirect($url_back)->with('message', print_message($message));
 	}
 	
 	public function update()
 	{
-		$message = $url_back = NULL;
-		
+		$post = $message = $url_back = NULL;
 		$message = 'No data update';
 		$url_back = Request::segment(1).DS.Request::segment(2);
 		if ($_POST)
@@ -130,11 +126,12 @@ class ClientCompanyController extends ClientController
 			
 			// Action start here
 			$param = NULL;
-			$param['company_id'] = $post['company_id'];
-			$param['company_name'] = $post['company_name'];
-			$param['company_address'] = $post['company_address'];
-			$param['company_phone'] = $post['company_phone'];
-			$param['company_pic'] = $post['company_pic'];
+			$param = $post;
+			// $param['company_id'] = $post['company_id'];
+			// $param['company_name'] = $post['company_name'];
+			// $param['company_address'] = $post['company_address'];
+			// $param['company_phone'] = $post['company_phone'];
+			// $param['company_pic'] = $post['company_pic'];
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
@@ -185,18 +182,18 @@ class ClientCompanyController extends ClientController
 			$param['updated_ip'] = get_ip();
 			
 			$api_url = env('API_URL').'company';
-			$api_method = 'put';
+			$api_method = 'delete';
 			
 			// $api_header['debug'] = 1;
 			$api_header['token'] = env('API_KEY');
 
-			$update = curl_api_liquid($api_url, $api_method, $api_header, $param);
+			$delete = curl_api_liquid($api_url, $api_method, $api_header, $param);
 			
-			if (isset($update)) {
-				$update = json_decode($update,1);
+			if (isset($delete)) {
+				$delete = json_decode($delete,1);
 				
-				if ($update['is_success']) $message = 'Update success';
-				else $message = 'Update failed. Please try again';
+				if ($delete['is_success']) $message = 'Delete success';
+				else $message = 'Delete failed. Please try again';
 
 			}
 		}
@@ -204,6 +201,7 @@ class ClientCompanyController extends ClientController
 		return redirect($url_back)->with('message', print_message($message));
 	}
 	
+	// Not yet working
 	public function bulk()
 	{
 		$message = 'Bulk action nodata';
@@ -215,12 +213,6 @@ class ClientCompanyController extends ClientController
 			
 			// Action start here
 			$param = NULL;
-			// $param[''] = $post[''];
-			$param['company_id'] = $post['company_id'];
-			$param['company_name'] = $post['company_name'];
-			$param['company_address'] = $post['company_address'];
-			$param['company_phone'] = $post['company_phone'];
-			$param['company_pic'] = $post['company_pic'];
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();

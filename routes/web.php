@@ -68,10 +68,52 @@ Route::prefix('client/')->group(function () {
 	Route::get('login', 'Client\ClientController@login');
 	Route::get('example', 'Client\ClientController@example');
 	
+	// DONE
 	Route::get('company', 'Client\ClientCompanyController@company');
 	Route::any('company/update', 'Client\ClientCompanyController@update');
 	Route::any('company/delete', 'Client\ClientCompanyController@delete');
 	Route::any('company/bulk', 'Client\ClientCompanyController@bulk');
+
+	Route::get('user', 'Client\ClientUserController@user');
+	Route::any('user/update', 'Client\ClientUserController@update');
+	Route::any('user/delete', 'Client\ClientUserController@delete');
+	Route::any('user/bulk', 'Client\ClientUserController@bulk');
+	
+	Route::get('user_attribute', 'Client\ClientUserAttributeController@user_attribute');
+	Route::any('user_attribute/update', 'Client\ClientUserAttributeController@update');
+	Route::any('user_attribute/delete', 'Client\ClientUserAttributeController@delete');
+	Route::any('user_attribute/bulk', 'Client\ClientUserAttributeController@bulk');
+	
+	Route::get('site', 'Client\ClientController@site');
+	Route::any('site/update', 'Client\ClientController@update');
+	Route::any('site/delete', 'Client\ClientController@delete');
+	Route::any('site/bulk', 'Client\ClientController@bulk');
+	
+	Route::get('pic', 'Client\ClientPicController@pic');
+	Route::any('pic/update', 'Client\ClientPicController@update');
+	Route::any('pic/delete', 'Client\ClientPicController@delete');
+	Route::any('pic/bulk', 'Client\ClientPicController@bulk');
+	
+	Route::get('reason', 'Client\ClientPicController@reason');
+	Route::any('reason/update', 'Client\ClientPicController@update');
+	Route::any('reason/delete', 'Client\ClientPicController@delete');
+	Route::any('reason/bulk', 'Client\ClientPicController@bulk');
+
+	Route::get('level', 'Client\ClientController@level');
+	Route::any('level/update', 'Client\ClientController@update');
+	Route::any('level/delete', 'Client\ClientController@delete');
+	Route::any('level/bulk', 'Client\ClientController@bulk');
+	
+	Route::get('reason_type', 'Client\ClientController@');
+	Route::any('reason_type/update', 'Client\ClientController@update');
+	Route::any('reason_type/delete', 'Client\ClientController@delete');
+	Route::any('reason_type/bulk', 'Client\ClientController@bulk');
+	
+	// Route::get('', 'Client\ClientController@');
+	// Route::any('/update', 'Client\ClientController@update');
+	// Route::any('/delete', 'Client\ClientController@delete');
+	// Route::any('/bulk', 'Client\ClientController@bulk');
+	
 	
 });
 
