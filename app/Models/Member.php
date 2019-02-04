@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
-    //
+    // GA PAKE BRO
 	
 	
 }

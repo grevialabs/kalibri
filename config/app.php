@@ -231,6 +231,7 @@ return [
 		// Model
         'CompanyModel' => Patriot\Models\Company::class,
         'GeneralModel' => Patriot\Models\General::class,
+        'UserModel' => Patriot\Models\User::class,
 
         // 'PDF' => Barryvdh\DomPDF\Facade::class,
 
