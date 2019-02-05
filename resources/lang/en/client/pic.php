@@ -13,17 +13,17 @@ return [
     |
     */
 
-    'page_title' => 'Company',
-    'module' => 'Company',
+    'page_title' => 'PIC',
+    'module' => 'PIC',
     // 'forgotpass' => 'Lupa Password',
-    'add_new' => 'Add new company',
+    'add_new' => 'Add new PIC',
     'p1' => '',
     'success' => 'success',
 	
-    'company_id' => 'Company ID',
-    'company_name' => 'Company Name',
-    'company_address' => 'Company Address',
-    'company_phone' => 'Company Phone',
-    'company_pic' => 'Company PIC',
+    'pic_id' => 'PicID',
+    'site_id' => 'SiteID',
+    'pic_name' => 'PicName',
+    'pic_phone' => 'PicPhone',
+    'pic_email' => 'PicEmail',
 
 ];

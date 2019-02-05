@@ -7,10 +7,10 @@ $offset = 0;
 $page = 1;
 
 // $perpage_allowed = array(2,40,60);
-$user_model = new UserModel();
+$level_model = new LevelModel();
 $general_model = new GeneralModel();
 
-$getorder_allowed_list = $user_model->getorder_allowed_list();
+$getorder_allowed_list = $level_model->getorder_allowed_list();
 $getorderby_allowed_list = $general_model->getorderby_allowed_list();
 $perpage_allowed = $general_model->perpage_allowed();
 
@@ -33,7 +33,7 @@ if (isset($getorder)) $api_param['order'] = $getorder; else $getorder = $getorde
 if (isset($getorderby)) $api_param['orderby'] = $getorderby; else $getorderby = $getorderby_allowed_list[0];
 $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_list);
 
-$api_url = env('API_URL').'user/get_list';
+$api_url = env('API_URL').'company/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
@@ -76,7 +76,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $userlang['add_new'] }}</a><br/><br/>
+				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $levellang['add_new'] }}</a><br/><br/>
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -100,15 +100,13 @@ $base_url = base_url();
 				
 				<form method="post" action="{{ $current_url . DS . 'bulk' }}">
 					<div class="table-responsive">
-						<table class="table table-striped table-bordered" id="table_user">
+						<table class="table table-striped table-bordered" id="table_company">
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['user_id']['class'] }}" title="{{ $arrsort['user_id']['title'] }}" href="{{ $arrsort['user_id']['url'] }}">userID {!! $arrsort['user_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['user_code']['class'] }}" title="{{ $arrsort['user_code']['title'] }}" href="{{ $arrsort['user_code']['url'] }}">{{ $userlang['user_code'] }} {!! $arrsort['firstname']['icon'] !!}</a></td>
-								<td><a class="{{ $arrsort['firstname']['class'] }}" title="{{ $arrsort['firstname']['title'] }}" href="{{ $arrsort['firstname']['url'] }}">{{ $userlang['firstname'] }} {!! $arrsort['firstname']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['division']['class'] }}" title="{{ $arrsort['division']['title'] }}" href="{{ $arrsort['division']['url'] }}">{{ $userlang['division'] }} {!! $arrsort['division']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['email']['class'] }}" title="{{ $arrsort['email']['title'] }}" href="{{ $arrsort['email']['url'] }}">{{ $userlang['email'] }} {!! $arrsort['email']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['level_id']['class'] }}" title="{{ $arrsort['level_id']['title'] }}" href="{{ $arrsort['level_id']['url'] }}">{{ $levellang['level_id'] }} {!! $arrsort['level_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['level_hierarchy']['class'] }}" title="{{ $arrsort['level_hierarchy']['title'] }}" href="{{ $arrsort['level_hierarchy']['url'] }}">{{ $levellang['level_hierarchy'] }} {!! $arrsort['level_hierarchy']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['level_name']['class'] }}" title="{{ $arrsort['level_name']['title'] }}" href="{{ $arrsort['level_name']['url'] }}">{{ $levellang['level_name'] }} {!! $arrsort['level_name']['icon'] !!}</a></td>
 								<td width="2">Status</td>
 								<td width="50px" class="talCnt">Option</td>
 							</tr>
@@ -123,18 +121,16 @@ $base_url = base_url();
 								foreach ($listdata as $key => $rs) 
 								{
 									$i++;
-									$id = $rs['user_id'];
-									$idcol = 'user_id';
+									$id = $rs['level_id'];
+									$idcol = 'level_id';
 							?>
 							
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['user_id'] }}</td>
-								<td>{{ $rs['firstname'] }}</td>
-								<td>{{ $rs['user_code'] }}</td>
-								<td>{{ $rs['division'] }}</td>
-								<td>{{ $rs['email'] }}</td>
+								<td>{{ $rs['level_id'] }}</td>
+								<td>{{ $rs['level_hierarchy'] }}</td>
+								<td>{{ $rs['level_name'] }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
 								<a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg"></i></a> 

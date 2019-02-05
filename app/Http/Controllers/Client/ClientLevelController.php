@@ -15,7 +15,7 @@ use Cookie;
 use Lang;
 use Request;
 
-class ClientUserController extends ClientController
+class ClientLevelController extends ClientController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 	
@@ -26,24 +26,24 @@ class ClientUserController extends ClientController
 		// debug('mantap',1);
 	}
 		
-	public function user()
+	public function level()
 	{
-		$param = $content = $get = $lang = $userlang = $current_url = NULL;
+		$param = $content = $get = $lang = $levellang = $current_url = NULL;
 		
 		if ($_GET) $get = $_GET;
 		
 		$lang = Lang::get('common');
-		$userlang = Lang::get('client/user');
+		$levellang = Lang::get('client/level');
 		$current_url = current_url();
-		// debug($userlang,1);
+		// debug($levellang,1);
 		
 		$param['get'] = $get;
 		$param['lang'] = $lang;
-		$param['userlang'] = $userlang;
-		$param['PAGE_TITLE'] = $userlang['module'];
-		$param['MODULE'] = $userlang['module'];
+		$param['levellang'] = $levellang;
+		$param['PAGE_TITLE'] = $levellang['module'];
+		$param['MODULE'] = $levellang['module'];
 		
-		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['user_id']))) {
+		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['level_id']))) {
 			if ($get['do'] == 'insert') { 
 				$param['ACTION'] = $lang['insert'];
 				$param['form_url'] = $current_url.DS.'insert';
@@ -52,13 +52,13 @@ class ClientUserController extends ClientController
 				$param['form_url'] = $current_url.DS.'update';
 			}
 			
-			$viewtarget = 'client.user_form';
+			$viewtarget = 'client.level_form';
 		} else {
 			$param['ACTION'] = $lang['list'];
-			$viewtarget = 'client.user_list';
+			$viewtarget = 'client.level_list';
 		}
 		
-		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $userlang['module'];
+		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $levellang['module'];
 		
 		$param['current_url'] = $current_url;
 		$content = view($viewtarget,$param);	
@@ -85,9 +85,9 @@ class ClientUserController extends ClientController
 			$param['created_at'] = get_datetime();
 			$param['created_by'] = 1;
 			$param['created_ip'] = get_ip();
-			// $param['user_token'] = env('API_KEY');
+			// $param['level_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'user';
+			$api_url = env('API_URL').'level';
 			$api_method = 'post';
 			
 			// $api_header['debug'] = 1;
@@ -119,24 +119,19 @@ class ClientUserController extends ClientController
 			unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($post['user_id'])) {
-                $message = 'user_id not exist';
+            if (! isset($post['level_id'])) {
+                $message = 'level_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
 			// Action start here
 			$param = NULL;
 			$param = $post;
-			// $param['user_id'] = $post['user_id'];
-			// $param['user_name'] = $post['user_name'];
-			// $param['user_address'] = $post['user_address'];
-			// $param['user_phone'] = $post['user_phone'];
-			// $param['user_pic'] = $post['user_pic'];
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'user';
+			$api_url = env('API_URL').'level';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
@@ -168,20 +163,20 @@ class ClientUserController extends ClientController
 			// unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($get['user_id'])) {
-                $message = 'user_id not exist';
+            if (! isset($get['level_id'])) {
+                $message = 'level_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
 			// Action start here
 			$param = NULL;
-			$param['user_id'] = $get['user_id'];
+			$param['level_id'] = $get['level_id'];
 			$param['status'] = -1;
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'user';
+			$api_url = env('API_URL').'level';
 			$api_method = 'delete';
 			
 			// $api_header['debug'] = 1;
@@ -216,9 +211,9 @@ class ClientUserController extends ClientController
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
-			// $param['user_token'] = env('API_KEY');
+			// $param['level_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'user';
+			$api_url = env('API_URL').'level';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
@@ -232,11 +227,11 @@ class ClientUserController extends ClientController
 				if ($save['is_success']) $message = 'Save success';
 				else $message = 'Save failed';
 				
-				// return redirect('user')->with('message', print_message($message));
+				// return redirect('level')->with('message', print_message($message));
 			}
 			
 			$message = 'Bulk action success';
 		}
-		return redirect('user')->with('message', print_message($message));
+		return redirect('level')->with('message', print_message($message));
 	}
 }

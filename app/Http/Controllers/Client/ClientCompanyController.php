@@ -33,7 +33,7 @@ class ClientCompanyController extends ClientController
 		if ($_GET) $get = $_GET;
 		
 		$lang = Lang::get('common');
-		$companylang = Lang::get('modular/company');
+		$companylang = Lang::get('client/company');
 		$current_url = current_url();
 		// debug($companylang,1);
 		

@@ -232,6 +232,11 @@ return [
         'CompanyModel' => Patriot\Models\Company::class,
         'GeneralModel' => Patriot\Models\General::class,
         'UserModel' => Patriot\Models\User::class,
+        'PicModel' => Patriot\Models\Pic::class,
+        'SiteModel' => Patriot\Models\Site::class,
+        'LevelModel' => Patriot\Models\Level::class,
+        'ReasonModel' => Patriot\Models\Reason::class,
+        // 'UserModel' => Patriot\Models\User::class,
 
         // 'PDF' => Barryvdh\DomPDF\Facade::class,
 

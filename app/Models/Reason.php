@@ -4,7 +4,7 @@ namespace Patriot\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Reason extends Model
 {
     // getorder_allowed_list
 	public static function column_list()
