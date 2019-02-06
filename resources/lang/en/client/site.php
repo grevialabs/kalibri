@@ -19,6 +19,7 @@ return [
     'add_new' => 'Add new Site',
     'p1' => '',
     'success' => 'success',
+    'company_name' => 'CompanyName',
 	
     'site_id' => 'SiteID',
     'company_id' => 'CompanyID',

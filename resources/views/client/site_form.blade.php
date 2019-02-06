@@ -2,12 +2,12 @@
 // ---------------------------
 // Get data 
 $data = NULL;
-if (isset($get['company_id'])) {
+if (isset($get['site_id'])) {
 	$api_url = $api_method = $api_param = $api_header = NULL;
 	$api_param['token'] = env('API_KEY');
-	$api_param['company_id'] = $get['company_id'];
+	$api_param['site_id'] = $get['site_id'];
 
-	$api_url = env('API_URL').'company/get';
+	$api_url = env('API_URL').'site/get';
 	$api_method = 'get';
 	// $api_header['debug'] = 1;
 	
@@ -32,7 +32,22 @@ $base_url = base_url();
 // if ($get['do'] == 'insert') $action = $lang['add'];
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
-// $PAGE_TITLE = $action .' '. $companylang['module']; 
+// $PAGE_TITLE = $action .' '. $sitelang['module']; 
+
+// if (isset($get['do'])) 
+$list_company = NULL;
+$api_url = $api_method = $api_param = $api_header = NULL;
+$api_param['token'] = env('API_KEY');
+$api_param['paging'] = false;
+
+$api_url = env('API_URL').'company/get_list';
+$api_method = 'get';
+// $api_header['debug'] = 1;
+
+$temp = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+
+if (! empty($temp)) $temp = json_decode($temp,1);
+$list_company = $temp['data'];
 
 function validate_column($arrsource,$arrtarget) {
 	
@@ -48,12 +63,6 @@ function validate_column($arrsource,$arrtarget) {
 	return $temp;
 }
 
-// $source = array('company_id', 'company_name', 'company_address', 'company_phone', 'company_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
-// $target = array('mantap' => 'gokil', 'company_name' => 'harusmasuknih');
-// // $test = array('ayam','bebek');
-// // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
-// $a = validate_column($source,$target);
-// debug($a,1);
 ?>
 
 <!-- Article AREA -->
@@ -86,62 +95,122 @@ function validate_column($arrsource,$arrtarget) {
 					-->
 					
 				
-					<?php if (isset($data['company_id'])) { ?>
+					<?php if (isset($data['site_id'])) { ?>
 					
 					<!--
 					<div class="col-lg-12 col-sm-12">
 						<div class="md-form">
-							<input type="text" id="company_id" class="form-control" value="{{ $data['company_id'] }}" disabled />
-							<input type="hidden" name="company_id" value="{{ $data['company_id'] }}" />
+							<input type="text" id="site_id" class="form-control" value="{{ $data['site_id'] }}" disabled />
+							<input type="hidden" name="site_id" value="{{ $data['site_id'] }}" />
 							
-							<label for="company_id" >Company ID</label>
+							<label for="site_id" >Company ID</label>
 						</div>
 					</div>
 					-->
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="" class="control-label col-form-label">CompanyID</label>
+							<label for="site_id" class="control-label col-form-label">{!! $sitelang['site_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $companylang['company_id'] }}" required="" data-original-title="" value="{{ $data['company_id'] }}" disabled />
-							<input type="hidden" name="company_id" value="{{ $data['company_id'] }}" />
+							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $sitelang['site_id'] }}" required="" data-original-title="" value="{{ $data['site_id'] }}" disabled />
+							<input type="hidden" name="site_id" value="{{ $data['site_id'] }}" />
 						</div>
 					</div>
 					<?php } ?>
 					
+					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="company_name" class="control-label col-form-label">{!! $companylang['company_name'] !!}</label>
+							<label for="site_name" class="control-label col-form-label">{!! $sitelang['site_name'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $companylang['company_name'] }}" title="{{ $companylang['company_name'] }}" class="form-control" id="company_name" name="company_name" placeholder="{{ $companylang['company_name'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $sitelang['site_name'] }}" title="{{ $sitelang['site_name'] }}" class="form-control" id="site_name" name="site_name" placeholder="{{ $sitelang['site_name'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="company_address" class="control-label col-form-label">{!! $companylang['company_address'] !!}</label>
+							<label for="company_id" class="control-label col-form-label">{!! $sitelang['company_name'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<textarea type="text" data-toggle="{{ $companylang['company_address'] }}" title="" class="form-control" id="company_address" name="company_address" placeholder="{{ $companylang['company_address'] }}" required="" data-original-title="{{ $companylang['company_address'] }}"></textarea>
+							<!--
+							<input type="text" data-toggle="{{ $sitelang['company_id'] }}" title="{{ $sitelang['company_id'] }}" class="form-control" id="company_id" name="company_id" placeholder="{{ $sitelang['company_id'] }}" required="" data-original-title="" />
+							-->
+							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="company_id">
+							<?php 
+							if (!empty($list_company)) {
+								foreach ($list_company as $k => $rs) {
+								?>
+								<option>{{ $rs['company_name'] . ' - ID ' . $rs['company_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
 						</div>
 					</div>
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="company_phone" class="control-label col-form-label">{!! $companylang['company_phone'] !!}</label>
+							<label for="site_address" class="control-label col-form-label">{!! $sitelang['site_address'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="company_phone" name="company_phone" placeholder="{{ $companylang['company_phone'] }}" required="" data-original-title="" />
+							<textarea type="text" data-toggle="{{ $sitelang['site_address'] }}" title="" class="form-control" id="site_address" name="site_address" placeholder="{{ $sitelang['site_address'] }}" required="" data-original-title="{{ $sitelang['site_address'] }}"></textarea>
 						</div>
 					</div>
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="" class="control-label col-form-label">{!! $companylang['company_pic'] !!}</label>
+							<label for="site_qty_value" class="control-label col-form-label">{!! $sitelang['site_qty_value'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="company_pic" name="company_pic" placeholder="{{ $companylang['company_pic'] }}" required="" data-original-title="{{ $companylang['company_pic'] }}" />
+							<input type="text" data-toggle="{{ $sitelang['site_qty_value'] }}" title="{{ $sitelang['site_qty_value'] }}" class="form-control" id="site_qty_value" name="site_qty_value" placeholder="{{ $sitelang['site_qty_value'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="flag_qty_value" class="control-label col-form-label">{!! $sitelang['flag_qty_value'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $sitelang['flag_qty_value'] }}" title="{{ $sitelang['flag_qty_value'] }}" class="form-control" id="flag_qty_value" name="flag_qty_value" placeholder="{{ $sitelang['flag_qty_value'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="method_calc" class="control-label col-form-label">{!! $sitelang['method_calc'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="" title="" class="form-control" id="method_calc" name="method_calc" placeholder="{{ $sitelang['method_calc'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="start_date_counting" class="control-label col-form-label">{!! $sitelang['start_date_counting'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="" title="" class="datepicker form-control" id="start_date_counting" name="start_date_counting" placeholder="{{ $sitelang['start_date_counting'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="reset_days" class="control-label col-form-label">{!! $sitelang['reset_days'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="" title="" class="form-control" id="reset_days" name="reset_days" placeholder="{{ $sitelang['reset_days'] }}" required="" data-original-title="{{ $sitelang['reset_days'] }}" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="logo_file_name" class="control-label col-form-label">{!! $sitelang['logo_file_name'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="" title="" class="form-control" id="logo_file_name" name="logo_file_name" placeholder="{{ $sitelang['logo_file_name'] }}" required="" data-original-title="{{ $sitelang['logo_file_name'] }}" />
 						</div>
 					</div>
 					

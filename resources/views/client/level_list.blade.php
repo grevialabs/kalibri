@@ -33,7 +33,7 @@ if (isset($getorder)) $api_param['order'] = $getorder; else $getorder = $getorde
 if (isset($getorderby)) $api_param['orderby'] = $getorderby; else $getorderby = $getorderby_allowed_list[0];
 $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_list);
 
-$api_url = env('API_URL').'company/get_list';
+$api_url = env('API_URL').'level/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
@@ -100,12 +100,12 @@ $base_url = base_url();
 				
 				<form method="post" action="{{ $current_url . DS . 'bulk' }}">
 					<div class="table-responsive">
-						<table class="table table-striped table-bordered" id="table_company">
+						<table class="table table-striped table-bordered" id="table_level">
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
 								<td width="150px"><a class="{{ $arrsort['level_id']['class'] }}" title="{{ $arrsort['level_id']['title'] }}" href="{{ $arrsort['level_id']['url'] }}">{{ $levellang['level_id'] }} {!! $arrsort['level_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['level_hierarchy']['class'] }}" title="{{ $arrsort['level_hierarchy']['title'] }}" href="{{ $arrsort['level_hierarchy']['url'] }}">{{ $levellang['level_hierarchy'] }} {!! $arrsort['level_hierarchy']['icon'] !!}</a></td>
+								<td width=""><a class="{{ $arrsort['level_hierarchy']['class'] }}" title="{{ $arrsort['level_hierarchy']['title'] }}" href="{{ $arrsort['level_hierarchy']['url'] }}">{{ $levellang['level_hierarchy'] }} {!! $arrsort['level_hierarchy']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['level_name']['class'] }}" title="{{ $arrsort['level_name']['title'] }}" href="{{ $arrsort['level_name']['url'] }}">{{ $levellang['level_name'] }} {!! $arrsort['level_name']['icon'] !!}</a></td>
 								<td width="2">Status</td>
 								<td width="50px" class="talCnt">Option</td>

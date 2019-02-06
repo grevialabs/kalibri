@@ -2,12 +2,12 @@
 // ---------------------------
 // Get data 
 $data = NULL;
-if (isset($get['company_id'])) {
+if (isset($get['reason_id'])) {
 	$api_url = $api_method = $api_param = $api_header = NULL;
 	$api_param['token'] = env('API_KEY');
-	$api_param['company_id'] = $get['company_id'];
+	$api_param['reason_id'] = $get['reason_id'];
 
-	$api_url = env('API_URL').'company/get';
+	$api_url = env('API_URL').'reason/get';
 	$api_method = 'get';
 	// $api_header['debug'] = 1;
 	
@@ -32,7 +32,7 @@ $base_url = base_url();
 // if ($get['do'] == 'insert') $action = $lang['add'];
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
-// $PAGE_TITLE = $action .' '. $companylang['module']; 
+// $PAGE_TITLE = $action .' '. $reasonlang['module']; 
 
 function validate_column($arrsource,$arrtarget) {
 	
@@ -48,8 +48,8 @@ function validate_column($arrsource,$arrtarget) {
 	return $temp;
 }
 
-// $source = array('company_id', 'company_name', 'company_address', 'company_phone', 'company_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
-// $target = array('mantap' => 'gokil', 'company_name' => 'harusmasuknih');
+// $source = array('reason_id', 'reason_name', 'reason_address', 'reason_phone', 'reason_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
+// $target = array('mantap' => 'gokil', 'reason_name' => 'harusmasuknih');
 // // $test = array('ayam','bebek');
 // // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
 // $a = validate_column($source,$target);
@@ -86,62 +86,35 @@ function validate_column($arrsource,$arrtarget) {
 					-->
 					
 				
-					<?php if (isset($data['company_id'])) { ?>
+					<?php if (isset($data['reason_id'])) { ?>
 					
 					<!--
 					<div class="col-lg-12 col-sm-12">
 						<div class="md-form">
-							<input type="text" id="company_id" class="form-control" value="{{ $data['company_id'] }}" disabled />
-							<input type="hidden" name="company_id" value="{{ $data['company_id'] }}" />
+							<input type="text" id="reason_id" class="form-control" value="{{ $data['reason_id'] }}" disabled />
+							<input type="hidden" name="reason_id" value="{{ $data['reason_id'] }}" />
 							
-							<label for="company_id" >Company ID</label>
+							<label for="reason_id" >Company ID</label>
 						</div>
 					</div>
 					-->
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="" class="control-label col-form-label">CompanyID</label>
+							<label for="" class="control-label col-form-label">{!! $reasonlang['reason_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $companylang['company_id'] }}" required="" data-original-title="" value="{{ $data['company_id'] }}" disabled />
-							<input type="hidden" name="company_id" value="{{ $data['company_id'] }}" />
+							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $reasonlang['reason_id'] }}" required="" data-original-title="" value="{{ $data['reason_id'] }}" disabled />
+							<input type="hidden" name="reason_id" value="{{ $data['reason_id'] }}" />
 						</div>
 					</div>
 					<?php } ?>
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="company_name" class="control-label col-form-label">{!! $companylang['company_name'] !!}</label>
+							<label for="reason_value" class="control-label col-form-label">{!! $reasonlang['reason_value'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $companylang['company_name'] }}" title="{{ $companylang['company_name'] }}" class="form-control" id="company_name" name="company_name" placeholder="{{ $companylang['company_name'] }}" required="" data-original-title="" />
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="company_address" class="control-label col-form-label">{!! $companylang['company_address'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<textarea type="text" data-toggle="{{ $companylang['company_address'] }}" title="" class="form-control" id="company_address" name="company_address" placeholder="{{ $companylang['company_address'] }}" required="" data-original-title="{{ $companylang['company_address'] }}"></textarea>
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="company_phone" class="control-label col-form-label">{!! $companylang['company_phone'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="company_phone" name="company_phone" placeholder="{{ $companylang['company_phone'] }}" required="" data-original-title="" />
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="" class="control-label col-form-label">{!! $companylang['company_pic'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="company_pic" name="company_pic" placeholder="{{ $companylang['company_pic'] }}" required="" data-original-title="{{ $companylang['company_pic'] }}" />
+							<input type="text" data-toggle="{{ $reasonlang['reason_value'] }}" title="{{ $reasonlang['reason_value'] }}" class="form-control" id="reason_value" name="reason_value" placeholder="{{ $reasonlang['reason_value'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					

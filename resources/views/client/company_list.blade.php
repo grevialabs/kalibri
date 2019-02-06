@@ -104,11 +104,11 @@ $base_url = base_url();
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['company_id']['class'] }}" title="{{ $arrsort['company_id']['title'] }}" href="{{ $arrsort['company_id']['url'] }}">CompanyID {!! $arrsort['company_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['company_name']['class'] }}" title="{{ $arrsort['company_name']['title'] }}" href="{{ $arrsort['company_name']['url'] }}">CompanyName {!! $arrsort['company_name']['icon'] !!}</a></td>
-								<td><a class="{{ $arrsort['company_address']['class'] }}" title="{{ $arrsort['company_address']['title'] }}" href="{{ $arrsort['company_address']['url'] }}">CompanyAddress {!! $arrsort['company_address']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['company_phone']['class'] }}" title="{{ $arrsort['company_phone']['title'] }}" href="{{ $arrsort['company_phone']['url'] }}">CompanyPhone {!! $arrsort['company_phone']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['company_pic']['class'] }}" title="{{ $arrsort['company_pic']['title'] }}" href="{{ $arrsort['company_pic']['url'] }}">CompanyPIC {!! $arrsort['company_pic']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['company_id']['class'] }}" title="{{ $arrsort['company_id']['title'] }}" href="{{ $arrsort['company_id']['url'] }}">{{ $companylang['company_id'] }} {!! $arrsort['company_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['company_name']['class'] }}" title="{{ $arrsort['company_name']['title'] }}" href="{{ $arrsort['company_name']['url'] }}">{{ $companylang['company_name'] }} {!! $arrsort['company_name']['icon'] !!}</a></td>
+								<td><a class="{{ $arrsort['company_address']['class'] }}" title="{{ $arrsort['company_address']['title'] }}" href="{{ $arrsort['company_address']['url'] }}">{{ $companylang['company_address'] }} {!! $arrsort['company_address']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['company_phone']['class'] }}" title="{{ $arrsort['company_phone']['title'] }}" href="{{ $arrsort['company_phone']['url'] }}">{{ $companylang['company_phone'] }} {!! $arrsort['company_phone']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['company_pic']['class'] }}" title="{{ $arrsort['company_pic']['title'] }}" href="{{ $arrsort['company_pic']['url'] }}">{{ $companylang['company_pic'] }} {!! $arrsort['company_pic']['icon'] !!}</a></td>
 								<td width="2">Status</td>
 								<td width="50px" class="talCnt">Option</td>
 							</tr>

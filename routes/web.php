@@ -87,11 +87,11 @@ Route::prefix('client/')->group(function () {
 	Route::any('user_attribute/delete', 'Client\ClientUserAttributeController@delete');
 	Route::any('user_attribute/bulk', 'Client\ClientUserAttributeController@bulk');
 	
-	Route::get('site', 'Client\ClientController@site');
-	Route::any('site/insert', 'Client\ClientController@insert');
-	Route::any('site/update', 'Client\ClientController@update');
-	Route::any('site/delete', 'Client\ClientController@delete');
-	Route::any('site/bulk', 'Client\ClientController@bulk');
+	Route::get('site', 'Client\ClientSiteController@site');
+	Route::any('site/insert', 'Client\ClientSiteController@insert');
+	Route::any('site/update', 'Client\ClientSiteController@update');
+	Route::any('site/delete', 'Client\ClientSiteController@delete');
+	Route::any('site/bulk', 'Client\ClientSiteController@bulk');
 	
 	Route::get('pic', 'Client\ClientPicController@pic');
 	Route::any('pic/insert', 'Client\ClientPicController@insert');

@@ -7,10 +7,10 @@ $offset = 0;
 $page = 1;
 
 // $perpage_allowed = array(2,40,60);
-$company_model = new CompanyModel();
+$reason_model = new ReasonModel();
 $general_model = new GeneralModel();
 
-$getorder_allowed_list = $company_model->getorder_allowed_list();
+$getorder_allowed_list = $reason_model->getorder_allowed_list();
 $getorderby_allowed_list = $general_model->getorderby_allowed_list();
 $perpage_allowed = $general_model->perpage_allowed();
 
@@ -32,8 +32,9 @@ if (isset($getkeyword)) $api_param['keyword'] = $getkeyword;
 if (isset($getorder)) $api_param['order'] = $getorder; else $getorder = $getorder_allowed_list[0];
 if (isset($getorderby)) $api_param['orderby'] = $getorderby; else $getorderby = $getorderby_allowed_list[0];
 $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_list);
+// debug($arrsort,1);
 
-$api_url = env('API_URL').'company/get_list';
+$api_url = env('API_URL').'reason/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
@@ -76,7 +77,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $companylang['add_new'] }}</a><br/><br/>
+				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $reasonlang['add_new'] }}</a><br/><br/>
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -100,15 +101,14 @@ $base_url = base_url();
 				
 				<form method="post" action="{{ $current_url . DS . 'bulk' }}">
 					<div class="table-responsive">
-						<table class="table table-striped table-bordered" id="table_company">
+						<table class="table table-striped table-bordered" id="table_reason">
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['company_id']['class'] }}" title="{{ $arrsort['company_id']['title'] }}" href="{{ $arrsort['company_id']['url'] }}">CompanyID {!! $arrsort['company_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['company_name']['class'] }}" title="{{ $arrsort['company_name']['title'] }}" href="{{ $arrsort['company_name']['url'] }}">CompanyName {!! $arrsort['company_name']['icon'] !!}</a></td>
-								<td><a class="{{ $arrsort['company_address']['class'] }}" title="{{ $arrsort['company_address']['title'] }}" href="{{ $arrsort['company_address']['url'] }}">CompanyAddress {!! $arrsort['company_address']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['company_phone']['class'] }}" title="{{ $arrsort['company_phone']['title'] }}" href="{{ $arrsort['company_phone']['url'] }}">CompanyPhone {!! $arrsort['company_phone']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['company_pic']['class'] }}" title="{{ $arrsort['company_pic']['title'] }}" href="{{ $arrsort['company_pic']['url'] }}">CompanyPIC {!! $arrsort['company_pic']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['reason_id']['class'] }}" title="{{ $arrsort['reason_id']['title'] }}" href="{{ $arrsort['reason_id']['url'] }}">{{ $reasonlang['reason_id'] }} {!! $arrsort['reason_id']['icon'] !!}</a></td>
+								<td width=""><a class="{{ $arrsort['reason_value']['class'] }}" title="{{ $arrsort['reason_value']['title'] }}" href="{{ $arrsort['reason_value']['url'] }}">{{ $reasonlang['reason_value'] }} {!! $arrsort['reason_value']['icon'] !!}</a></td>
+								<td width="200px">Created</td>
+								<td width="200px">Updated</td>
 								<td width="2">Status</td>
 								<td width="50px" class="talCnt">Option</td>
 							</tr>
@@ -123,18 +123,17 @@ $base_url = base_url();
 								foreach ($listdata as $key => $rs) 
 								{
 									$i++;
-									$id = $rs['company_id'];
-									$idcol = 'company_id';
+									$id = $rs['reason_id'];
+									$idcol = 'reason_id';
 							?>
 							
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['company_id'] }}</td>
-								<td>{{ $rs['company_name'] }}</td>
-								<td>{{ $rs['company_address'] }}</td>
-								<td>{{ $rs['company_phone'] }}</td>
-								<td>{{ $rs['company_pic'] }}</td>
+								<td>{{ $rs['reason_id'] }}</td>
+								<td>{{ $rs['reason_value'] }}</td>
+								<td>{{ $rs['created_at'] or null }}</td>
+								<td>{{ $rs['updated_at'] or null }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
 								<a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg"></i></a> 
