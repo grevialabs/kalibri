@@ -15,10 +15,8 @@ return [
 
     'page_title' => 'Company',
     'module' => 'Company',
-    // 'forgotpass' => 'Lupa Password',
-    'add_new' => 'Add new company',
+    'add_new' => 'Add new Company',
     'p1' => '',
-    'success' => 'success',
 	
     'company_id' => 'CompanyID',
     'company_name' => 'CompanyName',

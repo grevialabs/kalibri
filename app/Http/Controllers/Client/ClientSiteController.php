@@ -8,7 +8,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use Patriot\Http\Controllers\Controller;
-
 use Patriot\Http\Controllers\Client\ClientController;
 
 use Cookie;

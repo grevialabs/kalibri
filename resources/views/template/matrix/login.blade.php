@@ -1,5 +1,8 @@
 <?php 
-$base_url = base_url().'public/matrix/';
+// no use
+// $base_url = base_url().'public/matrix/';
+$form_url = base_url().'dologin';
+// debug($form_url,1);
 ?>
 <!DOCTYPE html>
 <html dir="ltr">
@@ -12,10 +15,10 @@ $base_url = base_url().'public/matrix/';
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../public/matrix/assets/images/favicon.png">
-    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./public/matrix/assets/images/favicon.png">
+    <title>Matrix Template - Login Kalibri</title>
     <!-- Custom CSS -->
-    <link href="../public/matrix/dist/css/style.min.css" rel="stylesheet">
+    <link href="./public/matrix/dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -45,23 +48,30 @@ $base_url = base_url().'public/matrix/';
             <div class="auth-box bg-dark border-top border-secondary">
                 <div id="loginform">
                     <div class="text-center p-t-20 p-b-20">
-                        <span class="db"><img src="../public/matrix/assets/images/logo.png" alt="logo" /></span>
+                        <span class="db"><img src="./public/matrix/assets/images/logo.png" alt="logo" /></span>
                     </div>
+					
+					@if (session('message'))
+						{!! session('message') !!}
+					@endif
+					
                     <!-- Form -->
-                    <form class="form-horizontal m-t-20" id="loginform" action="index.html">
+                    <form class="form-horizontal m-t-20" id="loginform" action="{{ $form_url }}" method="post">
                         <div class="row p-b-30">
                             <div class="col-12">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required="">
+                                    <input type="text" class="form-control form-control-lg" name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required="">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="">
+                                    <input type="password" class="form-control form-control-lg" name="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="">
+									
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 </div>
                             </div>
                         </div>
@@ -122,10 +132,10 @@ $base_url = base_url().'public/matrix/';
     <!-- ============================================================== -->
     <!-- All Required js -->
     <!-- ============================================================== -->
-    <script src="../public/matrix/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="./public/matrix/assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../public/matrix/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="../public/matrix/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./public/matrix/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="./public/matrix/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- ============================================================== -->
     <!-- This page plugin js -->
     <!-- ============================================================== -->

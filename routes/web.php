@@ -17,9 +17,9 @@ Route::get('/welcome', 'Modular\ModularController@welcome');
 Route::get('/about', 'Modular\ModularController@about');
 Route::get('/test_curl', 'Modular\ModularController@test_curl');
 
-// Route::get('/login', 'Modular\ModularController@login');
-// Route::any('/login', 'Modular\ModularLoginController@login');
-Route::any('/login', 'Client\ClientController@login');
+Route::any('/login', 'Modular\ModularLoginController@login');
+Route::any('/dologin', 'Modular\ModularLoginController@dologin');
+// Route::any('/login', 'Client\ClientController@login');
 Route::any('/article', 'Modular\ModularArticleController@article');
 
 Route::any('/company', 'Modular\ModularCompanyController@company');

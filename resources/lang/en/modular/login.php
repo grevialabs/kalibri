@@ -14,8 +14,9 @@ return [
     */
 
     'page_title' => 'Login',
-    'forgotpass' => 'Lupa Password',
+    'module' => 'login',
     'p1' => 'Masukan email anda',
-    'success' => 'success'
+	
+    'forgotpass' => 'Lupa Password',
 
 ];

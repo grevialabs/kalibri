@@ -7,6 +7,8 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+use Illuminate\Support\Facades\Crypt;
+
 use Patriot\Http\Controllers\Controller;
 use Patriot\Http\Controllers\Modular\ModularController;
 
@@ -16,6 +18,11 @@ use Lang;
 class ModularLoginController extends ModularController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+	
+	public function __construct()
+	{
+		$this->themes = env('THEMES','general');
+	}
 	
 	public function login()
 	{
@@ -28,13 +35,42 @@ class ModularLoginController extends ModularController
 		// {
 		// 	debug('invalid member<hr/>');
 		// }
+		// $themes = env('THEMES','general');
 		
+		$param = $content = $get = $lang = $loginlang = $current_url = NULL;
+		
+		// if ($_GET) $get = $_GET;
+		
+		// $lang = Lang::get('common');
+		// $loginlang = Lang::get('modular/login');
+		// $current_url = current_url();
+		
+		// $param['get'] = $get;
+		// $param['lang'] = $lang;
+		// $param['loginlang'] = $loginlang;
+		// $param['PAGE_TITLE'] = $loginlang['module'];
+		// $param['MODULE'] = $loginlang['module'];
+		
+		$param['PAGE_HEADER'] = $loginlang['module'];
+		return view('template.' . $this->themes . '.login',$param);
+		
+		// $param = NULL;
+		// $param['message'] = Lang::get('common.message');
+		// $param['PAGE_TITLE'] = Lang::get('modular/login.page_title');
+		// $param['CONTENT'] = view('modular.login',$param);
+		// return view('template.' . $this->themes . '.index',$param);
+	}
+	
+	public function dologin()
+	{
 		if ($_POST) 
 		{
-			$post = NULL;
+			$post = $message = NULL;
 			$post = $_POST;
 			
-			if (! isset($post['email'])) {
+			// debug($post,1);
+			
+			if (! isset($post['username'])) {
 				$message = 'Email harus diisi';
 				return redirect('login')->with('message', print_message($message));
 			}
@@ -45,9 +81,8 @@ class ModularLoginController extends ModularController
 			}
 			
 			// $url = 'http://www.grevia.com/api/member';
-			$url = env('API_URL').'member/get?email='.$post['email'];
-			$obj = curl_api_grevia($url);
-			// debug($obj,1);
+			$url = env('API_URL').'user/get?user_code='.$post['username'];
+			$obj = curl_api_liquid($url);
 
 			if (empty($obj)) {
 				// $message = 'Mohon maaf terjadi kesalahan. Silakan coba lagi';
@@ -61,35 +96,40 @@ class ModularLoginController extends ModularController
 				return redirect('login')->with('message', print_message($message));
 			}
 			
-			// debug('nyoh '.dodecrypt($obj['password']). ' '.$post['password']);
-			// debug($obj,1);
+			$decrypt_password = Crypt::decryptString($obj['password']);
+			
+			// debug(HR.'mantapgam',1);
+			
 			// valid
-			if (isset($obj['password']) && dodecrypt($obj['password']) == $post['password']) {
+			if (isset($obj['password']) && $post['password'] == $decrypt_password) {
 				// check if uri last page exist
+				// debug('mantapgam',1);
 				
 				// create cookie or session 
 				$cname = $cvalue = $cminutes = NULL;
 				$cname = 'tokenhash';
 				// $tokenhash = $obj['member_id'].'||'.$obj['name'].'||'.$obj['email'];
-				$cvalue = $obj['member_id'].'||'.$obj['name'].'||'.$obj['email'];
+				$cvalue = $obj['user_id'].'||'.$obj['site_id'].'||'.$obj['firstname'].' '.$obj['lastname'].'||'.$obj['email'].'||'.$obj['job_title'].'||';
 				$cminutes = 24 * 60;
 				Cookie::queue($cname, $cvalue, $cminutes);
 				
 				// cookie available on next request;
+				$message = 'Welcome, '. $obj['firstname'].' '.$obj['lastname'];
+				
+				// Check user Replenish / Client by user_category
+				// if () {
+					
+				// } else {
+					
+				// }
 				
 				// redirect to member 
-				return redirect('member/home');
+				return redirect('client/company')->with('message', print_message($message));
 				
 			} else {
 				$message = 'Email / Password tidak sesuai';
 				return redirect('login')->with('message', print_message($message));
 			}
 		}
-		
-		$param = NULL;
-		$param['message'] = Lang::get('common.message');
-		$param['PAGE_TITLE'] = Lang::get('modular/login.page_title');
-		$param['CONTENT'] = view('modular.login',$param);
-		return view('template.general.index',$param);
 	}
 }

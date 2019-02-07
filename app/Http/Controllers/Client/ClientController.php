@@ -35,6 +35,15 @@ class ClientController extends Controller
 	{
 		// return view('template.' . $this->themes . '.login');
 		// or
+		
+		$encrypted = Crypt::encryptString('Hello world.');
+		
+		debug($encrypted);
+		debug(HR);
+		
+		$decrypt = Crypt::decryptString($encrypted);
+		debug($decrypt,1);
+		
 		return view('client.login');
 	}
 	
@@ -56,47 +65,6 @@ class ClientController extends Controller
 				
 		$content = view('client.example',$param);
 		$themes = env('THEMES','general');
-		$param['CONTENT'] = $content;
-		return view('template.' . $themes . '.index',$param);
-		die;
-	}
-	
-	public function company()
-	{
-		$param = $content = $get = $lang = $companylang = $current_url = NULL;
-		
-		if ($_GET) $get = $_GET;
-		
-		$lang = Lang::get('common');
-		$companylang = Lang::get('modular/company');
-		$themes = env('THEMES','general');
-		$current_url = current_url();
-		// debug($companylang,1);
-		
-		$param['get'] = $get;
-		$param['lang'] = $lang;
-		$param['companylang'] = $companylang;
-		$param['PAGE_TITLE'] = ' Halaman' . $companylang['module'];
-		$param['PAGE_HEADER'] = $companylang['module'];
-		
-		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['company_id']))) {
-			if ($get['do'] == 'insert') { 
-				$param['PAGE_HEADER'] = $lang['add'] . ' ' . $lang['page'] . ' ' . $companylang['module'];
-				$param['form_url'] = $current_url.DS.'insert';
-			} 
-			else if($get['do'] == 'edit') { 
-				$param['PAGE_HEADER'] = $lang['edit'] . ' ' . $lang['page'] . ' ' . $companylang['module'];
-				$param['form_url'] = $current_url.DS.'update';
-			}
-			
-			$viewtarget = 'client.company_form';
-		} else {
-			$viewtarget = 'client.company_list';
-		}
-		
-		$param['current_url'] = $current_url;
-		$content = view($viewtarget,$param);	
-		
 		$param['CONTENT'] = $content;
 		return view('template.' . $themes . '.index',$param);
 		die;

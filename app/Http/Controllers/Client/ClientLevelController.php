@@ -8,7 +8,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use Patriot\Http\Controllers\Controller;
-
 use Patriot\Http\Controllers\Client\ClientController;
 
 use Cookie;
@@ -22,10 +21,8 @@ class ClientLevelController extends ClientController
 	public function __construct()
 	{
 		$this->themes = env('THEMES','general');
-		// $this->themes = env('THEMES','general');
-		// debug('mantap',1);
 	}
-		
+	
 	public function level()
 	{
 		$param = $content = $get = $lang = $levellang = $current_url = NULL;
@@ -35,7 +32,6 @@ class ClientLevelController extends ClientController
 		$lang = Lang::get('common');
 		$levellang = Lang::get('client/level');
 		$current_url = current_url();
-		// debug($levellang,1);
 		
 		$param['get'] = $get;
 		$param['lang'] = $lang;
@@ -65,7 +61,6 @@ class ClientLevelController extends ClientController
 		
 		$param['CONTENT'] = $content;
 		return view('template.' . $this->themes . '.index',$param);
-		die;
 	}
 	
 	public function insert()
