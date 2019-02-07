@@ -15,7 +15,7 @@ use Cookie;
 use Lang;
 use Request;
 
-class ClientCompanyController extends ClientController
+class ClientUserAttributeController extends ClientController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 	
@@ -27,24 +27,24 @@ class ClientCompanyController extends ClientController
 		// debug('mantap',1);
 	}
 		
-	public function company()
+	public function user_attribute()
 	{
-		$param = $content = $get = $lang = $companylang = $current_url = NULL;
+		$param = $content = $get = $lang = $user_attributelang = $current_url = NULL;
 		
 		if ($_GET) $get = $_GET;
 		
 		$lang = Lang::get('common');
-		$companylang = Lang::get('client/company');
+		$user_attributelang = Lang::get('client/user_attribute');
 		$current_url = current_url();
-		// debug($companylang,1);
+		// debug($user_attributelang,1);
 		
 		$param['get'] = $get;
 		$param['lang'] = $lang;
-		$param['companylang'] = $companylang;
-		$param['PAGE_TITLE'] = $companylang['module'];
-		$param['MODULE'] = $companylang['module'];
+		$param['user_attributelang'] = $user_attributelang;
+		$param['PAGE_TITLE'] = $user_attributelang['module'];
+		$param['MODULE'] = $user_attributelang['module'];
 		
-		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['company_id']))) {
+		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['user_id']))) {
 			if ($get['do'] == 'insert') { 
 				$param['ACTION'] = $lang['insert'];
 				$param['form_url'] = $current_url.DS.'insert';
@@ -53,13 +53,13 @@ class ClientCompanyController extends ClientController
 				$param['form_url'] = $current_url.DS.'update';
 			}
 			
-			$viewtarget = 'client.company_form';
+			$viewtarget = 'client.user_attribute_form';
 		} else {
 			$param['ACTION'] = $lang['list'];
-			$viewtarget = 'client.company_list';
+			$viewtarget = 'client.user_attribute_list';
 		}
 		
-		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $companylang['module'];
+		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $user_attributelang['module'];
 		
 		$param['current_url'] = $current_url;
 		$content = view($viewtarget,$param);	
@@ -88,10 +88,10 @@ class ClientCompanyController extends ClientController
 			$param['created_ip'] = get_ip();
 			// $param['company_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'company';
+			$api_url = env('API_URL').'user_attribute';
 			$api_method = 'post';
 			
-			// $api_header['debug'] = 1;
+			//$api_header['debug'] = 1;
 			$api_header['token'] = env('API_KEY');
 
 			$save = curl_api_liquid($api_url, $api_method, $api_header, $param);
@@ -120,15 +120,15 @@ class ClientCompanyController extends ClientController
 			unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($post['company_id'])) {
-                $message = 'company_id not exist';
+            if (! isset($post['user_id'])) {
+                $message = 'user_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
 			// Action start here
 			$param = NULL;
 			$param = $post;
-			// $param['company_id'] = $post['company_id'];
+			// $param['user_id'] = $post['user_id'];
 			// $param['company_name'] = $post['company_name'];
 			// $param['company_address'] = $post['company_address'];
 			// $param['company_phone'] = $post['company_phone'];
@@ -137,10 +137,10 @@ class ClientCompanyController extends ClientController
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'company';
+			$api_url = env('API_URL').'user_attribute';
 			$api_method = 'put';
 			
-			// $api_header['debug'] = 1;
+			 $api_header['debug'] = 1;
 			$api_header['token'] = env('API_KEY');
 
 			$update = curl_api_liquid($api_url, $api_method, $api_header, $param);
@@ -169,20 +169,20 @@ class ClientCompanyController extends ClientController
 			// unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($get['company_id'])) {
-                $message = 'company_id not exist';
+            if (! isset($get['user_id'])) {
+                $message = 'user_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
 			// Action start here
 			$param = NULL;
-			$param['company_id'] = $get['company_id'];
+			$param['user_id'] = $get['user_id'];
 			$param['status'] = -1;
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'company';
+			$api_url = env('API_URL').'user_attribute';
 			$api_method = 'delete';
 			
 			// $api_header['debug'] = 1;
@@ -219,7 +219,7 @@ class ClientCompanyController extends ClientController
 			$param['updated_ip'] = get_ip();
 			// $param['company_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'company';
+			$api_url = env('API_URL').'user_attribute';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
@@ -233,11 +233,11 @@ class ClientCompanyController extends ClientController
 				if ($save['is_success']) $message = 'Save success';
 				else $message = 'Save failed';
 				
-				// return redirect('company')->with('message', print_message($message));
+				// return redirect('user_attribute')->with('message', print_message($message));
 			}
 			
 			$message = 'Bulk action success';
 		}
-		return redirect('company')->with('message', print_message($message));
+		return redirect('user_attribute')->with('message', print_message($message));
 	}
 }
