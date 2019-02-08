@@ -42,7 +42,7 @@ class ModularLoginController extends ModularController
 		// if ($_GET) $get = $_GET;
 		
 		// $lang = Lang::get('common');
-		// $loginlang = Lang::get('modular/login');
+		$loginlang = Lang::get('modular/login');
 		// $current_url = current_url();
 		
 		// $param['get'] = $get;
