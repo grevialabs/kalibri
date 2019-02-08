@@ -91,12 +91,12 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
                     <div class="col-12 d-flex no-block align-items-center">
                         <h4 class="page-title text-capitalize">{{ $PAGE_TITLE }}</h4>
                         <div class="ml-auto text-right">
-                            <nav aria-label="breadcrumb">
+                            <!-- <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Library</li>
                                 </ol>
-                            </nav>
+                            </nav> -->
                         </div>
                     </div>
                 </div>

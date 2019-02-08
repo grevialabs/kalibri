@@ -56,7 +56,7 @@ $base_url = base_url();
 				<!-- ============================================================== -->
 				<!-- create new -->
 				<!-- ============================================================== -->
-				<li class="nav-item dropdown">
+				<!-- <li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					 <span class="d-none d-md-block">Create New <i class="fa fa-angle-down"></i></span>
 					 <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
@@ -67,15 +67,15 @@ $base_url = base_url();
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">Something else here</a>
 					</div>
-				</li>
+				</li> -->
 				<!-- ============================================================== -->
 				<!-- Search -->
 				<!-- ============================================================== -->
-				<li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
+				<!-- <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
 					<form class="app-search position-absolute">
 						<input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
 					</form>
-				</li>
+				</li> -->
 			</ul>
 			<!-- ============================================================== -->
 			<!-- Right side toggle and nav items -->
@@ -84,7 +84,7 @@ $base_url = base_url();
 				<!-- ============================================================== -->
 				<!-- Comment -->
 				<!-- ============================================================== -->
-				<li class="nav-item dropdown">
+				<!-- <li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
 					</a>
 					 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -93,21 +93,21 @@ $base_url = base_url();
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">Something else here</a>
 					</div>
-				</li>
+				</li> -->
 				<!-- ============================================================== -->
 				<!-- End Comment -->
 				<!-- ============================================================== -->
 				<!-- ============================================================== -->
 				<!-- Messages -->
 				<!-- ============================================================== -->
-				<li class="nav-item dropdown">
+				<!-- <li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
 						<ul class="list-style-none">
 							<li>
 								<div class="">
-									 <!-- Message -->
+
 									<a href="javascript:void(0)" class="link border-top">
 										<div class="d-flex no-block align-items-center p-10">
 											<span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
@@ -117,7 +117,7 @@ $base_url = base_url();
 											</div>
 										</div>
 									</a>
-									<!-- Message -->
+									
 									<a href="javascript:void(0)" class="link border-top">
 										<div class="d-flex no-block align-items-center p-10">
 											<span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
@@ -127,7 +127,7 @@ $base_url = base_url();
 											</div>
 										</div>
 									</a>
-									<!-- Message -->
+									
 									<a href="javascript:void(0)" class="link border-top">
 										<div class="d-flex no-block align-items-center p-10">
 											<span class="btn btn-primary btn-circle"><i class="ti-user"></i></span>
@@ -137,7 +137,7 @@ $base_url = base_url();
 											</div>
 										</div>
 									</a>
-									<!-- Message -->
+									
 									<a href="javascript:void(0)" class="link border-top">
 										<div class="d-flex no-block align-items-center p-10">
 											<span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
@@ -151,7 +151,7 @@ $base_url = base_url();
 							</li>
 						</ul>
 					</div>
-				</li>
+				</li> -->
 				<!-- ============================================================== -->
 				<!-- End Messages -->
 				<!-- ============================================================== -->

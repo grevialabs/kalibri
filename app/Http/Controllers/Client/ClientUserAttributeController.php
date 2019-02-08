@@ -22,11 +22,8 @@ class ClientUserAttributeController extends ClientController
 	public function __construct()
 	{
 		$this->themes = env('THEMES','general');
-		// debug($this->themes,1);
-		// $this->themes = env('THEMES','general');
-		// debug('mantap',1);
 	}
-		
+	
 	public function user_attribute()
 	{
 		$param = $content = $get = $lang = $user_attributelang = $current_url = NULL;
@@ -86,7 +83,6 @@ class ClientUserAttributeController extends ClientController
 			$param['created_at'] = get_datetime();
 			$param['created_by'] = 1;
 			$param['created_ip'] = get_ip();
-			// $param['company_token'] = env('API_KEY');
 			
 			$api_url = env('API_URL').'user_attribute';
 			$api_method = 'post';
@@ -128,11 +124,6 @@ class ClientUserAttributeController extends ClientController
 			// Action start here
 			$param = NULL;
 			$param = $post;
-			// $param['user_id'] = $post['user_id'];
-			// $param['company_name'] = $post['company_name'];
-			// $param['company_address'] = $post['company_address'];
-			// $param['company_phone'] = $post['company_phone'];
-			// $param['company_pic'] = $post['company_pic'];
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
