@@ -1,3 +1,6 @@
+<?php 
+$base_url = base_url();
+?>
 <!-- ============================================================== -->
 <!-- Topbar header - style you can find in pages.scss -->
 <!-- ============================================================== -->
@@ -9,7 +12,7 @@
 			<!-- ============================================================== -->
 			<!-- Logo -->
 			<!-- ============================================================== -->
-			<a class="navbar-brand" href="index.html">
+			<a class="navbar-brand" href="<?php echo $base_url.Request::segment(1)?>">
 				<!-- Logo icon -->
 				<b class="logo-icon p-l-10">
 					<!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -160,12 +163,14 @@
 					<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../public/matrix/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
 					<div class="dropdown-menu dropdown-menu-right user-dd animated">
 						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+						<!--
 						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+						-->
 						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+						<a class="dropdown-item" href="<?php echo $base_url.DS.'client/logout'; ?>"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
 						<div class="dropdown-divider"></div>
 						<div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
 					</div>
@@ -189,14 +194,27 @@
 		<!-- Sidebar navigation-->
 		<nav class="sidebar-nav">
 			<ul id="sidebarnav" class="p-t-30">
-				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="company" href="company" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Company</span></a></li>
-				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="user" href="user" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User</span></a></li>
-				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="user_attribute" href="user_attribute" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User attribute</span></a></li>
-				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="site" href="site" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Site</span></a></li>
-				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="pic" href="pic" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">PIC</span></a></li>
-				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="reason" href="reason" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason</span></a></li>
-				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="level" href="level" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Level</span></a></li>
-				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active" id="reason_type" href="reason_type" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type Mapping</span></a></li>
+				
+				<li class="sidebar-item"> 
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Master User</span></a>
+					<ul aria-expanded="false" class="collapse  first-level">						
+						<li class="sidebar-item"> <a class="sidebar-link" id="user" href="user"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link " id="user_attribute" href="user_attribute"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User attribute</span></a></li>
+					</ul>
+				</li>
+				
+				<li class="sidebar-item"> 
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Master </span></a>
+					<ul aria-expanded="false" class="collapse  first-level">
+						<li class="sidebar-item"> <a class="sidebar-link" id="company" href="company"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Company</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="site" href="site"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Site</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="pic" href="pic"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">PIC</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="reason" href="reason"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="level" href="level"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Level</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="reason_type" href="reason_type"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type Mapping</span></a></li>
+					</ul>
+				</li>
+				
 				<!--
 				DUMMY MENU AND ICON START
 				<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
@@ -253,11 +271,6 @@
 <!-- ============================================================== -->
 <!-- End Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
-
-<?php 
-/* buat select menu active pake ini 
- * 
- * $('#charts').parent('li').addClass('selected')
- * 
-*/
-?>
+<!--
+$('#charts').parent('li').addClass('selected')
+-->

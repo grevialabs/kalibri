@@ -197,6 +197,8 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 	<?php 
 	}
 	?>
+		// minify menu active
+		$('.sidebartoggler').click();
 	
 	});
 	

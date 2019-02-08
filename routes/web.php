@@ -19,15 +19,14 @@ Route::get('/test_curl', 'Modular\ModularController@test_curl');
 
 Route::any('/login', 'Modular\ModularLoginController@login');
 Route::any('/dologin', 'Modular\ModularLoginController@dologin');
-// Route::any('/login', 'Client\ClientController@login');
-Route::any('/article', 'Modular\ModularArticleController@article');
+
+// Route::any('/article', 'Modular\ModularArticleController@article');
 
 Route::any('/company', 'Modular\ModularCompanyController@company');
 // Route::any('/company_list', 'Modular\ModularCompanyController@company_list');
 // Route::any('/company_form', 'Modular\ModularCompanyController@company_form');
-
-
 Route::any('/article-vue', 'Modular\ModularController@article_vue');
+
 Route::any('/forgotpass', 'Modular\ModularForgotpassController@forgotpass');
 
 
@@ -38,19 +37,6 @@ Route::prefix('modular')->group(function () {
 	Route::get('/welcome', 'Modular\ModularController@welcome');
 	Route::get('/about', 'Modular\ModularController@about');
 	Route::get('/list-user', 'Modular\ModularListUserController@listUser');
-	
-});
-
-Route::prefix('admin/')->group(function () {
-	
-	// return view
-	// Route::get('welcome', function () {
-		// return view('Modular\ModularController@welcome');
-	// });
-	
-	// Return to controller
-	Route::get('welcome', 'Admin\AdminController@welcome');
-	Route::get('about', 'Admin\AdminController@about');
 	
 });
 

@@ -37,7 +37,7 @@ class ModularLoginController extends ModularController
 		// }
 		// $themes = env('THEMES','general');
 		
-		$param = $content = $get = $lang = $loginlang = $current_url = NULL;
+		// $param = $content = $get = $lang = $loginlang = $current_url = NULL;
 		
 		// if ($_GET) $get = $_GET;
 		

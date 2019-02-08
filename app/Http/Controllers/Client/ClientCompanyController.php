@@ -22,9 +22,11 @@ class ClientCompanyController extends ClientController
 	public function __construct()
 	{
 		$this->themes = env('THEMES','general');
-		// debug($this->themes,1);
-		// $this->themes = env('THEMES','general');
-		// debug('mantap',1);
+		
+		$comp = 'tokenhash';
+		// $cookie = Cookie::get($comp);
+		$cookie = $_COOKIE;
+		// debug($cookie,1);
 	}
 		
 	public function company()
