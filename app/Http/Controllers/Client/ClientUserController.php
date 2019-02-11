@@ -16,13 +16,9 @@ use Request;
 
 class ClientUserController extends ClientController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-	
 	public function __construct()
 	{
 		$this->themes = env('THEMES','general');
-		// $this->themes = env('THEMES','general');
-		// debug('mantap',1);
 	}
 		
 	public function user()

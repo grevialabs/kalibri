@@ -57,12 +57,16 @@ $reget = http_build_query($reget);
 $resubmit_url = current_url().'?'.$reget;
 
 $base_url = base_url();
+
 ?>
 
 <style>
 
 </style>
 
+<script>
+
+</script>
 <!-- CONTENT AREA -->
 <div class="row">
 	<div class="col-sm-12">
@@ -76,7 +80,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $companylang['add_new'] }}</a><br/><br/>
+				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm btninsert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $companylang['add_new'] }}</a><br/><br/>
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -110,7 +114,7 @@ $base_url = base_url();
 								<td width="180px"><a class="{{ $arrsort['company_phone']['class'] }}" title="{{ $arrsort['company_phone']['title'] }}" href="{{ $arrsort['company_phone']['url'] }}">{{ $companylang['company_phone'] }} {!! $arrsort['company_phone']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['company_pic']['class'] }}" title="{{ $arrsort['company_pic']['title'] }}" href="{{ $arrsort['company_pic']['url'] }}">{{ $companylang['company_pic'] }} {!! $arrsort['company_pic']['icon'] !!}</a></td>
 								<td width="2">Status</td>
-								<td width="50px" class="talCnt">Option</td>
+								<td width="30px" class="talCnt">Option</td>
 							</tr>
 							<?php 
 							if (! empty($listdata)) 
@@ -130,15 +134,14 @@ $base_url = base_url();
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['company_id'] }}</td>
+								<td>{{ $rs['company_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
 								<td>{{ $rs['company_name'] }}</td>
 								<td>{{ $rs['company_address'] }}</td>
 								<td>{{ $rs['company_phone'] }}</td>
 								<td>{{ $rs['company_pic'] }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
-								<a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg"></i></a> 
-								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-times fa-lg" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
+								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
 								</td>
 							</tr>
 							<?php
@@ -146,14 +149,14 @@ $base_url = base_url();
 							?>
 							<tr>
 								<td colspan="100%">
-									<div id="group_action">With checked do 
+									<div id="group_action" class="btnedit">With checked do 
 									<select class="input" name="lst_group_action">
 										<option class="" value="1">Active</option>
 										<option class="" value="0">Inactive</option>
 										<option class="" value="-1">Delete</option>
 									</select>
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<button class="btn btn-default btn-sm" name="btn_group_action" value="1">Action</button></div>
+									<button class="btn btn-default btn-sm btnedit" name="btn_group_action" value="1">Action</button></div>
 								</td>
 							</tr>	
 							<?php
@@ -197,5 +200,6 @@ $(document).ready( function() {
 	// });
 
 });
+
 </script>
 

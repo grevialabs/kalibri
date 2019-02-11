@@ -108,6 +108,8 @@ Route::prefix('client/')->group(function () {
 	// Route::any('/delete', 'Client\ClientController@delete');
 	// Route::any('/bulk', 'Client\ClientController@bulk');
 	
+	Route::any('/logout', 'Client\ClientController@logout');
+	
 	
 });
 

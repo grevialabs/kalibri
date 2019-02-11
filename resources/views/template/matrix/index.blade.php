@@ -219,13 +219,12 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 		ignoreClick      : 'a',
 	});
 
+	// $('.btnview').hide(); // no access for view data
+	// $('.btninsert').hide(); // no access for save data
+	// $('.btnedit').hide(); // no access for edit data	
+	// $('.btndelete').hide(); // no access for delete data
 	
 	</script>
-	<!-- MDB core JavaScript 
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/js/mdb.min.js?{{ $jsv }}"></script>
-	
-	-->
-
 	
 </body>
 
@@ -263,7 +262,6 @@ function doConfirm(str = 'delete') {
 		str = 'Yakin melakukan aksi ini ?'
 	return confirm(str)
 }
-
 
 </script>
 

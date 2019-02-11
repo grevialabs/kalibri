@@ -15,14 +15,11 @@ use Lang;
 use Request;
 
 class ClientSiteController extends ClientController
-{
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-	
+{	
 	public function __construct()
 	{
 		$this->themes = env('THEMES','general');
-		// $this->themes = env('THEMES','general');
-		// debug('mantap',1);
+		parent::__construct();
 	}
 		
 	public function site()

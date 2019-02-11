@@ -21,6 +21,7 @@ class ClientLevelController extends ClientController
 	public function __construct()
 	{
 		$this->themes = env('THEMES','general');
+		parent::__construct();
 	}
 	
 	public function level()

@@ -22,8 +22,7 @@ class ClientPicController extends ClientController
 	public function __construct()
 	{
 		$this->themes = env('THEMES','general');
-		// $this->themes = env('THEMES','general');
-		// debug('mantap',1);
+		parent::__construct();
 	}
 		
 	public function pic()

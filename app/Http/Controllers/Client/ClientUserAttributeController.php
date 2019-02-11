@@ -17,29 +17,29 @@ use Request;
 
 class ClientUserAttributeController extends ClientController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 	
 	public function __construct()
 	{
 		$this->themes = env('THEMES','general');
+		parent::__construct();
 	}
 	
 	public function user_attribute()
 	{
-		$param = $content = $get = $lang = $user_attributelang = $current_url = NULL;
+		$param = $content = $get = $lang = $user_attribute_lang = $current_url = NULL;
 		
 		if ($_GET) $get = $_GET;
 		
 		$lang = Lang::get('common');
-		$user_attributelang = Lang::get('client/user_attribute');
+		$user_attribute_lang = Lang::get('client/user_attribute');
 		$current_url = current_url();
-		// debug($user_attributelang,1);
+		// debug($user_attribute_lang,1);
 		
 		$param['get'] = $get;
 		$param['lang'] = $lang;
-		$param['user_attributelang'] = $user_attributelang;
-		$param['PAGE_TITLE'] = $user_attributelang['module'];
-		$param['MODULE'] = $user_attributelang['module'];
+		$param['user_attribute_lang'] = $user_attribute_lang;
+		$param['PAGE_TITLE'] = $user_attribute_lang['module'];
+		$param['MODULE'] = $user_attribute_lang['module'];
 		
 		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['user_id']))) {
 			if ($get['do'] == 'insert') { 
@@ -56,7 +56,7 @@ class ClientUserAttributeController extends ClientController
 			$viewtarget = 'client.user_attribute_list';
 		}
 		
-		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $user_attributelang['module'];
+		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $user_attribute_lang['module'];
 		
 		$param['current_url'] = $current_url;
 		$content = view($viewtarget,$param);	

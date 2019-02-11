@@ -32,28 +32,12 @@ $base_url = base_url();
 // if ($get['do'] == 'insert') $action = $lang['add'];
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
-// $PAGE_TITLE = $action .' '. $user_attributelang['module']; 
+// $PAGE_TITLE = $action .' '. $user_attribute_lang['module']; 
 
-function validate_column($arrsource,$arrtarget) {
-	
-	if (empty($arrsource) || empty($arrtarget)) {
-		return 'helper error: validate_column error parameter';
-	}	
-	
-	$temp = NULL;
-	foreach ($arrsource as $rs) {
-		if (isset($arrtarget[$rs])) $temp[$rs] = $arrtarget[$rs];
-	}
-	
-	return $temp;
-}
-
-// $source = array('user_id', 'reason_name', 'reason_address', 'reason_phone', 'reason_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
-// $target = array('mantap' => 'gokil', 'reason_name' => 'harusmasuknih');
-// // $test = array('ayam','bebek');
-// // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
-// $a = validate_column($source,$target);
-// debug($a,1);
+// $cook = Cookie::get('tokenhash');
+$cook = $_COOKIE;
+debug('yowassap'.HR);
+debug($cook,1);
 ?>
 
 <!-- Article AREA -->
@@ -100,10 +84,10 @@ function validate_column($arrsource,$arrtarget) {
 					-->
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="" class="control-label col-form-label">{!! $user_attributelang['user_id'] !!}</label>
+							<label for="" class="control-label col-form-label">{!! $user_attribute_lang['user_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $user_attributelang['user_id'] }}" required="" data-original-title="" value="{{ $data['user_id'] }}" disabled />
+							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $user_attribute_lang['user_id'] }}" required="" data-original-title="" value="{{ $data['user_id'] }}" disabled />
 							<input type="hidden" name="user_id" value="{{ $data['user_id'] }}" />
 						</div>
 					</div>
@@ -111,19 +95,19 @@ function validate_column($arrsource,$arrtarget) {
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="attribute" class="control-label col-form-label">{!! $user_attributelang['attribute'] !!}</label>
+							<label for="attribute" class="control-label col-form-label">{!! $user_attribute_lang['attribute'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $user_attributelang['attribute'] }}" title="{{ $user_attributelang['attribute'] }}" class="form-control" id="attribute" name="attribute" placeholder="{{ $user_attributelang['attribute'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $user_attribute_lang['attribute'] }}" title="{{ $user_attribute_lang['attribute'] }}" class="form-control" id="attribute" name="attribute" placeholder="{{ $user_attribute_lang['attribute'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="value" class="control-label col-form-label">{!! $user_attributelang['value'] !!}</label>
+							<label for="value" class="control-label col-form-label">{!! $user_attribute_lang['value'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $user_attributelang['value'] }}" title="{{ $user_attributelang['value'] }}" class="form-control" id="value" name="value" placeholder="{{ $user_attributelang['value'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $user_attribute_lang['value'] }}" title="{{ $user_attribute_lang['value'] }}" class="form-control" id="value" name="value" placeholder="{{ $user_attribute_lang['value'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					

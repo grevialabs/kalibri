@@ -130,15 +130,14 @@ $base_url = base_url();
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['user_id'] }}</td>
+								<td>{{ $rs['user_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
 								<td>{{ $rs['firstname'] }}</td>
 								<td>{{ $rs['user_code'] }}</td>
 								<td>{{ $rs['division'] }}</td>
 								<td>{{ $rs['email'] }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
-								<td class="talCnt">
-								<a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg"></i></a> 
-								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-times fa-lg" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
+								<td class="talCnt">								
+								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
 								</td>
 							</tr>
 							<?php
@@ -146,7 +145,7 @@ $base_url = base_url();
 							?>
 							<tr>
 								<td colspan="100%">
-									<div id="group_action">With checked do 
+									<div id="group_action" class="btnedit">With checked do 
 									<select class="input" name="lst_group_action">
 										<option class="" value="1">Active</option>
 										<option class="" value="0">Inactive</option>

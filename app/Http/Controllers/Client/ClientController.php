@@ -17,12 +17,20 @@ use Request;
 
 class ClientController extends Controller
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    // use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 	
 	public function __construct()
 	{
 		$this->themes = env('THEMES','general');
 		// $this->themes = env('THEMES','general');
+		
+		// debug('gebleg',1);
+		// if (is_member()) {
+		if (! is_member()) {
+			$message = 'Please login first';
+			return redirect(base_url().'login')->with('message', print_message($message));
+		}
+		
 	}
 	
 	public function index()
@@ -68,5 +76,18 @@ class ClientController extends Controller
 		$param['CONTENT'] = $content;
 		return view('template.' . $themes . '.index',$param);
 		die;
+	}
+	
+	public function logout()
+	{
+		Cookie::queue('tokenhash', NULL, 1000);
+		// Cookie::queue(Cookie::forget('tokenhash'));
+		// unset($_COOKIE);
+		// unset($_SESSION);
+		// debug($_COOKIE,1);
+		
+		// clear all cookies and session
+		$message = 'Your account has been logout';
+		return redirect(base_url().'login')->with('message', print_message($message));
 	}
 }

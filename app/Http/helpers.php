@@ -359,7 +359,6 @@ function get_cookie($name, $column = NULL)
 	else 
 		return FALSE;
 	
-	// debug($temp,1);
 	if (! empty($temp)) 
 	{
 		$cookie = array(
@@ -379,16 +378,16 @@ function get_cookie($name, $column = NULL)
 		return $cookie;
 }
 
-function is_member()
-{
-	// No cookies then false
-	if (! isset($_COOKIE['tokenhash']) || $_COOKIE['tokenhash'] == '') return FALSE;
+// function is_member()
+// {
+	// // No cookies then false
+	// if (! isset($_COOKIE['tokenhash']) || $_COOKIE['tokenhash'] == '') return FALSE;
 	
-	return 'break';
-	// $tokenhash = NULL;
-	// $tokenhash = get_cookie('tokenhash','member_id');
-	// return (isset($tokenhash) && $tokenhash != '') ? TRUE : FALSE;
-}
+	// // return 'break';
+	// // $tokenhash = NULL;
+	// // $tokenhash = get_cookie('tokenhash','member_id');
+	// // return (isset($tokenhash) && $tokenhash != '') ? TRUE : FALSE;
+// }
 
 function orm_get($q)
 {
@@ -499,4 +498,50 @@ function current_url() {
 	return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 }
 
+/****************************************************
+ * Return cookie saved and encrypted when user login 
+ ****************************************************
+ * @parameter : array like 'user_id'
+ *
+ *
+ *
+*/
+function get_user_cookie($param = NULL)
+{
+	$response = $cookie = $arrdata = $arrcook = NULL;
+	
+	// $cookie = Cookie::get('tokenhash');
+	if (! isset($_COOKIE['tokenhash'])) return false; 
+	
+	$cookie = $_COOKIE['tokenhash'];
+	
+	if (empty($cookie)) return false; 
+	
+	$cookie = decrypt($cookie);
+	$arrcook = explode('||',$cookie);
+	
+	
+	// if (empty($arrcook)) return false; 
+	
+	if (isset($arrcook[0])) $arrdata['user_id'] = $arrcook[0];
+	if (isset($arrcook[1])) $arrdata['site_id'] = $arrcook[1];
+	if (isset($arrcook[2])) $arrdata['fullname'] = $arrcook[2];
+	if (isset($arrcook[3])) $arrdata['email'] = $arrcook[3];
+	if (isset($arrcook[4])) $arrdata['job_title'] = $arrcook[4];
+	if (isset($arrcook[5])) $arrdata['user_code'] = $arrcook[5];
+	
+	$response = $arrdata;
+	if (isset($param)) $response = $arrdata[$param];
+	
+	return $response;
+}
+
+function is_member($param = NULL)
+{
+	$temp = NULL;
+	$temp = get_user_cookie('user_id');
+	
+	if (! isset($temp)) return false;
+	else return true;
+}
 ?>

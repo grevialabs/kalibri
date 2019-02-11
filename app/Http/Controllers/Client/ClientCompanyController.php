@@ -16,17 +16,12 @@ use Lang;
 use Request;
 
 class ClientCompanyController extends ClientController
-{
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-	
+{	
 	public function __construct()
 	{
 		$this->themes = env('THEMES','general');
 		
-		$comp = 'tokenhash';
-		// $cookie = Cookie::get($comp);
-		$cookie = $_COOKIE;
-		// debug($cookie,1);
+		parent::__construct();
 	}
 		
 	public function company()
@@ -46,7 +41,7 @@ class ClientCompanyController extends ClientController
 		$param['PAGE_TITLE'] = $companylang['module'];
 		$param['MODULE'] = $companylang['module'];
 		
-		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['company_id']))) {
+		if (isset($get['do']) && ($get['do'] == 'view' || $get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['company_id']))) {
 			if ($get['do'] == 'insert') { 
 				$param['ACTION'] = $lang['insert'];
 				$param['form_url'] = $current_url.DS.'insert';
@@ -130,11 +125,6 @@ class ClientCompanyController extends ClientController
 			// Action start here
 			$param = NULL;
 			$param = $post;
-			// $param['company_id'] = $post['company_id'];
-			// $param['company_name'] = $post['company_name'];
-			// $param['company_address'] = $post['company_address'];
-			// $param['company_phone'] = $post['company_phone'];
-			// $param['company_pic'] = $post['company_pic'];
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();

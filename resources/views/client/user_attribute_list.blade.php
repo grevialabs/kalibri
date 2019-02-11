@@ -76,7 +76,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $user_attributelang['add_new'] }}</a><br/><br/>
+				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $user_attribute_lang['add_new'] }}</a><br/><br/>
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -104,9 +104,9 @@ $base_url = base_url();
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['user_id']['class'] }}" title="{{ $arrsort['user_id']['title'] }}" href="{{ $arrsort['user_id']['url'] }}">{{ $user_attributelang['user_id'] }} {!! $arrsort['user_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['attribute']['class'] }}" title="{{ $arrsort['attribute']['title'] }}" href="{{ $arrsort['attribute']['url'] }}">{{ $user_attributelang['attribute'] }} {!! $arrsort['attribute']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['val']['class'] }}" title="{{ $arrsort['val']['title'] }}" href="{{ $arrsort['val']['url'] }}">{{ $user_attributelang['val'] }} {!! $arrsort['val']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['user_id']['class'] }}" title="{{ $arrsort['user_id']['title'] }}" href="{{ $arrsort['user_id']['url'] }}">{{ $user_attribute_lang['user_id'] }} {!! $arrsort['user_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['attribute']['class'] }}" title="{{ $arrsort['attribute']['title'] }}" href="{{ $arrsort['attribute']['url'] }}">{{ $user_attribute_lang['attribute'] }} {!! $arrsort['attribute']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['value']['class'] }}" title="{{ $arrsort['value']['title'] }}" href="{{ $arrsort['value']['url'] }}">{{ $user_attribute_lang['value'] }} {!! $arrsort['value']['icon'] !!}</a></td>
 								<td width="2">Status</td>
 								<td width="50px" class="talCnt">Option</td>
 							</tr>
@@ -128,13 +128,12 @@ $base_url = base_url();
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['user_id'] }}</td>
+								<td>{{ $rs['user_id'] }}  <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-2x btnedit"></i></a> </td>
 								<td>{{ $rs['attribute'] }}</td>
 								<td>{{ $rs['val'] }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
-								<a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg"></i></a> 
-								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-times fa-lg" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
+								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
 								</td>
 							</tr>
 							<?php
@@ -143,7 +142,7 @@ $base_url = base_url();
 							<tr>
 								<td colspan="100%">
 									<div id="group_action">With checked do 
-									<select class="input" name="lst_group_action">
+									<select class="input btnedit" name="lst_group_action">
 										<option class="" value="1">Active</option>
 										<option class="" value="0">Inactive</option>
 										<option class="" value="-1">Delete</option>
