@@ -8,40 +8,38 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use Patriot\Http\Controllers\Controller;
-
 use Patriot\Http\Controllers\Client\ClientController;
 
 use Cookie;
 use Lang;
 use Request;
 
-class ClientArticleController extends ClientController
+class ClientSiteController extends ClientController
 {	
 	public function __construct()
 	{
 		$this->themes = env('THEMES','general');
-		
 		parent::__construct();
 	}
 		
-	public function article()
+	public function site()
 	{
-		$param = $content = $get = $lang = $articlelang = $current_url = NULL;
+		$param = $content = $get = $lang = $sitelang = $current_url = NULL;
 		
 		if ($_GET) $get = $_GET;
 		
 		$lang = Lang::get('common');
-		$articlelang = Lang::get('client/article');
+		$sitelang = Lang::get('client/site');
 		$current_url = current_url();
-		// debug($articlelang,1);
+		// debug($sitelang,1);
 		
 		$param['get'] = $get;
 		$param['lang'] = $lang;
-		$param['articlelang'] = $articlelang;
-		$param['PAGE_TITLE'] = $articlelang['module'];
-		$param['MODULE'] = $articlelang['module'];
+		$param['sitelang'] = $sitelang;
+		$param['PAGE_TITLE'] = $sitelang['module'];
+		$param['MODULE'] = $sitelang['module'];
 		
-		if (isset($get['do']) && ($get['do'] == 'view' || $get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['article_id']))) {
+		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['site_id']))) {
 			if ($get['do'] == 'insert') { 
 				$param['ACTION'] = $lang['insert'];
 				$param['form_url'] = $current_url.DS.'insert';
@@ -50,13 +48,13 @@ class ClientArticleController extends ClientController
 				$param['form_url'] = $current_url.DS.'update';
 			}
 			
-			$viewtarget = 'client.article_form';
+			$viewtarget = 'client.site_form';
 		} else {
 			$param['ACTION'] = $lang['list'];
-			$viewtarget = 'client.article_list';
+			$viewtarget = 'client.site_list';
 		}
 		
-		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $articlelang['module'];
+		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $sitelang['module'];
 		
 		$param['current_url'] = $current_url;
 		$content = view($viewtarget,$param);	
@@ -83,8 +81,9 @@ class ClientArticleController extends ClientController
 			$param['created_at'] = get_datetime();
 			$param['created_by'] = 1;
 			$param['created_ip'] = get_ip();
+			// $param['site_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'article';
+			$api_url = env('API_URL').'site';
 			$api_method = 'post';
 			
 			// $api_header['debug'] = 1;
@@ -116,8 +115,8 @@ class ClientArticleController extends ClientController
 			unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($post['article_id'])) {
-                $message = 'article_id not exist';
+            if (! isset($post['site_id'])) {
+                $message = 'site_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
@@ -128,7 +127,7 @@ class ClientArticleController extends ClientController
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'article';
+			$api_url = env('API_URL').'site';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
@@ -160,20 +159,20 @@ class ClientArticleController extends ClientController
 			// unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($get['article_id'])) {
-                $message = 'article_id not exist';
+            if (! isset($get['site_id'])) {
+                $message = 'site_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
 			// Action start here
 			$param = NULL;
-			$param['article_id'] = $get['article_id'];
+			$param['site_id'] = $get['site_id'];
 			$param['status'] = -1;
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'article';
+			$api_url = env('API_URL').'site';
 			$api_method = 'delete';
 			
 			// $api_header['debug'] = 1;
@@ -208,8 +207,9 @@ class ClientArticleController extends ClientController
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
+			// $param['site_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'article';
+			$api_url = env('API_URL').'site';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
@@ -223,11 +223,11 @@ class ClientArticleController extends ClientController
 				if ($save['is_success']) $message = 'Save success';
 				else $message = 'Save failed';
 				
-				// return redirect('article')->with('message', print_message($message));
+				// return redirect('site')->with('message', print_message($message));
 			}
 			
 			$message = 'Bulk action success';
 		}
-		return redirect('article')->with('message', print_message($message));
+		return redirect('site')->with('message', print_message($message));
 	}
 }

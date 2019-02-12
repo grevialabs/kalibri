@@ -147,7 +147,7 @@ box-sizing: border-box;         /* Opera/IE 8+ */
 .wdt80-pct{width:80%}
 .wdt90-pct{width:90%}
 .wdtHlf{width:50%}
-.wdtFul{width:100%}
+.wdtFul{width:100% !important}
 
 /*.padTop25{padding-top:25px} 
 reset nih si jumbotron

@@ -25,6 +25,9 @@ $form_url = base_url().'dologin';
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<style>
+.bgRed{background: #e11c23 !important}
+</style>
 </head>
 
 <body>
@@ -44,8 +47,8 @@ $form_url = base_url().'dologin';
         <!-- ============================================================== -->
         <!-- Login box.scss -->
         <!-- ============================================================== -->
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
-            <div class="auth-box bg-dark border-top border-secondary">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bgRed">
+            <div class="auth-box bgRed border-top border-secondary">
                 <div id="loginform">
                     <div class="text-center p-t-20 p-b-20">
                         <span class="db"><img src="./public/matrix/assets/images/logo.png" alt="logo" /></span>
@@ -56,7 +59,7 @@ $form_url = base_url().'dologin';
 					@endif
 					
                     <!-- Form -->
-                    <form class="form-horizontal m-t-20" id="loginform" action="{{ $form_url }}" method="post">
+                    <form class="form-horizontal m-t-20 form_submit" id="loginform" action="{{ $form_url }}" method="post" >
                         <div class="row p-b-30">
                             <div class="col-12">
                                 <div class="input-group mb-3">
@@ -80,7 +83,7 @@ $form_url = base_url().'dologin';
                                 <div class="form-group">
                                     <div class="p-t-20">
                                         <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Lost password?</button>
-                                        <button class="btn btn-success float-right" type="submit">Login</button>
+                                        <button class="btn btn-success float-right btnsubmit" type="submit" name="btnsubmit">Login</button>
                                     </div>
                                 </div>
                             </div>
@@ -155,6 +158,18 @@ $form_url = base_url().'dologin';
         $("#recoverform").hide();
         $("#loginform").fadeIn();
     });
+	
+	$('.btnsubmit').css('width','150');
+	$(".form_submit").submit(function(e){
+		
+		$('.btnsubmit').attr('disabled','true');
+		$('.btnsubmit').html('<i class="fa fa-spinner fa-spin"></i>');
+	});
+
+	
+	// $('.frmlogin').submit(function(){
+		
+	// })
     </script>
 
 </body>

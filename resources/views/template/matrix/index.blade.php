@@ -189,6 +189,12 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 	
 	<script>
 	$(document).ready(function(){
+		
+		$(".form_submit").submit(function(e){
+			// call blocker from footer 
+			modal_loading_block();
+		});
+
 	<?php 
 	// Activate menu if uri segment 1 & 2 exist
 	if (Request::segment(1) && Request::segment(2)) { 
@@ -225,6 +231,35 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 	// $('.btndelete').hide(); // no access for delete data
 	
 	</script>
+	
+	<!-- Start modal block -->
+	<div id="modalLoading" class="modal fade" role="dialog" style="padding-top:200px;z-index:9999;background-color:rgba(0, 0, 0, 0.4)">
+	  <div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-body">
+			<div class="talCnt" style="padding:25px 10px">
+				<i class="fa fa-cog fa-spin fa-3x fa-fw"></i><br/>
+				Mohon menunggu.
+			</div>
+		  </div>
+		</div>
+
+	  </div>
+	</div>
+	<!-- End modal block -->
+
+	<script>
+	function modal_loading_block()
+	{
+		$('#modalLoading').modal({
+			show: 'false',
+			keyboard: false,
+			backdrop: 'static'
+		});
+	}
+	</script>
+
 	
 </body>
 

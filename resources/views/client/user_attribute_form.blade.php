@@ -1,7 +1,7 @@
 <?php 
 // ---------------------------
 // Get data 
-$data = NULL;
+$data = $obj_list_user = NULL;
 if (isset($get['user_attribute_id'])) {
 	$api_url = $api_method = $api_param = $api_header = NULL;
 	$api_param['token'] = env('API_KEY');
@@ -14,7 +14,27 @@ if (isset($get['user_attribute_id'])) {
 	$data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 
 	if (! empty($data)) $data = json_decode($data,1);
+	
+	
 }
+
+// -------------------------------
+// get data user
+
+$api_url = $api_method = $api_param = $api_header = NULL;
+$api_param['token'] = env('API_KEY');
+
+$api_url = env('API_URL').'user/get_list';
+$api_method = 'get_list';
+// $api_header['debug'] = 1;
+
+$list_user = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+
+if (! empty($list_user)) $list_user = json_decode($list_user,1);
+$list_user = $list_user['data'];
+// debug('ayamberak ');
+// debug($temp,1);
+// debug($obj_list_user,1);
 // debug($data,1);
 
 $base_url = base_url();
@@ -34,26 +54,8 @@ $base_url = base_url();
 
 // $PAGE_TITLE = $action .' '. $user_attribute_lang['module']; 
 
-function validate_column($arrsource,$arrtarget) {
-	
-	if (empty($arrsource) || empty($arrtarget)) {
-		return 'helper error: validate_column error parameter';
-	}	
-	
-	$temp = NULL;
-	foreach ($arrsource as $rs) {
-		if (isset($arrtarget[$rs])) $temp[$rs] = $arrtarget[$rs];
-	}
-	
-	return $temp;
-}
+// $obj_list_user = NULL;
 
-// $source = array('user_id', 'reason_name', 'reason_address', 'reason_phone', 'reason_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
-// $target = array('mantap' => 'gokil', 'reason_name' => 'harusmasuknih');
-// // $test = array('ayam','bebek');
-// // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
-// $a = validate_column($source,$target);
-// debug($a,1);
 ?>
 
 <!-- Article AREA -->
@@ -114,7 +116,19 @@ function validate_column($arrsource,$arrtarget) {
 							<label for="user_id" class="control-label col-form-label">{!! $user_attribute_lang['user_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<!--
 							<input type="text" data-toggle="{{ $user_attribute_lang['user_id'] }}" title="{{ $user_attribute_lang['user_id'] }}" class="form-control" id="user_id" name="user_id" placeholder="{{ $user_attribute_lang['user_id'] }}" required="" data-original-title="" />
+							-->
+							
+							<select id="user_id" name="user_id"  title="{{ $user_attribute_lang['user_id'] }}"  class="select2 form-control custom-select" placeholder="{{ $user_attribute_lang['user_id'] }}" style="width:100%" required>
+								<?php if (! empty($list_user)) { ?>
+									<option value="" /> {{ $lang['please_select'] }} </>
+									<?php foreach ($list_user as $key => $obj) { ?>
+								<option value="<?php echo $obj['user_id']?>" <?php if (isset($obj['user_id']) && $obj['user_id'] == $data['user_id']) echo "selected='true'"; ?>> <?php echo $obj['firstname'].' '.$obj['email'] ?></option>
+									<?php } ?>
+								<?php } ?>
+							</select>
+							
 						</div>
 					</div>
 					
@@ -169,9 +183,9 @@ $(document).ready( function() {
         { 
         ?>
 	$('#{{ $key }}').val('{{$rs}}');
-	$('#{{ $key }}').trigger('change');
 	<?php 
         }
+		
     }
 
     ?>

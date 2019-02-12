@@ -67,11 +67,11 @@ Route::prefix('client/')->group(function () {
 	Route::any('user/delete', 'Client\ClientUserController@delete');
 	Route::any('user/bulk', 'Client\ClientUserController@bulk');
 	
-	Route::get('user_attribute', 'Client\ClientUserAttributeController@user_attribute');
-	Route::any('user_attribute/insert', 'Client\ClientUserAttributeController@insert');
-	Route::any('user_attribute/update', 'Client\ClientUserAttributeController@update');
-	Route::any('user_attribute/delete', 'Client\ClientUserAttributeController@delete');
-	Route::any('user_attribute/bulk', 'Client\ClientUserAttributeController@bulk');
+	Route::get('user-attribute', 'Client\ClientUserAttributeController@user_attribute');
+	Route::any('user-attribute/insert', 'Client\ClientUserAttributeController@insert');
+	Route::any('user-attribute/update', 'Client\ClientUserAttributeController@update');
+	Route::any('user-attribute/delete', 'Client\ClientUserAttributeController@delete');
+	Route::any('user-attribute/bulk', 'Client\ClientUserAttributeController@bulk');
 	
 	Route::get('site', 'Client\ClientSiteController@site');
 	Route::any('site/insert', 'Client\ClientSiteController@insert');
@@ -91,6 +91,12 @@ Route::prefix('client/')->group(function () {
 	Route::any('reason/delete', 'Client\ClientReasonController@delete');
 	Route::any('reason/bulk', 'Client\ClientReasonController@bulk');
 
+	Route::get('reason-type', 'Client\ClientReasonTypeController@reason_type');
+	Route::any('reason-type/insert', 'Client\ClientReasonTypeController@insert');
+	Route::any('reason-type/update', 'Client\ClientReasonTypeController@update');
+	Route::any('reason-type/delete', 'Client\ClientReasonTypeController@delete');
+	Route::any('reason-type/bulk', 'Client\ClientReasonTypeController@bulk');
+
 	Route::get('level', 'Client\ClientLevelController@level');
 	Route::any('level/insert', 'Client\ClientLevelController@insert');
 	Route::any('level/update', 'Client\ClientLevelController@update');
@@ -103,6 +109,7 @@ Route::prefix('client/')->group(function () {
 	Route::any('article/delete', 'Client\ClientarticleController@delete');
 	Route::any('article/bulk', 'Client\ClientarticleController@bulk');
 	
+<<<<<<< Updated upstream
 	Route::get('reason_type_mapping', 'Client\ClientreasontypemappingController@reason_type_mapping');
 	Route::any('reason_type_mapping/insert', 'Client\ClientreasontypemappingController@insert');
 	Route::any('reason_type_mapping/update', 'Client\ClientreasontypemappingController@update');
@@ -133,6 +140,8 @@ Route::prefix('client/')->group(function () {
 	// Route::any('reason_type/delete', 'Client\ClientController@delete');
 	// Route::any('reason_type/bulk', 'Client\ClientController@bulk');
 	
+=======
+>>>>>>> Stashed changes
 	// Route::get('', 'Client\ClientController@');
 	// Route::any('/update', 'Client\ClientController@update');
 	// Route::any('/delete', 'Client\ClientController@delete');

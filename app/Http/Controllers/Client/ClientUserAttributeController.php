@@ -105,6 +105,51 @@ class ClientUserAttributeController extends ClientController
 		return redirect($url_back)->with('message', print_message($message));
 	}
 	
+	// public function update()
+	// {
+		// $post = $message = $url_back = NULL;
+		// $message = 'No data update';
+		// $url_back = Request::segment(1).DS.Request::segment(2);
+		// if ($_POST)
+		// {
+			// $post = $_POST;
+			// unset($post['_token']);
+			// // unset($post['value']);
+			// // debug($post,1);
+			
+            // // Do validation here with model
+            // if (! isset($post['user_attribute_id'])) {
+                // $message = 'user_attribute_id not exist';
+                // return redirect($url_back)->with('message', print_message($message));
+            // } 
+			
+			// // Action start here
+			// $param = NULL;
+			// $param = $post;
+			// $param['updated_at'] = get_datetime();
+			// $param['updated_by'] = 1;
+			// $param['updated_ip'] = get_ip();
+			
+			// $api_url = env('API_URL').'user_attribute';
+			// $api_method = 'put';
+			
+			// $api_header['debug'] = 1;
+			// $api_header['token'] = env('API_KEY');
+
+			// $update = curl_api_liquid($api_url, $api_method, $api_header, $param);
+			
+			// if (isset($update)) {
+				// $update = json_decode($update,1);
+				
+				// if ($update['is_success']) $message = 'Update success';
+				// else $message = 'Update failed. Please try again';
+
+			// }
+		// }
+		
+		// return redirect($url_back)->with('message', print_message($message));
+	// }
+	
 	public function update()
 	{
 		$post = $message = $url_back = NULL;
@@ -113,9 +158,7 @@ class ClientUserAttributeController extends ClientController
 		if ($_POST)
 		{
 			$post = $_POST;
-			unset($post['_token']);
-			// unset($post['value']);
-			// debug($post,1);
+			unset($post['_token']);	
 			
             // Do validation here with model
             if (! isset($post['user_attribute_id'])) {
@@ -133,7 +176,7 @@ class ClientUserAttributeController extends ClientController
 			$api_url = env('API_URL').'user_attribute';
 			$api_method = 'put';
 			
-			//$api_header['debug'] = 1;
+			// $api_header['debug'] = 1;
 			$api_header['token'] = env('API_KEY');
 
 			$update = curl_api_liquid($api_url, $api_method, $api_header, $param);

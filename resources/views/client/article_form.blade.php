@@ -34,26 +34,6 @@ $base_url = base_url();
 
 // $PAGE_TITLE = $action .' '. $articlelang['module']; 
 
-function validate_column($arrsource,$arrtarget) {
-	
-	if (empty($arrsource) || empty($arrtarget)) {
-		return 'helper error: validate_column error parameter';
-	}	
-	
-	$temp = NULL;
-	foreach ($arrsource as $rs) {
-		if (isset($arrtarget[$rs])) $temp[$rs] = $arrtarget[$rs];
-	}
-	
-	return $temp;
-}
-
-// $source = array('article_id', 'company_name', 'company_address', 'company_phone', 'company_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
-// $target = array('mantap' => 'gokil', 'company_name' => 'harusmasuknih');
-// // $test = array('ayam','bebek');
-// // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
-// $a = validate_column($source,$target);
-// debug($a,1);
 ?>
 
 <!-- Article AREA -->

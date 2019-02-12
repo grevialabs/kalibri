@@ -35,7 +35,7 @@ $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_
 
 $api_url = env('API_URL').'article/get_list';
 $api_method = 'get';
-// $api_header['debug'] = 1;
+$api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 
 if (! empty($data)) $data = json_decode($data,1);

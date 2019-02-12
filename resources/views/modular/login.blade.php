@@ -13,7 +13,7 @@
 				{!! session('message') !!}
 			@endif
 			
-			<form method="post">
+			<form method="post" class="form_submit">
 				<div class="md-form">
 					<i class="fa fa-user prefix"></i>
 					<input type="text" id="email" class="form-control" name="email" required>
@@ -32,7 +32,7 @@
 				
 				<div>
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					<input type="submit" class="btn btn-primary btn-md" />
+					<input type="button" id="btnsubmit" name="btnsubmit" class="btn btn-primary btn-md" />
 				</div>
 			</form>
 		</div>

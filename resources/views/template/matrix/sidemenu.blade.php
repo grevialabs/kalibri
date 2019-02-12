@@ -204,14 +204,22 @@ $base_url = base_url();
 				</li>
 				
 				<li class="sidebar-item"> 
-					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Master </span></a>
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-pencil"></i><span class="hide-menu">Master Article</span></a>
+					<ul aria-expanded="false" class="collapse  first-level">
+						<li class="sidebar-item"> <a class="sidebar-link" id="article" href="article"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Atrticle</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="article-attribute" href="article-attribute"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Attribute</span></a></li>
+					</ul>
+				</li>
+				
+				<li class="sidebar-item"> 
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Master Other</span></a>
 					<ul aria-expanded="false" class="collapse  first-level">
 						<li class="sidebar-item"> <a class="sidebar-link" id="company" href="company"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Company</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="site" href="site"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Site</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="pic" href="pic"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">PIC</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="reason" href="reason"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="level" href="level"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Level</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="reason_type" href="reason_type"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type Mapping</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="reason-type" href="reason-type"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type Mapping</span></a></li>
 					</ul>
 				</li>
 				
