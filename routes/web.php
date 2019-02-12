@@ -97,6 +97,12 @@ Route::prefix('client/')->group(function () {
 	Route::any('level/delete', 'Client\ClientLevelController@delete');
 	Route::any('level/bulk', 'Client\ClientLevelController@bulk');
 	
+	Route::get('article', 'Client\ClientarticleController@article');
+	Route::any('article/insert', 'Client\ClientarticleController@insert');
+	Route::any('article/update', 'Client\ClientarticleController@update');
+	Route::any('article/delete', 'Client\ClientarticleController@delete');
+	Route::any('article/bulk', 'Client\ClientarticleController@bulk');
+	
 	// Route::get('reason_type', 'Client\ClientController@reason_type');
 	// Route::any('reason_type/insert', 'Client\ClientController@insert');
 	// Route::any('reason_type/update', 'Client\ClientController@update');

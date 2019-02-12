@@ -237,6 +237,7 @@ return [
         'LevelModel' => Patriot\Models\Level::class,
         'ReasonModel' => Patriot\Models\Reason::class,
         'UserAttributeModel' => Patriot\Models\UserAttribute::class,
+        'ArticleModel' => Patriot\Models\Article::class,
         // 'UserModel' => Patriot\Models\User::class,
 
         // 'PDF' => Barryvdh\DomPDF\Facade::class,
