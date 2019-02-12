@@ -103,6 +103,30 @@ Route::prefix('client/')->group(function () {
 	Route::any('article/delete', 'Client\ClientarticleController@delete');
 	Route::any('article/bulk', 'Client\ClientarticleController@bulk');
 	
+	Route::get('reason_type_mapping', 'Client\ClientreasontypemappingController@reason_type_mapping');
+	Route::any('reason_type_mapping/insert', 'Client\ClientreasontypemappingController@insert');
+	Route::any('reason_type_mapping/update', 'Client\ClientreasontypemappingController@update');
+	Route::any('reason_type_mapping/delete', 'Client\ClientreasontypemappingController@delete');
+	Route::any('reason_type_mapping/bulk', 'Client\ClientreasontypemappingController@bulk');
+	
+	Route::get('article_stock', 'Client\ClientarticlestockController@article_stock');
+	Route::any('article_stock/insert', 'Client\ClientarticlestockController@insert');
+	Route::any('article_stock/update', 'Client\ClientarticlestockController@update');
+	Route::any('article_stock/delete', 'Client\ClientarticlestockController@delete');
+	Route::any('article_stock/bulk', 'Client\ClientarticlestockController@bulk');
+	
+	Route::get('article_attribute', 'Client\ClientarticleattributeController@article_attribute');
+	Route::any('article_attribute/insert', 'Client\ClientarticleattributeController@insert');
+	Route::any('article_attribute/update', 'Client\ClientarticleattributeController@update');
+	Route::any('article_attribute/delete', 'Client\ClientarticleattributeController@delete');
+	Route::any('article_attribute/bulk', 'Client\ClientarticleattributeController@bulk');
+	
+	Route::get('article_attribute_value', 'Client\ClientarticleattributevalueController@article_attribute_value');
+	Route::any('article_attribute_value/insert', 'Client\ClientarticleattributevalueController@insert');
+	Route::any('article_attribute_value/update', 'Client\ClientarticleattributevalueController@update');
+	Route::any('article_attribute_value/delete', 'Client\ClientarticleattributevalueController@delete');
+	Route::any('article_attribute_value/bulk', 'Client\ClientarticleattributevalueController@bulk');
+	
 	// Route::get('reason_type', 'Client\ClientController@reason_type');
 	// Route::any('reason_type/insert', 'Client\ClientController@insert');
 	// Route::any('reason_type/update', 'Client\ClientController@update');

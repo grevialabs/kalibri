@@ -238,6 +238,10 @@ return [
         'ReasonModel' => Patriot\Models\Reason::class,
         'UserAttributeModel' => Patriot\Models\UserAttribute::class,
         'ArticleModel' => Patriot\Models\Article::class,
+        'ReasonTypeMappingModel' => Patriot\Models\ReasonTypeMapping::class,
+        'ArticleStockModel' => Patriot\Models\ArticleStock::class,
+        'ArticleAttributeModel' => Patriot\Models\ArticleAttribute::class,
+        'ArticleAttributeValueModel' => Patriot\Models\ArticleAttributeValue::class,
         // 'UserModel' => Patriot\Models\User::class,
 
         // 'PDF' => Barryvdh\DomPDF\Facade::class,

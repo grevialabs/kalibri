@@ -7,10 +7,10 @@ $offset = 0;
 $page = 1;
 
 // $perpage_allowed = array(2,40,60);
-$article_model = new ArticleModel();
+$article_attribute_model = new ArticleAttributeModel();
 $general_model = new GeneralModel();
 
-$getorder_allowed_list = $article_model->getorder_allowed_list();
+$getorder_allowed_list = $article_attribute_model->getorder_allowed_list();
 $getorderby_allowed_list = $general_model->getorderby_allowed_list();
 $perpage_allowed = $general_model->perpage_allowed();
 
@@ -33,7 +33,7 @@ if (isset($getorder)) $api_param['order'] = $getorder; else $getorder = $getorde
 if (isset($getorderby)) $api_param['orderby'] = $getorderby; else $getorderby = $getorderby_allowed_list[0];
 $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_list);
 
-$api_url = env('API_URL').'article/get_list';
+$api_url = env('API_URL').'article_attribute/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
@@ -80,7 +80,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm btninsert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $articlelang['add_new'] }}</a><br/><br/>
+				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm btninsert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $article_attribute_lang['add_new'] }}</a><br/><br/>
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -104,23 +104,12 @@ $base_url = base_url();
 				
 				<form method="post" action="{{ $current_url . DS . 'bulk' }}">
 					<div class="table-responsive">
-						<table class="table table-striped table-bordered" id="table_article">
+						<table class="table table-striped table-bordered" id="table_company">
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['article_id']['class'] }}" title="{{ $arrsort['article_id']['title'] }}" href="{{ $arrsort['article_id']['url'] }}">{{ $articlelang['article_id'] }} {!! $arrsort['article_id']['icon'] !!}</a></td>
-								<td width="150px"><a class="{{ $arrsort['site_id']['class'] }}" title="{{ $arrsort['site_id']['title'] }}" href="{{ $arrsort['site_id']['url'] }}">{{ $articlelang['site_id'] }} {!! $arrsort['site_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['article']['class'] }}" title="{{ $arrsort['article']['title'] }}" href="{{ $arrsort['article']['url'] }}">{{ $articlelang['article'] }} {!! $arrsort['article']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['customer_article']['class'] }}" title="{{ $arrsort['customer_article']['title'] }}" href="{{ $arrsort['customer_article']['url'] }}">{{ $articlelang['customer_article'] }} {!! $arrsort['customer_article']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['description']['class'] }}" title="{{ $arrsort['description']['title'] }}" href="{{ $arrsort['description']['url'] }}">{{ $articlelang['description'] }} {!! $arrsort['description']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['uom']['class'] }}" title="{{ $arrsort['uom']['title'] }}" href="{{ $arrsort['uom']['url'] }}">{{ $articlelang['uom'] }} {!! $arrsort['uom']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['conversion_value']['class'] }}" title="{{ $arrsort['conversion_value']['title'] }}" href="{{ $arrsort['conversion_value']['url'] }}">{{ $articlelang['conversion_value'] }} {!! $arrsort['conversion_value']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['safety_stock']['class'] }}" title="{{ $arrsort['safety_stock']['title'] }}" href="{{ $arrsort['safety_stock']['url'] }}">{{ $articlelang['safety_stock'] }} {!! $arrsort['safety_stock']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['column']['class'] }}" title="{{ $arrsort['column']['title'] }}" href="{{ $arrsort['column']['url'] }}">{{ $articlelang['column'] }} {!! $arrsort['column']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['rack']['class'] }}" title="{{ $arrsort['rack']['title'] }}" href="{{ $arrsort['rack']['url'] }}">{{ $articlelang['rack'] }} {!! $arrsort['rack']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['row']['class'] }}" title="{{ $arrsort['row']['title'] }}" href="{{ $arrsort['row']['url'] }}">{{ $articlelang['row'] }} {!! $arrsort['row']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['price']['class'] }}" title="{{ $arrsort['price']['title'] }}" href="{{ $arrsort['price']['url'] }}">{{ $articlelang['price'] }} {!! $arrsort['price']['icon'] !!}</a></td>
-								
+								<td width="150px"><a class="{{ $arrsort['article_attribute_id']['class'] }}" title="{{ $arrsort['article_attribute_id']['title'] }}" href="{{ $arrsort['article_attribute_id']['url'] }}">{{ $article_attribute_lang['article_attribute_id'] }} {!! $arrsort['article_attribute_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['attribute_name']['class'] }}" title="{{ $arrsort['attribute_name']['title'] }}" href="{{ $arrsort['attribute_name']['url'] }}">{{ $article_attribute_lang['attribute_name'] }} {!! $arrsort['attribute_name']['icon'] !!}</a></td>
 								<td width="2">Status</td>
 								<td width="30px" class="talCnt">Option</td>
 							</tr>
@@ -135,18 +124,15 @@ $base_url = base_url();
 								foreach ($listdata as $key => $rs) 
 								{
 									$i++;
-									$id = $rs['article_id'];
-									$idcol = 'article_id';
+									$id = $rs['article_attribute_id'];
+									$idcol = 'article_attribute_id';
 							?>
 							
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['article_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
-								<td>{{ $rs['site_id'] }}</td>
-								<td>{{ $rs['company_address'] }}</td>
-								<td>{{ $rs['company_phone'] }}</td>
-								<td>{{ $rs['company_pic'] }}</td>
+								<td>{{ $rs['article_attribute_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
+								<td>{{ $rs['attribute_name'] }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
 								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
