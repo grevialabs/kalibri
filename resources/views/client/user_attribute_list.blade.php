@@ -104,9 +104,10 @@ $base_url = base_url();
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
+								<td width="150px"><a class="{{ $arrsort['user_attribute_id']['class'] }}" title="{{ $arrsort['user_attribute_id']['title'] }}" href="{{ $arrsort['user_attribute_id']['url'] }}">{{ $user_attribute_lang['user_attribute_id'] }} {!! $arrsort['user_attribute_id']['icon'] !!}</a></td>
 								<td width="150px"><a class="{{ $arrsort['user_id']['class'] }}" title="{{ $arrsort['user_id']['title'] }}" href="{{ $arrsort['user_id']['url'] }}">{{ $user_attribute_lang['user_id'] }} {!! $arrsort['user_id']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['attribute']['class'] }}" title="{{ $arrsort['attribute']['title'] }}" href="{{ $arrsort['attribute']['url'] }}">{{ $user_attribute_lang['attribute'] }} {!! $arrsort['attribute']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['value']['class'] }}" title="{{ $arrsort['value']['title'] }}" href="{{ $arrsort['value']['url'] }}">{{ $user_attribute_lang['value'] }} {!! $arrsort['value']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['val']['class'] }}" title="{{ $arrsort['val']['title'] }}" href="{{ $arrsort['val']['url'] }}">{{ $user_attribute_lang['val'] }} {!! $arrsort['val']['icon'] !!}</a></td>
 								<td width="2">Status</td>
 								<td width="50px" class="talCnt">Option</td>
 							</tr>
@@ -121,19 +122,21 @@ $base_url = base_url();
 								foreach ($listdata as $key => $rs) 
 								{
 									$i++;
-									$id = $rs['user_id'];
-									$idcol = 'user_id';
+									$id = $rs['user_attribute_id'];
+									$idcol = 'user_attribute_id';
 							?>
 							
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['user_id'] }}  <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-2x btnedit"></i></a> </td>
+								<td>{{ $rs['user_attribute_id'] }}</td>
+								<td>{{ $rs['user_id'] }}</td>
 								<td>{{ $rs['attribute'] }}</td>
 								<td>{{ $rs['val'] }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
-								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
+								<a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg"></i></a> 
+								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-times fa-lg" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
 								</td>
 							</tr>
 							<?php
@@ -142,7 +145,7 @@ $base_url = base_url();
 							<tr>
 								<td colspan="100%">
 									<div id="group_action">With checked do 
-									<select class="input btnedit" name="lst_group_action">
+									<select class="input" name="lst_group_action">
 										<option class="" value="1">Active</option>
 										<option class="" value="0">Inactive</option>
 										<option class="" value="-1">Delete</option>

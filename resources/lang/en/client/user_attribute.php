@@ -20,7 +20,8 @@ return [
     'p1' => '',
     'success' => 'success',
 	
-    'user_id' => 'UserID',
+    'user_attribute_id' => 'User Attribute ID',
+    'user_id' => 'User ID',
     'attribute' => 'Attribute',
     'value' => 'Value',
 ];

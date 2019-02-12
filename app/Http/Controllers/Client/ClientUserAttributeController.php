@@ -41,7 +41,7 @@ class ClientUserAttributeController extends ClientController
 		$param['PAGE_TITLE'] = $user_attribute_lang['module'];
 		$param['MODULE'] = $user_attribute_lang['module'];
 		
-		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['user_id']))) {
+		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['user_attribute_id']))) {
 			if ($get['do'] == 'insert') { 
 				$param['ACTION'] = $lang['insert'];
 				$param['form_url'] = $current_url.DS.'insert';
@@ -114,10 +114,12 @@ class ClientUserAttributeController extends ClientController
 		{
 			$post = $_POST;
 			unset($post['_token']);
+			// unset($post['value']);
+			// debug($post,1);
 			
             // Do validation here with model
-            if (! isset($post['user_id'])) {
-                $message = 'user_id not exist';
+            if (! isset($post['user_attribute_id'])) {
+                $message = 'user_attribute_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
@@ -131,7 +133,7 @@ class ClientUserAttributeController extends ClientController
 			$api_url = env('API_URL').'user_attribute';
 			$api_method = 'put';
 			
-			 $api_header['debug'] = 1;
+			//$api_header['debug'] = 1;
 			$api_header['token'] = env('API_KEY');
 
 			$update = curl_api_liquid($api_url, $api_method, $api_header, $param);
@@ -160,14 +162,14 @@ class ClientUserAttributeController extends ClientController
 			// unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($get['user_id'])) {
-                $message = 'user_id not exist';
+            if (! isset($get['user_attribute_id'])) {
+                $message = 'user_attribute_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
 			// Action start here
 			$param = NULL;
-			$param['user_id'] = $get['user_id'];
+			$param['user_attribute_id'] = $get['user_attribute_id'];
 			$param['status'] = -1;
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;

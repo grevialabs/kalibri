@@ -2,10 +2,10 @@
 // ---------------------------
 // Get data 
 $data = NULL;
-if (isset($get['user_id'])) {
+if (isset($get['user_attribute_id'])) {
 	$api_url = $api_method = $api_param = $api_header = NULL;
 	$api_param['token'] = env('API_KEY');
-	$api_param['user_id'] = $get['user_id'];
+	$api_param['user_attribute_id'] = $get['user_attribute_id'];
 
 	$api_url = env('API_URL').'user_attribute/get';
 	$api_method = 'get';
@@ -34,10 +34,26 @@ $base_url = base_url();
 
 // $PAGE_TITLE = $action .' '. $user_attribute_lang['module']; 
 
-// $cook = Cookie::get('tokenhash');
-$cook = $_COOKIE;
-debug('yowassap'.HR);
-debug($cook,1);
+function validate_column($arrsource,$arrtarget) {
+	
+	if (empty($arrsource) || empty($arrtarget)) {
+		return 'helper error: validate_column error parameter';
+	}	
+	
+	$temp = NULL;
+	foreach ($arrsource as $rs) {
+		if (isset($arrtarget[$rs])) $temp[$rs] = $arrtarget[$rs];
+	}
+	
+	return $temp;
+}
+
+// $source = array('user_id', 'reason_name', 'reason_address', 'reason_phone', 'reason_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
+// $target = array('mantap' => 'gokil', 'reason_name' => 'harusmasuknih');
+// // $test = array('ayam','bebek');
+// // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
+// $a = validate_column($source,$target);
+// debug($a,1);
 ?>
 
 <!-- Article AREA -->
@@ -70,7 +86,7 @@ debug($cook,1);
 					-->
 					
 				
-					<?php if (isset($data['user_attribute'])) { ?>
+					<?php if (isset($data['user_attribute_id'])) { ?>
 					
 					<!--
 					<div class="col-lg-12 col-sm-12">
@@ -84,14 +100,23 @@ debug($cook,1);
 					-->
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="" class="control-label col-form-label">{!! $user_attribute_lang['user_id'] !!}</label>
+							<label for="" class="control-label col-form-label">{!! $user_attribute_lang['user_attribute_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $user_attribute_lang['user_id'] }}" required="" data-original-title="" value="{{ $data['user_id'] }}" disabled />
-							<input type="hidden" name="user_id" value="{{ $data['user_id'] }}" />
+							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $user_attribute_lang['user_attribute_id'] }}" required="" data-original-title="" value="{{ $data['user_attribute_id'] }}" disabled />
+							<input type="hidden"  name="user_attribute_id" value="{{ $data['user_attribute_id'] }}" />
 						</div>
 					</div>
 					<?php } ?>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="user_id" class="control-label col-form-label">{!! $user_attribute_lang['user_id'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $user_attribute_lang['user_id'] }}" title="{{ $user_attribute_lang['user_id'] }}" class="form-control" id="user_id" name="user_id" placeholder="{{ $user_attribute_lang['user_id'] }}" required="" data-original-title="" />
+						</div>
+					</div>
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
