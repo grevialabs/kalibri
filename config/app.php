@@ -242,6 +242,7 @@ return [
         'ArticleStockModel' => Patriot\Models\ArticleStock::class,
         'ArticleAttributeModel' => Patriot\Models\ArticleAttribute::class,
         'ArticleAttributeValueModel' => Patriot\Models\ArticleAttributeValue::class,
+        'TransactionModel' => Patriot\Models\Transaction::class,
         // 'UserModel' => Patriot\Models\User::class,
 
         // 'PDF' => Barryvdh\DomPDF\Facade::class,

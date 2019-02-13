@@ -190,10 +190,10 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 	<script>
 	$(document).ready(function(){
 		
-		$(".form_submit").submit(function(e){
-			// call blocker from footer 
-			modal_loading_block();
-		});
+		// $(".form_submit").submit(function(e){
+			// // call blocker from footer 
+			// modal_loading_block();
+		// });
 
 	<?php 
 	// Activate menu if uri segment 1 & 2 exist
@@ -204,7 +204,9 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 	}
 	?>
 		// minify menu active
-		$('.sidebartoggler').click();
+		// $('.sidebartoggler').click();
+		
+		// $('.datetimepicker').datetimepicker();
 	
 	});
 	
@@ -223,6 +225,13 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 		checkboxSelector : ':checkbox',
 		//selectAll        : $('.chkbox '),
 		ignoreClick      : 'a',
+	});
+	
+	$('.btnaction').css('width','150');
+	$(".form_submit").submit(function(e){
+		
+		$('.btnaction').attr('disabled','true');
+		$('.btnaction').html('<i class="fa fa-spinner fa-spin"></i>');
 	});
 
 	// $('.btnview').hide(); // no access for view data

@@ -14,7 +14,7 @@ use Cookie;
 use Lang;
 use Request;
 
-class ClientTransactionController extends ClientController
+class ClientSiteController extends ClientController
 {	
 	public function __construct()
 	{
@@ -22,24 +22,24 @@ class ClientTransactionController extends ClientController
 		parent::__construct();
 	}
 		
-	public function transaction()
+	public function site()
 	{
-		$param = $content = $get = $lang = $transactionlang = $current_url = NULL;
+		$param = $content = $get = $lang = $sitelang = $current_url = NULL;
 		
 		if ($_GET) $get = $_GET;
 		
 		$lang = Lang::get('common');
-		$transactionlang = Lang::get('client/transaction');
+		$sitelang = Lang::get('client/site');
 		$current_url = current_url();
-		// debug($transactionlang,1);
+		// debug($sitelang,1);
 		
 		$param['get'] = $get;
 		$param['lang'] = $lang;
-		$param['transactionlang'] = $transactionlang;
-		$param['PAGE_TITLE'] = $transactionlang['module'];
-		$param['MODULE'] = $transactionlang['module'];
+		$param['sitelang'] = $sitelang;
+		$param['PAGE_TITLE'] = $sitelang['module'];
+		$param['MODULE'] = $sitelang['module'];
 		
-		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['transaction_id']))) {
+		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['site_id']))) {
 			if ($get['do'] == 'insert') { 
 				$param['ACTION'] = $lang['insert'];
 				$param['form_url'] = $current_url.DS.'insert';
@@ -48,13 +48,13 @@ class ClientTransactionController extends ClientController
 				$param['form_url'] = $current_url.DS.'update';
 			}
 			
-			$viewtarget = 'client.transaction_form';
+			$viewtarget = 'client.site_form';
 		} else {
 			$param['ACTION'] = $lang['list'];
-			$viewtarget = 'client.transaction_list';
+			$viewtarget = 'client.site_list';
 		}
 		
-		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $transactionlang['module'];
+		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $sitelang['module'];
 		
 		$param['current_url'] = $current_url;
 		$content = view($viewtarget,$param);	
@@ -81,9 +81,9 @@ class ClientTransactionController extends ClientController
 			$param['created_at'] = get_datetime();
 			$param['created_by'] = 1;
 			$param['created_ip'] = get_ip();
-			// $param['transaction_token'] = env('API_KEY');
+			// $param['site_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'transaction';
+			$api_url = env('API_URL').'site';
 			$api_method = 'post';
 			
 			// $api_header['debug'] = 1;
@@ -115,8 +115,8 @@ class ClientTransactionController extends ClientController
 			unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($post['transaction_id'])) {
-                $message = 'transaction_id not exist';
+            if (! isset($post['site_id'])) {
+                $message = 'site_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
@@ -127,7 +127,7 @@ class ClientTransactionController extends ClientController
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'transaction';
+			$api_url = env('API_URL').'site';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
@@ -159,20 +159,20 @@ class ClientTransactionController extends ClientController
 			// unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($get['transaction_id'])) {
-                $message = 'transaction_id not exist';
+            if (! isset($get['site_id'])) {
+                $message = 'site_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
 			// Action start here
 			$param = NULL;
-			$param['transaction_id'] = $get['transaction_id'];
+			$param['site_id'] = $get['site_id'];
 			$param['status'] = -1;
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'transaction';
+			$api_url = env('API_URL').'site';
 			$api_method = 'delete';
 			
 			// $api_header['debug'] = 1;
@@ -207,9 +207,9 @@ class ClientTransactionController extends ClientController
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
-			// $param['transaction_token'] = env('API_KEY');
+			// $param['site_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'transaction';
+			$api_url = env('API_URL').'site';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
@@ -223,11 +223,11 @@ class ClientTransactionController extends ClientController
 				if ($save['is_success']) $message = 'Save success';
 				else $message = 'Save failed';
 				
-				// return redirect('transaction')->with('message', print_message($message));
+				// return redirect('site')->with('message', print_message($message));
 			}
 			
 			$message = 'Bulk action success';
 		}
-		return redirect('transaction')->with('message', print_message($message));
+		return redirect('site')->with('message', print_message($message));
 	}
 }

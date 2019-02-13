@@ -199,14 +199,14 @@ $base_url = base_url();
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Master User</span></a>
 					<ul aria-expanded="false" class="collapse  first-level">						
 						<li class="sidebar-item"> <a class="sidebar-link" id="user" href="user"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link " id="user_attribute" href="user_attribute"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User attribute</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link " id="user-attribute" href="user-attribute"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User attribute</span></a></li>
 					</ul>
 				</li>
 				
 				<li class="sidebar-item"> 
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-pencil"></i><span class="hide-menu">Master Article</span></a>
 					<ul aria-expanded="false" class="collapse  first-level">
-						<li class="sidebar-item"> <a class="sidebar-link" id="article" href="article"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Atrticle</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="article" href="article"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="article-attribute" href="article-attribute"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Attribute</span></a></li>
 					</ul>
 				</li>
@@ -215,11 +215,33 @@ $base_url = base_url();
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Master Other</span></a>
 					<ul aria-expanded="false" class="collapse  first-level">
 						<li class="sidebar-item"> <a class="sidebar-link" id="company" href="company"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Company</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="site" href="site"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Site</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="site" href="site"><i class="mdi mdi-chart-bar"></i><span>Site</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="pic" href="pic"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">PIC</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="reason" href="reason"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="level" href="level"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Level</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="reason-type" href="reason-type"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type Mapping</span></a></li>
+					</ul>
+				</li>
+				
+				<li class="sidebar-item"> 
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-relative-scale"></i><span class="hide-menu">Transaction</span></a>
+					<ul aria-expanded="false" class="collapse first-level">
+						<li class="sidebar-item"> <a class="sidebar-link" id="transaction" href="transaction"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Transaction</span></a></li>
+						<!--
+						<li class="sidebar-item"> <a class="sidebar-link" id="site" href="site"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="site" href="site"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="site" href="site"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement</span></a></li>
+						-->
+					</ul>
+				</li>
+				
+				<li class="sidebar-item"> 
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-note-plus"></i><span class="hide-menu">Access Role</span></a>
+					<ul aria-expanded="false" class="collapse first-level">
+						<li class="sidebar-item"> <a class="sidebar-link" id="capability" href="capability"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Capability</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="role" href="role"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Role</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="role-capability" href="role-capability"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Role Capability</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="site" href="site"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement</span></a></li>
 					</ul>
 				</li>
 				

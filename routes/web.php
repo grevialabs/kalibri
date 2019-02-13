@@ -103,35 +103,41 @@ Route::prefix('client/')->group(function () {
 	Route::any('level/delete', 'Client\ClientLevelController@delete');
 	Route::any('level/bulk', 'Client\ClientLevelController@bulk');
 	
-	Route::get('article', 'Client\ClientarticleController@article');
-	Route::any('article/insert', 'Client\ClientarticleController@insert');
-	Route::any('article/update', 'Client\ClientarticleController@update');
-	Route::any('article/delete', 'Client\ClientarticleController@delete');
-	Route::any('article/bulk', 'Client\ClientarticleController@bulk');
+	Route::get('article', 'Client\ClientArticleController@article');
+	Route::any('article/insert', 'Client\ClientArticleController@insert');
+	Route::any('article/update', 'Client\ClientArticleController@update');
+	Route::any('article/delete', 'Client\ClientArticleController@delete');
+	Route::any('article/bulk', 'Client\ClientArticleController@bulk');
 	
-	Route::get('reason_type_mapping', 'Client\ClientreasontypemappingController@reason_type_mapping');
-	Route::any('reason_type_mapping/insert', 'Client\ClientreasontypemappingController@insert');
-	Route::any('reason_type_mapping/update', 'Client\ClientreasontypemappingController@update');
-	Route::any('reason_type_mapping/delete', 'Client\ClientreasontypemappingController@delete');
-	Route::any('reason_type_mapping/bulk', 'Client\ClientreasontypemappingController@bulk');
+	Route::get('reason-type_mapping', 'Client\ClientReasonTypemappingController@reason_type_mapping');
+	Route::any('reason-type_mapping/insert', 'Client\ClientReasonTypemappingController@insert');
+	Route::any('reason-type_mapping/update', 'Client\ClientReasonTypemappingController@update');
+	Route::any('reason-type_mapping/delete', 'Client\ClientReasonTypemappingController@delete');
+	Route::any('reason-type_mapping/bulk', 'Client\ClientReasonTypemappingController@bulk');
 	
-	Route::get('article_stock', 'Client\ClientarticlestockController@article_stock');
-	Route::any('article_stock/insert', 'Client\ClientarticlestockController@insert');
-	Route::any('article_stock/update', 'Client\ClientarticlestockController@update');
-	Route::any('article_stock/delete', 'Client\ClientarticlestockController@delete');
-	Route::any('article_stock/bulk', 'Client\ClientarticlestockController@bulk');
+	Route::get('article-stock', 'Client\ClientArticleStockController@article_stock');
+	Route::any('article-stock/insert', 'Client\ClientArticleStockController@insert');
+	Route::any('article-stock/update', 'Client\ClientArticleStockController@update');
+	Route::any('article-stock/delete', 'Client\ClientArticleStockController@delete');
+	Route::any('article-stock/bulk', 'Client\ClientArticleStockController@bulk');
+
+	Route::get('article-attribute', 'Client\ClientArticleAttributeController@article_attribute');
+	Route::any('article-attribute/insert', 'Client\ClientArticleAttributeController@insert');
+	Route::any('article-attribute/update', 'Client\ClientArticleAttributeController@update');
+	Route::any('article-attribute/delete', 'Client\ClientArticleAttributeController@delete');
+	Route::any('article-attribute/bulk', 'Client\ClientArticleAttributeController@bulk');
 	
-	Route::get('article_attribute', 'Client\ClientarticleattributeController@article_attribute');
-	Route::any('article_attribute/insert', 'Client\ClientarticleattributeController@insert');
-	Route::any('article_attribute/update', 'Client\ClientarticleattributeController@update');
-	Route::any('article_attribute/delete', 'Client\ClientarticleattributeController@delete');
-	Route::any('article_attribute/bulk', 'Client\ClientarticleattributeController@bulk');
+	Route::get('article-attribute-value', 'Client\ClientArticleAttributeValueController@article_attribute_value');
+	Route::any('article-attribute-value/insert', 'Client\ClientArticleAttributeValueController@insert');
+	Route::any('article-attribute-value/update', 'Client\ClientArticleAttributeValueController@update');
+	Route::any('article-attribute-value/delete', 'Client\ClientArticleAttributeValueController@delete');
+	Route::any('article-attribute-value/bulk', 'Client\ClientArticleAttributeValueController@bulk');
 	
-	Route::get('article_attribute_value', 'Client\ClientarticleattributevalueController@article_attribute_value');
-	Route::any('article_attribute_value/insert', 'Client\ClientarticleattributevalueController@insert');
-	Route::any('article_attribute_value/update', 'Client\ClientarticleattributevalueController@update');
-	Route::any('article_attribute_value/delete', 'Client\ClientarticleattributevalueController@delete');
-	Route::any('article_attribute_value/bulk', 'Client\ClientarticleattributevalueController@bulk');
+	Route::get('transaction', 'Client\ClientTransactionController@transaction');
+	Route::any('transaction/insert', 'Client\ClientTransactionController@insert');
+	Route::any('transaction/update', 'Client\ClientTransactionController@update');
+	Route::any('transaction/delete', 'Client\ClientTransactionController@delete');
+	Route::any('transaction/bulk', 'Client\ClientTransactionController@bulk');
 	
 	// Route::get('reason_type', 'Client\ClientController@reason_type');
 	// Route::any('reason_type/insert', 'Client\ClientController@insert');

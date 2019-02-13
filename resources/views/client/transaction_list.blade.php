@@ -7,10 +7,10 @@ $offset = 0;
 $page = 1;
 
 // $perpage_allowed = array(2,40,60);
-$company_model = new CompanyModel();
+$transaction_model = new TransactionModel();
 $general_model = new GeneralModel();
 
-$getorder_allowed_list = $company_model->getorder_allowed_list();
+$getorder_allowed_list = $transaction_model->getorder_allowed_list();
 $getorderby_allowed_list = $general_model->getorderby_allowed_list();
 $perpage_allowed = $general_model->perpage_allowed();
 
@@ -32,8 +32,9 @@ if (isset($getkeyword)) $api_param['keyword'] = $getkeyword;
 if (isset($getorder)) $api_param['order'] = $getorder; else $getorder = $getorder_allowed_list[0];
 if (isset($getorderby)) $api_param['orderby'] = $getorderby; else $getorderby = $getorderby_allowed_list[0];
 $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_list);
+// debug($arrsort['transaction_id']['class'],1);
 
-$api_url = env('API_URL').'company/get_list';
+$api_url = env('API_URL').'transaction/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
@@ -41,6 +42,8 @@ $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 if (! empty($data)) $data = json_decode($data,1);
 if (isset($data['data'])) $listdata = $data['data'];
 if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
+
+// debug($listdata,1);
 
 $reget = NULL;
 if (! empty($get)) {
@@ -57,16 +60,12 @@ $reget = http_build_query($reget);
 $resubmit_url = current_url().'?'.$reget;
 
 $base_url = base_url();
-
 ?>
 
 <style>
 
 </style>
 
-<script>
-
-</script>
 <!-- CONTENT AREA -->
 <div class="row">
 	<div class="col-sm-12">
@@ -80,7 +79,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm btninsert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $companylang['add_new'] }}</a><br/><br/>
+				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $transactionlang['add_new'] }}</a><br/><br/>
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -104,17 +103,20 @@ $base_url = base_url();
 				
 				<form method="post" action="{{ $current_url . DS . 'bulk' }}">
 					<div class="table-responsive">
-						<table class="table table-striped table-bordered" id="table_company">
+						<table class="table table-striped table-bordered" id="table_transaction">
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['company_id']['class'] }}" title="{{ $arrsort['company_id']['title'] }}" href="{{ $arrsort['company_id']['url'] }}">{{ $companylang['company_id'] }} {!! $arrsort['company_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['company_name']['class'] }}" title="{{ $arrsort['company_name']['title'] }}" href="{{ $arrsort['company_name']['url'] }}">{{ $companylang['company_name'] }} {!! $arrsort['company_name']['icon'] !!}</a></td>
-								<td><a class="{{ $arrsort['company_address']['class'] }}" title="{{ $arrsort['company_address']['title'] }}" href="{{ $arrsort['company_address']['url'] }}">{{ $companylang['company_address'] }} {!! $arrsort['company_address']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['company_phone']['class'] }}" title="{{ $arrsort['company_phone']['title'] }}" href="{{ $arrsort['company_phone']['url'] }}">{{ $companylang['company_phone'] }} {!! $arrsort['company_phone']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['company_pic']['class'] }}" title="{{ $arrsort['company_pic']['title'] }}" href="{{ $arrsort['company_pic']['url'] }}">{{ $companylang['company_pic'] }} {!! $arrsort['company_pic']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['transaction_id']['class'] or '' }}" title="{{ $arrsort['transaction_id']['title'] or '' }}" href="{{ $arrsort['transaction_id']['url'] or '' }}">{{ $transactionlang['transaction_id'] or '' }} {!! $arrsort['transaction_id']['icon'] or '' !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['site_id']['class'] or '' }}" title="{{ $arrsort['site_id']['title'] or '' }}" href="{{ $arrsort['site_id']['url'] or '' }}">{{ $transactionlang['site_id'] or '' }} {!! $arrsort['site_id']['icon'] or '' !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['qty']['class'] or '' }}" title="{{ $arrsort['qty']['title'] or '' }}" href="{{ $arrsort['qty']['url'] or '' }}">{{ $transactionlang['qty'] or '' }} {!! $arrsort['qty']['icon'] or '' !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['value']['class'] or '' }}" title="{{ $arrsort['value']['title'] or '' }}" href="{{ $arrsort['value']['url'] or '' }}">{{ $transactionlang['value'] or '' }} {!! $arrsort['value']['icon'] or '' !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['status_in_out']['class'] or '' }}" title="{{ $arrsort['status_in_out']['title'] or '' }}" href="{{ $arrsort['status_in_out']['url'] or '' }}">{{ $transactionlang['status_in_out'] or '' }} {!! $arrsort['status_in_out']['icon'] or '' !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['wo_wbs']['class'] or '' }}" title="{{ $arrsort['wo_wbs']['title'] or '' }}" href="{{ $arrsort['wo_wbs']['url'] or '' }}">{{ $transactionlang['wo_wbs'] or '' }} {!! $arrsort['wo_wbs']['icon'] or '' !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['article']['class'] or '' }}" title="{{ $arrsort['article']['title'] or '' }}" href="{{ $arrsort['article']['url'] or '' }}">{{ $transactionlang['article'] or '' }} {!! $arrsort['article']['icon'] or '' !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['customer_article']['class'] or '' }}" title="{{ $arrsort['customer_article']['title'] or '' }}" href="{{ $arrsort['customer_article']['url'] or '' }}">{{ $transactionlang['customer_article'] or '' }} {!! $arrsort['customer_article']['icon'] or '' !!}</a></td>
 								<td width="2">Status</td>
-								<td width="30px" class="talCnt">Option</td>
+								<td width="50px" class="talCnt">Option</td>
 							</tr>
 							<?php 
 							if (! empty($listdata)) 
@@ -127,18 +129,21 @@ $base_url = base_url();
 								foreach ($listdata as $key => $rs) 
 								{
 									$i++;
-									$id = $rs['company_id'];
-									$idcol = 'company_id';
+									$id = $rs['transaction_id'];
+									$idcol = 'transaction_id';
 							?>
 							
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['company_id'] or '' }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
-								<td>{{ $rs['company_name'] or '' }}</td>
-								<td>{{ $rs['company_address'] or '' }}</td>
-								<td>{{ $rs['company_phone'] or '' }}</td>
-								<td>{{ $rs['company_pic'] or '' }}</td>
+								<td>{{ $rs['transaction_id'] or '' }}  <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
+								<td>{{ $rs['site_id'] or '' }}</td>
+								<td>{{ $rs['qty'] or '' }}</td>
+								<td>{{ $rs['value'] or '' }}</td>
+								<td>{{ $rs['status_in_out'] or '' }}</td>
+								<td>{{ $rs['wo_wbs'] or '' }}</td>
+								<td>{{ $rs['article'] or '' }}</td>
+								<td>{{ $rs['customer_article'] or '' }}</td>							
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
 								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
@@ -156,7 +161,7 @@ $base_url = base_url();
 										<option class="" value="-1">Delete</option>
 									</select>
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<button class="btn btn-default btn-sm btnedit" name="btn_group_action" value="1">Action</button></div>
+									<button class="btn btn-default btn-sm" name="btn_group_action" value="1">Action</button></div>
 								</td>
 							</tr>	
 							<?php
@@ -200,6 +205,5 @@ $(document).ready( function() {
 	// });
 
 });
-
 </script>
 

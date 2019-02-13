@@ -142,18 +142,18 @@ $base_url = base_url();
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['article_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
-								<td>{{ $rs['site_id'] }}</td>
-								<td>{{ $rs['article'] }}</td>
-								<td>{{ $rs['customer_article'] }}</td>
-								<td>{{ $rs['description'] }}</td>
-								<td>{{ $rs['uom'] }}</td>
-								<td>{{ $rs['conversion_value'] }}</td>
-								<td>{{ $rs['safety_stock'] }}</td>
-								<td>{{ $rs['column'] }}</td>
-								<td>{{ $rs['rack'] }}</td>
-								<td>{{ $rs['row'] }}</td>
-								<td>{{ $rs['price'] }}</td>
+								<td>{{ $rs['article_id'] or '' }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
+								<td>{{ $rs['site_id'] or '' }}</td>
+								<td>{{ $rs['article'] or '' }}</td>
+								<td>{{ $rs['customer_article'] or '' }}</td>
+								<td>{{ $rs['description'] or '' }}</td>
+								<td>{{ $rs['uom'] or '' }}</td>
+								<td>{{ $rs['conversion_value'] or '' }}</td>
+								<td>{{ $rs['column'] or '' }}</td>
+								<td>{{ $rs['rack'] or '' }}</td>
+								<td>{{ $rs['safety_stock'] or '' }}</td>
+								<td>{{ $rs['row'] or '' }}</td>
+								<td>{{ $rs['price'] or '' }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
 								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>

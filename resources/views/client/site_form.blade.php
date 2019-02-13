@@ -46,21 +46,9 @@ $api_method = 'get';
 
 $temp = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 
-if (! empty($temp)) $temp = json_decode($temp,1);
-$list_company = $temp['data'];
-
-function validate_column($arrsource,$arrtarget) {
-	
-	if (empty($arrsource) || empty($arrtarget)) {
-		return 'helper error: validate_column error parameter';
-	}	
-	
-	$temp = NULL;
-	foreach ($arrsource as $rs) {
-		if (isset($arrtarget[$rs])) $temp[$rs] = $arrtarget[$rs];
-	}
-	
-	return $temp;
+if (! empty($temp)) { 
+	$temp = json_decode($temp,1);
+	$list_company = $temp['data'];
 }
 
 ?>
@@ -80,7 +68,7 @@ function validate_column($arrsource,$arrtarget) {
 					{!! session('message') !!}
 				@endif
 				
-				<form method="post" action="{{ $form_url }}" class="form-horizontal">
+				<form method="post" action="{{ $form_url }}" class="form-horizontal form_submit">
 
 					
 					<!--
@@ -192,7 +180,7 @@ function validate_column($arrsource,$arrtarget) {
 							<label for="start_date_counting" class="control-label col-form-label">{!! $sitelang['start_date_counting'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="datepicker form-control" id="start_date_counting" name="start_date_counting" placeholder="{{ $sitelang['start_date_counting'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="" title="" class="datetimepicker form-control" id="start_date_counting" name="start_date_counting" placeholder="{{ $sitelang['start_date_counting'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
@@ -210,7 +198,7 @@ function validate_column($arrsource,$arrtarget) {
 							<label for="logo_file_name" class="control-label col-form-label">{!! $sitelang['logo_file_name'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="logo_file_name" name="logo_file_name" placeholder="{{ $sitelang['logo_file_name'] }}" required="" data-original-title="{{ $sitelang['logo_file_name'] }}" />
+							<input type="file" data-toggle="" title="" class="form-control" id="logo_file_name" name="logo_file_name" placeholder="{{ $sitelang['logo_file_name'] }}" data-original-title="{{ $sitelang['logo_file_name'] }}" />
 						</div>
 					</div>
 					
@@ -220,11 +208,11 @@ function validate_column($arrsource,$arrtarget) {
 							<?php 
 							if ($get['do'] == 'insert') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md">{{ $lang['save'] }}</button>
+							<button type="submit" class="btn btn-primary btn-md btnaction">{{ $lang['save'] }}</button>
 							<?php 
 							} else if ($get['do'] == 'edit') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md">{{ $lang['update'] }}</button>
+							<button type="submit" class="btn btn-primary btn-md btnaction">{{ $lang['update'] }}</button>
 							<?php 
 							}
 							?>
