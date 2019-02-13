@@ -109,7 +109,6 @@ Route::prefix('client/')->group(function () {
 	Route::any('article/delete', 'Client\ClientarticleController@delete');
 	Route::any('article/bulk', 'Client\ClientarticleController@bulk');
 	
-<<<<<<< Updated upstream
 	Route::get('reason_type_mapping', 'Client\ClientreasontypemappingController@reason_type_mapping');
 	Route::any('reason_type_mapping/insert', 'Client\ClientreasontypemappingController@insert');
 	Route::any('reason_type_mapping/update', 'Client\ClientreasontypemappingController@update');
@@ -140,8 +139,6 @@ Route::prefix('client/')->group(function () {
 	// Route::any('reason_type/delete', 'Client\ClientController@delete');
 	// Route::any('reason_type/bulk', 'Client\ClientController@bulk');
 	
-=======
->>>>>>> Stashed changes
 	// Route::get('', 'Client\ClientController@');
 	// Route::any('/update', 'Client\ClientController@update');
 	// Route::any('/delete', 'Client\ClientController@delete');
