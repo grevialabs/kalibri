@@ -19,6 +19,21 @@ if (isset($get['article_id'])) {
 
 $base_url = base_url();
 
+$list_site = NULL;
+$api_url = $api_method = $api_param = $api_header = NULL;
+$api_param['token'] = env('API_KEY');
+$api_param['paging'] = false;
+
+$api_url = env('API_URL').'site/get_list';
+$api_method = 'get';
+// $api_header['debug'] = 1;
+
+$temp = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+
+if (! empty($temp)) $temp = json_decode($temp,1);
+$list_site = $temp['data'];
+
+
 // Insert log
 // $postlog = NULL;
 // $postlog['name'] = current_url();
@@ -33,6 +48,19 @@ $base_url = base_url();
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
 // $PAGE_TITLE = $action .' '. $articlelang['module']; 
+function validate_column($arrsource,$arrtarget) {
+	
+	if (empty($arrsource) || empty($arrtarget)) {
+		return 'helper error: validate_column error parameter';
+	}	
+	
+	$temp = NULL;
+	foreach ($arrsource as $rs) {
+		if (isset($arrtarget[$rs])) $temp[$rs] = $arrtarget[$rs];
+	}
+	
+	return $temp;
+}
 
 ?>
 
@@ -88,13 +116,33 @@ $base_url = base_url();
 						</div>
 					</div>
 					<?php } ?>
-					
+<!-- 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="site_id" class="control-label col-form-label">{!! $articlelang['site_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
 							<input type="text" data-toggle="{{ $articlelang['site_id'] }}" title="{{ $articlelang['site_id'] }}" class="form-control" id="site_id" name="site_id" placeholder="{{ $articlelang['site_id'] }}" required="" data-original-title="" />
+						</div>
+					</div> -->
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="company_id" class="control-label col-form-label">{!! $articlelang['site_id'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="site_id">
+							<?php 
+							if (!empty($list_site)) {
+								foreach ($list_site as $k => $rs) {
+								?>
+								<option>{{ $rs['site_name'] . ' - ID ' . $rs['site_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
 						</div>
 					</div>
 					
@@ -121,7 +169,7 @@ $base_url = base_url();
 							<label for="description" class="control-label col-form-label">{!! $articlelang['description'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-                            <input type="text" data-toggle="{{ $articlelang['description'] }}" title="{{ $articlelang['description'] }}" class="form-control" id="description" name="description" placeholder="{{ $articlelang['description'] }}" required="" data-original-title="" />
+                            <textarea type="text" data-toggle="{{ $articlelang['description'] }}" title="" class="form-control" id="description" name="description" placeholder="{{ $articlelang['description'] }}" required="" data-original-title="{{ $articlelang['description'] }}"></textarea>
 						</div>
 					</div>
 					
@@ -139,7 +187,7 @@ $base_url = base_url();
 							<label for="conversion_value" class="control-label col-form-label">{!! $articlelang['conversion_value'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-                            <input type="text" data-toggle="{{ $articlelang['conversion_value'] }}" title="{{ $articlelang['conversion_value'] }}" class="form-control" id="conversion_value" name="conversion_value" placeholder="{{ $articlelang['conversion_value'] }}" required="" data-original-title="" />
+                            <input type="number" data-toggle="{{ $articlelang['conversion_value'] }}" title="{{ $articlelang['conversion_value'] }}" class="form-control" id="conversion_value" name="conversion_value" placeholder="{{ $articlelang['conversion_value'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
@@ -148,7 +196,7 @@ $base_url = base_url();
 							<label for="safety_stock" class="control-label col-form-label">{!! $articlelang['safety_stock'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-                            <input type="text" data-toggle="{{ $articlelang['safety_stock'] }}" title="{{ $articlelang['safety_stock'] }}" class="form-control" id="safety_stock" name="safety_stock" placeholder="{{ $articlelang['safety_stock'] }}" required="" data-original-title="" />
+                            <input type="number" data-toggle="{{ $articlelang['safety_stock'] }}" title="{{ $articlelang['safety_stock'] }}" class="form-control" id="safety_stock" name="safety_stock" placeholder="{{ $articlelang['safety_stock'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
@@ -160,6 +208,7 @@ $base_url = base_url();
                             <input type="text" data-toggle="{{ $articlelang['column'] }}" title="{{ $articlelang['column'] }}" class="form-control" id="column" name="column" placeholder="{{ $articlelang['column'] }}" required="" data-original-title="" />
 						</div>
 					</div>
+
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="rack" class="control-label col-form-label">{!! $articlelang['rack'] !!}</label>
@@ -183,7 +232,7 @@ $base_url = base_url();
 							<label for="price" class="control-label col-form-label">{!! $articlelang['price'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-                            <input type="text" data-toggle="{{ $articlelang['price'] }}" title="{{ $articlelang['price'] }}" class="form-control" id="price" name="price" placeholder="{{ $articlelang['price'] }}" required="" data-original-title="" />
+                            <input type="number" data-toggle="{{ $articlelang['price'] }}" title="{{ $articlelang['price'] }}" class="form-control" id="price" name="price" placeholder="{{ $articlelang['price'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
@@ -203,7 +252,6 @@ $base_url = base_url();
 							?>
 						</div>
 					</div>
-
 				</form>
 			</div>
 		</div>

@@ -35,7 +35,7 @@ $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_
 
 $api_url = env('API_URL').'article/get_list';
 $api_method = 'get';
-$api_header['debug'] = 1;
+// $api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 
 if (! empty($data)) $data = json_decode($data,1);
@@ -144,9 +144,16 @@ $base_url = base_url();
 								<td>{{ $i }}</td>
 								<td>{{ $rs['article_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
 								<td>{{ $rs['site_id'] }}</td>
-								<td>{{ $rs['company_address'] }}</td>
-								<td>{{ $rs['company_phone'] }}</td>
-								<td>{{ $rs['company_pic'] }}</td>
+								<td>{{ $rs['article'] }}</td>
+								<td>{{ $rs['customer_article'] }}</td>
+								<td>{{ $rs['description'] }}</td>
+								<td>{{ $rs['uom'] }}</td>
+								<td>{{ $rs['conversion_value'] }}</td>
+								<td>{{ $rs['safety_stock'] }}</td>
+								<td>{{ $rs['column'] }}</td>
+								<td>{{ $rs['rack'] }}</td>
+								<td>{{ $rs['row'] }}</td>
+								<td>{{ $rs['price'] }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
 								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>

@@ -33,6 +33,27 @@ $base_url = base_url();
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
 // $PAGE_TITLE = $action .' '. $article_attribute_value_lang['module']; 
+$list_article = NULL;
+$list_article_attribute = NULL;
+$api_url_article = $api_url_article_attribute = $api_method = $api_param = $api_header = NULL;
+$api_param['token'] = env('API_KEY');
+$api_param['paging'] = false;
+
+$api_url_article = env('API_URL').'article/get_list';
+$api_url_article_attribute = env('API_URL').'article_attribute/get_list';
+$api_method = 'get';
+// $api_header['debug'] = 1;
+
+$temp_article = curl_api_liquid($api_url_article, $api_method, $api_header, $api_param);
+$temp_article_attribute = curl_api_liquid($api_url_article_attribute, $api_method, $api_header, $api_param);
+
+if (! empty($temp_article)) $temp_article = json_decode($temp_article,1);
+$list_article = $temp_article['data'];
+
+
+if (! empty($temp_article_attribute)) $temp_article_attribute = json_decode($temp_article_attribute,1);
+$list_article_attribute = $temp_article_attribute['data'];
+
 
 function validate_column($arrsource,$arrtarget) {
 	
@@ -111,6 +132,43 @@ function validate_column($arrsource,$arrtarget) {
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="article_id" class="control-label col-form-label">{!! $article_attribute_value_lang['article'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="article_id">
+							<?php 
+							if (!empty($list_article)) {
+								foreach ($list_article as $k => $rs) {
+								?>
+								<option>{{ $rs['article'] . ' - ID ' . $rs['article_id']}}</option>
+								<?php 
+								} 							}
+							?>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="article_attribute_id" class="control-label col-form-label">{!! $article_attribute_value_lang['attribute_name'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="article_attribute_id">
+							<?php 
+							if (!empty($list_article_attribute)) {
+								foreach ($list_article_attribute as $k => $rs) {
+								?>
+								<option>{{ $rs['attribute_name'] . ' - ID ' . $rs['article_attribute_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
+						</div>
+					</div>
+
+					<!-- <div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="article_id" class="control-label col-form-label">{!! $article_attribute_value_lang['article_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
@@ -125,7 +183,7 @@ function validate_column($arrsource,$arrtarget) {
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
 							<input type="text" data-toggle="{{ $article_attribute_value_lang['article_attribute_id'] }}" title="" class="form-control" id="article_attribute_id" name="article_attribute_id" placeholder="{{ $article_attribute_value_lang['article_attribute_id'] }}" required="" data-original-title="{{ $article_attribute_value_lang['article_attribute_id'] }}"></textarea>
 						</div>
-					</div>
+					</div> -->
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
