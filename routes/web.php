@@ -109,11 +109,11 @@ Route::prefix('client/')->group(function () {
 	Route::any('article/delete', 'Client\ClientArticleController@delete');
 	Route::any('article/bulk', 'Client\ClientArticleController@bulk');
 	
-	Route::get('reason-type_mapping', 'Client\ClientReasonTypemappingController@reason_type_mapping');
-	Route::any('reason-type_mapping/insert', 'Client\ClientReasonTypemappingController@insert');
-	Route::any('reason-type_mapping/update', 'Client\ClientReasonTypemappingController@update');
-	Route::any('reason-type_mapping/delete', 'Client\ClientReasonTypemappingController@delete');
-	Route::any('reason-type_mapping/bulk', 'Client\ClientReasonTypemappingController@bulk');
+	Route::get('reason-type-mapping', 'Client\ClientReasonTypemappingController@reason_type_mapping');
+	Route::any('reason-type-mapping/insert', 'Client\ClientReasonTypemappingController@insert');
+	Route::any('reason-type-mapping/update', 'Client\ClientReasonTypemappingController@update');
+	Route::any('reason-type-mapping/delete', 'Client\ClientReasonTypemappingController@delete');
+	Route::any('reason-type-mapping/bulk', 'Client\ClientReasonTypemappingController@bulk');
 	
 	Route::get('article-stock', 'Client\ClientArticleStockController@article_stock');
 	Route::any('article-stock/insert', 'Client\ClientArticleStockController@insert');
@@ -138,6 +138,24 @@ Route::prefix('client/')->group(function () {
 	Route::any('transaction/update', 'Client\ClientTransactionController@update');
 	Route::any('transaction/delete', 'Client\ClientTransactionController@delete');
 	Route::any('transaction/bulk', 'Client\ClientTransactionController@bulk');
+	
+	Route::get('role', 'Client\ClientRoleController@role');
+	Route::any('role/insert', 'Client\ClientRoleController@insert');
+	Route::any('role/update', 'Client\ClientRoleController@update');
+	Route::any('role/delete', 'Client\ClientRoleController@delete');
+	Route::any('role/bulk', 'Client\ClientRoleController@bulk');
+	
+	Route::get('capability', 'Client\ClientCapabilityController@capability');
+	Route::any('capability/insert', 'Client\ClientCapabilityController@insert');
+	Route::any('capability/update', 'Client\ClientCapabilityController@update');
+	Route::any('capability/delete', 'Client\ClientCapabilityController@delete');
+	Route::any('capability/bulk', 'Client\ClientCapabilityController@bulk');
+	
+	Route::get('role-capability', 'Client\ClientRoleCapabilityController@role_capability');
+	Route::any('role-capability/insert', 'Client\ClientRoleCapabilityController@insert');
+	Route::any('role-capability/update', 'Client\ClientRoleCapabilityController@update');
+	Route::any('role-capability/delete', 'Client\ClientRoleCapabilityController@delete');
+	Route::any('role-capability/bulk', 'Client\ClientRoleCapabilityController@bulk');
 	
 	// Route::get('reason_type', 'Client\ClientController@reason_type');
 	// Route::any('reason_type/insert', 'Client\ClientController@insert');

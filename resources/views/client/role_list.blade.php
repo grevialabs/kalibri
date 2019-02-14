@@ -7,10 +7,10 @@ $offset = 0;
 $page = 1;
 
 // $perpage_allowed = array(2,40,60);
-$reason_type_mapping_model = new ReasonTypeMappingModel();
+$role_model = new RoleModel();
 $general_model = new GeneralModel();
 
-$getorder_allowed_list = $reason_type_mapping_model->getorder_allowed_list();
+$getorder_allowed_list = $role_model->getorder_allowed_list();
 $getorderby_allowed_list = $general_model->getorderby_allowed_list();
 $perpage_allowed = $general_model->perpage_allowed();
 
@@ -33,7 +33,7 @@ if (isset($getorder)) $api_param['order'] = $getorder; else $getorder = $getorde
 if (isset($getorderby)) $api_param['orderby'] = $getorderby; else $getorderby = $getorderby_allowed_list[0];
 $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_list);
 
-$api_url = env('API_URL').'reason_type_mapping_model/get_list';
+$api_url = env('API_URL').'role/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
@@ -57,16 +57,12 @@ $reget = http_build_query($reget);
 $resubmit_url = current_url().'?'.$reget;
 
 $base_url = base_url();
-
 ?>
 
 <style>
 
 </style>
 
-<script>
-
-</script>
 <!-- CONTENT AREA -->
 <div class="row">
 	<div class="col-sm-12">
@@ -80,7 +76,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm btninsert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $reason_type_mapping_lang['add_new'] }}</a><br/><br/>
+				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $rolelang['add_new'] }}</a><br/><br/>
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -104,15 +100,14 @@ $base_url = base_url();
 				
 				<form method="post" action="{{ $current_url . DS . 'bulk' }}">
 					<div class="table-responsive">
-						<table class="table table-striped table-bordered" id="table_reason_type_mapping">
+						<table class="table table-striped table-bordered" id="table_level">
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['reason_type_mapping_id']['class'] }}" title="{{ $arrsort['reason_type_mapping_id']['title'] }}" href="{{ $arrsort['reason_type_mapping_id']['url'] }}">{{ $reason_type_mapping_lang['reason_type_mapping_id'] }} {!! $arrsort['reason_type_mapping_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['reason_type_id']['class'] }}" title="{{ $arrsort['reason_type_id']['title'] }}" href="{{ $arrsort['reason_type_id']['url'] }}">{{ $reason_type_mapping_lang['reason_type_id'] }} {!! $arrsort['reason_type_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['reason_id']['class'] }}" title="{{ $arrsort['reason_id']['title'] }}" href="{{ $arrsort['reason_id']['url'] }}">{{ $reason_type_mapping_lang['reason_id'] }} {!! $arrsort['reason_id']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['role_id']['class'] }}" title="{{ $arrsort['role_id']['title'] }}" href="{{ $arrsort['role_id']['url'] }}">{{ $rolelang['role_id'] }} {!! $arrsort['role_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['role_name']['class'] }}" title="{{ $arrsort['role_name']['title'] }}" href="{{ $arrsort['role_name']['url'] }}">{{ $rolelang['role_name'] }} {!! $arrsort['role_name']['icon'] !!}</a></td>
 								<td width="2">Status</td>
-								<td width="30px" class="talCnt">Option</td>
+								<td width="50px" class="talCnt">Option</td>
 							</tr>
 							<?php 
 							if (! empty($listdata)) 
@@ -125,16 +120,15 @@ $base_url = base_url();
 								foreach ($listdata as $key => $rs) 
 								{
 									$i++;
-									$id = $rs['reason_type_mapping_id'];
-									$idcol = 'reason_type_mapping_id';
+									$id = $rs['role_id'];
+									$idcol = 'role_id';
 							?>
 							
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['reason_type_mapping_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
-								<td>{{ $rs['reason_type_id'] or '' }}</td>
-								<td>{{ $rs['reason_id'] or '' }}</td>
+								<td>{{ $rs['role_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
+								<td>{{ $rs['role_name'] }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
 								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
@@ -196,6 +190,5 @@ $(document).ready( function() {
 	// });
 
 });
-
 </script>
 

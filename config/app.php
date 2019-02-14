@@ -243,6 +243,9 @@ return [
         'ArticleAttributeModel' => Patriot\Models\ArticleAttribute::class,
         'ArticleAttributeValueModel' => Patriot\Models\ArticleAttributeValue::class,
         'TransactionModel' => Patriot\Models\Transaction::class,
+        'RoleModel' => Patriot\Models\Role::class,
+        'CapabilityModel' => Patriot\Models\Capability::class,
+        'RoleCapabilityModel' => Patriot\Models\RoleCapability::class,
         // 'UserModel' => Patriot\Models\User::class,
 
         // 'PDF' => Barryvdh\DomPDF\Facade::class,

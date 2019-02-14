@@ -2,12 +2,12 @@
 // ---------------------------
 // Get data 
 $data = NULL;
-if (isset($get['reason_type_mapping_id'])) {
+if (isset($get['role_id'])) {
 	$api_url = $api_method = $api_param = $api_header = NULL;
 	$api_param['token'] = env('API_KEY');
-	$api_param['reason_type_mapping_id'] = $get['reason_type_mapping_id'];
+	$api_param['role_id'] = $get['role_id'];
 
-	$api_url = env('API_URL').'reason_type_mapping/get';
+	$api_url = env('API_URL').'role/get';
 	$api_method = 'get';
 	// $api_header['debug'] = 1;
 	
@@ -32,26 +32,7 @@ $base_url = base_url();
 // if ($get['do'] == 'insert') $action = $lang['add'];
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
-// $PAGE_TITLE = $action .' '. $reason_type_mapping_lang['module']; 
-$list_reason = $list_reason_type = NULL;
-$api_url_reason = $api_url_reason_type = $api_method = $api_param = $api_header = NULL;
-$api_param['token'] = env('API_KEY');
-$api_param['paging'] = false;
-
-$api_url_reason = env('API_URL').'reason/get_list';
-$api_url_reason_type = env('API_URL').'reason/get_list';
-$api_method = 'get';
- //$api_header['debug'] = 1;
-
-$temp_reason = curl_api_liquid($api_url_reason, $api_method, $api_header, $api_param);
-$temp_reason_type = curl_api_liquid($api_url_reason_type, $api_method, $api_header, $api_param);
-
-
-if (! empty($temp_reason)) $temp_reason = json_decode($temp_reason,1);
-$list_reason = $temp_reason['data'];
-if (! empty($temp_reason_type)) $temp_reason_type = json_decode($temp_reason_type,1);
-$list_reason_type = $temp_reason_type['data'];
-
+// $PAGE_TITLE = $action .' '. $rolelang['module']; 
 
 function validate_column($arrsource,$arrtarget) {
 	
@@ -67,8 +48,8 @@ function validate_column($arrsource,$arrtarget) {
 	return $temp;
 }
 
-// $source = array('reason_type_mapping_id', 'reason_id', 'company_address', 'company_phone', 'company_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
-// $target = array('mantap' => 'gokil', 'reason_id' => 'harusmasuknih');
+// $source = array('role_id', 'level_name', 'level_address', 'level_phone', 'level_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
+// $target = array('mantap' => 'gokil', 'level_name' => 'harusmasuknih');
 // // $test = array('ayam','bebek');
 // // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
 // $a = validate_column($source,$target);
@@ -105,67 +86,38 @@ function validate_column($arrsource,$arrtarget) {
 					-->
 					
 				
-					<?php if (isset($data['reason_type_mapping_id'])) { ?>
+					<?php if (isset($data['role_id'])) { ?>
 					
 					<!--
 					<div class="col-lg-12 col-sm-12">
 						<div class="md-form">
-							<input type="text" id="reason_type_mapping_id" class="form-control" value="{{ $data['reason_type_mapping_id'] }}" disabled />
-							<input type="hidden" name="reason_type_mapping_id" value="{{ $data['reason_type_mapping_id'] }}" />
+							<input type="text" id="role_id" class="form-control" value="{{ $data['role_id'] }}" disabled />
+							<input type="hidden" name="role_id" value="{{ $data['role_id'] }}" />
 							
-							<label for="reason_type_mapping_id" >Company ID</label>
+							<label for="role_id" >Company ID</label>
 						</div>
 					</div>
 					-->
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="reason_type_mapping_id" class="control-label col-form-label">{!! $reason_type_mapping_lang['reason_type_mapping_id'] !!}</label>
+							<label for="" class="control-label col-form-label">{!! $rolelang['role_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $reason_type_mapping_lang['reason_type_mapping_id'] }}" required="" data-original-title="" value="{{ $data['reason_type_mapping_id'] }}" disabled />
-							<input type="hidden" name="reason_type_mapping_id" value="{{ $data['reason_type_mapping_id'] }}" />
+							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $rolelang['role_id'] }}" required="" data-original-title="" value="{{ $data['role_id'] }}" disabled />
+							<input type="hidden" name="role_id" value="{{ $data['role_id'] }}" />
 						</div>
 					</div>
 					<?php } ?>
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="reason_type_id" class="control-label col-form-label">{!! $reason_type_mapping_lang['reason_type_id'] !!}</label>
+							<label for="role_name" class="control-label col-form-label">{!! $rolelang['role_name'] !!}</label>
 						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="reason_type_id">
-							<?php 
-							if (!empty($list_reason_type)) {
-								foreach ($list_reason_type as $k => $rs) {
-								?>
-								<option>{{ $rs['reason_name'] . ' - ID ' . $rs['reason_id']}}</option>
-								<?php 
-								} 
-							}
-							?>
-							</select>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<textarea type="text" data-toggle="{{ $rolelang['role_name'] }}" title="" class="form-control" id="role_name" name="role_name" placeholder="{{ $rolelang['role_name'] }}" required="" data-original-title="{{ $rolelang['role_name'] }}"></textarea>
 						</div>
 					</div>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="reason_id" class="control-label col-form-label">{!! $reason_type_mapping_lang['reason_id'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="reason_id">
-							<?php 
-							if (!empty($list_reason)) {
-								foreach ($list_reason as $k => $rs) {
-								?>
-								<option>{{ $rs['reason_name'] . ' - ID ' . $rs['reason_id']}}</option>
-								<?php 
-								} 
-							}
-							?>
-							</select>
-						</div>
-					</div>
-					
+										
 					<div class="form-group row">
 						<div class="col-sm-12">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
