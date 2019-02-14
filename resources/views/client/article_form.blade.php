@@ -9,7 +9,7 @@ if (isset($get['article_id'])) {
 
 	$api_url = env('API_URL').'article/get';
 	$api_method = 'get';
-	// $api_header['debug'] = 1;
+	//$api_header['debug'] = 1;
 	
 	$data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 
@@ -128,7 +128,7 @@ function validate_column($arrsource,$arrtarget) {
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="company_id" class="control-label col-form-label">{!! $articlelang['site_id'] !!}</label>
+							<label for="site_id" class="control-label col-form-label">{!! $articlelang['site_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
 							

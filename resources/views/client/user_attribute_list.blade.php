@@ -130,9 +130,9 @@ $base_url = base_url();
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
 								<td>{{ $rs['user_attribute_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
-								<td>{{ $rs['fullname'] }}</td>
-								<td>{{ $rs['attribute'] }}</td>
-								<td>{{ $rs['value'] }}</td>
+								<td>{{ $rs['user_id'] or ''}}</td>
+								<td>{{ $rs['attribute'] or ''}}</td>
+								<td>{{ $rs['value'] or ''}}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
 								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>

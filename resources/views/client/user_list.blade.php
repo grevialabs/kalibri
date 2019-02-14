@@ -102,13 +102,28 @@ $base_url = base_url();
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered" id="table_user">
 							<tr class="b">
+							
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
 								<td width="150px"><a class="{{ $arrsort['user_id']['class'] }}" title="{{ $arrsort['user_id']['title'] }}" href="{{ $arrsort['user_id']['url'] }}">userID {!! $arrsort['user_id']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['user_code']['class'] }}" title="{{ $arrsort['user_code']['title'] }}" href="{{ $arrsort['user_code']['url'] }}">{{ $userlang['user_code'] }} {!! $arrsort['firstname']['icon'] !!}</a></td>
-								<td><a class="{{ $arrsort['firstname']['class'] }}" title="{{ $arrsort['firstname']['title'] }}" href="{{ $arrsort['firstname']['url'] }}">{{ $userlang['firstname'] }} {!! $arrsort['firstname']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['site_id']['class'] }}" title="{{ $arrsort['site_id']['title'] }}" href="{{ $arrsort['site_id']['url'] }}">{{ $userlang['site_id'] }} {!! $arrsort['site_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['parent_user_id']['class'] }}" title="{{ $arrsort['parent_user_id']['title'] }}" href="{{ $arrsort['parent_user_id']['url'] }}">{{ $userlang['parent_user_id'] }} {!! $arrsort['parent_user_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['level_id']['class'] }}" title="{{ $arrsort['level_id']['title'] }}" href="{{ $arrsort['level_id']['url'] }}">{{ $userlang['level_id'] }} {!! $arrsort['level_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['firstname']['class'] }}" title="{{ $arrsort['firstname']['title'] }}" href="{{ $arrsort['firstname']['url'] }}">{{ $userlang['firstname'] }} {!! $arrsort['firstname']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['lastname']['class'] }}" title="{{ $arrsort['lastname']['title'] }}" href="{{ $arrsort['lastname']['url'] }}">{{ $userlang['lastname'] }} {!! $arrsort['lastname']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['quota_initial']['class'] }}" title="{{ $arrsort['quota_initial']['title'] }}" href="{{ $arrsort['quota_initial']['url'] }}">{{ $userlang['quota_initial'] }} {!! $arrsort['quota_initial']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['quota_additional']['class'] }}" title="{{ $arrsort['quota_additional']['title'] }}" href="{{ $arrsort['quota_additional']['url'] }}">{{ $userlang['quota_additional'] }} {!! $arrsort['quota_additional']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['quota_remaining']['class'] }}" title="{{ $arrsort['quota_remaining']['title'] }}" href="{{ $arrsort['quota_remaining']['url'] }}">{{ $userlang['quota_remaining'] }} {!! $arrsort['quota_remaining']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['job_title']['class'] }}" title="{{ $arrsort['job_title']['title'] }}" href="{{ $arrsort['job_title']['url'] }}">{{ $userlang['job_title'] }} {!! $arrsort['job_title']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['division']['class'] }}" title="{{ $arrsort['division']['title'] }}" href="{{ $arrsort['division']['url'] }}">{{ $userlang['division'] }} {!! $arrsort['division']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['email']['class'] }}" title="{{ $arrsort['email']['title'] }}" href="{{ $arrsort['email']['url'] }}">{{ $userlang['email'] }} {!! $arrsort['email']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['user_category']['class'] }}" title="{{ $arrsort['user_category']['title'] }}" href="{{ $arrsort['user_category']['url'] }}">{{ $userlang['user_category'] }} {!! $arrsort['user_category']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['password']['class'] }}" title="{{ $arrsort['password']['title'] }}" href="{{ $arrsort['password']['url'] }}">{{ $userlang['password'] }} {!! $arrsort['password']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['counter_wrong_pass']['class'] }}" title="{{ $arrsort['counter_wrong_pass']['title'] }}" href="{{ $arrsort['counter_wrong_pass']['url'] }}">{{ $userlang['counter_wrong_pass'] }} {!! $arrsort['counter_wrong_pass']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['locked_time']['class'] }}" title="{{ $arrsort['locked_time']['title'] }}" href="{{ $arrsort['locked_time']['url'] }}">{{ $userlang['locked_time'] }} {!! $arrsort['locked_time']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['reset_by']['class'] }}" title="{{ $arrsort['reset_by']['title'] }}" href="{{ $arrsort['reset_by']['url'] }}">{{ $userlang['reset_by'] }} {!! $arrsort['reset_by']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['reset_time']['class'] }}" title="{{ $arrsort['reset_time']['title'] }}" href="{{ $arrsort['reset_time']['url'] }}">{{ $userlang['reset_time'] }} {!! $arrsort['reset_time']['icon'] !!}</a></td>
 								<td width="2">Status</td>
 								<td width="50px" class="talCnt">Option</td>
 							</tr>
@@ -130,11 +145,26 @@ $base_url = base_url();
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['user_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
-								<td>{{ $rs['firstname'] }}</td>
-								<td>{{ $rs['user_code'] }}</td>
-								<td>{{ $rs['division'] }}</td>
-								<td>{{ $rs['email'] }}</td>
+								<td>{{ $rs['user_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>								
+								<td>{{ $rs['user_code'] or '' }}</td>
+								<td>{{ $rs['site_id'] or '' }}</td>
+								<td>{{ $rs['parent_user_id'] or '' }}</td>
+								<td>{{ $rs['level_id'] or '' }}</td>
+								<td>{{ $rs['firstname'] or '' }}</td>
+								<td>{{ $rs['lastname'] or '' }}</td>								
+								<td>{{ $rs['quota_initial'] or '' }}</td>
+								<td>{{ $rs['quota_additional'] or '' }}</td>
+								<td>{{ $rs['quota_remaining'] or '' }}</td>
+								<td>{{ $rs['job_title'] or '' }}</td>
+								<td>{{ $rs['division'] or '' }}</td>
+								<td>{{ $rs['email'] or '' }}</td>
+								<td>{{ $rs['user_category'] or '' }}</td>
+								<td>{{ $rs['password'] or '' }}</td>
+								<td>{{ $rs['counter_wrong_pass'] or '' }}</td>
+								<td>{{ $rs['locked_time'] or '' }}</td>
+								<td>{{ $rs['reset_by'] or '' }}</td>
+								<td>{{ $rs['reset_time'] or '' }}</td>
+
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">								
 								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
