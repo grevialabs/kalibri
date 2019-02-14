@@ -207,7 +207,7 @@ function validate_column($arrsource,$arrtarget) {
 							<label for="quota_initial" class="control-label col-form-label">{!! $userlang['quota_initial'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['quota_initial'] }}" title="{{ $userlang['quota_initial'] }}" class="form-control" id="quota_initial" name="quota_initial" placeholder="{{ $userlang['quota_initial'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $userlang['quota_initial'] }}" title="{{ $userlang['quota_initial'] }}" class="form-control numeric" id="quota_initial" name="quota_initial" placeholder="{{ $userlang['quota_initial'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					

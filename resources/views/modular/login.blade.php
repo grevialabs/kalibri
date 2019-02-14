@@ -32,6 +32,7 @@
 				
 				<div>
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="uri" value="{{ $_GET['uri'] or '' }}">
 					<input type="button" id="btnsubmit" name="btnsubmit" class="btn btn-primary btn-md" />
 				</div>
 			</form>

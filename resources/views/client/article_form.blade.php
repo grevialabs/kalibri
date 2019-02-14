@@ -151,7 +151,9 @@ function validate_column($arrsource,$arrtarget) {
 							<label for="article" class="control-label col-form-label">{!! $articlelang['article'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-                            <input type="text" data-toggle="{{ $articlelang['article'] }}" title="{{ $articlelang['article'] }}" class="form-control" id="article" name="article" placeholder="{{ $articlelang['article'] }}" required="" data-original-title="" />
+                            <!-- <input type="text" data-toggle="{{ $articlelang['article'] }}" title="{{ $articlelang['article'] }}" class="form-control" id="article" name="article" placeholder="{{ $articlelang['article'] }}" required="" data-original-title="" /> -->
+							
+                            <input type="text" title="{{ $articlelang['article'] }}" class="form-control" id="article" name="article" placeholder="{{ $articlelang['article'] }}" />
 						</div>
 					</div>
 					
@@ -231,8 +233,14 @@ function validate_column($arrsource,$arrtarget) {
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="price" class="control-label col-form-label">{!! $articlelang['price'] !!}</label>
 						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-                            <input type="number" data-toggle="{{ $articlelang['price'] }}" title="{{ $articlelang['price'] }}" class="form-control" id="price" name="price" placeholder="{{ $articlelang['price'] }}" required="" data-original-title="" />
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">						
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="pre-rupiah">IDR</span>
+								</div>
+								
+								<input type="text" data-toggle="{{ $articlelang['price'] }}" title="{{ $articlelang['price'] }}" class="form-control money" id="price" name="price" placeholder="{{ $articlelang['price'] }}" required="" data-original-title="" />
+							</div>
 						</div>
 					</div>
 					
@@ -266,11 +274,12 @@ $(document).ready( function() {
     {
         foreach ($data as $key => $rs) 
         { 
+			if (isset($rs)) {
         ?>
-	$('#{{ $key }}').val('{{$rs}}');
-	$('#{{ $key }}').trigger('change');
+	$('#{{ $key }}').val('{{ $rs }}');
 	<?php 
-        }
+			}
+		}
     }
 
     ?>

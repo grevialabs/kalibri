@@ -26,24 +26,23 @@ class ModularLoginController extends ModularController
 	
 	public function login()
 	{
+		if (is_member()) {
+			$message = 'Welcome again';
+			
+			$targeturl = 'client/company';
+			
+			if (isset($_GET['uri'])) $targeturl = urldecode($_GET['uri']);
+			
+			return redirect($targeturl)->with('message', print_message($message));
+		}
+		
 		// Redirect guest to login
-		// if (is_member()) {
-		// 	$url = base_url().'member/home';
-		// 	// return redirect($url);
-		// 	debug('valid member<hr/>');
-		// } else 
-		// {
-		// 	debug('invalid member<hr/>');
-		// }
-		// $themes = env('THEMES','general');
+		
 		
 		// $param = $content = $get = $lang = $loginlang = $current_url = NULL;
 		
-		// if ($_GET) $get = $_GET;
-		
 		// $lang = Lang::get('common');
-		$loginlang = Lang::get('modular/login');
-		// $current_url = current_url();
+		$loginlang = Lang::get('modular/login');	
 		
 		// $param['get'] = $get;
 		// $param['lang'] = $lang;
@@ -98,8 +97,6 @@ class ModularLoginController extends ModularController
 			
 			$decrypt_password = Crypt::decryptString($obj['password']);
 			
-			// debug(HR.'mantapgam',1);
-			
 			// valid
 			if (isset($obj['password']) && $post['password'] == $decrypt_password) {
 				// check if uri last page exist
@@ -123,13 +120,15 @@ class ModularLoginController extends ModularController
 					
 				// }
 				
-				// redirect to member 
-				return redirect('client/company')->with('message', print_message($message));
+				$targeturl = 'client/company';
+				
+				if (isset($_GET['uri'])) $targeturl = urldecode($_GET['uri']);
 				
 			} else {
+				$targeturl = 'login';
 				$message = 'Email / Password tidak sesuai';
-				return redirect('login')->with('message', print_message($message));
 			}
+			return redirect('login')->with('message', print_message($message));
 		}
 	}
 }

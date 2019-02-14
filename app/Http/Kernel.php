@@ -58,6 +58,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
         // middleware check guest
-        'check.member' => \Patriot\Http\Middleware\CheckMember::class
+        'check.user' => \Patriot\Http\Middleware\CheckUser::class
     ];
 }

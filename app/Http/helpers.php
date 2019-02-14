@@ -540,8 +540,10 @@ function is_member($param = NULL)
 {
 	$temp = NULL;
 	$temp = get_user_cookie('user_id');
+	// $temp = get_user_cookie('hashtoken');
 	
-	if (! isset($temp)) return false;
-	else return true;
+	$return = false;
+	if (isset($temp) && $temp != '') $return = true;
+	return $return;
 }
 ?>

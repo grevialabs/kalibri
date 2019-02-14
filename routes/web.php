@@ -19,12 +19,6 @@ Route::get('/test_curl', 'Modular\ModularController@test_curl');
 
 Route::any('/login', 'Modular\ModularLoginController@login');
 Route::any('/dologin', 'Modular\ModularLoginController@dologin');
-
-// Route::any('/article', 'Modular\ModularArticleController@article');
-
-Route::any('/company', 'Modular\ModularCompanyController@company');
-// Route::any('/company_list', 'Modular\ModularCompanyController@company_list');
-// Route::any('/company_form', 'Modular\ModularCompanyController@company_form');
 Route::any('/article-vue', 'Modular\ModularController@article_vue');
 
 Route::any('/forgotpass', 'Modular\ModularForgotpassController@forgotpass');
@@ -40,7 +34,10 @@ Route::prefix('modular')->group(function () {
 	
 });
 
-Route::prefix('client/')->group(function () {
+// Route::prefix('member')->group(['middleware' => ['check.member']], function () {
+// Route::prefix('client/')->group(['middleware' => 'check.user'], function () {
+Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () {
+// Route::prefix('client/')->group(function () {
 	
 	// return view
 	// Route::get('welcome', function () {
@@ -51,7 +48,6 @@ Route::prefix('client/')->group(function () {
 	Route::get('/', 'Client\ClientController@index');
 	Route::get('welcome', 'Client\ClientController@welcome');
 	Route::get('about', 'Client\ClientController@about');
-	Route::get('login', 'Client\ClientController@login');
 	Route::get('example', 'Client\ClientController@example');
 	
 	// DONE
@@ -191,13 +187,13 @@ Route::prefix('testing/')->group(function () {
 	
 // });
 
-Route::group(['prefix' => 'member', 'middleware' => ['check.member']], function () {
+// Route::group(['prefix' => 'member', 'middleware' => ['check.member']], function () {
 	
-	// Return to controller
-	Route::get('/home', 'Member\MemberController@home');
-	Route::get('/logout', 'Member\MemberController@logout');
+	// // Return to controller
+	// Route::get('/home', 'Member\MemberController@home');
+	// Route::get('/logout', 'Member\MemberController@logout');
 	
-});
+// });
 
 
 //------------------------------------

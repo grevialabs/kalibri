@@ -25,7 +25,7 @@ class ModularController extends Controller
 	{	
 		// Check if not login then show else show 
 		if (is_member()) {
-			return redirect('member/home');
+			return redirect('client/company');
 		} else {
 			return redirect('login');
 		}

@@ -177,6 +177,8 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 	
 	
 	<script type="text/javascript" src="../public/matrix/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js?{{ $jsv }}"></script>
+	<script type="text/javascript" src="../public/js/jquery.maskMoney.min.js?{{ $jsv }}"></script>
+
     <script type="text/javascript" src="../public/matrix/dist/js/pages/mask/mask.init.js?{{ $jsv }}"></script>
     <script type="text/javascript" src="../public/matrix/assets/libs/select2/dist/js/select2.full.min.js?{{ $jsv }}"></script>
     <script type="text/javascript" src="../public/matrix/assets/libs/select2/dist/js/select2.min.js?{{ $jsv }}"></script>
@@ -196,10 +198,10 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 		// });
 
 	<?php 
-	// Activate menu if uri segment 1 & 2 exist
+	// Activate menu on sidebar if uri segment 1 & 2 exist
 	if (Request::segment(1) && Request::segment(2)) { 
 	?>
-			$('#{{ Request::segment(2) }}').parent('li').addClass('selected')
+			$('#{{ Request::segment(1)."_".Request::segment(2) }}').parent('li').addClass('selected')
 	<?php 
 	}
 	?>
@@ -207,6 +209,13 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 		// $('.sidebartoggler').click();
 		
 		// $('.datetimepicker').datetimepicker();
+		
+		$(".numeric").keypress(function(e){
+			if (e.which != 8 && e.which != 13 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+				return false;
+			}
+		});
+
 	
 	});
 	
@@ -233,6 +242,9 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 		$('.btnaction').attr('disabled','true');
 		$('.btnaction').html('<i class="fa fa-spinner fa-spin"></i>');
 	});
+	
+	// money format
+	$('.money').maskMoney({precision:0, thousand:',',allowNegative: false});
 
 	// $('.btnview').hide(); // no access for view data
 	// $('.btninsert').hide(); // no access for save data

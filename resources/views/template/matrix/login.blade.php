@@ -73,7 +73,7 @@ $form_url = base_url().'dologin';
                                         <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
                                     </div>
                                     <input type="password" class="form-control form-control-lg" name="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="">
-									
+									<input type="hidden" name="uri" value="{{ $_GET['uri'] or '' }}">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 </div>
                             </div>

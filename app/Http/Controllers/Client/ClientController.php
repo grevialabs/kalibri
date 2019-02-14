@@ -26,34 +26,39 @@ class ClientController extends Controller
 		
 		// debug('gebleg',1);
 		// if (is_member()) {
-		if (! is_member()) {
-			$message = 'Please login first';
-			return redirect(base_url().'login')->with('message', print_message($message));
-		}
+		// debug($_COOKIE,1);
+		// $coo = get_user_cookie('user_id');
+		// debug($coo,1);
+		// $a = is_member();
+		// debug($a,1);
+		 
 		
 	}
 	
 	public function index()
 	{
 		// echo "Client index";
-		return redirect('client/company');
+		// return redirect('client/company');
+		
+		$message = 'Please login first aa';
+			return redirect('login')->with('message', print_message($message));
 	}
 	
-	public function login()
-	{
-		// return view('template.' . $this->themes . '.login');
-		// or
+	// public function login()
+	// {
+		// // return view('template.' . $this->themes . '.login');
+		// // or
 		
-		$encrypted = Crypt::encryptString('Hello world.');
+		// $encrypted = Crypt::encryptString('Hello world.');
 		
-		debug($encrypted);
-		debug(HR);
+		// debug($encrypted);
+		// debug(HR);
 		
-		$decrypt = Crypt::decryptString($encrypted);
-		debug($decrypt,1);
+		// $decrypt = Crypt::decryptString($encrypted);
+		// debug($decrypt,1);
 		
-		return view('client.login');
-	}
+		// return view('client.login');
+	// }
 	
 	public function example()
 	{
@@ -80,14 +85,19 @@ class ClientController extends Controller
 	
 	public function logout()
 	{
-		Cookie::queue('tokenhash', NULL, 1000);
-		// Cookie::queue(Cookie::forget('tokenhash'));
-		// unset($_COOKIE);
-		// unset($_SESSION);
+		Cookie::queue('tokenhash', '', 1000);
+		Cookie::queue(Cookie::forget('tokenhash'));
+		
+		setcookie('tokenhash', '', time()-3600, '/');
+		setcookie('tokenhash', '', time()-3600, '/');
+		
+		unset($_COOKIE);
+		unset($_SESSION);
 		// debug($_COOKIE,1);
 		
 		// clear all cookies and session
 		$message = 'Your account has been logout';
-		return redirect(base_url().'login')->with('message', print_message($message));
+		debug($message,1);
+		// return redirect(base_url().'login')->with('message', print_message($message));
 	}
 }
