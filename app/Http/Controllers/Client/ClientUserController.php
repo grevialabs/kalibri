@@ -32,7 +32,7 @@ class ClientUserController extends ClientController
 		$current_url = current_url();
 		// debug($userlang,1);
 		
-		$param['getaa'] = $get;
+		$param['get'] = $get;
 		$param['lang'] = $lang;
 		$param['userlang'] = $userlang;
 		$param['PAGE_TITLE'] = $userlang['module'];
