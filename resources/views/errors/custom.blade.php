@@ -1,0 +1,1 @@
+<h2>Custom Error {{ $exception->getMessage() }}</h2>

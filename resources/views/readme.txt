@@ -1,0 +1,1 @@
+Template : folder for general file template(header, footer, index)
