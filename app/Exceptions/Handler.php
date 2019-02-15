@@ -1,6 +1,6 @@
 <?php
 
-namespace Patriot\Exceptions;
+namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
@@ -32,14 +32,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if ($exception instanceof CustomException) {
-			// do something here
-			
-			// save to log 
-			
-		}
-		
-		parent::report($exception);
+        parent::report($exception);
     }
 
     /**
@@ -49,36 +42,9 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $e)
+    public function render($request, Exception $exception)
     {
-        // Custom error here 
-		// if ($exception instanceof CustomException) {
-			// return response()->view('errors.custom', [], 500);
-		// }
-		
-		if($this->isHttpException($e)) {
-			
-            switch ($e->getStatusCode()) {
-                
-				// not found
-                case 404:
-					//whatever you want to do with this exception
-					return $this->renderHttpException($e); 
-                break;
-				
-                // internal error
-                case '500':
-					return $this->renderHttpException($e); 
-                break;
-
-                default:
-					return $this->renderHttpException($e);
-                break;
-            }
-
-        }
-		
-		return parent::render($request, $exception);
+        return parent::render($request, $exception);
     }
 
     /**

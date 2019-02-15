@@ -30,8 +30,10 @@ class ClientSiteController extends ClientController
 		
 		$lang = Lang::get('common');
 		$sitelang = Lang::get('client/site');
+		$companylang = Lang::get('client/company');
+		$sitelang = array_merge($companylang,$sitelang);
 		$current_url = current_url();
-		// debug($sitelang,1);
+		debug($sitelang,1);
 		
 		$param['get'] = $get;
 		$param['lang'] = $lang;
