@@ -56,8 +56,8 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \Patriot\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-
-        // middleware check guest
+		
+		// middleware check guest
         'check.user' => \Patriot\Http\Middleware\CheckUser::class
     ];
 }
