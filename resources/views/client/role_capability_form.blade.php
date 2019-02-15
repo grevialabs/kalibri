@@ -2,12 +2,12 @@
 // ---------------------------
 // Get data 
 $data = NULL;
-if (isset($get['role_id'])) {
+if (isset($get['role_capability_id'])) {
 	$api_url = $api_method = $api_param = $api_header = NULL;
 	$api_param['token'] = env('API_KEY');
-	$api_param['role_id'] = $get['role_id'];
+	$api_param['role_capability_id'] = $get['role_capability_id'];
 
-	$api_url = env('API_URL').'role/get';
+	$api_url = env('API_URL').'role_capability/get';
 	$api_method = 'get';
 	// $api_header['debug'] = 1;
 	
@@ -32,7 +32,25 @@ $base_url = base_url();
 // if ($get['do'] == 'insert') $action = $lang['add'];
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
-// $PAGE_TITLE = $action .' '. $rolelang['module']; 
+// $PAGE_TITLE = $action .' '. $role_capability_lang['module']; 
+$list_role = $list_capability = NULL;
+$api_url_role = $api_url_capability = $api_method = $api_param = $api_header = NULL;
+$api_param['token'] = env('API_KEY');
+$api_param['paging'] = false;
+
+$api_url_role = env('API_URL').'role/get_list';
+$api_url_capability = env('API_URL').'capability/get_list';
+$api_method = 'get';
+//  $api_header['debug'] = 1;
+
+$temp_role = curl_api_liquid($api_url_role, $api_method, $api_header, $api_param);
+$temp_capability = curl_api_liquid($api_url_capability, $api_method, $api_header, $api_param);
+
+
+if (! empty($temp_role)) $temp_role = json_decode($temp_role,1);
+$list_role = $temp_role['data'];
+if (! empty($temp_capability)) $temp_capability = json_decode($temp_capability,1);
+$list_capability = $temp_capability['data'];
 
 function validate_column($arrsource,$arrtarget) {
 	
@@ -48,7 +66,7 @@ function validate_column($arrsource,$arrtarget) {
 	return $temp;
 }
 
-// $source = array('role_id', 'level_name', 'level_address', 'level_phone', 'level_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
+// $source = array('role_capability_id', 'level_name', 'level_address', 'level_phone', 'level_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
 // $target = array('mantap' => 'gokil', 'level_name' => 'harusmasuknih');
 // // $test = array('ayam','bebek');
 // // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
@@ -72,52 +90,53 @@ function validate_column($arrsource,$arrtarget) {
 				@endif
 				
 				<form method="post" action="{{ $form_url }}" class="form-horizontal">
-
-					
-					<!--
-					<div class="row mb-3 align-items-center">
-						<div class="col-lg-3 col-md-12">
-							<span>Tooltip Input</span>
-						</div>
-						<div class="col-lg-6 col-lg-offset-3 col-md-12">
-							<input type="text" data-toggle="tooltip" title="" class="form-control" id="validationDefault05" placeholder="Hover For tooltip" required="" data-original-title="A Tooltip for the input !">
-						</div>
-					</div>
-					-->
-					
-				
-					<?php if (isset($data['role_id'])) { ?>
-					
-					<!--
-					<div class="col-lg-12 col-sm-12">
-						<div class="md-form">
-							<input type="text" id="role_id" class="form-control" value="{{ $data['role_id'] }}" disabled />
-							<input type="hidden" name="role_id" value="{{ $data['role_id'] }}" />
-							
-							<label for="role_id" >Company ID</label>
-						</div>
-					</div>
-					-->
+					<?php if (isset($data['role_capability_id'])) { ?>
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="" class="control-label col-form-label">{!! $rolelang['role_id'] !!}</label>
+							<label for="" class="control-label col-form-label">{!! $role_capability_lang['role_capability_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $rolelang['role_id'] }}" required="" data-original-title="" value="{{ $data['role_id'] }}" disabled />
-							<input type="hidden" name="role_id" value="{{ $data['role_id'] }}" />
+							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $role_capability_lang['role_capability_id'] }}" required="" data-original-title="" value="{{ $data['role_capability_id'] }}" disabled />
+							<input type="hidden" name="role_capability_id" value="{{ $data['role_capability_id'] }}" />
 						</div>
 					</div>
-					<?php } ?>
-					
+					<?php } ?>					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="role_name" class="control-label col-form-label">{!! $rolelang['role_name'] !!}</label>
+							<label for="role_id" class="control-label col-form-label">{!! $role_capability_lang['role_id'] !!}</label>
 						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $rolelang['role_name'] }}" title="{{ $rolelang['role_name'] }}" class="form-control" id="role_name" name="role_name" placeholder="{{ $rolelang['role_name'] }}" required="" data-original-title="" />
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="role_id">
+							<?php 
+							if (!empty($list_role)) {
+								foreach ($list_role as $k => $rs) {
+								?>
+								<option>{{ $rs['role_name'] . ' - ID ' . $rs['role_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
+						</div>
+					</div>								
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="capability_id" class="control-label col-form-label">{!! $role_capability_lang['capability_id'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="capability_id">
+							<?php 
+							if (!empty($list_capability)) {
+								foreach ($list_capability as $k => $rs) {
+								?>
+								<option>{{ $rs['capability'] . ' - ID ' . $rs['capability_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
 						</div>
 					</div>
-										
 					<div class="form-group row">
 						<div class="col-sm-12">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">

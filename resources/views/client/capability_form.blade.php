@@ -2,12 +2,12 @@
 // ---------------------------
 // Get data 
 $data = NULL;
-if (isset($get['role_id'])) {
+if (isset($get['capability_id'])) {
 	$api_url = $api_method = $api_param = $api_header = NULL;
 	$api_param['token'] = env('API_KEY');
-	$api_param['role_id'] = $get['role_id'];
+	$api_param['capability_id'] = $get['capability_id'];
 
-	$api_url = env('API_URL').'role/get';
+	$api_url = env('API_URL').'capability/get';
 	$api_method = 'get';
 	// $api_header['debug'] = 1;
 	
@@ -32,7 +32,7 @@ $base_url = base_url();
 // if ($get['do'] == 'insert') $action = $lang['add'];
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
-// $PAGE_TITLE = $action .' '. $rolelang['module']; 
+// $PAGE_TITLE = $action .' '. $capabilitylang['module']; 
 
 function validate_column($arrsource,$arrtarget) {
 	
@@ -48,7 +48,7 @@ function validate_column($arrsource,$arrtarget) {
 	return $temp;
 }
 
-// $source = array('role_id', 'level_name', 'level_address', 'level_phone', 'level_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
+// $source = array('capability_id', 'level_name', 'level_address', 'level_phone', 'level_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
 // $target = array('mantap' => 'gokil', 'level_name' => 'harusmasuknih');
 // // $test = array('ayam','bebek');
 // // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
@@ -86,35 +86,35 @@ function validate_column($arrsource,$arrtarget) {
 					-->
 					
 				
-					<?php if (isset($data['role_id'])) { ?>
+					<?php if (isset($data['capability_id'])) { ?>
 					
 					<!--
 					<div class="col-lg-12 col-sm-12">
 						<div class="md-form">
-							<input type="text" id="role_id" class="form-control" value="{{ $data['role_id'] }}" disabled />
-							<input type="hidden" name="role_id" value="{{ $data['role_id'] }}" />
+							<input type="text" id="capability_id" class="form-control" value="{{ $data['capability_id'] }}" disabled />
+							<input type="hidden" name="capability_id" value="{{ $data['capability_id'] }}" />
 							
-							<label for="role_id" >Company ID</label>
+							<label for="capability_id" >Company ID</label>
 						</div>
 					</div>
 					-->
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="" class="control-label col-form-label">{!! $rolelang['role_id'] !!}</label>
+							<label for="" class="control-label col-form-label">{!! $capabilitylang['capability_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $rolelang['role_id'] }}" required="" data-original-title="" value="{{ $data['role_id'] }}" disabled />
-							<input type="hidden" name="role_id" value="{{ $data['role_id'] }}" />
+							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $capabilitylang['capability_id'] }}" required="" data-original-title="" value="{{ $data['capability_id'] }}" disabled />
+							<input type="hidden" name="capability_id" value="{{ $data['capability_id'] }}" />
 						</div>
 					</div>
 					<?php } ?>
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="role_name" class="control-label col-form-label">{!! $rolelang['role_name'] !!}</label>
+							<label for="capability" class="control-label col-form-label">{!! $capabilitylang['capability'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $rolelang['role_name'] }}" title="{{ $rolelang['role_name'] }}" class="form-control" id="role_name" name="role_name" placeholder="{{ $rolelang['role_name'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $capabilitylang['capability'] }}" title="{{ $capabilitylang['capability'] }}" class="form-control" id="capability" name="capability" placeholder="{{ $capabilitylang['capability'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 										
@@ -134,7 +134,6 @@ function validate_column($arrsource,$arrtarget) {
 							?>
 						</div>
 					</div>
-
 				</form>
 			</div>
 		</div>

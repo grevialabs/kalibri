@@ -133,12 +133,12 @@ function validate_column($arrsource,$arrtarget) {
 							<label for="reason_type_id" class="control-label col-form-label">{!! $reason_type_mapping_lang['reason_type_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="reason_type_id">
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="reason_type_id" id="reason_type_id">
 							<?php 
 							if (!empty($list_reason_type)) {
 								foreach ($list_reason_type as $k => $rs) {
 								?>
-								<option>{{ $rs['reason_name'] . ' - ID ' . $rs['reason_id']}}</option>
+								<option value="{{ $rs['reason_id']}}">{{ $rs['reason_name'] . ' - ID ' . $rs['reason_id']}}</option>
 								<?php 
 								} 
 							}
@@ -152,12 +152,12 @@ function validate_column($arrsource,$arrtarget) {
 							<label for="reason_id" class="control-label col-form-label">{!! $reason_type_mapping_lang['reason_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="reason_id">
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="reason_id" id="reason_id">
 							<?php 
 							if (!empty($list_reason)) {
 								foreach ($list_reason as $k => $rs) {
 								?>
-								<option>{{ $rs['reason_name'] . ' - ID ' . $rs['reason_id']}}</option>
+								<option value="{{ $rs['reason_id']}}">{{ $rs['reason_name'] . ' - ID ' . $rs['reason_id']}}</option>
 								<?php 
 								} 
 							}

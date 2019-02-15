@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class ModularController extends Controller
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    // use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 	
 	public function index()
 	{	
