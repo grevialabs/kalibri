@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Scrapetw;
+namespace Patriot\Http\Controllers\Scrapetw;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\ModularController;
+use Patriot\Http\Controllers\Controller;
+use Patriot\Http\Controllers\ModularController;
 
-use App\Models\Scrapetw;
-// use App\Models\Scrape\Scrape;
-use App\Models\Scrapetw\Username;
+use Patriot\Models\Scrapetw;
+// use Patriot\Models\Scrape\Scrape;
+use Patriot\Models\Scrapetw\Username;
 
 use Cookie;
 

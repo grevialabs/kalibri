@@ -104,11 +104,11 @@ $base_url = base_url();
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['site_id']['class'] }}" title="{{ $arrsort['site_id']['title'] }}" href="{{ $arrsort['site_id']['url'] }}">{{ $sitelang['site_id'] }} {!! $arrsort['site_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['site_name']['class'] }}" title="{{ $arrsort['site_name']['title'] }}" href="{{ $arrsort['site_name']['url'] }}">{{ $sitelang['site_name'] }} {!! $arrsort['site_name']['icon'] !!}</a></td>
-								<td><a class="{{ $arrsort['site_address']['class'] }}" title="{{ $arrsort['site_address']['title'] }}" href="{{ $arrsort['site_address']['url'] }}">{{ $sitelang['site_address'] }} {!! $arrsort['site_address']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['site_qty_value']['class'] }}" title="{{ $arrsort['site_qty_value']['title'] }}" href="{{ $arrsort['site_qty_value']['url'] }}">{{ $sitelang['site_qty_value'] }}  {!! $arrsort['site_qty_value']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['reset_days']['class'] }}" title="{{ $arrsort['reset_days']['title'] }}" href="{{ $arrsort['reset_days']['url'] }}">{{ $sitelang['reset_days'] }} {!! $arrsort['reset_days']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['site_id']['class'] or '' }}" title="{{ $arrsort['site_id']['title'] or '' }}" href="{{ $arrsort['site_id']['url'] or '' }}">{{ $sitelang['site_id'] or '' }} {!! $arrsort['site_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['site_name']['class'] or '' }}" title="{{ $arrsort['site_name']['title'] or '' }}" href="{{ $arrsort['site_name']['url'] or '' }}">{{ $sitelang['site_name'] or '' }} {!! $arrsort['site_name']['icon'] !!}</a></td>
+								<td><a class="{{ $arrsort['site_address']['class'] or '' }}" title="{{ $arrsort['site_address']['title'] or '' }}" href="{{ $arrsort['site_address']['url'] or '' }}">{{ $sitelang['site_address'] or '' }} {!! $arrsort['site_address']['icon'] or '' !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['site_qty_value']['class'] or '' }}" title="{{ $arrsort['site_qty_value']['title'] or '' }}" href="{{ $arrsort['site_qty_value']['url'] or '' }}">{{ $sitelang['site_qty_value'] or '' }}  {!! $arrsort['site_qty_value']['icon'] or '' !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['reset_days']['class'] or '' }}" title="{{ $arrsort['reset_days']['title'] or '' }}" href="{{ $arrsort['reset_days']['url'] or '' }}">{{ $sitelang['reset_days'] or '' }} {!! $arrsort['reset_days']['icon'] or '' !!}</a></td>
 								<td width="2">Status</td>
 								<td width="50px" class="talCnt">Option</td>
 							</tr>
@@ -125,17 +125,18 @@ $base_url = base_url();
 									$i++;
 									$id = $rs['site_id'];
 									$idcol = 'site_id';
+									$status = (isset($rs['status'])) ? $general_model->show_record_status($rs['status']) : '';
 							?>
 							
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['site_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
-								<td>{{ $rs['site_name'] }}</td>
-								<td>{{ $rs['site_address'] }}</td>
-								<td>{{ $rs['site_qty_value'] }}</td>
-								<td>{{ $rs['reset_days'] }}</td>
-								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
+								<td>{{ $rs['site_id'] or '' }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
+								<td>{{ $rs['site_name'] or '' }}</td>
+								<td>{{ $rs['site_address'] or '' }}</td>
+								<td>{{ $rs['site_qty_value'] or '' }}</td>
+								<td>{{ $rs['reset_days'] or '' }}</td>
+								<td class="talCnt">{!! $status or '' !!}</td>
 								<td class="talCnt">
 								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
 								</td>

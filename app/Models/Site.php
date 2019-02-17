@@ -16,7 +16,7 @@ class Site extends Model
 	// getorder_allowed_list
 	public static function getorder_allowed_list()
     {
-	   static $str = array('site_id','company_id','site_name','site_address','site_qty_value','flag_qt_value','method_calc','start_date_counting','reset_days','logo_file_name','status', 'created_at','created_ip','updated_at','updated_by');
+	   static $str = array('site_id','company_id','company_name','site_name','site_address','site_qty_value','flag_qty_value','method_calc','start_date_counting','reset_days','logo_file_name','status', 'created_at','created_ip','updated_at','updated_by');
        return $str;
     }
 	

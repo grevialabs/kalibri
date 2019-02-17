@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -176,8 +176,6 @@ return [
         // Patriot\Providers\BroadcastServiceProvider::class,
         Patriot\Providers\EventServiceProvider::class,
         Patriot\Providers\RouteServiceProvider::class,
-
-        // Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
