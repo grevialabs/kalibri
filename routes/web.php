@@ -50,6 +50,8 @@ Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () 
 	Route::get('about', 'Client\ClientController@about');
 	Route::get('example', 'Client\ClientController@example');
 	
+	Route::get('dashboard', 'Client\ClientDashboardController@dashboard');
+	
 	// DONE
 	Route::get('company', 'Client\ClientCompanyController@company');
 	Route::any('company/insert', 'Client\ClientCompanyController@insert');

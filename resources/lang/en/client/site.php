@@ -22,7 +22,8 @@ return [
     'company_name' => 'CompanyName',
 	
     'site_id' => 'SiteID',
-    'company_id' => 'CompanyID',
+    // 'company_id' => 'CompanyID',
+    // 'company_name' => 'CompanyName',
     'site_name' => 'SiteName',
     'site_address' => 'SiteAddress',
     'site_qty_value' => 'SiteQty',
