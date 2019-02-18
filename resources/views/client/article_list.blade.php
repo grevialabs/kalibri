@@ -108,19 +108,20 @@ $base_url = base_url();
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['article_id']['class'] }}" title="{{ $arrsort['article_id']['title'] }}" href="{{ $arrsort['article_id']['url'] }}">{{ $articlelang['article_id'] }} {!! $arrsort['article_id']['icon'] !!}</a></td>
 								<td width="150px"><a class="{{ $arrsort['site_id']['class'] }}" title="{{ $arrsort['site_id']['title'] }}" href="{{ $arrsort['site_id']['url'] }}">{{ $articlelang['site_id'] }} {!! $arrsort['site_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['article']['class'] }}" title="{{ $arrsort['article']['title'] }}" href="{{ $arrsort['article']['url'] }}">{{ $articlelang['article'] }} {!! $arrsort['article']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['article_id']['class'] }}" title="{{ $arrsort['article_id']['title'] }}" href="{{ $arrsort['article_id']['url'] }}">{{ $articlelang['article_id'] }} {!! $arrsort['article_id']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['customer_article']['class'] }}" title="{{ $arrsort['customer_article']['title'] }}" href="{{ $arrsort['customer_article']['url'] }}">{{ $articlelang['customer_article'] }} {!! $arrsort['customer_article']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['description']['class'] }}" title="{{ $arrsort['description']['title'] }}" href="{{ $arrsort['description']['url'] }}">{{ $articlelang['description'] }} {!! $arrsort['description']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['uom']['class'] }}" title="{{ $arrsort['uom']['title'] }}" href="{{ $arrsort['uom']['url'] }}">{{ $articlelang['uom'] }} {!! $arrsort['uom']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['conversion_value']['class'] }}" title="{{ $arrsort['conversion_value']['title'] }}" href="{{ $arrsort['conversion_value']['url'] }}">{{ $articlelang['conversion_value'] }} {!! $arrsort['conversion_value']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['safety_stock']['class'] }}" title="{{ $arrsort['safety_stock']['title'] }}" href="{{ $arrsort['safety_stock']['url'] }}">{{ $articlelang['safety_stock'] }} {!! $arrsort['safety_stock']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['column']['class'] }}" title="{{ $arrsort['column']['title'] }}" href="{{ $arrsort['column']['url'] }}">{{ $articlelang['column'] }} {!! $arrsort['column']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['rack']['class'] }}" title="{{ $arrsort['rack']['title'] }}" href="{{ $arrsort['rack']['url'] }}">{{ $articlelang['rack'] }} {!! $arrsort['rack']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['row']['class'] }}" title="{{ $arrsort['row']['title'] }}" href="{{ $arrsort['row']['url'] }}">{{ $articlelang['row'] }} {!! $arrsort['row']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['price']['class'] }}" title="{{ $arrsort['price']['title'] }}" href="{{ $arrsort['price']['url'] }}">{{ $articlelang['price'] }} {!! $arrsort['price']['icon'] !!}</a></td>
 								
+								<!-- <td width="180px"><a class="{{ $arrsort['article']['class'] }}" title="{{ $arrsort['article']['title'] }}" href="{{ $arrsort['article']['url'] }}">{{ $articlelang['article'] }} {!! $arrsort['article']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['safety_stock']['class'] }}" title="{{ $arrsort['safety_stock']['title'] }}" href="{{ $arrsort['safety_stock']['url'] }}">{{ $articlelang['safety_stock'] }} {!! $arrsort['safety_stock']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['price']['class'] }}" title="{{ $arrsort['price']['title'] }}" href="{{ $arrsort['price']['url'] }}">{{ $articlelang['price'] }} {!! $arrsort['price']['icon'] !!}</a></td>
+								 -->
 								<td width="2">Status</td>
 								<td width="30px" class="talCnt">Option</td>
 							</tr>
@@ -142,18 +143,19 @@ $base_url = base_url();
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['article_id'] or '' }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
-								<td>{{ $rs['site_id'] or '' }}</td>
-								<td>{{ $rs['article'] or '' }}</td>
+								<td>{{ $rs['site_id'] or '' }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
+								<td>{{ $rs['article_id'] or '' }}</td>
 								<td>{{ $rs['customer_article'] or '' }}</td>
 								<td>{{ $rs['description'] or '' }}</td>
 								<td>{{ $rs['uom'] or '' }}</td>
 								<td>{{ $rs['conversion_value'] or '' }}</td>
 								<td>{{ $rs['column'] or '' }}</td>
 								<td>{{ $rs['rack'] or '' }}</td>
-								<td>{{ $rs['safety_stock'] or '' }}</td>
 								<td>{{ $rs['row'] or '' }}</td>
-								<td>{{ $rs['price'] or '' }}</td>
+								
+								<!-- <td>{{ $rs['article'] or '' }}</td>
+								<td>{{ $rs['safety_stock'] or '' }}</td>
+								<td>{{ $rs['price'] or '' }}</td> -->
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
 								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>

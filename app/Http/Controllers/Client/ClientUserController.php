@@ -29,6 +29,9 @@ class ClientUserController extends ClientController
 		
 		$lang = Lang::get('common');
 		$userlang = Lang::get('client/user');
+		$rolelang = Lang::get('client/role');
+		$levellang = Lang::get('client/level');
+		$userlang = array_merge($rolelang,$levellang,$userlang);
 		$current_url = current_url();
 		// debug($userlang,1);
 		

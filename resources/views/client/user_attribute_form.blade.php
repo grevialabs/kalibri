@@ -124,7 +124,7 @@ $base_url = base_url();
 								<?php if (! empty($list_user)) { ?>
 									<option value="" /> {{ $lang['please_select'] }} </>
 									<?php foreach ($list_user as $key => $obj) { ?>
-								<option value="<?php echo $obj['user_id']?>" <?php if (isset($obj['user_id']) && $obj['user_id'] == $data['user_id']) echo "selected='true'"; ?>> <?php echo $obj['firstname'].' '.$obj['email'] ?></option>
+										<option value="{{ $obj['user_id']}}">{{ $obj['site_id'] . ' - ID ' . $obj['site_id']}}</option>
 									<?php } ?>
 								<?php } ?>
 							</select>
@@ -183,6 +183,7 @@ $(document).ready( function() {
         { 
         ?>
 	$('#{{ $key }}').val('{{$rs}}');
+	$('#{{ $key }}').trigger('change');
 	<?php 
         }
 		

@@ -126,64 +126,7 @@ function validate_column($arrsource,$arrtarget) {
 						</div>
 					</div>
 					<?php } ?>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="user_code" class="control-label col-form-label">{!! $userlang['user_code'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['user_code'] }}" title="{{ $userlang['user_code'] }}" class="form-control" id="user_code" name="user_code" placeholder="{{ $userlang['user_code'] }}" required="" data-original-title="" />
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="site_id" class="control-label col-form-label">{!! $userlang['site_id'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id	">
-							<?php 
-							if (!empty($list_site)) {
-								foreach ($list_site as $k => $rs) {
-								?>
-								<option value="{{ $rs['site_id']}}">{{ $rs['site_name'] . ' - ID ' . $rs['site_id']}}</option>
-								<?php 
-								} 
-							}
-							?>
-							</select>
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="parent_user_id" class="control-label col-form-label">{!! $userlang['parent_user_id'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['parent_user_id'] }}" title="{{ $userlang['parent_user_id'] }}" class="form-control" id="parent_user_id" name="parent_user_id" placeholder="{{ $userlang['parent_user_id'] }}" required="" data-original-title="" />
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="level_id" class="control-label col-form-label">{!! $userlang['level_id'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="level_id" id="level_id">
-							<?php 
-							if (!empty($list_level)) {
-								foreach ($list_level as $k => $rs) {
-								?>
-								<option value="{{ $rs['level_id']}}">{{ $rs['level_name'] . ' - ID ' . $rs['level_id']}}</option>
-								<?php 
-								} 
-							}
-							?>
-							</select>
-						</div>
-					</div>
-					
+										
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="firstname" class="control-label col-form-label">{!! $userlang['firstname'] !!}</label>
@@ -201,34 +144,7 @@ function validate_column($arrsource,$arrtarget) {
 							<input type="text" data-toggle="{{ $userlang['lastname'] }}" title="{{ $userlang['lastname'] }}" class="form-control" id="lastname" name="lastname" placeholder="{{ $userlang['lastname'] }}" required="" data-original-title="" />
 						</div>
 					</div>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="quota_initial" class="control-label col-form-label">{!! $userlang['quota_initial'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['quota_initial'] }}" title="{{ $userlang['quota_initial'] }}" class="form-control numeric" id="quota_initial" name="quota_initial" placeholder="{{ $userlang['quota_initial'] }}" required="" data-original-title="" />
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="quota_additional" class="control-label col-form-label">{!! $userlang['quota_additional'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['quota_additional'] }}" title="{{ $userlang['quota_additional'] }}" class="form-control" id="quota_additional" name="quota_additional" placeholder="{{ $userlang['quota_additional'] }}" required="" data-original-title="" />
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="quota_remaining" class="control-label col-form-label">{!! $userlang['quota_remaining'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['quota_remaining'] }}" title="{{ $userlang['quota_remaining'] }}" class="form-control" id="quota_remaining" name="quota_remaining" placeholder="{{ $userlang['quota_remaining'] }}" required="" data-original-title="" />
-						</div>
-					</div>
-					
+
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="job_title" class="control-label col-form-label">{!! $userlang['job_title'] !!}</label>
@@ -262,6 +178,89 @@ function validate_column($arrsource,$arrtarget) {
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
 							<input type="text" data-toggle="{{ $userlang['user_category'] }}" title="{{ $userlang['user_category'] }}" class="form-control" id="user_category" name="user_category" placeholder="{{ $userlang['user_category'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="level_id" class="control-label col-form-label">{!! $userlang['level_id'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="level_id" id="level_id">
+							<?php 
+							if (!empty($list_level)) {
+								foreach ($list_level as $k => $rs) {
+								?>
+								<option value="{{ $rs['level_id']}}">{{ $rs['level_name'] . ' - ID ' . $rs['level_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="site_id" class="control-label col-form-label">{!! $userlang['site_id'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id	">
+							<?php 
+							if (!empty($list_site)) {
+								foreach ($list_site as $k => $rs) {
+								?>
+								<option value="{{ $rs['site_id']}}">{{ $rs['site_name'] . ' - ID ' . $rs['site_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="user_code" class="control-label col-form-label">{!! $userlang['user_code'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $userlang['user_code'] }}" title="{{ $userlang['user_code'] }}" class="form-control" id="user_code" name="user_code" placeholder="{{ $userlang['user_code'] }}" required="" data-original-title="" />
+						</div>
+					</div>					
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="parent_user_id" class="control-label col-form-label">{!! $userlang['parent_user_id'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $userlang['parent_user_id'] }}" title="{{ $userlang['parent_user_id'] }}" class="form-control" id="parent_user_id" name="parent_user_id" placeholder="{{ $userlang['parent_user_id'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+										
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="quota_initial" class="control-label col-form-label">{!! $userlang['quota_initial'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $userlang['quota_initial'] }}" title="{{ $userlang['quota_initial'] }}" class="form-control numeric" id="quota_initial" name="quota_initial" placeholder="{{ $userlang['quota_initial'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="quota_additional" class="control-label col-form-label">{!! $userlang['quota_additional'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $userlang['quota_additional'] }}" title="{{ $userlang['quota_additional'] }}" class="form-control" id="quota_additional" name="quota_additional" placeholder="{{ $userlang['quota_additional'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="quota_remaining" class="control-label col-form-label">{!! $userlang['quota_remaining'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $userlang['quota_remaining'] }}" title="{{ $userlang['quota_remaining'] }}" class="form-control" id="quota_remaining" name="quota_remaining" placeholder="{{ $userlang['quota_remaining'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					

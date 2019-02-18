@@ -134,7 +134,9 @@ function validate_column($arrsource,$arrtarget) {
 							
 							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id">
 							<?php 
-							if (!empty($list_site)) {
+							if (!empty($list_site)) {?>
+								<option value="" /> {{ $lang['please_select'] }} </>
+								<?php
 								foreach ($list_site as $k => $rs) {
 								?>
 								<option value="{{ $rs['site_id']}}">{{ $rs['site_name'] . ' - ID ' . $rs['site_id']}}</option>
@@ -277,6 +279,7 @@ $(document).ready( function() {
 			if (isset($rs)) {
         ?>
 	$('#{{ $key }}').val('{{ $rs }}');
+	$('#{{ $key }}').trigger('change');
 	<?php 
 			}
 		}

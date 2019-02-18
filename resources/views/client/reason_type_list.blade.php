@@ -7,10 +7,10 @@ $offset = 0;
 $page = 1;
 
 // $perpage_allowed = array(2,40,60);
-$reason_model = new ReasonModel();
+$reason_type_model = new ReasonTypeModel();
 $general_model = new GeneralModel();
 
-$getorder_allowed_list = $reason_model->getorder_allowed_list();
+$getorder_allowed_list = $reason_type_model->getorder_allowed_list();
 $getorderby_allowed_list = $general_model->getorderby_allowed_list();
 $perpage_allowed = $general_model->perpage_allowed();
 
@@ -34,7 +34,7 @@ if (isset($getorderby)) $api_param['orderby'] = $getorderby; else $getorderby = 
 $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_list);
 // debug($arrsort,1);
 
-$api_url = env('API_URL').'reason/get_list';
+$api_url = env('API_URL').'reason_type/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
@@ -77,7 +77,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $reasonlang['add_new'] }}</a><br/><br/>
+				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $reason_type_lang['add_new'] }}</a><br/><br/>
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -105,8 +105,10 @@ $base_url = base_url();
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['reason_id']['class'] }}" title="{{ $arrsort['reason_id']['title'] }}" href="{{ $arrsort['reason_id']['url'] }}">{{ $reasonlang['reason_id'] }} {!! $arrsort['reason_id']['icon'] !!}</a></td>
-								<td width=""><a class="{{ $arrsort['reason_value']['class'] }}" title="{{ $arrsort['reason_value']['title'] }}" href="{{ $arrsort['reason_value']['url'] }}">{{ $reasonlang['reason_value'] }} {!! $arrsort['reason_value']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['reason_type_id']['class'] }}" title="{{ $arrsort['reason_type_id']['title'] }}" href="{{ $arrsort['reason_type_id']['url'] }}">{{ $reason_type_lang['reason_type_id'] }} {!! $arrsort['reason_type_id']['icon'] !!}</a></td>
+								<td width=""><a class="{{ $arrsort['attribute_id']['class'] }}" title="{{ $arrsort['attribute_id']['title'] }}" href="{{ $arrsort['attribute_id']['url'] }}">{{ $reason_type_lang['attribute_id'] }} {!! $arrsort['attribute_id']['icon'] !!}</a></td>
+								<td width=""><a class="{{ $arrsort['site_id']['class'] }}" title="{{ $arrsort['site_id']['title'] }}" href="{{ $arrsort['site_id']['url'] }}">{{ $reason_type_lang['site_id'] }} {!! $arrsort['site_id']['icon'] !!}</a></td>
+								<td width=""><a class="{{ $arrsort['attribute_value']['class'] }}" title="{{ $arrsort['attribute_value']['title'] }}" href="{{ $arrsort['attribute_value']['url'] }}">{{ $reason_type_lang['attribute_value'] }} {!! $arrsort['attribute_value']['icon'] !!}</a></td>
 								<td width="200px">Created</td>
 								<td width="200px">Updated</td>
 								<td width="2">Status</td>
@@ -123,15 +125,17 @@ $base_url = base_url();
 								foreach ($listdata as $key => $rs) 
 								{
 									$i++;
-									$id = $rs['reason_id'];
-									$idcol = 'reason_id';
+									$id = $rs['reason_type_id'];
+									$idcol = 'reason_type_id';
 							?>
 							
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['reason_id'] }}  <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
-								<td>{{ $rs['reason_value'] }}</td>
+								<td>{{ $rs['reason_type_id'] }}  <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
+								<td>{{ $rs['attribute_id'] }}</td>
+								<td>{{ $rs['site_id'] }}</td>
+								<td>{{ $rs['attribute_value'] }}</td>
 								<td>{{ $rs['created_at'] or null }}</td>
 								<td>{{ $rs['updated_at'] or null }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>

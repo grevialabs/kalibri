@@ -26,22 +26,22 @@ class ClientReasonTypeController extends ClientController
 		
 	public function reason_type()
 	{
-		$param = $content = $get = $lang = $reasonlang = $current_url = NULL;
+		$param = $content = $get = $lang = $reason_type_lang = $current_url = NULL;
 		
 		if ($_GET) $get = $_GET;
 		
 		$lang = Lang::get('common');
-		$reasonlang = Lang::get('client/reason');
+		$reason_type_lang = Lang::get('client/reason_type');
 		$current_url = current_url();
-		// debug($reasonlang,1);
+		// debug($reason_type_lang,1);
 		
 		$param['get'] = $get;
 		$param['lang'] = $lang;
-		$param['reasonlang'] = $reasonlang;
-		$param['PAGE_TITLE'] = $reasonlang['module'];
-		$param['MODULE'] = $reasonlang['module'];
+		$param['reason_type_lang'] = $reason_type_lang;
+		$param['PAGE_TITLE'] = $reason_type_lang['module'];
+		$param['MODULE'] = $reason_type_lang['module'];
 		
-		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['reason_id']))) {
+		if (isset($get['do']) && ($get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['reason_type_id']))) {
 			if ($get['do'] == 'insert') { 
 				$param['ACTION'] = $lang['insert'];
 				$param['form_url'] = $current_url.DS.'insert';
@@ -50,13 +50,13 @@ class ClientReasonTypeController extends ClientController
 				$param['form_url'] = $current_url.DS.'update';
 			}
 			
-			$viewtarget = 'client.reason_form';
+			$viewtarget = 'client.reason_type_form';
 		} else {
 			$param['ACTION'] = $lang['list'];
-			$viewtarget = 'client.reason_list';
+			$viewtarget = 'client.reason_type_list';
 		}
 		
-		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $reasonlang['module'];
+		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $reason_type_lang['module'];
 		
 		$param['current_url'] = $current_url;
 		$content = view($viewtarget,$param);	
@@ -85,7 +85,7 @@ class ClientReasonTypeController extends ClientController
 			$param['created_ip'] = get_ip();
 			// $param['reason_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'reason';
+			$api_url = env('API_URL').'reason_type';
 			$api_method = 'post';
 			
 			// $api_header['debug'] = 1;
@@ -117,8 +117,8 @@ class ClientReasonTypeController extends ClientController
 			unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($post['reason_id'])) {
-                $message = 'reason_id not exist';
+            if (! isset($post['reason_type_id'])) {
+                $message = 'reason_type_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
@@ -129,7 +129,7 @@ class ClientReasonTypeController extends ClientController
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'reason';
+			$api_url = env('API_URL').'reason_type';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
@@ -161,20 +161,20 @@ class ClientReasonTypeController extends ClientController
 			// unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($get['reason_id'])) {
-                $message = 'reason_id not exist';
+            if (! isset($get['reason_type_id'])) {
+                $message = 'reason_type_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
 			// Action start here
 			$param = NULL;
-			$param['reason_id'] = $get['reason_id'];
+			$param['reason_type_id'] = $get['reason_type_id'];
 			$param['status'] = -1;
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'reason';
+			$api_url = env('API_URL').'reason_type';
 			$api_method = 'delete';
 			
 			// $api_header['debug'] = 1;
@@ -211,7 +211,7 @@ class ClientReasonTypeController extends ClientController
 			$param['updated_ip'] = get_ip();
 			// $param['reason_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'reason';
+			$api_url = env('API_URL').'reason_type';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
@@ -225,11 +225,11 @@ class ClientReasonTypeController extends ClientController
 				if ($save['is_success']) $message = 'Save success';
 				else $message = 'Save failed';
 				
-				// return redirect('reason')->with('message', print_message($message));
+				// return redirect('reason_type')->with('message', print_message($message));
 			}
 			
 			$message = 'Bulk action success';
 		}
-		return redirect('reason')->with('message', print_message($message));
+		return redirect('reason_type')->with('message', print_message($message));
 	}
 }

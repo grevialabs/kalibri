@@ -2,12 +2,12 @@
 // ---------------------------
 // Get data 
 $data = NULL;
-if (isset($get['reason_id'])) {
+if (isset($get['reason_type_id'])) {
 	$api_url = $api_method = $api_param = $api_header = NULL;
 	$api_param['token'] = env('API_KEY');
-	$api_param['reason_id'] = $get['reason_id'];
+	$api_param['reason_type_id'] = $get['reason_type_id'];
 
-	$api_url = env('API_URL').'reason/get';
+	$api_url = env('API_URL').'reason_type/get';
 	$api_method = 'get';
 	// $api_header['debug'] = 1;
 	
@@ -32,7 +32,21 @@ $base_url = base_url();
 // if ($get['do'] == 'insert') $action = $lang['add'];
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
-// $PAGE_TITLE = $action .' '. $reasonlang['module']; 
+// $PAGE_TITLE = $action .' '. $reason_type_lang['module']; 
+
+$list_site = NULL;
+$api_url = $api_method = $api_param = $api_header = NULL;
+$api_param['token'] = env('API_KEY');
+$api_param['paging'] = false;
+
+$api_url = env('API_URL').'site/get_list';
+$api_method = 'get';
+// $api_header['debug'] = 1;
+
+$temp = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+
+if (! empty($temp)) $temp = json_decode($temp,1);
+$list_site = $temp['data'];
 
 function validate_column($arrsource,$arrtarget) {
 	
@@ -48,7 +62,7 @@ function validate_column($arrsource,$arrtarget) {
 	return $temp;
 }
 
-// $source = array('reason_id', 'reason_name', 'reason_address', 'reason_phone', 'reason_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
+// $source = array('reason_type_id', 'reason_name', 'reason_address', 'reason_phone', 'reason_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
 // $target = array('mantap' => 'gokil', 'reason_name' => 'harusmasuknih');
 // // $test = array('ayam','bebek');
 // // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
@@ -86,35 +100,66 @@ function validate_column($arrsource,$arrtarget) {
 					-->
 					
 				
-					<?php if (isset($data['reason_id'])) { ?>
+					<?php if (isset($data['reason_type_id'])) { ?>
 					
 					<!--
 					<div class="col-lg-12 col-sm-12">
 						<div class="md-form">
-							<input type="text" id="reason_id" class="form-control" value="{{ $data['reason_id'] }}" disabled />
-							<input type="hidden" name="reason_id" value="{{ $data['reason_id'] }}" />
+							<input type="text" id="reason_type_id" class="form-control" value="{{ $data['reason_type_id'] }}" disabled />
+							<input type="hidden" name="reason_type_id" value="{{ $data['reason_type_id'] }}" />
 							
-							<label for="reason_id" >Company ID</label>
+							<label for="reason_type_id" >Company ID</label>
 						</div>
 					</div>
 					-->
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="" class="control-label col-form-label">{!! $reasonlang['reason_id'] !!}</label>
+							<label for="" class="control-label col-form-label">{!! $reason_type_lang['reason_type_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $reasonlang['reason_id'] }}" required="" data-original-title="" value="{{ $data['reason_id'] }}" disabled />
-							<input type="hidden" name="reason_id" value="{{ $data['reason_id'] }}" />
+							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $reason_type_lang['reason_type_id'] }}" required="" data-original-title="" value="{{ $data['reason_type_id'] }}" disabled />
+							<input type="hidden" name="reason_type_id" value="{{ $data['reason_type_id'] }}" />
 						</div>
 					</div>
 					<?php } ?>
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="reason_value" class="control-label col-form-label">{!! $reasonlang['reason_value'] !!}</label>
+							<label for="attribute_id" class="control-label col-form-label">{!! $reason_type_lang['attribute_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $reasonlang['reason_value'] }}" title="{{ $reasonlang['reason_value'] }}" class="form-control" id="reason_value" name="reason_value" placeholder="{{ $reasonlang['reason_value'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $reason_type_lang['attribute_id'] }}" title="{{ $reason_type_lang['attribute_id'] }}" class="form-control" id="attribute_id" name="attribute_id" placeholder="{{ $reason_type_lang['attribute_id'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="site_id" class="control-label col-form-label">{!! $reason_type_lang['site_id'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id">
+							<?php 
+							if (!empty($list_site)) {?>
+								<option value="" /> {{ $lang['please_select'] }} </>
+								<?php
+								foreach ($list_site as $k => $rs) {
+								?>
+								<option value="{{ $rs['site_id']}}">{{ $rs['site_name'] . ' - ID ' . $rs['site_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="attribute_value" class="control-label col-form-label">{!! $reason_type_lang['attribute_value'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $reason_type_lang['attribute_value'] }}" title="{{ $reason_type_lang['attribute_value'] }}" class="form-control" id="attribute_value" name="attribute_value" placeholder="{{ $reason_type_lang['attribute_value'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
