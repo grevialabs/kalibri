@@ -153,7 +153,6 @@ function validate_column($arrsource,$arrtarget) {
 							?>
 						</div>
 					</div>
-
 				</form>
 			</div>
 		</div>
