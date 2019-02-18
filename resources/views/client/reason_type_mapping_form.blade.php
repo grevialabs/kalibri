@@ -138,7 +138,7 @@ function validate_column($arrsource,$arrtarget) {
 							if (!empty($list_reason_type)) {
 								foreach ($list_reason_type as $k => $rs) {
 								?>
-								<option value="{{ $rs['reason_id']}}">{{ $rs['reason_name'] . ' - ID ' . $rs['reason_id']}}</option>
+								<option value="{{ $rs['reason_id']}}">{{ $rs['reason_type_id'] . ' - ID ' . $rs['reason_type_mapping_id']}}</option>
 								<?php 
 								} 
 							}

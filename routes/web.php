@@ -17,8 +17,14 @@ Route::get('/welcome', 'Modular\ModularController@welcome');
 Route::get('/about', 'Modular\ModularController@about');
 Route::get('/test_curl', 'Modular\ModularController@test_curl');
 
+//old
 Route::any('/login', 'Modular\ModularLoginController@login');
 Route::any('/dologin', 'Modular\ModularLoginController@dologin');
+
+//new
+Route::get('/login', 'Modular\ModularLoginController@login_get');
+Route::post('/login', 'Modular\ModularLoginController@login_post');
+Route::get('/logout', 'Modular\ModularController@logout');
 Route::any('/article-vue', 'Modular\ModularController@article_vue');
 
 Route::any('/forgotpass', 'Modular\ModularForgotpassController@forgotpass');
@@ -46,6 +52,7 @@ Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () 
 	
 	// Return to controller
 	Route::get('/', 'Client\ClientController@index');
+	Route::get('dashboard', 'Client\ClientDashboardController@dashboard');
 	Route::get('welcome', 'Client\ClientController@welcome');
 	Route::get('about', 'Client\ClientController@about');
 	Route::get('example', 'Client\ClientController@example');
@@ -54,10 +61,10 @@ Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () 
 	
 	// DONE
 	Route::get('company', 'Client\ClientCompanyController@company');
-	Route::any('company/insert', 'Client\ClientCompanyController@insert');
-	Route::any('company/update', 'Client\ClientCompanyController@update');
-	Route::any('company/delete', 'Client\ClientCompanyController@delete');
-	Route::any('company/bulk', 'Client\ClientCompanyController@bulk');
+	Route::post('company/insert', 'Client\ClientCompanyController@insert');
+	Route::post('company/update', 'Client\ClientCompanyController@update');
+	Route::post('company/delete', 'Client\ClientCompanyController@delete');
+	Route::post('company/bulk', 'Client\ClientCompanyController@bulk');
 
 	Route::get('user', 'Client\ClientUserController@user');
 	Route::any('user/insert', 'Client\ClientUserController@insert');
@@ -166,7 +173,7 @@ Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () 
 	// Route::any('/delete', 'Client\ClientController@delete');
 	// Route::any('/bulk', 'Client\ClientController@bulk');
 	
-	Route::any('/logout', 'Client\ClientController@logout');
+	// Route::any('/logout', 'Client\ClientController@logout');
 	
 	
 });

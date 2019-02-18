@@ -15,13 +15,14 @@ class CheckUser
      */
     public function handle($request, Closure $next)
     {
-        // debug('jalan checkmember<hr/>',1);
         
         // if ($request->is_not_member) {
         //     return redirect('login');
         // }
 
         if (! is_member()) {
+			
+			
 			$loginurl = 'login';
 			
 			// Redirect to last page
@@ -30,9 +31,11 @@ class CheckUser
             // if (isset($_GET['uri'])) $url = '?uri='.$_GET['uri'];
 			$loginurl .= '?uri='.urlencode(current_full_url());
 			
-			$message = 'Please login bro';
+			$message = 'Your session has been logout. Please login again. ';
             return redirect($loginurl)->with('message',print_message($message));
-        }
+        } else {
+			// Check role
+		}
         
         return $next($request);
     }

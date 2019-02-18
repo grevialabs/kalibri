@@ -15,7 +15,7 @@ use Cookie;
 use Lang;
 use Request;
 
-class ClientRoleCapabilityController extends ClientController
+class ClientDashboardController extends ClientController
 {	
 	public function __construct()
 	{
@@ -24,39 +24,28 @@ class ClientRoleCapabilityController extends ClientController
 		parent::__construct();
 	}
 		
-	public function role_capability()
+	public function dashboard()
 	{
-		$param = $content = $get = $lang = $role_capability_lang = $current_url = NULL;
+		$param = $content = $get = $lang = $companylang = $current_url = NULL;
 		
 		if ($_GET) $get = $_GET;
 		
 		$lang = Lang::get('common');
-		$role_capability_lang = Lang::get('client/role_capability');
+		$dashboardlang = Lang::get('client/dashboard');
 		$current_url = current_url();
-		// debug($role_capability_lang,1);
+		// debug($dashboardlang,1);
 		
 		$param['get'] = $get;
 		$param['lang'] = $lang;
-		$param['role_capability_lang'] = $role_capability_lang;
-		$param['PAGE_TITLE'] = $role_capability_lang['module'];
-		$param['MODULE'] = $role_capability_lang['module'];
+		$param['dashboardlang'] = $dashboardlang;
+		$param['PAGE_TITLE'] = $dashboardlang['module'];
+		$param['MODULE'] = $dashboardlang['module'];
 		
-		if (isset($get['do']) && ($get['do'] == 'view' || $get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['role_id']))) {
-			if ($get['do'] == 'insert') { 
-				$param['ACTION'] = $lang['insert'];
-				$param['form_url'] = $current_url.DS.'insert';
-			} else if($get['do'] == 'edit') {
-				$param['ACTION'] = $lang['edit'];
-				$param['form_url'] = $current_url.DS.'update';
-			}
-			
-			$viewtarget = 'client.role_capability_form';
-		} else {
-			$param['ACTION'] = $lang['list'];
-			$viewtarget = 'client.role_capability_list';
-		}
+		// $param['ACTION'] = '';
+		$param['form_url'] = $current_url.DS.'dashboard';
+		$viewtarget = 'client.dashboard';
 		
-		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $role_capability_lang['module'];
+		$param['PAGE_HEADER'] = $dashboardlang['module'];
 		
 		$param['current_url'] = $current_url;
 		$content = view($viewtarget,$param);	
@@ -83,9 +72,9 @@ class ClientRoleCapabilityController extends ClientController
 			$param['created_at'] = get_datetime();
 			$param['created_by'] = 1;
 			$param['created_ip'] = get_ip();
-			// $param['company_token'] = env('API_KEY');
+			// $param['dashboard_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'role_capability';
+			$api_url = env('API_URL').'dashboard';
 			$api_method = 'post';
 			
 			// $api_header['debug'] = 1;
@@ -117,8 +106,8 @@ class ClientRoleCapabilityController extends ClientController
 			unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($post['role_capability_id'])) {
-                $message = 'role_capability_id not exist';
+            if (! isset($post['dashboard_id'])) {
+                $message = 'dashboard_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
@@ -129,7 +118,7 @@ class ClientRoleCapabilityController extends ClientController
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'role_capability';
+			$api_url = env('API_URL').'dashboard';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
@@ -161,20 +150,20 @@ class ClientRoleCapabilityController extends ClientController
 			// unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($get['role_capability_id'])) {
-                $message = 'role_capability_id not exist';
+            if (! isset($get['dashboard_id'])) {
+                $message = 'dashboard_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
 			// Action start here
 			$param = NULL;
-			$param['role_capability_id'] = $get['role_capability_id'];
+			$param['dashboard_id'] = $get['dashboard_id'];
 			$param['status'] = -1;
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'role_capability';
+			$api_url = env('API_URL').'dashboard';
 			$api_method = 'delete';
 			
 			// $api_header['debug'] = 1;
@@ -209,9 +198,9 @@ class ClientRoleCapabilityController extends ClientController
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
-			// $param['company_token'] = env('API_KEY');
+			// $param['dashboard_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'role_capability';
+			$api_url = env('API_URL').'dashboard';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
@@ -225,11 +214,11 @@ class ClientRoleCapabilityController extends ClientController
 				if ($save['is_success']) $message = 'Save success';
 				else $message = 'Save failed';
 				
-				// return redirect('role_capability')->with('message', print_message($message));
+				// return redirect('dashboard')->with('message', print_message($message));
 			}
 			
 			$message = 'Bulk action success';
 		}
-		return redirect('role_capability')->with('message', print_message($message));
+		return redirect('dashboard')->with('message', print_message($message));
 	}
 }

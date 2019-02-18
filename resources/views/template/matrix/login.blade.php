@@ -1,7 +1,7 @@
 <?php 
 // no use
 // $base_url = base_url().'public/matrix/';
-$form_url = base_url().'dologin';
+$form_url = base_url().'login';
 // debug($form_url,1);
 ?>
 <!DOCTYPE html>

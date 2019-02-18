@@ -539,7 +539,7 @@ function get_user_cookie($param = NULL)
 function is_member($param = NULL)
 {
 	$temp = NULL;
-	$temp = get_user_cookie('user_id');
+	$temp = get_user_cookie();
 	// $temp = get_user_cookie('hashtoken');
 	
 	$return = false;

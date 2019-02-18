@@ -24,7 +24,8 @@ class ModularLoginController extends ModularController
 		$this->themes = env('THEMES','general');
 	}
 	
-	public function login()
+	// public function login()
+	public function login_get()
 	{
 		if (is_member()) {
 			$message = 'Welcome again';
@@ -60,7 +61,8 @@ class ModularLoginController extends ModularController
 		// return view('template.' . $this->themes . '.index',$param);
 	}
 	
-	public function dologin()
+	// public function dologin()
+	public function login_post()
 	{
 		if ($_POST) 
 		{

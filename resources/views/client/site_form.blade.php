@@ -130,7 +130,7 @@ if (! empty($temp)) {
 							if (!empty($list_company)) {
 								foreach ($list_company as $k => $rs) {
 								?>
-								<option>{{ $rs['company_name'] . ' - ID ' . $rs['company_id']}}</option>
+								<option value="{{ $rs['company_id'] }}">{{ $rs['company_name'] . ' - ID ' . $rs['company_id']}}</option>
 								<?php 
 								} 
 							}

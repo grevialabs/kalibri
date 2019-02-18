@@ -1,5 +1,9 @@
 <?php 
 $base_url = base_url();
+
+$cookie_user = NULL;
+
+if (is_member()) $cookie_user = get_user_cookie();
 ?>
 <!-- ============================================================== -->
 <!-- Topbar header - style you can find in pages.scss -->
@@ -159,8 +163,18 @@ $base_url = base_url();
 				<!-- ============================================================== -->
 				<!-- User profile and search -->
 				<!-- ============================================================== -->
+				<?php 
+				if (is_member()) {
+					// $cookie_user = get_cookie('tokenhash');
+					// if (isset($cookie_user['member_id'])) 
+					// if (isset($cookie_user['name'])) 
+					// if (isset($cookie_user['email'])) 
+					// cookie_user
+					// debug($cookie,1);
+				
+				?>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../public/matrix/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+					<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../public/matrix/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"> Welcome, {{ $cookie_user['fullname'] or '' }}</a>
 					<div class="dropdown-menu dropdown-menu-right user-dd animated">
 						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
 						<!--
@@ -170,11 +184,14 @@ $base_url = base_url();
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="<?php echo $base_url.'client/logout'; ?>"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+						<a class="dropdown-item" href="<?php echo $base_url.'logout'; ?>"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
 						<div class="dropdown-divider"></div>
 						<div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
 					</div>
 				</li>
+				<?php 
+				}
+				?>
 				<!-- ============================================================== -->
 				<!-- User profile and search -->
 				<!-- ============================================================== -->
@@ -194,7 +211,7 @@ $base_url = base_url();
 		<!-- Sidebar navigation-->
 		<nav class="sidebar-nav">
 			<ul id="sidebarnav" class="p-t-30">
-				
+				<li class="sidebar-item"><a class="sidebar-link" id="client_dashboard" href="dashboard"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 				<li class="sidebar-item"> 
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Master User</span></a>
 					<ul aria-expanded="false" class="collapse  first-level">						
@@ -219,7 +236,8 @@ $base_url = base_url();
 						<li class="sidebar-item"> <a class="sidebar-link" id="client_pic" href="pic"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">PIC</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="client_reason" href="reason"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="client_level" href="level"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Level</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_reason-type" href="reason-type"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type Mapping</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="client_reason-type" href="reason-type"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="client_reason-type-mapping" href="reason-type-mapping"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type Mapping</span></a></li>
 					</ul>
 				</li>
 				

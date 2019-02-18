@@ -1,21 +1,23 @@
 <?php 
 // ---------------------------
 // Get data 
-$data = NULL;
-if (isset($get['role_capability_id'])) {
+$data = $total_rows = $listdata = NULL;
+if (isset($get['role_id'])) {
 	$api_url = $api_method = $api_param = $api_header = NULL;
 	$api_param['token'] = env('API_KEY');
-	$api_param['role_capability_id'] = $get['role_capability_id'];
+	$api_param['role_id'] = $get['role_id'];
 
-	$api_url = env('API_URL').'role_capability/get';
+	$api_url = env('API_URL').'role_capability/get_list_detail';
 	$api_method = 'get';
 	// $api_header['debug'] = 1;
 	
 	$data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 
 	if (! empty($data)) $data = json_decode($data,1);
+	if (isset($data['data'])) $listdata = $data['data'];
+	if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
 }
-// debug($data,1);
+// debug($listdata,1);
 
 $base_url = base_url();
 
@@ -101,12 +103,13 @@ function validate_column($arrsource,$arrtarget) {
 						</div>
 					</div>
 					<?php } ?>					
+					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="role_id" class="control-label col-form-label">{!! $role_capability_lang['role_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="role_id">
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="" disabled>
 							<?php 
 							if (!empty($list_role)) {
 								foreach ($list_role as $k => $rs) {
@@ -118,25 +121,36 @@ function validate_column($arrsource,$arrtarget) {
 							?>
 							</select>
 						</div>
-					</div>								
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="capability_id" class="control-label col-form-label">{!! $role_capability_lang['capability_id'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="capability_id">
-							<?php 
-							if (!empty($list_capability)) {
-								foreach ($list_capability as $k => $rs) {
-								?>
-								<option>{{ $rs['capability'] . ' - ID ' . $rs['capability_id']}}</option>
-								<?php 
-								} 
-							}
+					</div>	
+					
+					<table class="table table-striped table-bordered" id="table_level">
+						<tr class="b">
+							<td width=1>#</td>
+							<td width="">MenuName</td>
+							<td width="100px">Create</td>
+							<td width="100px">Read</td>
+							<td width="100px">Update</td>
+							<td width="100px">Delete</td>
+						</tr>
+						<?php 
+						if (!empty($listdata)) {
+							foreach ($listdata as $i => $rs) {
+								$i++;
 							?>
-							</select>
-						</div>
-					</div>
+						<tr class="b">
+							<td class="talCnt">{{ $i }}</td>
+							<td>{{ $rs['capability'] or '' }}</td>
+							<td class="talCnt"><div class="custom-control custom-checkbox "><input type="checkbox" name="[]" class="custom-control-input" id="createCheck{{ $i }}" <?php if ($rs['create']) echo "checked"; ?> /> <label class="custom-control-label" for="createCheck{{ $i }}"></label></div></td>
+							<td class="talCnt"><div class="custom-control custom-checkbox "><input type="checkbox" name="[]" class="custom-control-input" id="readCheck{{ $i }}" <?php if ($rs['read']) echo "checked"; ?> /> <label class="custom-control-label" for="readCheck{{ $i }}"></label></div></td>
+							<td class="talCnt"><div class="custom-control custom-checkbox "><input type="checkbox" name="[]" class="custom-control-input" id="updateCheck{{ $i }}" <?php if ($rs['update']) echo "checked"; ?> /> <label class="custom-control-label" for="updateCheck{{ $i }}"></label></div></td>
+							<td class="talCnt"><div class="custom-control custom-checkbox "><input type="checkbox" name="[]" class="custom-control-input" id="deleteCheck{{ $i }}" <?php if ($rs['delete']) echo "checked"; ?> /> <label class="custom-control-label" for="deleteCheck{{ $i }}"></label></div></td>
+						</tr>
+						<?php 
+							}
+						}
+						?>
+					</table>
+
 					<div class="form-group row">
 						<div class="col-sm-12">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -162,18 +176,5 @@ function validate_column($arrsource,$arrtarget) {
 <script>
 $(document).ready( function() {
 	
-	<?php 
-    if (! empty($data)) 
-    {
-        foreach ($data as $key => $rs) 
-        { 
-        ?>
-	$('#{{ $key }}').val('{{$rs}}');
-	$('#{{ $key }}').trigger('change');
-	<?php 
-        }
-    }
-
-    ?>
 })
 </script>

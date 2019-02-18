@@ -107,4 +107,22 @@ class ModularController extends Controller
 		$param['CONTENT'] = view('modular.article_vue',$param);
 		return view('template.general.index',$param);
 	}
+	
+	public function logout()
+	{
+		Cookie::queue('tokenhash', '', 1000);
+		Cookie::queue(Cookie::forget('tokenhash'));
+		
+		setcookie('tokenhash', '', time()-3600, '/');
+		setcookie('tokenhash', '', time()-3600, '/');
+		
+		unset($_COOKIE);
+		unset($_SESSION);
+		// debug($_COOKIE,1);
+		
+		// clear all cookies and session
+		$message = 'Your account has been logout';
+		// debug($message,1);
+		return redirect(base_url().'login')->with('message', print_message($message));
+	}
 }

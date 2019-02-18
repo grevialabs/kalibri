@@ -76,7 +76,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $role_capability_lang['add_new'] }}</a><br/><br/>
+				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $capabilitylang['add_new'] }}</a><br/><br/>
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -104,8 +104,8 @@ $base_url = base_url();
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['capability_id']['class'] }}" title="{{ $arrsort['capability_id']['title'] }}" href="{{ $arrsort['capability_id']['url'] }}">{{ $role_capability_lang['capability_id'] }} {!! $arrsort['capability_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['capability']['class'] }}" title="{{ $arrsort['capability']['title'] }}" href="{{ $arrsort['capability']['url'] }}">{{ $role_capability_lang['capability'] }} {!! $arrsort['capability']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['capability_id']['class'] }}" title="{{ $arrsort['capability_id']['title'] }}" href="{{ $arrsort['capability_id']['url'] }}">{{ $capabilitylang['capability_id'] }} {!! $arrsort['capability_id']['icon'] !!}</a></td>
+								<td width=""><a class="{{ $arrsort['capability']['class'] }}" title="{{ $arrsort['capability']['title'] }}" href="{{ $arrsort['capability']['url'] }}">{{ $capabilitylang['capability'] }} {!! $arrsort['capability']['icon'] !!}</a></td>
 								<td width="2">Status</td>
 								<td width="50px" class="talCnt">Option</td>
 							</tr>
