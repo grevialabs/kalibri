@@ -32,7 +32,25 @@ $base_url = base_url();
 // if ($get['do'] == 'insert') $action = $lang['add'];
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
-// $PAGE_TITLE = $action .' '. $Article_stock_lang['module']; 
+// $PAGE_TITLE = $action .' '. $article_stock_lang['module']; 
+$list_site = $list_article = NULL;
+$api_url = $api_url_article = $api_method = $api_param = $api_header = NULL;
+$api_param['token'] = env('API_KEY');
+$api_param['paging'] = false;
+
+$api_url = env('API_URL').'site/get_list';
+$api_url_article = env('API_URL').'article/get_list';
+$api_method = 'get';
+// $api_header['debug'] = 1;
+
+$temp = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+$temp_article = curl_api_liquid($api_url_article, $api_method, $api_header, $api_param);
+
+
+if (! empty($temp)) $temp = json_decode($temp,1);
+$list_site = $temp['data'];
+if (! empty($temp_article)) $temp_article = json_decode($temp_article,1);
+$list_article = $temp_article['data'];
 
 function validate_column($arrsource,$arrtarget) {
 	
@@ -98,50 +116,81 @@ function validate_column($arrsource,$arrtarget) {
 						</div>
 					</div>
 					-->
-					<div class="form-group row">
+					<!-- <div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="site_id" class="control-label col-form-label">{!! $Article_stock_lang['site_id'] !!}</label>
+							<label for="site_id" class="control-label col-form-label">{!! $article_stock_lang['site_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $Article_stock_lang['site_id'] }}" required="" data-original-title="" value="{{ $data['site_id'] }}" disabled />
+							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $article_stock_lang['site_id'] }}" required="" data-original-title="" value="{{ $data['site_id'] }}" disabled />
 							<input type="hidden" name="site_id" value="{{ $data['site_id'] }}" />
 						</div>
-					</div>
+					</div> -->
 					<?php } ?>
-					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="article" class="control-label col-form-label">{!! $Article_stock_lang['article'] !!}</label>
+							<label for="site_id" class="control-label col-form-label">{!! $article_stock_lang['site_id'] !!}</label>
 						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $Article_stock_lang['article'] }}" title="{{ $Article_stock_lang['article'] }}" class="form-control" id="article" name="article" placeholder="{{ $Article_stock_lang['article'] }}" required="" data-original-title="" />
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id	">
+							<?php 
+							if (!empty($list_site)) {
+								foreach ($list_site as $k => $rs) {
+								?>
+								<option value="{{ $rs['site_id']}}">{{ $rs['site_name'] . ' - ID ' . $rs['site_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="article_id" class="control-label col-form-label">{!! $article_stock_lang['article_id'] !!}</label>
+						</div>
+						<!-- <div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $article_stock_lang['article_id'] }}" title="{{ $article_stock_lang['article_id'] }}" class="form-control" id="article_id" name="article_id" placeholder="{{ $article_stock_lang['article_id'] }}" required="" data-original-title="" />
+						</div> -->
+						
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="article_id" id="article_id	">
+							<?php 
+							if (!empty($list_article)) {
+								foreach ($list_article as $k => $rs) {
+								?>
+								<option value="{{ $rs['article_id']}}">{{ $rs['article'] . ' - ID ' . $rs['article_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
 						</div>
 					</div>
 					
                     <div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="customer_article" class="control-label col-form-label">{!! $Article_stock_lang['customer_article'] !!}</label>
+							<label for="customer_article" class="control-label col-form-label">{!! $article_stock_lang['customer_article'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $Article_stock_lang['customer_article'] }}" title="{{ $Article_stock_lang['customer_article'] }}" class="form-control" id="customer_article" name="customer_article" placeholder="{{ $Article_stock_lang['customer_article'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $article_stock_lang['customer_article'] }}" title="{{ $article_stock_lang['customer_article'] }}" class="form-control" id="customer_article" name="customer_article" placeholder="{{ $article_stock_lang['customer_article'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
                     <div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="description" class="control-label col-form-label">{!! $Article_stock_lang['description'] !!}</label>
+							<label for="description" class="control-label col-form-label">{!! $article_stock_lang['description'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $Article_stock_lang['description'] }}" title="{{ $Article_stock_lang['description'] }}" class="form-control" id="description" name="description" placeholder="{{ $Article_stock_lang['description'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $article_stock_lang['description'] }}" title="{{ $article_stock_lang['description'] }}" class="form-control" id="description" name="description" placeholder="{{ $article_stock_lang['description'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="stock_qty" class="control-label col-form-label">{!! $Article_stock_lang['stock_qty'] !!}</label>
+							<label for="stock_qty" class="control-label col-form-label">{!! $article_stock_lang['stock_qty'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $Article_stock_lang['stock_qty'] }}" title="{{ $Article_stock_lang['stock_qty'] }}" class="form-control" id="stock_qty" name="stock_qty" placeholder="{{ $Article_stock_lang['stock_qty'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $article_stock_lang['stock_qty'] }}" title="{{ $article_stock_lang['stock_qty'] }}" class="form-control" id="stock_qty" name="stock_qty" placeholder="{{ $article_stock_lang['stock_qty'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					

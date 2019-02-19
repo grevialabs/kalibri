@@ -19,7 +19,7 @@ return [
     'p1' => '',
 	
     'site_id' => 'SiteId',
-    'article' => 'Article',
+    'article_id' => 'ArticleID',
     'customer_article' => 'CustomerArticle',
     'description' => 'Description',
     'stock_qty' => 'StockQty',

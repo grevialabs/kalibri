@@ -21,17 +21,7 @@ if (isset($get['user_attribute_id'])) {
 // -------------------------------
 // get data user
 
-$api_url = $api_method = $api_param = $api_header = NULL;
-$api_param['token'] = env('API_KEY');
 
-$api_url = env('API_URL').'user/get_list';
-$api_method = 'get_list';
-// $api_header['debug'] = 1;
-
-$list_user = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
-
-if (! empty($list_user)) $list_user = json_decode($list_user,1);
-$list_user = $list_user['data'];
 // debug('ayamberak ');
 // debug($temp,1);
 // debug($obj_list_user,1);
@@ -55,6 +45,34 @@ $base_url = base_url();
 // $PAGE_TITLE = $action .' '. $user_attribute_lang['module']; 
 
 // $obj_list_user = NULL;
+
+$api_url_user = $list_user = $api_method = $api_param = $api_header = NULL;
+$api_param['token'] = env('API_KEY');
+$api_param['paging'] = false;
+
+$api_url_user = env('API_URL').'user/get_list_dropdown';
+$api_method = 'get';
+// $api_header['debug'] = 1;
+
+$temp_user = curl_api_liquid($api_url_user, $api_method, $api_header, $api_param);
+//debug($temp_user,1);
+
+if (! empty($temp_user)) $temp_user = json_decode($temp_user,1);
+// $list_user = $temp_user['data'];
+
+function validate_column($arrsource,$arrtarget) {
+	
+	if (empty($arrsource) || empty($arrtarget)) {
+		return 'helper error: validate_column error parameter';
+	}	
+	
+	$temp = NULL;
+	foreach ($arrsource as $rs) {
+		if (isset($arrtarget[$rs])) $temp[$rs] = $arrtarget[$rs];
+	}
+	
+	return $temp;
+}
 
 ?>
 
@@ -116,15 +134,11 @@ $base_url = base_url();
 							<label for="user_id" class="control-label col-form-label">{!! $user_attribute_lang['user_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<!--
-							<input type="text" data-toggle="{{ $user_attribute_lang['user_id'] }}" title="{{ $user_attribute_lang['user_id'] }}" class="form-control" id="user_id" name="user_id" placeholder="{{ $user_attribute_lang['user_id'] }}" required="" data-original-title="" />
-							-->
-							
 							<select id="user_id" name="user_id"  title="{{ $user_attribute_lang['user_id'] }}"  class="select2 form-control custom-select" placeholder="{{ $user_attribute_lang['user_id'] }}" style="width:100%" required>
 								<?php if (! empty($list_user)) { ?>
 									<option value="" /> {{ $lang['please_select'] }} </>
 									<?php foreach ($list_user as $key => $obj) { ?>
-										<option value="{{ $obj['user_id']}}">{{ $obj['site_id'] . ' - ID ' . $obj['site_id']}}</option>
+										<option value="{{ $obj['user_id']}}">{{ $obj['site_id'] . ' - ID ' . $obj['user_id']}}</option>
 									<?php } ?>
 								<?php } ?>
 							</select>

@@ -21,7 +21,7 @@ return [
     'success' => 'success',
 	
     'reason_type_id' => 'ReasonTypeID',
-    'attribute_id' => 'AttributeID',
+    'article_attribute_id' => 'ArticleAttributeID',
     'attribute_value' => 'AttributeValue',
     'site_id' => 'SiteID',
     // '' => '',

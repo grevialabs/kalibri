@@ -109,7 +109,7 @@ $base_url = base_url();
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
 								<td width="150px"><a class="{{ $arrsort['site_id']['class'] }}" title="{{ $arrsort['site_id']['title'] }}" href="{{ $arrsort['site_id']['url'] }}">{{ $article_stock_lang['site_id'] }} {!! $arrsort['site_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['article']['class'] }}" title="{{ $arrsort['article']['title'] }}" href="{{ $arrsort['article']['url'] }}">{{ $article_stock_lang['article'] }} {!! $arrsort['article']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['article_id']['class'] }}" title="{{ $arrsort['article_id']['title'] }}" href="{{ $arrsort['article_id']['url'] }}">{{ $article_stock_lang['article_id'] }} {!! $arrsort['article_id']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['customer_article']['class'] }}" title="{{ $arrsort['customer_article']['title'] }}" href="{{ $arrsort['customer_article']['url'] }}">{{ $article_stock_lang['customer_article'] }} {!! $arrsort['customer_article']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['description']['class'] }}" title="{{ $arrsort['description']['title'] }}" href="{{ $arrsort['description']['url'] }}">{{ $article_stock_lang['description'] }} {!! $arrsort['description']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['stock_qty']['class'] }}" title="{{ $arrsort['stock_qty']['title'] }}" href="{{ $arrsort['stock_qty']['url'] }}">{{ $article_stock_lang['stock_qty'] }} {!! $arrsort['stock_qty']['icon'] !!}</a></td>
@@ -135,7 +135,7 @@ $base_url = base_url();
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
 								<td>{{ $rs['site_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
-								<td>{{ $rs['article'] }}</td>
+								<td>{{ $rs['article_id'] }}</td>
 								<td>{{ $rs['customer_article'] }}</td>
 								<td>{{ $rs['description'] }}</td>
 								<td>{{ $rs['stock_qty'] }}</td>

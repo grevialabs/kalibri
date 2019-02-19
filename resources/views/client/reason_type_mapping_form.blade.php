@@ -39,7 +39,7 @@ $api_param['token'] = env('API_KEY');
 $api_param['paging'] = false;
 
 $api_url_reason = env('API_URL').'reason/get_list';
-$api_url_reason_type = env('API_URL').'reason/get_list';
+$api_url_reason_type = env('API_URL').'reason_type/get_list';
 $api_method = 'get';
  //$api_header['debug'] = 1;
 
@@ -135,10 +135,12 @@ function validate_column($arrsource,$arrtarget) {
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
 							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="reason_type_id" id="reason_type_id">
 							<?php 
-							if (!empty($list_reason_type)) {
+							if (!empty($list_reason_type)) {?>
+								<option value="" /> {{ $lang['please_select'] }} </>
+								<?php 
 								foreach ($list_reason_type as $k => $rs) {
 								?>
-								<option value="{{ $rs['reason_id']}}">{{ $rs['reason_type_id'] . ' - ID ' . $rs['reason_type_mapping_id']}}</option>
+								<option value="{{ $rs['reason_type_id']}}">{{ $rs['attribute_id'] . ' - ID ' . $rs['reason_type_id']}}</option>
 								<?php 
 								} 
 							}
@@ -154,10 +156,12 @@ function validate_column($arrsource,$arrtarget) {
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
 							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="reason_id" id="reason_id">
 							<?php 
-							if (!empty($list_reason)) {
+							if (!empty($list_reason)) {?>
+								<option value="" /> {{ $lang['please_select'] }} </>
+								<?php 
 								foreach ($list_reason as $k => $rs) {
 								?>
-								<option value="{{ $rs['reason_id']}}">{{ $rs['reason_name'] . ' - ID ' . $rs['reason_id']}}</option>
+								<option value="{{ $rs['reason_id']}}">{{ $rs['reason_value'] . ' - ID ' . $rs['reason_id']}}</option>
 								<?php 
 								} 
 							}

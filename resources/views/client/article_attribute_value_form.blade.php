@@ -140,7 +140,7 @@ function validate_column($arrsource,$arrtarget) {
 							if (!empty($list_article)) {
 								foreach ($list_article as $k => $rs) {
 								?>
-								<option>{{ $rs['article'] . ' - ID ' . $rs['article_id']}}</option>
+								<option  value="{{ $rs['article_id']}}>{{ $rs['article'] . ' - ID ' . $rs['article_id']}}</option>
 								<?php 
 								} 							}
 							?>
@@ -158,7 +158,7 @@ function validate_column($arrsource,$arrtarget) {
 							if (!empty($list_article_attribute)) {
 								foreach ($list_article_attribute as $k => $rs) {
 								?>
-								<option>{{ $rs['attribute_name'] . ' - ID ' . $rs['article_attribute_id']}}</option>
+								<option value="{{ $rs['article_attribute_id']}}>{{ $rs['attribute_name'] . ' - ID ' . $rs['article_attribute_id']}}</option>
 								<?php 
 								} 
 							}

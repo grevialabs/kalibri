@@ -34,19 +34,25 @@ $base_url = base_url();
 
 // $PAGE_TITLE = $action .' '. $reason_type_lang['module']; 
 
-$list_site = NULL;
-$api_url = $api_method = $api_param = $api_header = NULL;
+$list_site = $list_article_attribute = NULL;
+$api_url = $api_url_article_attribute = $api_method = $api_param = $api_header = NULL;
 $api_param['token'] = env('API_KEY');
 $api_param['paging'] = false;
 
 $api_url = env('API_URL').'site/get_list';
+$api_url_article_attribute = env('API_URL').'article_attribute/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 
 $temp = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 
+$temp_article_attribute = curl_api_liquid($api_url_article_attribute, $api_method, $api_header, $api_param);
+
 if (! empty($temp)) $temp = json_decode($temp,1);
 $list_site = $temp['data'];
+
+if (! empty($temp_article_attribute)) $temp_article_attribute = json_decode($temp_article_attribute,1);
+$list_article_attribute = $temp_article_attribute['data'];
 
 function validate_column($arrsource,$arrtarget) {
 	
@@ -125,10 +131,23 @@ function validate_column($arrsource,$arrtarget) {
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="attribute_id" class="control-label col-form-label">{!! $reason_type_lang['attribute_id'] !!}</label>
+							<label for="article_attribute_id" class="control-label col-form-label">{!! $reason_type_lang['article_attribute_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $reason_type_lang['attribute_id'] }}" title="{{ $reason_type_lang['attribute_id'] }}" class="form-control" id="attribute_id" name="attribute_id" placeholder="{{ $reason_type_lang['attribute_id'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $reason_type_lang['article_attribute_id'] }}" title="{{ $reason_type_lang['article_attribute_id'] }}" class="form-control" id="article_attribute_id" name="article_attribute_id" placeholder="{{ $reason_type_lang['article_attribute_id'] }}" required="" data-original-title="" />
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="article_attribute_id" id="article_attribute_id">
+							<?php 
+							if (!empty($list_article_attribute)) {?>
+								<option value="" /> {{ $lang['please_select'] }} </>
+								<?php
+								foreach ($list_article_attribute as $k => $rs) {
+								?>
+								<option value="{{ $rs['article_attribute_id']}}">{{ $rs['attribute_name'] . ' - ID ' . $rs['article_attribute_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
 						</div>
 					</div>
 					
@@ -136,8 +155,7 @@ function validate_column($arrsource,$arrtarget) {
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="site_id" class="control-label col-form-label">{!! $reason_type_lang['site_id'] !!}</label>
 						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
 							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id">
 							<?php 
 							if (!empty($list_site)) {?>
