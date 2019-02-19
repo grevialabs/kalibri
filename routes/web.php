@@ -162,6 +162,24 @@ Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () 
 	Route::any('role-capability/delete', 'Client\ClientRoleCapabilityController@delete');
 	Route::any('role-capability/bulk', 'Client\ClientRoleCapabilityController@bulk');
 	
+	Route::get('rfid-article', 'Client\ClientRfidArticleController@rfid_article');
+	Route::any('rfid-article/insert', 'Client\ClientRfidArticleController@insert');
+	Route::any('rfid-article/update', 'Client\ClientRfidArticleController@update');
+	Route::any('rfid-article/delete', 'Client\ClientRfidArticleController@delete');
+	Route::any('rfid-article/bulk', 'Client\ClientRfidArticleController@bulk');
+	
+	Route::get('article-po', 'Client\ClientArticlePoController@article_po');
+	Route::any('article-po/insert', 'Client\ClientArticlePoController@insert');
+	Route::any('article-po/update', 'Client\ClientArticlePoController@update');
+	Route::any('article-po/delete', 'Client\ClientArticlePoController@delete');
+	Route::any('article-po/bulk', 'Client\ClientArticlePoController@bulk');
+	
+	Route::get('config', 'Client\ClientConfigController@config');
+	Route::any('config/insert', 'Client\ClientConfigController@insert');
+	Route::any('config/update', 'Client\ClientConfigController@update');
+	Route::any('config/delete', 'Client\ClientConfigController@delete');
+	Route::any('config/bulk', 'Client\ClientConfigController@bulk');
+	
 	// Route::get('reason_type', 'Client\ClientController@reason_type');
 	// Route::any('reason_type/insert', 'Client\ClientController@insert');
 	// Route::any('reason_type/update', 'Client\ClientController@update');

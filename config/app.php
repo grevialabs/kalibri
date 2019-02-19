@@ -245,6 +245,9 @@ return [
         'CapabilityModel' => Patriot\Models\Capability::class,
         'RoleCapabilityModel' => Patriot\Models\RoleCapability::class,
         'ReasonTypeModel' => Patriot\Models\ReasonType::class,
+        'ArticlePoModel' => Patriot\Models\ArticlePo::class,
+        'RfidArticleModel' => Patriot\Models\RfidArticle::class,
+        'ConfigModel' => Patriot\Models\Config::class,
         // 'UserModel' => Patriot\Models\User::class,
 
         // 'PDF' => Barryvdh\DomPDF\Facade::class,

@@ -224,7 +224,11 @@ if (is_member()) $cookie_user = get_user_cookie();
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-pencil"></i><span class="hide-menu">Master Article</span></a>
 					<ul aria-expanded="false" class="collapse  first-level">
 						<li class="sidebar-item"> <a class="sidebar-link" id="client_article" href="article"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_article-attribute" href="article-attribute"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Attribute</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="client_article_attribute" href="article-attribute"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Attribute</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="client_article_attribute_value" href="article-attribute-value"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Attribute Value</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="client_article_stock" href="article-stock"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Stock</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="client_rfid_article" href="rfid-article"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">RFID Article</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="client_article_po" href="article-po"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article PO</span></a></li>
 					</ul>
 				</li>
 				
@@ -233,11 +237,12 @@ if (is_member()) $cookie_user = get_user_cookie();
 					<ul aria-expanded="false" class="collapse  first-level">
 						<li class="sidebar-item"> <a class="sidebar-link" id="client_company" href="company"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Company</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="client_site" href="site"><i class="mdi mdi-chart-bar"></i><span>Site</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_pic" href="pic"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">PIC</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_reason" href="reason"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="client_pic" href="pic"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">PIC</span></a></li>						
 						<li class="sidebar-item"> <a class="sidebar-link" id="client_level" href="level"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Level</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="client_reason" href="reason"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="client_reason-type" href="reason-type"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link" id="client_reason-type-mapping" href="reason-type-mapping"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type Mapping</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link" id="client_config" href="config"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Config</span></a></li>
 					</ul>
 				</li>
 				
