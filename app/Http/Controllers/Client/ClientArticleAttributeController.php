@@ -92,7 +92,7 @@ class ClientArticleAttributeController extends ClientController
 			$api_header['token'] = env('API_KEY');
 
 			$save = curl_api_liquid($api_url, $api_method, $api_header, $param);
-			 debug($save,1);
+			 //debug($save,1);
 			if (isset($save)) {
 				$save = json_decode($save,1);
 				
