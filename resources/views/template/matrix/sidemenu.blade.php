@@ -217,6 +217,7 @@ if (is_member()) $cookie_user = get_user_cookie();
 					<ul aria-expanded="false" class="collapse  first-level">						
 						<li class="sidebar-item"> <a class="sidebar-link" id="client_user" href="user"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User</span></a></li>
 						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link " id="client_user-attribute" href="user-attribute"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User attribute</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link " id="client_user-role" href="user-role"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User role</span></a></li>
 					</ul>
 				</li>
 				
@@ -245,18 +246,9 @@ if (is_member()) $cookie_user = get_user_cookie();
 						<li class="sidebar-item"> <a class="sidebar-link" id="client_config" href="config"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Config</span></a></li>
 					</ul>
 				</li>
-				
-				<li class="sidebar-item"> 
-					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-relative-scale"></i><span class="hide-menu">Transaction</span></a>
-					<ul aria-expanded="false" class="collapse first-level">
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_transaction" href="transaction"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Transaction</span></a></li>
-						<!--
-						<li class="sidebar-item"> <a class="sidebar-link" id="site" href="site"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="site" href="site"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="site" href="site"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement</span></a></li>
-						-->
-					</ul>
-				</li>
+							
+				<li class="sidebar-item"> <a class="sidebar-link" id="client_transaction" href="transaction"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Transaction</span></a></li>
+
 				
 				<li class="sidebar-item"> 
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-note-plus"></i><span class="hide-menu">Access Role</span></a>
@@ -267,6 +259,24 @@ if (is_member()) $cookie_user = get_user_cookie();
 						<li class="sidebar-item"> <a class="sidebar-link" id="client_movement" href="movement"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement</span></a></li>
 					</ul>
 				</li>
+				
+				<?php 
+				// $acl = $cookie = NULL;
+				// $cookie = get_user_cookie();
+				// debug($cookie);
+				
+				// $api_url = $api_method = $api_param = $api_header = NULL;
+				// $api_param['token'] = env('API_KEY');
+				// $api_param['user_id'] = $cookie['user_id'];
+				// $api_url = env('API_URL').'user_role/get';
+				// $api_method = 'get';
+				// // $api_header['debug'] = 1;
+				
+				// $acl = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+				// debug($acl);
+				// $url = curl_api_liquid(,'get',);
+				// debug($menu);
+				?>
 				
 				<!--
 				DUMMY MENU AND ICON START

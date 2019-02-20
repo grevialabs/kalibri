@@ -52,26 +52,8 @@ $list_site = $temp['data'];
 if (! empty($temp_level)) $temp_level = json_decode($temp_level,1);
 $list_level = $temp_level['data'];
 
-function validate_column($arrsource,$arrtarget) {
-	
-	if (empty($arrsource) || empty($arrtarget)) {
-		return 'helper error: validate_column error parameter';
-	}	
-	
-	$temp = NULL;
-	foreach ($arrsource as $rs) {
-		if (isset($arrtarget[$rs])) $temp[$rs] = $arrtarget[$rs];
-	}
-	
-	return $temp;
-}
-
-// $source = array('user_id', 'user_name', 'user_address', 'division', 'user_category', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
-// $target = array('mantap' => 'gokil', 'user_name' => 'harusmasuknih');
-// // $test = array('ayam','bebek');
-// // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
-// $a = validate_column($source,$target);
-// debug($a,1);
+// Get user replenish or chamber
+$get_user_category_list = UserModel::get_user_category_list();
 ?>
 
 <!-- Article AREA -->
@@ -178,6 +160,20 @@ function validate_column($arrsource,$arrtarget) {
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
 							<input type="text" data-toggle="{{ $userlang['user_category'] }}" title="{{ $userlang['user_category'] }}" class="form-control" id="user_category" name="user_category" placeholder="{{ $userlang['user_category'] }}" required="" data-original-title="" />
+							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="user_category" id="user_category">
+							<?php 
+							if (!empty($get_user_category_list)) {
+								foreach ($get_user_category_list as $k => $rs) {
+									$k++;
+								?>
+								<option value="{{ $rs }}">{{ $rs }}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
+							
 						</div>
 					</div>
 					

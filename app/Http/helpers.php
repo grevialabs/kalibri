@@ -529,6 +529,8 @@ function get_user_cookie($param = NULL)
 	if (isset($arrcook[3])) $arrdata['email'] = $arrcook[3];
 	if (isset($arrcook[4])) $arrdata['job_title'] = $arrcook[4];
 	if (isset($arrcook[5])) $arrdata['user_code'] = $arrcook[5];
+	if (isset($arrcook[6])) $arrdata['role_id'] = $arrcook[6];
+	if (isset($arrcook[7])) $arrdata['role_name'] = $arrcook[7];
 	
 	$response = $arrdata;
 	if (isset($param)) $response = $arrdata[$param];

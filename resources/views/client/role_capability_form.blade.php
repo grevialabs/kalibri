@@ -17,7 +17,6 @@ if (isset($get['role_id'])) {
 	if (isset($data['data'])) $listdata = $data['data'];
 	if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
 }
-// debug($listdata,1);
 
 $base_url = base_url();
 
@@ -114,7 +113,7 @@ function validate_column($arrsource,$arrtarget) {
 							if (!empty($list_role)) {
 								foreach ($list_role as $k => $rs) {
 								?>
-								<option>{{ $rs['role_name'] . ' - ID ' . $rs['role_id']}}</option>
+								<option <?php if (isset($_GET['role_id']) && $rs['role_id'] == $_GET['role_id']) echo 'selected'; ?>>{{ $rs['role_name'] . ' - ID ' . $rs['role_id']}}</option>
 								<?php 
 								} 
 							}

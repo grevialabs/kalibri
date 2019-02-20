@@ -236,11 +236,12 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
 		ignoreClick      : 'a',
 	});
 	
-	$('.btnaction').css('width','150');
+	// Block button inside form
+	$('.btn_submit').css('width','150');
 	$(".form_submit").submit(function(e){
 		
-		$('.btnaction').attr('disabled','true');
-		$('.btnaction').html('<i class="fa fa-spinner fa-spin"></i>');
+		$('.btn_submit').attr('disabled','true');
+		$('.btn_submit').html('<i class="fa fa-spinner fa-spin"></i>');
 	});
 	
 	// money format

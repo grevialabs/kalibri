@@ -3,6 +3,7 @@
 // $base_url = base_url().'public/matrix/';
 $form_url = base_url().'login';
 // debug($form_url,1);
+
 ?>
 <!DOCTYPE html>
 <html dir="ltr">
@@ -83,7 +84,7 @@ $form_url = base_url().'login';
                                 <div class="form-group">
                                     <div class="p-t-20">
                                         <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Lost password?</button>
-                                        <button class="btn btn-success float-right btnsubmit" type="submit" name="btnsubmit">Login</button>
+                                        <button class="btn btn-success float-right btn_submit" type="submit" name="btn_submit">Login</button>
                                     </div>
                                 </div>
                             </div>
@@ -159,11 +160,11 @@ $form_url = base_url().'login';
         $("#loginform").fadeIn();
     });
 	
-	$('.btnsubmit').css('width','150');
+	$('.btn_submit').css('width','150');
 	$(".form_submit").submit(function(e){
 		
-		$('.btnsubmit').attr('disabled','true');
-		$('.btnsubmit').html('<i class="fa fa-spinner fa-spin"></i>');
+		$('.btn_submit').attr('disabled','true');
+		$('.btn_submit').html('<i class="fa fa-spinner fa-spin"></i>');
 	});
 
 	

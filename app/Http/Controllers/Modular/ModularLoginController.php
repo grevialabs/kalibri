@@ -97,7 +97,7 @@ class ModularLoginController extends ModularController
 				return redirect('login')->with('message', print_message($message));
 			}
 			
-			$decrypt_password = Crypt::decryptString($obj['password']);
+			if (isset($obj['password'])) $decrypt_password = Crypt::decryptString($obj['password']);
 			
 			// valid
 			if (isset($obj['password']) && $post['password'] == $decrypt_password) {
@@ -108,7 +108,7 @@ class ModularLoginController extends ModularController
 				$cname = $cvalue = $cminutes = NULL;
 				$cname = 'tokenhash';
 				// $tokenhash = $obj['member_id'].'||'.$obj['name'].'||'.$obj['email'];
-				$cvalue = $obj['user_id'].'||'.$obj['site_id'].'||'.$obj['firstname'].' '.$obj['lastname'].'||'.$obj['email'].'||'.$obj['job_title'].'||';
+				$cvalue = $obj['user_id'].'||'.$obj['site_id'].'||'.$obj['fullname'].'||'.$obj['email'].'||'.$obj['job_title'].'||'.$obj['user_code'].'||'.$obj['role_id'].'||'.$obj['role_name'];
 				$cminutes = 24 * 60;
 				Cookie::queue($cname, $cvalue, $cminutes);
 				
@@ -122,7 +122,7 @@ class ModularLoginController extends ModularController
 					
 				// }
 				
-				$targeturl = 'client/company';
+				$targeturl = 'client/dashboard';
 				
 				if (isset($_GET['uri'])) $targeturl = urldecode($_GET['uri']);
 				

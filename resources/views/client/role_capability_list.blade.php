@@ -7,10 +7,12 @@ $offset = 0;
 $page = 1;
 
 // $perpage_allowed = array(2,40,60);
-$role_model_capability = new RoleCapabilityModel();
+// $role_capability_model = new RoleCapabilityModel();
+$role_model = new RoleModel();
 $general_model = new GeneralModel();
 
-$getorder_allowed_list = $role_model_capability->getorder_allowed_list();
+// $getorder_allowed_list = $role_capability_model->getorder_allowed_list();
+$getorder_allowed_list = $role_model->getorder_allowed_list();
 $getorderby_allowed_list = $general_model->getorderby_allowed_list();
 $perpage_allowed = $general_model->perpage_allowed();
 
@@ -32,8 +34,10 @@ if (isset($getkeyword)) $api_param['keyword'] = $getkeyword;
 if (isset($getorder)) $api_param['order'] = $getorder; else $getorder = $getorder_allowed_list[0];
 if (isset($getorderby)) $api_param['orderby'] = $getorderby; else $getorderby = $getorderby_allowed_list[0];
 $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_list);
+// debug($arrsort,1);
 
-$api_url = env('API_URL').'role_capability/get_list';
+// $api_url = env('API_URL').'role_capability/get_list';
+$api_url = env('API_URL').'role/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
@@ -41,7 +45,7 @@ $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 if (! empty($data)) $data = json_decode($data,1);
 if (isset($data['data'])) $listdata = $data['data'];
 if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
-
+// debug($listdata,1);
 $reget = NULL;
 if (! empty($get)) {
 	$reget = $get;
@@ -104,9 +108,8 @@ $base_url = base_url();
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['role_capability_id']['class'] }}" title="{{ $arrsort['role_capability_id']['title'] }}" href="{{ $arrsort['role_capability_id']['url'] }}">{{ $role_capability_lang['role_capability_id'] }} {!! $arrsort['role_capability_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['role_id']['class'] }}" title="{{ $arrsort['role_id']['title'] }}" href="{{ $arrsort['role_id']['url'] }}">{{ $role_capability_lang['role_id'] }} {!! $arrsort['role_id']['icon'] !!}</a></td>
-                                <td width="180px"><a class="{{ $arrsort['capability_id']['class'] }}" title="{{ $arrsort['capability_id']['title'] }}" href="{{ $arrsort['capability_id']['url'] }}">{{ $role_capability_lang['capability_id'] }} {!! $arrsort['capability_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['role_id']['class'] or '' }}" title="{{ $arrsort['role_id']['title'] or '' }}" href="{{ $arrsort['role_id']['url'] or '' }}">{{ $role_capability_lang['role_id'] or '' }} {!! $arrsort['role_id']['icon'] !!}</a></td>
+                                <td width=""><a class="{{ $arrsort['role_name']['class'] or '' }}" title="{{ $arrsort['role_name']['title'] or '' }}" href="{{ $arrsort['role_name']['url'] or '' }}">{{ $role_capability_lang['role_name'] or '' }} {!! $arrsort['role_name']['icon'] or '' !!}</a></td>
 								<td width="2">Status</td>
 								<td width="50px" class="talCnt">Option</td>
 							</tr>
@@ -121,19 +124,20 @@ $base_url = base_url();
 								foreach ($listdata as $key => $rs) 
 								{
 									$i++;
-									$id = $rs['role_capability_id'];
-									$idcol = 'role_capability_id';
+									$id = $rs['role_id'];
+									$idcol = 'role_id';
 							?>
 							
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['role_capability_id'] or '' }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
-								<td>{{ $rs['role_id'] or '' }}</td>
-                                <td>{{ $rs['capability_id'] or '' }}</td>
+								<td>{{ $rs['role_id'] or '' }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
+								<td>{{ $rs['role_name'] or '' }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
+								<!--
 								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
+								-->
 								</td>
 							</tr>
 							<?php

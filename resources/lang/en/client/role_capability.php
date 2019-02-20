@@ -22,6 +22,7 @@ return [
 	
     'role_capability_id' => 'RoleCapabilityID',
     'role_id' => 'RoleID',
+    'role_name' => 'RoleName',
     'capability_id' => 'CapabilityID',
     // '' => '',
     

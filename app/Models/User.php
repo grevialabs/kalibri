@@ -23,9 +23,14 @@ class User extends Model
 	// Allowed
 	public static function required()
     {
-       $str = array(
-		'user_id', 'company_name', 'company_phone', 'company_address', 'company_pic');
+       $str = array('user_id', 'company_name', 'company_phone', 'company_address', 'company_pic');
        return $str;
+    }
+	
+	public static function get_user_category_list()
+    {
+		$arr = array('chamber', 'dashboard');
+		return $arr;
     }
 	
 	// public function validate_action($post,)
