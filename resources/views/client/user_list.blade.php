@@ -105,16 +105,16 @@ $base_url = base_url();
 							
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['user_id']['class'] }}" title="{{ $arrsort['user_id']['title'] }}" href="{{ $arrsort['user_id']['url'] }}">userID {!! $arrsort['user_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['firstname']['class'] }}" title="{{ $arrsort['firstname']['title'] }}" href="{{ $arrsort['firstname']['url'] }}">{{ $userlang['firstname'] }} {!! $arrsort['firstname']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['lastname']['class'] }}" title="{{ $arrsort['lastname']['title'] }}" href="{{ $arrsort['lastname']['url'] }}">{{ $userlang['lastname'] }} {!! $arrsort['lastname']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['job_title']['class'] }}" title="{{ $arrsort['job_title']['title'] }}" href="{{ $arrsort['job_title']['url'] }}">{{ $userlang['job_title'] }} {!! $arrsort['job_title']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['division']['class'] }}" title="{{ $arrsort['division']['title'] }}" href="{{ $arrsort['division']['url'] }}">{{ $userlang['division'] }} {!! $arrsort['division']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['user_id']['class'] or '' }}" title="{{ $arrsort['user_id']['title'] or '' }}" href="{{ $arrsort['user_id']['url'] or '' }}">userID {!! $arrsort['user_id']['icon'] or '' !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['firstname']['class'] or '' }}" title="{{ $arrsort['firstname']['title'] }}" href="{{ $arrsort['firstname']['url'] }}">{{ $userlang['firstname'] }} {!! $arrsort['firstname']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['lastname']['class'] or '' }}" title="{{ $arrsort['lastname']['title'] }}" href="{{ $arrsort['lastname']['url'] }}">{{ $userlang['lastname'] }} {!! $arrsort['lastname']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['job_title']['class'] or '' }}" title="{{ $arrsort['job_title']['title'] }}" href="{{ $arrsort['job_title']['url'] }}">{{ $userlang['job_title'] }} {!! $arrsort['job_title']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['division']['class'] or '' }}" title="{{ $arrsort['division']['title'] }}" href="{{ $arrsort['division']['url'] }}">{{ $userlang['division'] }} {!! $arrsort['division']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['email']['class'] }}" title="{{ $arrsort['email']['title'] }}" href="{{ $arrsort['email']['url'] }}">{{ $userlang['email'] }} {!! $arrsort['email']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['user_category']['class'] }}" title="{{ $arrsort['user_category']['title'] }}" href="{{ $arrsort['user_category']['url'] }}">{{ $userlang['user_category'] }} {!! $arrsort['user_category']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['role_name']['class'] }}" title="{{ $arrsort['role_name']['title'] }}" href="{{ $arrsort['role_name']['url'] }}">{{ $userlang['role_name'] }} {!! $arrsort['role_name']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['level_id']['class'] }}" title="{{ $arrsort['level_id']['title'] }}" href="{{ $arrsort['level_id']['url'] }}">{{ $userlang['level_id'] }} {!! $arrsort['level_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['site_id']['class'] }}" title="{{ $arrsort['site_id']['title'] }}" href="{{ $arrsort['site_id']['url'] }}">{{ $userlang['site_id'] }} {!! $arrsort['site_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['user_category']['class'] or '' }}" title="{{ $arrsort['user_category']['title'] or '' }}" href="{{ $arrsort['user_category']['url'] or '' }}">{{ $userlang['user_category'] or '' }} {!! $arrsort['user_category']['icon'] or '' !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['role_name']['class'] or '' }}" title="{{ $arrsort['role_name']['title'] or '' }}" href="{{ $arrsort['role_name']['url'] or '' }}">{{ $userlang['role_name'] or '' }} {!! $arrsort['role_name']['icon'] or '' !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['level_id']['class'] or '' }}" title="{{ $arrsort['level_id']['title'] }}" href="{{ $arrsort['level_id']['url'] or '' }}">{{ $userlang['level_id'] }} {!! $arrsort['level_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['site_id']['class'] or '' }}" title="{{ $arrsort['site_id']['title'] or '' }}" href="{{ $arrsort['site_id']['url'] or '' }}">{{ $userlang['site_id'] or '' }} {!! $arrsort['site_id']['icon'] or '' !!}</a></td>
 								
 								<!-- <td width="180px"><a class="{{ $arrsort['user_code']['class'] }}" title="{{ $arrsort['user_code']['title'] }}" href="{{ $arrsort['user_code']['url'] }}">{{ $userlang['user_code'] }} {!! $arrsort['firstname']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['parent_user_id']['class'] }}" title="{{ $arrsort['parent_user_id']['title'] }}" href="{{ $arrsort['parent_user_id']['url'] }}">{{ $userlang['parent_user_id'] }} {!! $arrsort['parent_user_id']['icon'] !!}</a></td>
@@ -142,6 +142,7 @@ $base_url = base_url();
 									$i++;
 									$id = $rs['user_id'];
 									$idcol = 'user_id';
+									$status = (isset($rs['status'])) ? $rs['status'] : 0 ;
 							?>
 							
 							<tr>
@@ -169,7 +170,7 @@ $base_url = base_url();
 								<td>{{ $rs['reset_by'] or '' }}</td>
 								<td>{{ $rs['reset_time'] or '' }}</td> -->
 
-								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
+								<td class="talCnt">{!! $general_model->show_record_status($status) !!}</td>
 								<td class="talCnt">								
 								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
 								</td>

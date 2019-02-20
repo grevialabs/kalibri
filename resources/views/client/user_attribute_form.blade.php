@@ -54,11 +54,10 @@ $api_url_user = env('API_URL').'user/get_list_dropdown';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 
-$temp_user = curl_api_liquid($api_url_user, $api_method, $api_header, $api_param);
-//debug($temp_user,1);
+$list_user = curl_api_liquid($api_url_user, $api_method, $api_header, $api_param);
 
-if (! empty($temp_user)) $temp_user = json_decode($temp_user,1);
-// $list_user = $temp_user['data'];
+if (! empty($list_user)) $list_user = json_decode($list_user,1);
+if (! empty($list_user['data'])) $list_user = $list_user['data'];
 
 function validate_column($arrsource,$arrtarget) {
 	
@@ -138,7 +137,7 @@ function validate_column($arrsource,$arrtarget) {
 								<?php if (! empty($list_user)) { ?>
 									<option value="" /> {{ $lang['please_select'] }} </>
 									<?php foreach ($list_user as $key => $obj) { ?>
-										<option value="{{ $obj['user_id']}}">{{ $obj['site_id'] . ' - ID ' . $obj['user_id']}}</option>
+										<option value="{{ $obj['user_id']}}">{{ $obj['fullname'] . ' - ID ' . $obj['user_id']}}</option>
 									<?php } ?>
 								<?php } ?>
 							</select>
