@@ -33,9 +33,9 @@ if (isset($getorder)) $api_param['order'] = $getorder; else $getorder = $getorde
 if (isset($getorderby)) $api_param['orderby'] = $getorderby; else $getorderby = $getorderby_allowed_list[0];
 $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_list);
 
-$api_url = env('API_URL').'reason_type_mapping_model/get_list';
+$api_url = env('API_URL').'reason_type_mapping/get_list';
 $api_method = 'get';
-// $api_header['debug'] = 1;
+//$api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 
 if (! empty($data)) $data = json_decode($data,1);

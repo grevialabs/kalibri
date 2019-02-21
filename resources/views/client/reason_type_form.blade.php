@@ -133,8 +133,7 @@ function validate_column($arrsource,$arrtarget) {
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="article_attribute_id" class="control-label col-form-label">{!! $reason_type_lang['article_attribute_id'] !!}</label>
 						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
 							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="article_attribute_id" id="article_attribute_id">
 							<?php 
 							if (!empty($list_article_attribute)) {?>

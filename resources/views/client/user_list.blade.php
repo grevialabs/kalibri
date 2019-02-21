@@ -114,6 +114,7 @@ $base_url = base_url();
 								<td width="180px"><a class="{{ $arrsort['user_category']['class'] or '' }}" title="{{ $arrsort['user_category']['title'] or '' }}" href="{{ $arrsort['user_category']['url'] or '' }}">{{ $userlang['user_category'] or '' }} {!! $arrsort['user_category']['icon'] or '' !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['role_name']['class'] or '' }}" title="{{ $arrsort['role_name']['title'] or '' }}" href="{{ $arrsort['role_name']['url'] or '' }}">{{ $userlang['role_name'] or '' }} {!! $arrsort['role_name']['icon'] or '' !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['level_id']['class'] or '' }}" title="{{ $arrsort['level_id']['title'] }}" href="{{ $arrsort['level_id']['url'] or '' }}">{{ $userlang['level_id'] }} {!! $arrsort['level_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['level_name']['class'] or '' }}" title="{{ $arrsort['level_name']['title'] }}" href="{{ $arrsort['level_name']['url'] or '' }}">{{ $userlang['level_name'] }} {!! $arrsort['level_name']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['site_id']['class'] or '' }}" title="{{ $arrsort['site_id']['title'] or '' }}" href="{{ $arrsort['site_id']['url'] or '' }}">{{ $userlang['site_id'] or '' }} {!! $arrsort['site_id']['icon'] or '' !!}</a></td>
 								
 								<!-- <td width="180px"><a class="{{ $arrsort['user_code']['class'] }}" title="{{ $arrsort['user_code']['title'] }}" href="{{ $arrsort['user_code']['url'] }}">{{ $userlang['user_code'] }} {!! $arrsort['firstname']['icon'] !!}</a></td>
@@ -157,6 +158,7 @@ $base_url = base_url();
 								<td>{{ $rs['user_category'] or '' }}</td>
 								<td>{{ $rs['role_name'] or '' }}</td>
 								<td>{{ $rs['level_id'] or '' }}</td>
+								<td>{{ $rs['level_name'] or '' }}</td>
 								<td>{{ $rs['site_id'] or '' }}</td>
 								
 								<!-- <td>{{ $rs['user_code'] or '' }}</td>

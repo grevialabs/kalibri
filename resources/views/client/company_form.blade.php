@@ -132,7 +132,7 @@ function validate_column($arrsource,$arrtarget) {
 							<label for="company_phone" class="control-label col-form-label">{!! $companylang['company_phone'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="company_phone" name="company_phone" placeholder="{{ $companylang['company_phone'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="" title=""  class="form-control numeric" id="company_phone" name="company_phone" placeholder="{{ $companylang['company_phone'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					

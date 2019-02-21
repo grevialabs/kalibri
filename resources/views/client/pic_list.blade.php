@@ -105,6 +105,7 @@ $base_url = base_url();
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
 								<td width="150px"><a class="{{ $arrsort['pic_id']['class'] }}" title="{{ $arrsort['pic_id']['title'] }}" href="{{ $arrsort['pic_id']['url'] }}">{{ $piclang['pic_id'] }} {!! $arrsort['pic_id']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['site_id']['class'] }}" title="{{ $arrsort['site_id']['title'] }}" href="{{ $arrsort['site_id']['url'] }}">{{ $piclang['site_id'] }} {!! $arrsort['site_id']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['pic_name']['class'] }}" title="{{ $arrsort['pic_name']['title'] }}" href="{{ $arrsort['pic_name']['url'] }}">{{ $piclang['pic_name'] }} {!! $arrsort['pic_name']['icon'] !!}</a></td>
 								<td><a class="{{ $arrsort['pic_email']['class'] }}" title="{{ $arrsort['pic_email']['title'] }}" href="{{ $arrsort['pic_email']['url'] }}">{{ $piclang['pic_email'] }} {!! $arrsort['pic_email']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['pic_phone']['class'] }}" title="{{ $arrsort['pic_phone']['title'] }}" href="{{ $arrsort['pic_phone']['url'] }}">{{ $piclang['pic_phone'] }} {!! $arrsort['pic_phone']['icon'] !!}</a></td>
@@ -130,6 +131,7 @@ $base_url = base_url();
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
 								<td>{{ $rs['pic_id'] }}  <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
+								<td>{{ $rs['site_id'] }}</td>
 								<td>{{ $rs['pic_name'] }}</td>
 								<td>{{ $rs['pic_phone'] }}</td>
 								<td>{{ $rs['pic_email'] }}</td>							

@@ -158,9 +158,7 @@ $get_user_category_list = UserModel::get_user_category_list();
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="user_category" class="control-label col-form-label">{!! $userlang['user_category'] !!}</label>
 						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['user_category'] }}" title="{{ $userlang['user_category'] }}" class="form-control" id="user_category" name="user_category" placeholder="{{ $userlang['user_category'] }}" required="" data-original-title="" />
-							
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
 							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="user_category" id="user_category">
 							<?php 
 							if (!empty($get_user_category_list)) {
@@ -203,7 +201,7 @@ $get_user_category_list = UserModel::get_user_category_list();
 							<label for="site_id" class="control-label col-form-label">{!! $userlang['site_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id	">
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id">
 							<?php 
 							if (!empty($list_site)) {?>
 								<option value="" /> {{ $lang['please_select'] }} </>
@@ -233,7 +231,7 @@ $get_user_category_list = UserModel::get_user_category_list();
 							<label for="parent_user_id" class="control-label col-form-label">{!! $userlang['parent_user_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['parent_user_id'] }}" title="{{ $userlang['parent_user_id'] }}" class="form-control" id="parent_user_id" name="parent_user_id" placeholder="{{ $userlang['parent_user_id'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $userlang['parent_user_id'] }}" title="{{ $userlang['parent_user_id'] }}" class="form-control numeric" id="parent_user_id" name="parent_user_id" placeholder="{{ $userlang['parent_user_id'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 										
@@ -251,7 +249,7 @@ $get_user_category_list = UserModel::get_user_category_list();
 							<label for="quota_additional" class="control-label col-form-label">{!! $userlang['quota_additional'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['quota_additional'] }}" title="{{ $userlang['quota_additional'] }}" class="form-control" id="quota_additional" name="quota_additional" placeholder="{{ $userlang['quota_additional'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $userlang['quota_additional'] }}" title="{{ $userlang['quota_additional'] }}" class="form-control numeric" id="quota_additional" name="quota_additional" placeholder="{{ $userlang['quota_additional'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
@@ -260,7 +258,7 @@ $get_user_category_list = UserModel::get_user_category_list();
 							<label for="quota_remaining" class="control-label col-form-label">{!! $userlang['quota_remaining'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['quota_remaining'] }}" title="{{ $userlang['quota_remaining'] }}" class="form-control" id="quota_remaining" name="quota_remaining" placeholder="{{ $userlang['quota_remaining'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $userlang['quota_remaining'] }}" title="{{ $userlang['quota_remaining'] }}" class="form-control numeric" id="quota_remaining" name="quota_remaining" placeholder="{{ $userlang['quota_remaining'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
@@ -278,7 +276,18 @@ $get_user_category_list = UserModel::get_user_category_list();
 							<label for="counter_wrong_pass" class="control-label col-form-label">{!! $userlang['counter_wrong_pass'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['counter_wrong_pass'] }}" title="{{ $userlang['counter_wrong_pass'] }}" class="form-control" id="counter_wrong_pass" name="counter_wrong_pass" placeholder="{{ $userlang['counter_wrong_pass'] }}" required="" data-original-title="" />
+							<input checked="checked" data-toggle="{{ $userlang['counter_wrong_pass'] }}" title="{{ $userlang['counter_wrong_pass'] }}" name="counter_wrong_pass" id="counter_wrong_pass" type="checkbox" value="yes" placeholder="{{ $userlang['counter_wrong_pass'] }}" required="" data-original-title="" >
+							<!-- <input type="text" data-toggle="{{ $userlang['counter_wrong_pass'] }}" title="{{ $userlang['counter_wrong_pass'] }}" class="form-control" id="counter_wrong_pass" name="counter_wrong_pass" placeholder="{{ $userlang['counter_wrong_pass'] }}" required="" data-original-title="" /> -->
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="status_lock" class="control-label col-form-label">{!! $userlang['status_lock'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input checked="checked" data-toggle="{{ $userlang['status_lock'] }}" title="{{ $userlang['status_lock'] }}" name="status_lock" id="status_lock" type="checkbox" value="yes" placeholder="{{ $userlang['status_lock'] }}" required="" data-original-title="" >
+							<!-- <input type="text" data-toggle="{{ $userlang['status_lock'] }}" title="{{ $userlang['status_lock'] }}" class="form-control" id="status_lock" name="status_lock" placeholder="{{ $userlang['status_lock'] }}" required="" data-original-title="" /> -->
 						</div>
 					</div>
 					
@@ -305,7 +314,7 @@ $get_user_category_list = UserModel::get_user_category_list();
 							<label for="reset_time" class="control-label col-form-label">{!! $userlang['reset_time'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['reset_time'] }}" title="{{ $userlang['reset_time'] }}" class="form-control" id="reset_time" name="quota_initial" placeholder="{{ $userlang['quota_initial'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $userlang['reset_time'] }}" title="{{ $userlang['reset_time'] }}" class="form-control" id="reset_time" name="reset_time" placeholder="{{ $userlang['reset_time'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					

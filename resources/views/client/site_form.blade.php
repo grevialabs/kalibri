@@ -104,9 +104,18 @@ if (! empty($temp)) {
 							<input type="hidden" name="site_id" value="{{ $data['site_id'] }}" />
 						</div>
 					</div>
+					<?php }
+					else{ ?>
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="site_id" class="control-label col-form-label">{!! $sitelang['site_id'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $sitelang['site_id'] }}" title="{{ $sitelang['site_id'] }}" class="form-control" id="site_id" name="site_id" placeholder="{{ $sitelang['site_id'] }}" required="" data-original-title="" "/>							
+						</div>
+					</div>
 					<?php } ?>
-					
-					
+										
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="site_name" class="control-label col-form-label">{!! $sitelang['site_name'] !!}</label>
@@ -125,9 +134,11 @@ if (! empty($temp)) {
 							<input type="text" data-toggle="{{ $sitelang['company_id'] }}" title="{{ $sitelang['company_id'] }}" class="form-control" id="company_id" name="company_id" placeholder="{{ $sitelang['company_id'] }}" required="" data-original-title="" />
 							-->
 							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="company_id">
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="company_id" name="company_id">
 							<?php 
-							if (!empty($list_company)) {
+							if (!empty($list_company)) {?>
+								<option value="" /> {{ $lang['please_select'] }} </>
+								<?php
 								foreach ($list_company as $k => $rs) {
 								?>
 								<option value="{{ $rs['company_id'] }}">{{ $rs['company_name'] . ' - ID ' . $rs['company_id']}}</option>
@@ -153,7 +164,7 @@ if (! empty($temp)) {
 							<label for="site_qty_value" class="control-label col-form-label">{!! $sitelang['site_qty_value'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $sitelang['site_qty_value'] }}" title="{{ $sitelang['site_qty_value'] }}" class="form-control" id="site_qty_value" name="site_qty_value" placeholder="{{ $sitelang['site_qty_value'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $sitelang['site_qty_value'] }}" title="{{ $sitelang['site_qty_value'] }}" class="form-control numeric" id="site_qty_value" name="site_qty_value" placeholder="{{ $sitelang['site_qty_value'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
@@ -189,7 +200,7 @@ if (! empty($temp)) {
 							<label for="reset_days" class="control-label col-form-label">{!! $sitelang['reset_days'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="reset_days" name="reset_days" placeholder="{{ $sitelang['reset_days'] }}" required="" data-original-title="{{ $sitelang['reset_days'] }}" />
+							<input type="text" data-toggle="" title="" class="form-control numeric" id="reset_days" name="reset_days" placeholder="{{ $sitelang['reset_days'] }}" required="" data-original-title="{{ $sitelang['reset_days'] }}" />
 						</div>
 					</div>
 					

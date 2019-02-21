@@ -140,7 +140,7 @@ function validate_column($arrsource,$arrtarget) {
 								<?php 
 								foreach ($list_reason_type as $k => $rs) {
 								?>
-								<option value="{{ $rs['reason_type_id']}}">{{ $rs['attribute_id'] . ' - ID ' . $rs['reason_type_id']}}</option>
+								<option value="{{ $rs['reason_type_id']}}">{{ $rs['article_attribute_id'] . ' - ID ' . $rs['reason_type_id']}}</option>
 								<?php 
 								} 
 							}

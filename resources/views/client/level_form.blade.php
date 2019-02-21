@@ -114,7 +114,7 @@ function validate_column($arrsource,$arrtarget) {
 							<label for="level_hierarchy" class="control-label col-form-label">{!! $levellang['level_hierarchy'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<textarea type="text" data-toggle="{{ $levellang['level_hierarchy'] }}" title="" class="form-control" id="level_hierarchy" name="level_hierarchy" placeholder="{{ $levellang['level_hierarchy'] }}" required="" data-original-title="{{ $levellang['level_hierarchy'] }}"></textarea>
+							<textarea type="text" data-toggle="{{ $levellang['level_hierarchy'] }}" title="" class="form-control numeric" id="level_hierarchy" name="level_hierarchy" placeholder="{{ $levellang['level_hierarchy'] }}" required="" data-original-title="{{ $levellang['level_hierarchy'] }}"></textarea>
 						</div>
 					</div>
 					

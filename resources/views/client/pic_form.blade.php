@@ -34,6 +34,19 @@ $base_url = base_url();
 
 // $PAGE_TITLE = $action .' '. $piclang['module']; 
 
+$api_url_user = $list_site = $api_method = $api_param = $api_header = NULL;
+$api_param['token'] = env('API_KEY');
+$api_param['paging'] = false;
+
+$api_url_user = env('API_URL').'site/get_list';
+$api_method = 'get';
+// $api_header['debug'] = 1;
+
+$list_site = curl_api_liquid($api_url_user, $api_method, $api_header, $api_param);
+
+if (! empty($list_site)) $list_site = json_decode($list_site,1);
+if (! empty($list_site['data'])) $list_site = $list_site['data'];
+
 function validate_column($arrsource,$arrtarget) {
 	
 	if (empty($arrsource) || empty($arrtarget)) {
@@ -123,7 +136,19 @@ function validate_column($arrsource,$arrtarget) {
 							<label for="site_id" class="control-label col-form-label">{!! $piclang['site_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<textarea type="text" data-toggle="{{ $piclang['site_id'] }}" title="" class="form-control" id="site_id" name="site_id" placeholder="{{ $piclang['site_id'] }}" required="" data-original-title="{{ $piclang['site_id'] }}"></textarea>
+						<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id">
+							<?php 
+							if (!empty($list_site)) {?>
+								<option value="" /> {{ $lang['please_select'] }} </>
+								<?php
+								foreach ($list_site as $k => $rs) {
+								?>
+								<option value="{{ $rs['site_id']}}">{{ $rs['site_name'] . ' - ID ' . $rs['site_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
 						</div>
 					</div>
 					
