@@ -84,6 +84,7 @@ class ModularLoginController extends ModularController
 			// $url = 'http://www.grevia.com/api/member';
 			$url = env('API_URL').'user/get?user_code='.$post['username'];
 			$obj = curl_api_liquid($url);
+			// debug($obj,1);
 
 			if (empty($obj)) {
 				// $message = 'Mohon maaf terjadi kesalahan. Silakan coba lagi';
@@ -97,6 +98,7 @@ class ModularLoginController extends ModularController
 				return redirect('login')->with('message', print_message($message));
 			}
 			
+			$decrypt_password = NULL;
 			if (isset($obj['password'])) $decrypt_password = Crypt::decryptString($obj['password']);
 			
 			// valid
@@ -130,7 +132,7 @@ class ModularLoginController extends ModularController
 				$targeturl = 'login';
 				$message = 'Email / Password tidak sesuai';
 			}
-			return redirect('login')->with('message', print_message($message));
+			return redirect($targeturl)->with('message', print_message($message));
 		}
 	}
 }

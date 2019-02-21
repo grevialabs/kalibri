@@ -34,7 +34,6 @@ $base_url = base_url();
 
 // $PAGE_TITLE = $action .' '. $sitelang['module']; 
 
-// if (isset($get['do'])) 
 $list_company = NULL;
 $api_url = $api_method = $api_param = $api_header = NULL;
 $api_param['token'] = env('API_KEY');
@@ -44,14 +43,15 @@ $api_url = env('API_URL').'company/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 
-$temp = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+$list_company = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 
-if (! empty($temp)) { 
-	$temp = json_decode($temp,1);
-	$list_company = $temp['data'];
+if (! empty($list_company)) { 
+	$list_company = json_decode($list_company,1);
+	$list_company = $list_company['data'];
 }
 
 ?>
+
 
 <!-- Article AREA -->
 <div class="row">
@@ -84,17 +84,6 @@ if (! empty($temp)) {
 					
 				
 					<?php if (isset($data['site_id'])) { ?>
-					
-					<!--
-					<div class="col-lg-12 col-sm-12">
-						<div class="md-form">
-							<input type="text" id="site_id" class="form-control" value="{{ $data['site_id'] }}" disabled />
-							<input type="hidden" name="site_id" value="{{ $data['site_id'] }}" />
-							
-							<label for="site_id" >Company ID</label>
-						</div>
-					</div>
-					-->
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="site_id" class="control-label col-form-label">{!! $sitelang['site_id'] !!}</label>
@@ -104,18 +93,20 @@ if (! empty($temp)) {
 							<input type="hidden" name="site_id" value="{{ $data['site_id'] }}" />
 						</div>
 					</div>
-					<?php }
-					else{ ?>
+					<?php } else { ?>
+					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="site_id" class="control-label col-form-label">{!! $sitelang['site_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $sitelang['site_id'] }}" title="{{ $sitelang['site_id'] }}" class="form-control" id="site_id" name="site_id" placeholder="{{ $sitelang['site_id'] }}" required="" data-original-title="" "/>							
+							<input type="text" data-toggle="" title="" class="form-control text-uppercase" id="site_id" name="site_id" placeholder="{{ $sitelang['site_id'] }}" required="" data-original-title="" value="" maxlength="4" />
+							<small class="b" id="spn_site_id"></small>
+							<input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="light" data-width="100" data-size="small">
 						</div>
 					</div>
 					<?php } ?>
-										
+					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="site_name" class="control-label col-form-label">{!! $sitelang['site_name'] !!}</label>
@@ -134,11 +125,9 @@ if (! empty($temp)) {
 							<input type="text" data-toggle="{{ $sitelang['company_id'] }}" title="{{ $sitelang['company_id'] }}" class="form-control" id="company_id" name="company_id" placeholder="{{ $sitelang['company_id'] }}" required="" data-original-title="" />
 							-->
 							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="company_id" name="company_id">
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="company_id">
 							<?php 
-							if (!empty($list_company)) {?>
-								<option value="" /> {{ $lang['please_select'] }} </>
-								<?php
+							if (!empty($list_company)) {
 								foreach ($list_company as $k => $rs) {
 								?>
 								<option value="{{ $rs['company_id'] }}">{{ $rs['company_name'] . ' - ID ' . $rs['company_id']}}</option>
@@ -164,7 +153,7 @@ if (! empty($temp)) {
 							<label for="site_qty_value" class="control-label col-form-label">{!! $sitelang['site_qty_value'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $sitelang['site_qty_value'] }}" title="{{ $sitelang['site_qty_value'] }}" class="form-control numeric" id="site_qty_value" name="site_qty_value" placeholder="{{ $sitelang['site_qty_value'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $sitelang['site_qty_value'] }}" title="{{ $sitelang['site_qty_value'] }}" class="form-control" id="site_qty_value" name="site_qty_value" placeholder="{{ $sitelang['site_qty_value'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
@@ -200,7 +189,7 @@ if (! empty($temp)) {
 							<label for="reset_days" class="control-label col-form-label">{!! $sitelang['reset_days'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control numeric" id="reset_days" name="reset_days" placeholder="{{ $sitelang['reset_days'] }}" required="" data-original-title="{{ $sitelang['reset_days'] }}" />
+							<input type="text" data-toggle="" title="" class="form-control" id="reset_days" name="reset_days" placeholder="{{ $sitelang['reset_days'] }}" required="" data-original-title="{{ $sitelang['reset_days'] }}" />
 						</div>
 					</div>
 					
@@ -236,9 +225,9 @@ if (! empty($temp)) {
 	</div>
 </div>
 
-<script>
+<script type="text/javascript">
 $(document).ready( function() {
-	
+		
 	<?php 
     if (! empty($data)) 
     {
@@ -252,5 +241,63 @@ $(document).ready( function() {
     }
 
     ?>
+	
+	<?php if ($get['do'] == 'insert') { ?>
+	// ---------------------
+	// Start check ajax element
+	var btn_action = 'button[type="submit"]';
+	var input_target = 'input[name=site_id]';
+	var column = 'SiteID';
+	var span_target = '#spn_site_id';
+	
+	$(btn_action).attr('disabled','disabled');
+	$(input_target).on('keyup focusout', function(){
+		// delay input
+		var site_id = $(this).val();
+		if ($.trim(site_id).length) 
+		{	
+			var paramdata = 'site_id=' + site_id;
+			// $('#spn_username').html('<i class="fa fa-cog fa-spin"></i> mohon menunggu');
+			// -------------------------------------------------
+			// Start ajax here
+			$.ajax({
+				type: "GET",
+				url: "<?php echo current_url()?>/ajax",
+				data: paramdata,
+				cache: false,
+				success: function(resp) {
+					btn_status = 'disabled';
+					if (resp == "valid") {
+						btn_status = false;
+						action_message = '<span class="clrGrn"><i class="fa fa-check"></i> ' + column + ' valid</span>';
+					} else if (resp == "invalid") {
+						btn_status = 'disabled';
+						action_message = '<span class="clrRed"><i class="fa fa-close"></i> ' + column + ' is invalid.</span>';
+					} else {
+						btn_status = 'disabled';
+						action_message = '<span class="clrRed"><i class="fa fa-close"></i> Error occurred. Please try again later.</span>';
+					}
+					$(span_target).html(action_message);
+					$(btn_action).attr('disabled',btn_status);
+				}, 
+				error: function (xhr, ajaxOptions, thrownError) {
+					// alert(xhr.status);
+					// alert(thrownError);
+					action_message = '<span class="clrRed"><i class="fa fa-close"></i> Error occurred. Please try again later.</span>';
+					$(span_target).html(action_message);
+					$(btn_action).attr('disabled','disabled');
+				}
+			});
+			
+			// End ajax
+			// -------------------------------------------------
+		}
+		else
+		{
+			$(span_target).html('<span class="clrRed"><i class="fa fa-close"></i> ' + column + ' harus diisi</span>');
+			$(btn_action).attr('disabled','disabled');
+		}
+	});
+	<?php } ?>
 })
 </script>

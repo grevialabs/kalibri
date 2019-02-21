@@ -21,7 +21,34 @@ class ClientSiteController extends ClientController
 		$this->themes = env('THEMES','general');
 		parent::__construct();
 	}
+	
+	public function ajax()
+	{
+		$get = $_GET;
+		if (! isset($get['site_id']) || $get['site_id'] == '') {
+			echo "site_id required";
+			die;
+		}
 		
+		$api_url = $api_method = $api_param = $api_header = NULL;
+		$api_param['token'] = env('API_KEY');
+		$api_param['site_id'] = $get['site_id'];
+
+		$api_url = env('API_URL').'site/get';
+		$api_method = 'get';
+		// $api_header['debug'] = 1;
+		
+		$data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+
+		if (! empty($data)) $data = json_decode($data,1);
+
+		$message = 'valid';
+		if (isset($data['site_id']) && $data['site_id'] != '') $message = 'invalid';		
+		
+		echo $message;
+		die;
+	}
+	
 	public function site()
 	{
 		$param = $content = $get = $lang = $sitelang = $current_url = NULL;

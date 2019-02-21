@@ -4,6 +4,10 @@ $base_url = base_url();
 $cookie_user = NULL;
 
 if (is_member()) $cookie_user = get_user_cookie();
+
+// Bypass data from middleware
+$list_unavail_menu = \Request::get('list_unavail_menu');
+
 ?>
 <!-- ============================================================== -->
 <!-- Topbar header - style you can find in pages.scss -->
@@ -337,3 +341,26 @@ if (is_member()) $cookie_user = get_user_cookie();
 <!--
 $('#charts').parent('li').addClass('selected')
 -->
+<script>
+$(document).ready(function(){
+	<?php 
+	if (! empty($list_unavail_menu)) {
+		foreach ($list_unavail_menu as $key => $menu) {
+			if ($menu['read'] == 1 || ($menu['create'] == 1 || $menu['update'] == 1 || $menu['delete'] == 1)) {
+				
+			} else {
+		?>
+		// mantabjiwa
+	// $('#client_<?php echo $menu['capability'] ?>').parent('.sidebar-item').hide();
+	$("a[href*=<?php echo $menu['capability'] ?>").parent('.sidebar-item').hide();
+
+	// $('#client_dashboard').parent('.sidebar-item').hide();
+	
+	// $('#client_user-attribute').parent('.sidebar-item').hide();
+		<?php 
+			}
+		}
+	}
+	?>
+})
+</script>

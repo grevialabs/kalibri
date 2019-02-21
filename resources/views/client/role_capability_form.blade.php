@@ -33,39 +33,30 @@ $base_url = base_url();
 // if ($get['do'] == 'insert') $action = $lang['add'];
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
+// --------------------------
+// check access group and insert if not exist
+$api_url = $api_url_capability = $api_method = $api_param = $api_header = NULL;
+$api_param['token'] = env('API_KEY');
+$api_param['role_id'] = get_user_cookie('role_id');
+
+$api_url = env('API_URL').'role_capability/cron_insert_role';
+$api_method = 'get';
+// $api_header['debug'] = 1;
+$list_role = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+// --------------------------
+
 // $PAGE_TITLE = $action .' '. $role_capability_lang['module']; 
-$list_role = $list_capability = NULL;
-$api_url_role = $api_url_capability = $api_method = $api_param = $api_header = NULL;
+$list_role = NULL;
+$api_url = $api_method = $api_param = $api_header = NULL;
 $api_param['token'] = env('API_KEY');
 $api_param['paging'] = false;
 
-$api_url_role = env('API_URL').'role/get_list';
-$api_url_capability = env('API_URL').'capability/get_list';
+$api_url = env('API_URL').'role/get_list';
 $api_method = 'get';
 //  $api_header['debug'] = 1;
-
-$temp_role = curl_api_liquid($api_url_role, $api_method, $api_header, $api_param);
-$temp_capability = curl_api_liquid($api_url_capability, $api_method, $api_header, $api_param);
-
-
-if (! empty($temp_role)) $temp_role = json_decode($temp_role,1);
-$list_role = $temp_role['data'];
-if (! empty($temp_capability)) $temp_capability = json_decode($temp_capability,1);
-$list_capability = $temp_capability['data'];
-
-function validate_column($arrsource,$arrtarget) {
-	
-	if (empty($arrsource) || empty($arrtarget)) {
-		return 'helper error: validate_column error parameter';
-	}	
-	
-	$temp = NULL;
-	foreach ($arrsource as $rs) {
-		if (isset($arrtarget[$rs])) $temp[$rs] = $arrtarget[$rs];
-	}
-	
-	return $temp;
-}
+$list_role = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+if (! empty($list_role)) $list_role = json_decode($list_role,1);
+if (! empty($list_role['data'])) $list_role = $list_role['data'];
 
 // $source = array('role_capability_id', 'level_name', 'level_address', 'level_phone', 'level_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
 // $target = array('mantap' => 'gokil', 'level_name' => 'harusmasuknih');

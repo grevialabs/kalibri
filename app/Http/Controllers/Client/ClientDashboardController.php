@@ -24,10 +24,13 @@ class ClientDashboardController extends ClientController
 		parent::__construct();
 	}
 		
-	public function dashboard()
+	public function dashboard(Request $request)
 	{
 		$param = $content = $get = $lang = $companylang = $current_url = NULL;
-		
+		// $req = \Request::get('list_unavail_menu');
+		// $req = $request->get['ayam'];
+		// $req = $request->mantab;
+		// debug($req,1);
 		if ($_GET) $get = $_GET;
 		
 		$lang = Lang::get('common');

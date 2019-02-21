@@ -63,8 +63,8 @@ Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () 
 	Route::get('company', 'Client\ClientCompanyController@company');
 	Route::post('company/insert', 'Client\ClientCompanyController@insert');
 	Route::post('company/update', 'Client\ClientCompanyController@update');
-	Route::post('company/delete', 'Client\ClientCompanyController@delete');
-	Route::post('company/bulk', 'Client\ClientCompanyController@bulk');
+	Route::any('company/delete', 'Client\ClientCompanyController@delete');
+	Route::any('company/bulk', 'Client\ClientCompanyController@bulk');
 
 	Route::get('user', 'Client\ClientUserController@user');
 	Route::any('user/insert', 'Client\ClientUserController@insert');
@@ -78,6 +78,7 @@ Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () 
 	Route::any('user-attribute/delete', 'Client\ClientUserAttributeController@delete');
 	Route::any('user-attribute/bulk', 'Client\ClientUserAttributeController@bulk');
 	
+	Route::get('site/ajax', 'Client\ClientSiteController@ajax');
 	Route::get('site', 'Client\ClientSiteController@site');
 	Route::any('site/insert', 'Client\ClientSiteController@insert');
 	Route::any('site/update', 'Client\ClientSiteController@update');

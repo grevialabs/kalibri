@@ -21,6 +21,8 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
     <!-- Custom CSS -->
 	
 	<link rel="stylesheet" type="text/css" href="../public/matrix/assets/libs/select2/dist/css/select2.min.css?{{ $jsv }}">
+	
+	<link rel="stylesheet" type="text/css" href="../public/css/bootstrap-toggle.2.2.2.min.css?{{ $jsv }}">
 	<link rel="stylesheet" type="text/css" href="../public/matrix/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css?{{ $jsv }}">
 
 	<link href="<?php echo URL::to('/');?>/public/css/style_default.css?{{ $jsv }}" rel="stylesheet">
@@ -188,6 +190,8 @@ if (! isset($PAGE_TITLE)) $PAGE_TITLE = 'Admin dashboard';
     <script type="text/javascript" src="../public/matrix/assets/libs/jquery-minicolors/jquery.minicolors.min.js?{{ $jsv }}"></script>
     <script type="text/javascript" src="../public/matrix/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js?{{ $jsv }}"></script>
 	<script type="text/javascript" src="../public/js/jquery.shiftcheckbox.js"></script>
+	
+	<script type="text/javascript" src="../public/js/bootstrap-toggle.2.2.2.min.js?{{ $jsv }}"></script>
 	
 	<script>
 	$(document).ready(function(){
