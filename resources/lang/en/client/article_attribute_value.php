@@ -21,6 +21,6 @@ return [
     'article_attribute_value_id' => 'ArticleAttributeValueId',
     'article_id' => 'ArticleId',
     'article_attribute_id' => 'ArticleAttributeId',
-    'value' => 'Value',
+    'attribute_value' => 'AttributeValue',
 
 ];

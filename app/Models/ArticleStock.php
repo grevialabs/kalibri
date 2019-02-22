@@ -9,14 +9,14 @@ class ArticleStock extends Model
     // getorder_allowed_list
 	public static function getorder_allowed_list()
     {
-       static $str = array('site_id','article_id','customer_article','description','stock_qty');
+       static $str = array('article_stock_id','site_id','article','customer_article','description','stock_qty');
        return $str;
     }
 	
 	// Allowed
 	public static function required()
     {
-       $str = array('site_id','article_id','customer_article','description','stock_qty');
+       $str = array('article_stock_id','site_id','article','customer_article','description','stock_qty');
        return $str;
     }
 	

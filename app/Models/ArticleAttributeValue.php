@@ -9,14 +9,14 @@ class ArticleAttributeValue extends Model
     // getorder_allowed_list
 	public static function getorder_allowed_list()
     {
-       static $str = array('article_attribute_value_id','article_id','article_attribute_id','value');
+       static $str = array('article_attribute_value_id','article_id','article_attribute_id','attribute_value');
        return $str;
     }
 	
 	// Allowed
 	public static function required()
     {
-       $str = array('article_attribute_value_id','article_id','article_attribute_id','value');
+       $str = array('article_attribute_value_id','article_id','article_attribute_id','attribute_value');
        return $str;
     }
 	

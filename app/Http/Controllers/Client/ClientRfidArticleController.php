@@ -15,7 +15,7 @@ use Cookie;
 use Lang;
 use Request;
 
-class ClientArticleStockController extends ClientController
+class ClientRfidArticleController extends ClientController
 {	
 	public function __construct()
 	{
@@ -24,24 +24,24 @@ class ClientArticleStockController extends ClientController
 		parent::__construct();
 	}
 		
-	public function article_stock()
+	public function rfid_article()
 	{
-		$param = $content = $get = $lang = $article_stock_lang = $current_url = NULL;
+		$param = $content = $get = $lang = $rfid_article_lang = $current_url = NULL;
 		
 		if ($_GET) $get = $_GET;
 		
 		$lang = Lang::get('common');
-		$article_stock_lang = Lang::get('client/article_stock');
+		$rfid_article_lang = Lang::get('client/rfid_article');
 		$current_url = current_url();
-		// debug($article_stock_lang,1);
+		// debug($rfid_article_lang,1);
 		
 		$param['get'] = $get;
 		$param['lang'] = $lang;
-		$param['article_stock_lang'] = $article_stock_lang;
-		$param['PAGE_TITLE'] = $article_stock_lang['module'];
-		$param['MODULE'] = $article_stock_lang['module'];
+		$param['rfid_article_lang'] = $rfid_article_lang;
+		$param['PAGE_TITLE'] = $rfid_article_lang['module'];
+		$param['MODULE'] = $rfid_article_lang['module'];
 		
-		if (isset($get['do']) && ($get['do'] == 'view' || $get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['article_stock_id']))) {
+		if (isset($get['do']) && ($get['do'] == 'view' || $get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['rfid_article_id']))) {
 			if ($get['do'] == 'insert') { 
 				$param['ACTION'] = $lang['insert'];
 				$param['form_url'] = $current_url.DS.'insert';
@@ -50,13 +50,13 @@ class ClientArticleStockController extends ClientController
 				$param['form_url'] = $current_url.DS.'update';
 			}
 			
-			$viewtarget = 'client.article_stock_form';
+			$viewtarget = 'client.rfid_article_form';
 		} else {
 			$param['ACTION'] = $lang['list'];
-			$viewtarget = 'client.article_stock_list';
+			$viewtarget = 'client.rfid_article_list';
 		}
 		
-		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $article_stock_lang['module'];
+		$param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $rfid_article_lang['module'];
 		
 		$param['current_url'] = $current_url;
 		$content = view($viewtarget,$param);	
@@ -85,7 +85,7 @@ class ClientArticleStockController extends ClientController
 			$param['created_ip'] = get_ip();
 			// $param['company_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'article_stock';
+			$api_url = env('API_URL').'rfid_article';
 			$api_method = 'post';
 			
 			// $api_header['debug'] = 1;
@@ -117,8 +117,8 @@ class ClientArticleStockController extends ClientController
 			unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($post['site_id'])) {
-                $message = 'site_id not exist';
+            if (! isset($post['rfid_article_id'])) {
+                $message = 'rfid_article_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
@@ -129,14 +129,14 @@ class ClientArticleStockController extends ClientController
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'article_stock';
+			$api_url = env('API_URL').'rfid_article';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
 			$api_header['token'] = env('API_KEY');
 
 			$update = curl_api_liquid($api_url, $api_method, $api_header, $param);
-			//$api_header['debug'] = 1;
+			
 			if (isset($update)) {
 				$update = json_decode($update,1);
 				
@@ -161,20 +161,20 @@ class ClientArticleStockController extends ClientController
 			// unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($get['site_id'])) {
-                $message = 'site_id not exist';
+            if (! isset($get['rfid_article_id'])) {
+                $message = 'rfid_article_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
 			// Action start here
 			$param = NULL;
-			$param['site_id'] = $get['site_id'];
+			$param['rfid_article_id'] = $get['rfid_article_id'];
 			$param['status'] = -1;
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'article_stock';
+			$api_url = env('API_URL').'rfid_article';
 			$api_method = 'delete';
 			
 			// $api_header['debug'] = 1;
@@ -211,7 +211,7 @@ class ClientArticleStockController extends ClientController
 			$param['updated_ip'] = get_ip();
 			// $param['company_token'] = env('API_KEY');
 			
-			$api_url = env('API_URL').'article_stock';
+			$api_url = env('API_URL').'rfid_article';
 			$api_method = 'put';
 			
 			// $api_header['debug'] = 1;
@@ -225,11 +225,11 @@ class ClientArticleStockController extends ClientController
 				if ($save['is_success']) $message = 'Save success';
 				else $message = 'Save failed';
 				
-				// return redirect('article_stock')->with('message', print_message($message));
+				// return redirect('rfid_article')->with('message', print_message($message));
 			}
 			
 			$message = 'Bulk action success';
 		}
-		return redirect('article_stock')->with('message', print_message($message));
+		return redirect('rfid_article')->with('message', print_message($message));
 	}
 }

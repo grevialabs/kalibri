@@ -2,12 +2,12 @@
 // ---------------------------
 // Get data 
 $data = NULL;
-if (isset($get['article_stock_id'])) {
+if (isset($get['article_po_id'])) {
 	$api_url = $api_method = $api_param = $api_header = NULL;
 	$api_param['token'] = env('API_KEY');
-	$api_param['article_stock_id'] = $get['article_stock_id'];
+	$api_param['article_po_id'] = $get['article_po_id'];
 
-	$api_url = env('API_URL').'article_stock/get';
+	$api_url = env('API_URL').'article_po/get';
 	$api_method = 'get';
 	// $api_header['debug'] = 1;
 	
@@ -32,7 +32,8 @@ $base_url = base_url();
 // if ($get['do'] == 'insert') $action = $lang['add'];
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
-// $PAGE_TITLE = $action .' '. $article_stock_lang['module']; 
+// $PAGE_TITLE = $action .' '. $article_po_lang['module']; 
+
 $list_site = $list_article = NULL;
 $api_url = $api_url_article = $api_method = $api_param = $api_header = NULL;
 $api_param['token'] = env('API_KEY');
@@ -66,8 +67,8 @@ function validate_column($arrsource,$arrtarget) {
 	return $temp;
 }
 
-// $source = array('article_stock_id', 'stock_qty', 'company_address', 'company_phone', 'company_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
-// $target = array('mantap' => 'gokil', 'stock_qty' => 'harusmasuknih');
+// $source = array('article_po_id', 'customer_article', 'pic_address', 'po_created_date', 'pic_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
+// $target = array('mantap' => 'gokil', 'customer_article' => 'harusmasuknih');
 // // $test = array('ayam','bebek');
 // // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
 // $a = validate_column($source,$target);
@@ -104,54 +105,35 @@ function validate_column($arrsource,$arrtarget) {
 					-->
 					
 				
-					<?php if (isset($data['article_stock_id'])) { ?>
+					<?php if (isset($data['article_po_id'])) { ?>
 					
 					<!--
 					<div class="col-lg-12 col-sm-12">
 						<div class="md-form">
-							<input type="text" id="article_stock_id" class="form-control" value="{{ $data['article_stock_id'] }}" disabled />
-							<input type="hidden" name="article_stock_id" value="{{ $data['article_stock_id'] }}" />
+							<input type="text" id="article_po_id" class="form-control" value="{{ $data['article_po_id'] }}" disabled />
+							<input type="hidden" name="article_po_id" value="{{ $data['article_po_id'] }}" />
 							
-							<label for="article_stock_id" >Company ID</label>
+							<label for="article_po_id" >Company ID</label>
 						</div>
 					</div>
 					-->
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="article_stock_id" class="control-label col-form-label">{!! $article_stock_lang['article_stock_id'] !!}</label>
+							<label for="article_po_id" class="control-label col-form-label">{!! $article_po_lang['article_po_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $article_stock_lang['article_stock_id'] }}" required="" data-original-title="" value="{{ $data['article_stock_id'] }}" disabled />
-							<input type="hidden" name="article_stock_id" value="{{ $data['article_stock_id'] }}" />
+							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $article_po_lang['article_po_id'] }}" required="" data-original-title="" value="{{ $data['article_po_id'] }}" disabled />
+							<input type="hidden" name="article_po_id" value="{{ $data['article_po_id'] }}" />
 						</div>
 					</div>
-					<div class="form-group row">
+					<?php } ?>
+					
+                    <div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="site_id" class="control-label col-form-label">{!! $article_stock_lang['site_id'] !!}</label>
+							<label for="site_id" class="control-label col-form-label">{!! $article_po_lang['site_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $article_stock_lang['site_id'] }}" required="" data-original-title="" value="{{ $data['site_id'] }}" disabled />
-							<input type="hidden" name="site_id" value="{{ $data['site_id'] }}" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="article" class="control-label col-form-label">{!! $article_stock_lang['article'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $article_stock_lang['article'] }}" required="" data-original-title="" value="{{ $data['article'] }}" disabled />
-							<input type="hidden" name="article" value="{{ $data['article'] }}" />
-						</div>
-					</div>
-					<?php } 
-					else
-					{?>
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="site_id" class="control-label col-form-label">{!! $article_stock_lang['site_id'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id	">
+						<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id">
 							<?php 
 							if (!empty($list_site)) {?>
 								<option value="" /> {{ $lang['please_select'] }} </>
@@ -166,12 +148,13 @@ function validate_column($arrsource,$arrtarget) {
 							</select>
 						</div>
 					</div>
-					<div class="form-group row">
+					
+                    <div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="article" class="control-label col-form-label">{!! $article_stock_lang['article'] !!}</label>
+							<label for="article" class="control-label col-form-label">{!! $article_po_lang['article'] !!}</label>
 						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="article" id="article	">
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+						<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="article" id="article">
 							<?php 
 							if (!empty($list_article)) {?>
 								<option value="" /> {{ $lang['please_select'] }} </>
@@ -186,35 +169,49 @@ function validate_column($arrsource,$arrtarget) {
 							</select>
 						</div>
 					</div>
-					<?php } ?>
 					
-                    <div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="customer_article" class="control-label col-form-label">{!! $article_stock_lang['customer_article'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $article_stock_lang['customer_article'] }}" title="{{ $article_stock_lang['customer_article'] }}" class="form-control" id="customer_article" name="customer_article" placeholder="{{ $article_stock_lang['customer_article'] }}" required="" data-original-title="" />
-						</div>
-					</div>
-					
-                    <div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="description" class="control-label col-form-label">{!! $article_stock_lang['description'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $article_stock_lang['description'] }}" title="{{ $article_stock_lang['description'] }}" class="form-control" id="description" name="description" placeholder="{{ $article_stock_lang['description'] }}" required="" data-original-title="" />
-						</div>
-					</div>
-
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="stock_qty" class="control-label col-form-label">{!! $article_stock_lang['stock_qty'] !!}</label>
+							<label for="customer_article" class="control-label col-form-label">{!! $article_po_lang['customer_article'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $article_stock_lang['stock_qty'] }}" title="{{ $article_stock_lang['stock_qty'] }}" class="form-control numeric" id="stock_qty" name="stock_qty" placeholder="{{ $article_stock_lang['stock_qty'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $article_po_lang['customer_article'] }}" title="{{ $article_po_lang['customer_article'] }}" class="form-control" id="customer_article" name="customer_article" placeholder="{{ $article_po_lang['customer_article'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="description" class="control-label col-form-label">{!! $article_po_lang['description'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+                            <input type="text" data-toggle="{{ $article_po_lang['description'] }}" title="{{ $article_po_lang['description'] }}" class="form-control" id="description" name="description" placeholder="{{ $article_po_lang['description'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="po_blanket_number" class="control-label col-form-label">{!! $article_po_lang['po_blanket_number'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+                            <input type="text" data-toggle="{{ $article_po_lang['po_blanket_number'] }}" title="{{ $article_po_lang['po_blanket_number'] }}" class="form-control" id="po_blanket_number" name="po_blanket_number" placeholder="{{ $article_po_lang['po_blanket_number'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="po_blanket_qty" class="control-label col-form-label">{!! $article_po_lang['po_blanket_qty'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+                            <input type="text" data-toggle="{{ $article_po_lang['po_blanket_qty'] }}" title="{{ $article_po_lang['po_blanket_qty'] }}" class="form-control numeric" id="po_blanket_qty" name="po_blanket_qty" placeholder="{{ $article_po_lang['po_blanket_qty'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="po_created_date" class="control-label col-form-label">{!! $article_po_lang['po_created_date'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+                            <input type="text" data-toggle="{{ $article_po_lang['po_created_date'] }}" title="{{ $article_po_lang['po_created_date'] }}" class="form-control" id="po_created_date" name="po_created_date" placeholder="{{ $article_po_lang['po_created_date'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+										
 					<div class="form-group row">
 						<div class="col-sm-12">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">

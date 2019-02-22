@@ -18,8 +18,9 @@ return [
     'add_new' => 'Add new Article Stock',
     'p1' => '',
 	
+    'article_stock_id' => 'ArticleStockId',
     'site_id' => 'SiteId',
-    'article_id' => 'ArticleID',
+    'article' => 'Article',
     'customer_article' => 'CustomerArticle',
     'description' => 'Description',
     'stock_qty' => 'StockQty',

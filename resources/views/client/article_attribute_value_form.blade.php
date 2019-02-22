@@ -132,33 +132,39 @@ function validate_column($arrsource,$arrtarget) {
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="article_id" class="control-label col-form-label">{!! $article_attribute_value_lang['article'] !!}</label>
+							<label for="article_id" class="control-label col-form-label">{!! $article_attribute_value_lang['article_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="article_id">
+							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="article_id" id="article_id">
 							<?php 
-							if (!empty($list_article)) {
+							if (!empty($list_article)) {?>
+								<option value="" /> {{ $lang['please_select'] }} </>
+								<?php
 								foreach ($list_article as $k => $rs) {
 								?>
-								<option  value="{{ $rs['article_id']}}>{{ $rs['article'] . ' - ID ' . $rs['article_id']}}</option>
+								<option value="{{ $rs['article_id']}}">{{ $rs['article'] . ' - ID ' . $rs['article_id']}}</option>
 								<?php 
-								} 							}
+								} 
+							}
 							?>
 							</select>
 						</div>
 					</div>
-
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="article_attribute_id" class="control-label col-form-label">{!! $article_attribute_value_lang['attribute_name'] !!}</label>
+							<label for="article_attribute_id" class="control-label col-form-label">{!! $article_attribute_value_lang['article_attribute_id'] !!}</label>
 						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" id="article_attribute_id">
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="article_attribute_id" id="article_attribute_id">
 							<?php 
-							if (!empty($list_article_attribute)) {
+							if (!empty($list_article_attribute)) {?>
+								<option value="" /> {{ $lang['please_select'] }} </>
+								<?php
 								foreach ($list_article_attribute as $k => $rs) {
 								?>
-								<option value="{{ $rs['article_attribute_id']}}>{{ $rs['attribute_name'] . ' - ID ' . $rs['article_attribute_id']}}</option>
+								<option value="{{ $rs['article_attribute_id']}}">{{ $rs['attribute_name'] . ' - ID ' . $rs['article_attribute_id']}}</option>
 								<?php 
 								} 
 							}
@@ -167,30 +173,12 @@ function validate_column($arrsource,$arrtarget) {
 						</div>
 					</div>
 
-					<!-- <div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="article_id" class="control-label col-form-label">{!! $article_attribute_value_lang['article_id'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $article_attribute_value_lang['article_id'] }}" title="{{ $article_attribute_value_lang['article_id'] }}" class="form-control" id="article_id" name="article_id" placeholder="{{ $article_attribute_value_lang['article_id'] }}" required="" data-original-title="" />
-						</div>
-					</div>
-					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="article_attribute_id" class="control-label col-form-label">{!! $article_attribute_value_lang['article_attribute_id'] !!}</label>
+							<label for="value" class="control-label col-form-label">{!! $article_attribute_value_lang['attribute_value'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $article_attribute_value_lang['article_attribute_id'] }}" title="" class="form-control" id="article_attribute_id" name="article_attribute_id" placeholder="{{ $article_attribute_value_lang['article_attribute_id'] }}" required="" data-original-title="{{ $article_attribute_value_lang['article_attribute_id'] }}"></textarea>
-						</div>
-					</div> -->
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="value" class="control-label col-form-label">{!! $article_attribute_value_lang['value'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="value" name="value" placeholder="{{ $article_attribute_value_lang['value'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="" title="" class="form-control" id="attribute_value" name="attribute_value" placeholder="{{ $article_attribute_value_lang['attribute_value'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 										

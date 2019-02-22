@@ -111,7 +111,7 @@ $base_url = base_url();
 								<td width="150px"><a class="{{ $arrsort['article_attribute_value_id']['class'] }}" title="{{ $arrsort['article_attribute_value_id']['title'] }}" href="{{ $arrsort['article_attribute_value_id']['url'] }}">{{ $article_attribute_value_lang['article_attribute_value_id'] }} {!! $arrsort['article_attribute_value_id']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['article_id']['class'] }}" title="{{ $arrsort['article_id']['title'] }}" href="{{ $arrsort['article_id']['url'] }}">{{ $article_attribute_value_lang['article_id'] }} {!! $arrsort['article_id']['icon'] !!}</a></td>
                                 <td width="180px"><a class="{{ $arrsort['article_attribute_id']['class'] }}" title="{{ $arrsort['article_attribute_id']['title'] }}" href="{{ $arrsort['article_attribute_id']['url'] }}">{{ $article_attribute_value_lang['article_attribute_id'] }} {!! $arrsort['article_attribute_id']['icon'] !!}</a></td>
-                                <td width="180px"><a class="{{ $arrsort['value']['class'] }}" title="{{ $arrsort['value']['title'] }}" href="{{ $arrsort['value']['url'] }}">{{ $article_attribute_value_lang['value'] }} {!! $arrsort['value']['icon'] !!}</a></td>
+                                <td width="180px"><a class="{{ $arrsort['attribute_value']['class'] }}" title="{{ $arrsort['attribute_value']['title'] }}" href="{{ $arrsort['attribute_value']['url'] }}">{{ $article_attribute_value_lang['attribute_value'] }} {!! $arrsort['attribute_value']['icon'] !!}</a></td>
 								<td width="2">Status</td>
 								<td width="30px" class="talCnt">Option</td>
 							</tr>
@@ -136,7 +136,7 @@ $base_url = base_url();
 								<td>{{ $rs['article_attribute_value_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
 								<td>{{ $rs['article_id'] }}</td>
                                 <td>{{ $rs['article_attribute_id'] }}</td>
-                                <td>{{ $rs['value'] }}</td>
+                                <td>{{ $rs['attribute_value'] }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
 								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>

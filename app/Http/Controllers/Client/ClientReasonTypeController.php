@@ -84,7 +84,7 @@ class ClientReasonTypeController extends ClientController
 			$param['created_by'] = 1;
 			$param['created_ip'] = get_ip();
 			// $param['reason_token'] = env('API_KEY');
-			
+			// debug($param,1);
 			$api_url = env('API_URL').'reason_type';
 			$api_method = 'post';
 			

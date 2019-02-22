@@ -2,12 +2,12 @@
 // ---------------------------
 // Get data 
 $data = NULL;
-if (isset($get['reason_type_id'])) {
+if (isset($get['config_id'])) {
 	$api_url = $api_method = $api_param = $api_header = NULL;
 	$api_param['token'] = env('API_KEY');
-	$api_param['reason_type_id'] = $get['reason_type_id'];
+	$api_param['config_id'] = $get['config_id'];
 
-	$api_url = env('API_URL').'reason_type/get';
+	$api_url = env('API_URL').'config/get';
 	$api_method = 'get';
 	// $api_header['debug'] = 1;
 	
@@ -32,27 +32,20 @@ $base_url = base_url();
 // if ($get['do'] == 'insert') $action = $lang['add'];
 // else if ($get['do'] == 'edit') $action = $lang['edit'];
 
-// $PAGE_TITLE = $action .' '. $reason_type_lang['module']; 
+// $PAGE_TITLE = $action .' '. $configlang['module']; 
 
-$list_site = $list_article_attribute = NULL;
-$api_url = $api_url_article_attribute = $api_method = $api_param = $api_header = NULL;
+$api_url_user = $list_site = $api_method = $api_param = $api_header = NULL;
 $api_param['token'] = env('API_KEY');
 $api_param['paging'] = false;
 
-$api_url = env('API_URL').'site/get_list';
-$api_url_article_attribute = env('API_URL').'article_attribute/get_list';
+$api_url_user = env('API_URL').'site/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 
-$temp = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+$list_site = curl_api_liquid($api_url_user, $api_method, $api_header, $api_param);
 
-$temp_article_attribute = curl_api_liquid($api_url_article_attribute, $api_method, $api_header, $api_param);
-
-if (! empty($temp)) $temp = json_decode($temp,1);
-$list_site = $temp['data'];
-
-if (! empty($temp_article_attribute)) $temp_article_attribute = json_decode($temp_article_attribute,1);
-$list_article_attribute = $temp_article_attribute['data'];
+if (! empty($list_site)) $list_site = json_decode($list_site,1);
+if (! empty($list_site['data'])) $list_site = $list_site['data'];
 
 function validate_column($arrsource,$arrtarget) {
 	
@@ -68,8 +61,8 @@ function validate_column($arrsource,$arrtarget) {
 	return $temp;
 }
 
-// $source = array('reason_type_id', 'reason_name', 'reason_address', 'reason_phone', 'reason_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
-// $target = array('mantap' => 'gokil', 'reason_name' => 'harusmasuknih');
+// $source = array('config_id', 'config_name', 'pic_address', 'config_value', 'pic_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
+// $target = array('mantap' => 'gokil', 'config_name' => 'harusmasuknih');
 // // $test = array('ayam','bebek');
 // // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
 // $a = validate_column($source,$target);
@@ -106,56 +99,44 @@ function validate_column($arrsource,$arrtarget) {
 					-->
 					
 				
-					<?php if (isset($data['reason_type_id'])) { ?>
+					<?php if (isset($data['config_id'])) { ?>
 					
 					<!--
 					<div class="col-lg-12 col-sm-12">
 						<div class="md-form">
-							<input type="text" id="reason_type_id" class="form-control" value="{{ $data['reason_type_id'] }}" disabled />
-							<input type="hidden" name="reason_type_id" value="{{ $data['reason_type_id'] }}" />
+							<input type="text" id="config_id" class="form-control" value="{{ $data['config_id'] }}" disabled />
+							<input type="hidden" name="config_id" value="{{ $data['config_id'] }}" />
 							
-							<label for="reason_type_id" >Company ID</label>
+							<label for="config_id" >Company ID</label>
 						</div>
 					</div>
 					-->
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="" class="control-label col-form-label">{!! $reason_type_lang['reason_type_id'] !!}</label>
+							<label for="config_id" class="control-label col-form-label">{!! $configlang['config_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $reason_type_lang['reason_type_id'] }}" required="" data-original-title="" value="{{ $data['reason_type_id'] }}" disabled />
-							<input type="hidden" name="reason_type_id" value="{{ $data['reason_type_id'] }}" />
+							<input type="text" data-toggle="" title="" class="form-control" id="" placeholder="{{ $configlang['config_id'] }}" required="" data-original-title="" value="{{ $data['config_id'] }}" disabled />
+							<input type="hidden" name="config_id" value="{{ $data['config_id'] }}" />
 						</div>
 					</div>
 					<?php } ?>
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="article_attribute_id" class="control-label col-form-label">{!! $reason_type_lang['article_attribute_id'] !!}</label>
+							<label for="config_name" class="control-label col-form-label">{!! $configlang['config_name'] !!}</label>
 						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="article_attribute_id" id="article_attribute_id">
-							<?php 
-							if (!empty($list_article_attribute)) {?>
-								<option value="" /> {{ $lang['please_select'] }} </>
-								<?php
-								foreach ($list_article_attribute as $k => $rs) {
-								?>
-								<option value="{{ $rs['article_attribute_id']}}">{{ $rs['attribute_name'] . ' - ID ' . $rs['article_attribute_id']}}</option>
-								<?php 
-								} 
-							}
-							?>
-							</select>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $configlang['config_name'] }}" title="{{ $configlang['config_name'] }}" class="form-control" id="config_name" name="config_name" placeholder="{{ $configlang['config_name'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="site_id" class="control-label col-form-label">{!! $reason_type_lang['site_id'] !!}</label>
+							<label for="site_id" class="control-label col-form-label">{!! $configlang['site_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id">
+						<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="site_id" id="site_id">
 							<?php 
 							if (!empty($list_site)) {?>
 								<option value="" /> {{ $lang['please_select'] }} </>
@@ -170,16 +151,16 @@ function validate_column($arrsource,$arrtarget) {
 							</select>
 						</div>
 					</div>
-
+					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="attribute_value" class="control-label col-form-label">{!! $reason_type_lang['attribute_value'] !!}</label>
+							<label for="config_value" class="control-label col-form-label">{!! $configlang['config_value'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $reason_type_lang['attribute_value'] }}" title="{{ $reason_type_lang['attribute_value'] }}" class="form-control" id="attribute_value" name="attribute_value" placeholder="{{ $reason_type_lang['attribute_value'] }}" required="" data-original-title="" />
+                        <input checked="checked" data-toggle="{{ $configlang['config_value'] }}" title="{{ $configlang['config_value'] }}" name="config_value" id="config_value" type="checkbox" value="1" placeholder="{{ $configlang['config_value'] }}" data-original-title="" >
 						</div>
 					</div>
-					
+										
 					<div class="form-group row">
 						<div class="col-sm-12">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">

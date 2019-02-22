@@ -40,8 +40,8 @@ class ClientReasonTypeMappingController extends ClientController
 		$param['reason_type_mapping_lang'] = $reason_type_mapping_lang;
 		$param['PAGE_TITLE'] = $reason_type_mapping_lang['module'];
 		$param['MODULE'] = $reason_type_mapping_lang['module'];
-		
-		if (isset($get['do']) && ($get['do'] == 'view' || $get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['reason_type_id']))) {
+		//debug($get,1);
+		if (isset($get['do']) && ($get['do'] == 'view' || $get['do'] == 'insert' || $get['do'] == 'edit' && isset($get['reason_type_mapping_id']))) {
 			if ($get['do'] == 'insert') { 
 				$param['ACTION'] = $lang['insert'];
 				$param['form_url'] = $current_url.DS.'insert';
@@ -117,8 +117,8 @@ class ClientReasonTypeMappingController extends ClientController
 			unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($post['reason_type_id'])) {
-                $message = 'reason_type_id not exist';
+            if (! isset($post['reason_type_mapping_id'])) {
+                $message = 'reason_type_mapping_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
@@ -161,14 +161,14 @@ class ClientReasonTypeMappingController extends ClientController
 			// unset($post['_token']);
 			
             // Do validation here with model
-            if (! isset($get['reason_type_id'])) {
-                $message = 'reason_type_id not exist';
+            if (! isset($get['reason_type_mapping_id'])) {
+                $message = 'reason_type_mapping_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
 			// Action start here
 			$param = NULL;
-			$param['reason_type_id'] = $get['reason_type_id'];
+			$param['reason_type_mapping_id'] = $get['reason_type_mapping_id'];
 			$param['status'] = -1;
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;

@@ -7,10 +7,10 @@ $offset = 0;
 $page = 1;
 
 // $perpage_allowed = array(2,40,60);
-$article_stock_model = new ArticleStockModel();
+$config_model = new ConfigModel();
 $general_model = new GeneralModel();
 
-$getorder_allowed_list = $article_stock_model->getorder_allowed_list();
+$getorder_allowed_list = $config_model->getorder_allowed_list();
 $getorderby_allowed_list = $general_model->getorderby_allowed_list();
 $perpage_allowed = $general_model->perpage_allowed();
 
@@ -33,7 +33,7 @@ if (isset($getorder)) $api_param['order'] = $getorder; else $getorder = $getorde
 if (isset($getorderby)) $api_param['orderby'] = $getorderby; else $getorderby = $getorderby_allowed_list[0];
 $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_list);
 
-$api_url = env('API_URL').'article_stock/get_list';
+$api_url = env('API_URL').'config/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
@@ -57,16 +57,12 @@ $reget = http_build_query($reget);
 $resubmit_url = current_url().'?'.$reget;
 
 $base_url = base_url();
-
 ?>
 
 <style>
 
 </style>
 
-<script>
-
-</script>
 <!-- CONTENT AREA -->
 <div class="row">
 	<div class="col-sm-12">
@@ -80,7 +76,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<!-- <a href="<?php //echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm btninsert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $article_stock_lang['add_new'] }}</a><br/><br/> -->
+				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $configlang['add_new'] }}</a><br/><br/>
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -104,18 +100,16 @@ $base_url = base_url();
 				
 				<form method="post" action="{{ $current_url . DS . 'bulk' }}">
 					<div class="table-responsive">
-						<table class="table table-striped table-bordered" id="table_company">
+						<table class="table table-striped table-bordered" id="table_pic">
 							<tr class="b">
 								<td width=1><input type="checkbox" class="chkbox togglebox" onclick="togglebox()" /></td>
 								<td width=1>#</td>
-								<td width="150px"><a class="{{ $arrsort['article_stock_id']['class'] }}" title="{{ $arrsort['article_stock_id']['title'] }}" href="{{ $arrsort['article_stock_id']['url'] }}">{{ $article_stock_lang['article_stock_id'] }} {!! $arrsort['article_stock_id']['icon'] !!}</a></td>
-								<td width="150px"><a class="{{ $arrsort['site_id']['class'] }}" title="{{ $arrsort['site_id']['title'] }}" href="{{ $arrsort['site_id']['url'] }}">{{ $article_stock_lang['site_id'] }} {!! $arrsort['site_id']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['article']['class'] }}" title="{{ $arrsort['article']['title'] }}" href="{{ $arrsort['article']['url'] }}">{{ $article_stock_lang['article'] }} {!! $arrsort['article']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['customer_article']['class'] }}" title="{{ $arrsort['customer_article']['title'] }}" href="{{ $arrsort['customer_article']['url'] }}">{{ $article_stock_lang['customer_article'] }} {!! $arrsort['customer_article']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['description']['class'] }}" title="{{ $arrsort['description']['title'] }}" href="{{ $arrsort['description']['url'] }}">{{ $article_stock_lang['description'] }} {!! $arrsort['description']['icon'] !!}</a></td>
-								<td width="180px"><a class="{{ $arrsort['stock_qty']['class'] }}" title="{{ $arrsort['stock_qty']['title'] }}" href="{{ $arrsort['stock_qty']['url'] }}">{{ $article_stock_lang['stock_qty'] }} {!! $arrsort['stock_qty']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['config_id']['class'] }}" title="{{ $arrsort['config_id']['title'] }}" href="{{ $arrsort['config_id']['url'] }}">{{ $configlang['config_id'] }} {!! $arrsort['config_id']['icon'] !!}</a></td>
+								<td width="150px"><a class="{{ $arrsort['site_id']['class'] }}" title="{{ $arrsort['site_id']['title'] }}" href="{{ $arrsort['site_id']['url'] }}">{{ $configlang['site_id'] }} {!! $arrsort['site_id']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['config_name']['class'] }}" title="{{ $arrsort['config_name']['title'] }}" href="{{ $arrsort['config_name']['url'] }}">{{ $configlang['config_name'] }} {!! $arrsort['config_name']['icon'] !!}</a></td>
+								<td><a class="{{ $arrsort['config_value']['class'] }}" title="{{ $arrsort['config_value']['title'] }}" href="{{ $arrsort['config_value']['url'] }}">{{ $configlang['config_value'] }} {!! $arrsort['config_value']['icon'] !!}</a></td>
 								<td width="2">Status</td>
-								<!-- <td width="30px" class="talCnt">Option</td> -->
+								<td width="50px" class="talCnt">Option</td>
 							</tr>
 							<?php 
 							if (! empty($listdata)) 
@@ -128,23 +122,21 @@ $base_url = base_url();
 								foreach ($listdata as $key => $rs) 
 								{
 									$i++;
-									$id = $rs['article_stock_id'];
-									$idcol = 'article_stock_id';
+									$id = $rs['config_id'];
+									$idcol = 'config_id';
 							?>
 							
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['article_stock_id'] }} <!-- <br/> <a style="margin-right:6px" href="<?php //echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td> -->
+								<td>{{ $rs['config_id'] }}  <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
 								<td>{{ $rs['site_id'] }}</td>
-								<td>{{ $rs['article'] }}</td>
-								<td>{{ $rs['customer_article'] }}</td>
-								<td>{{ $rs['description'] }}</td>
-								<td>{{ $rs['stock_qty'] }}</td>
+								<td>{{ $rs['config_name'] }}</td>
+								<td>{{ $rs['config_value'] }}</td>							
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
-								<!-- <td class="talCnt">
-								<a href="<?php //echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
-								</td> -->
+								<td class="talCnt">
+								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
+								</td>
 							</tr>
 							<?php
 								}
@@ -158,7 +150,7 @@ $base_url = base_url();
 										<option class="" value="-1">Delete</option>
 									</select>
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<button class="btn btn-default btn-sm btnedit" name="btn_group_action" value="1">Action</button></div>
+									<button class="btn btn-default btn-sm" name="btn_group_action" value="1">Action</button></div>
 								</td>
 							</tr>	
 							<?php
@@ -202,6 +194,5 @@ $(document).ready( function() {
 	// });
 
 });
-
 </script>
 

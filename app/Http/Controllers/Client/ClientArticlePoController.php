@@ -24,7 +24,7 @@ class ClientArticlePoController extends ClientController
 		parent::__construct();
 	}
 		
-	public function articlePo()
+	public function article_po()
 	{
 		$param = $content = $get = $lang = $article_po_lang = $current_url = NULL;
 		
