@@ -30,7 +30,7 @@ class ModularLoginController extends ModularController
 		if (is_member()) {
 			$message = 'Welcome again';
 			
-			$targeturl = 'client/company';
+			$targeturl = 'client/dashboard';
 			
 			if (isset($_GET['uri'])) $targeturl = urldecode($_GET['uri']);
 			
@@ -103,8 +103,18 @@ class ModularLoginController extends ModularController
 			
 			// valid
 			if (isset($obj['password']) && $post['password'] == $decrypt_password) {
-				// check if uri last page exist
-				// debug('mantapgam',1);
+				
+				// --------------------------
+				// check access group and insert if not exist
+				$api_url = $api_url_capability = $api_method = $api_param = $api_header = NULL;
+				$api_param['token'] = env('API_KEY');
+				$api_param['role_id'] = get_user_cookie('role_id');
+
+				$api_url = env('API_URL').'role_capability/cron_insert_role';
+				$api_method = 'get';
+				// $api_header['debug'] = 1;
+				$list_role = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+				// --------------------------
 				
 				// create cookie or session 
 				$cname = $cvalue = $cminutes = NULL;
@@ -126,6 +136,7 @@ class ModularLoginController extends ModularController
 				
 				$targeturl = 'client/dashboard';
 				
+				// check if uri last page exist
 				if (isset($_GET['uri'])) $targeturl = urldecode($_GET['uri']);
 				
 			} else {

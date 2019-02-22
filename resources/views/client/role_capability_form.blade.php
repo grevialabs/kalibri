@@ -6,6 +6,7 @@ if (isset($get['role_id'])) {
 	$api_url = $api_method = $api_param = $api_header = NULL;
 	$api_param['token'] = env('API_KEY');
 	$api_param['role_id'] = $get['role_id'];
+	$api_param['paging'] = false;
 
 	$api_url = env('API_URL').'role_capability/get_list_detail';
 	$api_method = 'get';
@@ -81,7 +82,7 @@ if (! empty($list_role['data'])) $list_role = $list_role['data'];
 					{!! session('message') !!}
 				@endif
 				
-				<form method="post" action="{{ $form_url }}" class="form-horizontal">
+				<form method="post" action="{{ $form_url }}" class="form-horizontal form_submit">
 					<?php if (isset($data['role_capability_id'])) { ?>
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
@@ -147,11 +148,11 @@ if (! empty($list_role['data'])) $list_role = $list_role['data'];
 							<?php 
 							if ($get['do'] == 'insert') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md">{{ $lang['save'] }}</button>
+							<button type="submit" class="btn btn-primary btn-md btn_submit btncreate">{{ $lang['save'] }}</button>
 							<?php 
 							} else if ($get['do'] == 'edit') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md">{{ $lang['update'] }}</button>
+							<button type="submit" class="btn btn-primary btn-md btn_submit btnupdate">{{ $lang['update'] }}</button>
 							<?php 
 							}
 							?>

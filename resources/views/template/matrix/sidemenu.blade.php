@@ -7,6 +7,8 @@ if (is_member()) $cookie_user = get_user_cookie();
 
 // Bypass data from middleware
 $list_unavail_menu = \Request::get('list_unavail_menu');
+$list_avail_menu = \Request::get('list_avail_menu');
+$list_access_current_menu = \Request::get('list_access_current_menu');
 
 ?>
 <!-- ============================================================== -->
@@ -178,7 +180,7 @@ $list_unavail_menu = \Request::get('list_unavail_menu');
 				
 				?>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../public/matrix/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"> Welcome, {{ $cookie_user['fullname'] or '' }}</a>
+					<a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../public/matrix/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"> Welcome, {{ $cookie_user['fullname'] or '' }}, Role: {{ $cookie_user['role_name'] or '' }}</a>
 					<div class="dropdown-menu dropdown-menu-right user-dd animated">
 						<a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
 						<!--
@@ -215,52 +217,52 @@ $list_unavail_menu = \Request::get('list_unavail_menu');
 		<!-- Sidebar navigation-->
 		<nav class="sidebar-nav">
 			<ul id="sidebarnav" class="p-t-30">
-				<li class="sidebar-item"><a class="sidebar-link" id="client_dashboard" href="dashboard"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
-				<li class="sidebar-item"> 
+				<li class="sidebar-item hide"><a class="sidebar-link" id="client_dashboard" href="dashboard"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+				<li class="sidebar-item hide"> 
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Master User</span></a>
 					<ul aria-expanded="false" class="collapse  first-level">						
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_user" href="user"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link " id="client_user-attribute" href="user-attribute"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User attribute</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link " id="client_user-role" href="user-role"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User role</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_user" href="user"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link waves-effect waves-dark sidebar-link " id="client_user-attribute" href="user-attribute"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User attribute</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link waves-effect waves-dark sidebar-link " id="client_user-role" href="user-role"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">User role</span></a></li>
 					</ul>
 				</li>
 				
-				<li class="sidebar-item"> 
+				<li class="sidebar-item hide"> 
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-pencil"></i><span class="hide-menu">Master Article</span></a>
 					<ul aria-expanded="false" class="collapse  first-level">
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_article" href="article"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_article_attribute" href="article-attribute"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Attribute</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_article_attribute_value" href="article-attribute-value"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Attribute Value</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_article_stock" href="article-stock"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Stock</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_rfid_article" href="rfid-article"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">RFID Article</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_article_po" href="article-po"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article PO</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_article" href="article"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_article_attribute" href="article-attribute"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Attribute</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_article_attribute_value" href="article-attribute-value"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Attribute Value</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_article_stock" href="article-stock"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Stock</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_rfid_article" href="rfid-article"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">RFID Article</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_article_po" href="article-po"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article PO</span></a></li>
 					</ul>
 				</li>
 				
-				<li class="sidebar-item"> 
+				<li class="sidebar-item hide"> 
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Master Other</span></a>
 					<ul aria-expanded="false" class="collapse  first-level">
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_company" href="company"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Company</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_site" href="site"><i class="mdi mdi-chart-bar"></i><span>Site</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_pic" href="pic"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">PIC</span></a></li>						
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_level" href="level"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Level</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_reason" href="reason"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_reason-type" href="reason-type"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_reason-type-mapping" href="reason-type-mapping"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type Mapping</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_config" href="config"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Config</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_company" href="company"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Company</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_site" href="site"><i class="mdi mdi-chart-bar"></i><span>Site</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_pic" href="pic"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">PIC</span></a></li>						
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_level" href="level"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Level</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_reason" href="reason"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_reason-type" href="reason-type"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_reason-type-mapping" href="reason-type-mapping"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reason Type Mapping</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_config" href="config"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Config</span></a></li>
 					</ul>
 				</li>
 							
 				<li class="sidebar-item"> <a class="sidebar-link" id="client_transaction" href="transaction"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Transaction</span></a></li>
 
 				
-				<li class="sidebar-item"> 
+				<li class="sidebar-item hide"> 
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-note-plus"></i><span class="hide-menu">Access Role</span></a>
 					<ul aria-expanded="false" class="collapse first-level">
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_capability" href="capability"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Capability</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_role" href="role"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Role</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_role-capability" href="role-capability"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Role Capability</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link" id="client_movement" href="movement"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_capability" href="capability"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Capability</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_role" href="role"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Role</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_role-capability" href="role-capability"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Role Capability</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_movement" href="movement"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement</span></a></li>
 					</ul>
 				</li>
 				
@@ -343,24 +345,68 @@ $('#charts').parent('li').addClass('selected')
 -->
 <script>
 $(document).ready(function(){
+	// disable all menu
+	// $('li.sidebar-item').addClass('hide');
+
 	<?php 
+	// Hide menu when not avail
 	if (! empty($list_unavail_menu)) {
 		foreach ($list_unavail_menu as $key => $menu) {
-			if ($menu['read'] == 1 || ($menu['create'] == 1 || $menu['update'] == 1 || $menu['delete'] == 1)) {
+			// if ($menu['read'] == 1 || ($menu['create'] == 1 || $menu['update'] == 1 || $menu['delete'] == 1)) {
 				
-			} else {
+			// } else {
 		?>
-		// mantabjiwa
-	// $('#client_<?php echo $menu['capability'] ?>').parent('.sidebar-item').hide();
-	$("a[href*=<?php echo $menu['capability'] ?>").parent('.sidebar-item').hide();
+			// $('#client_<?php echo $menu['capability'] ?>').parent('.sidebar-item').hide();
+			// $("a[href*=<?php echo $menu['capability'] ?>").parent('.sidebar-item').hide();
 
-	// $('#client_dashboard').parent('.sidebar-item').hide();
-	
-	// $('#client_user-attribute').parent('.sidebar-item').hide();
 		<?php 
-			}
+			// $('#client_dashboard').parent('.sidebar-item').hide();
+			// $('#client_user-attribute').parent('.sidebar-item').hide();
+			
 		}
 	}
 	?>
+
+	<?php 
+	// Activate when menu avail
+	if (! empty($list_avail_menu)) {
+		foreach ($list_avail_menu as $key => $menu) {
+
+		?>
+		// mantabjowos
+	$("a[href*=<?php echo $menu['capability'] ?>").parents('.sidebar-item').removeClass('hide');
+
+		<?php 
+
+		}
+	}
+
+	if (! empty($list_access_current_menu)) 
+	{
+		if ($list_access_current_menu['create'] != 1) {
+			echo "$('.btncreate').hide();";
+		}
+
+		if ($list_access_current_menu['read'] != 1) {
+			echo "$('.btnread').hide();";
+		}
+
+		if ($list_access_current_menu['update'] != 1) {
+			echo "$('.btnupdate').hide();";
+		}
+
+		if ($list_access_current_menu['delete'] != 1) {
+			echo "$('.btndelete').hide();";
+		}
+	}
+	?>
+
+	//disable bulk action but this is no effect
+	$('#group_action').addClass('hide');
+
+	// $('.btnview').hide(); // no access for view data
+	// $('.btninsert').hide(); // no access for save data
+	// $('.btnedit').hide(); // no access for edit data	
+	// $('.btndelete').hide(); // no access for delete data
 })
 </script>

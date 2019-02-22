@@ -80,7 +80,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm btninsert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $companylang['add_new'] }}</a><br/><br/>
+				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm btncreate"><i class="fa fa-plus" aria-hidden="true"></i> {{ $companylang['add_new'] }}</a><br/><br/>
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -134,7 +134,7 @@ $base_url = base_url();
 							<tr>
 								<td class="parentcheckbox"><input type="checkbox" name="chkbox[]" id="chkbox[]" class="chkbox" value="<?php echo $i?>"/></td>
 								<td>{{ $i }}</td>
-								<td>{{ $rs['company_id'] or '' }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
+								<td>{{ $rs['company_id'] or '' }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnupdate"></i></a> </td>
 								<td>{{ $rs['company_name'] or '' }}</td>
 								<td>{{ $rs['company_address'] or '' }}</td>
 								<td>{{ $rs['company_phone'] or '' }}</td>
@@ -149,14 +149,14 @@ $base_url = base_url();
 							?>
 							<tr>
 								<td colspan="100%">
-									<div id="group_action" class="btnedit">With checked do 
+									<div id="group_action" class="btnupdate">With checked do 
 									<select class="input" name="lst_group_action">
 										<option class="" value="1">Active</option>
 										<option class="" value="0">Inactive</option>
 										<option class="" value="-1">Delete</option>
 									</select>
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<button class="btn btn-default btn-sm btnedit" name="btn_group_action" value="1">Action</button></div>
+									<button class="btn btn-default btn-sm btnupdate" name="btn_group_action" value="1">Action</button></div>
 								</td>
 							</tr>	
 							<?php

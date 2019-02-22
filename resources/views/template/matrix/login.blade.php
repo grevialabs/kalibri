@@ -60,7 +60,7 @@ $form_url = base_url().'login';
 					@endif
 					
                     <!-- Form -->
-                    <form class="form-horizontal m-t-20 form_submit" id="loginform" action="{{ $form_url }}" method="post" >
+                    <form class="form-horizontal m-t-20 form_submit" id="loginform" action="{{ current_full_url() }}" method="post" >
                         <div class="row p-b-30">
                             <div class="col-12">
                                 <div class="input-group mb-3">
