@@ -43,6 +43,28 @@ class ClientController extends Controller
 		$message = 'Please login first aa';
 			return redirect('login')->with('message', print_message($message));
 	}
+
+	public function no_access()
+	{
+		$param = array();
+		// $param['lang'] = $lang;
+		// $param['sitelang'] = $sitelang;
+		// $param['PAGE_TITLE'] = $sitelang['module'];
+		// $param['MODULE'] = $sitelang['module'];
+		
+		$param['PAGE_TITLE'] = 'No Access';
+		$param['MODULE'] = 'Forbidden';
+		$viewtarget = 'modular.no_access';
+		
+		// $param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $sitelang['module'];
+		
+		// $param['current_url'] = $current_url;
+		$content = view($viewtarget,$param);	
+		
+		$param['CONTENT'] = $content;
+		return view('template.' . $this->themes . '.index',$param);
+		// die;
+	}
 	
 	// public function login()
 	// {

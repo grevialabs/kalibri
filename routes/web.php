@@ -56,6 +56,7 @@ Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () 
 	Route::get('welcome', 'Client\ClientController@welcome');
 	Route::get('about', 'Client\ClientController@about');
 	Route::get('example', 'Client\ClientController@example');
+	Route::get('no_access', 'Client\ClientController@no_access');
 	
 	Route::get('dashboard', 'Client\ClientDashboardController@dashboard');
 	

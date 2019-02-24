@@ -72,9 +72,13 @@ class CheckUser
 					if (! empty($list_unavail_menu)) {
 						foreach ($list_unavail_menu as $rsu) {
 							if ($rsu['capability'] == $uri[2]) {
-								echo $no_access = $this->no_access();
-								// echo "you cannot access this page";
+								// redirect to no access page
+								return redirect('client/no_access');
 								die;
+								// $this->no_access();
+								// die;
+								// echo $no_access = $this->no_access();
+								// echo "you cannot access this page";
 							}		
 						}
 					}
@@ -180,23 +184,24 @@ class CheckUser
 	
 	public function no_access()
 	{
-		$param = array();
-		// $param['lang'] = $lang;
-		// $param['sitelang'] = $sitelang;
-		// $param['PAGE_TITLE'] = $sitelang['module'];
-		// $param['MODULE'] = $sitelang['module'];
+		return redirect('no_access');
+		// $param = array();
+		// // $param['lang'] = $lang;
+		// // $param['sitelang'] = $sitelang;
+		// // $param['PAGE_TITLE'] = $sitelang['module'];
+		// // $param['MODULE'] = $sitelang['module'];
 		
-		$param['PAGE_TITLE'] = 'No Access';
-		$param['MODULE'] = 'Forbidden';
-		$viewtarget = 'modular.no_access';
+		// $param['PAGE_TITLE'] = 'No Access';
+		// $param['MODULE'] = 'Forbidden';
+		// $viewtarget = 'modular.no_access';
 		
-		// $param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $sitelang['module'];
+		// // $param['PAGE_HEADER'] = $param['ACTION'] . ' ' . $sitelang['module'];
 		
-		// $param['current_url'] = $current_url;
-		$content = view($viewtarget,$param);	
+		// // $param['current_url'] = $current_url;
+		// $content = view($viewtarget,$param);	
 		
-		$param['CONTENT'] = $content;
-		return view('template.' . $this->themes . '.index',$param);
-		// die;
+		// $param['CONTENT'] = $content;
+		// return view('template.' . $this->themes . '.index',$param);
+		// // die;
 	}
 }
