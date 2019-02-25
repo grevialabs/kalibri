@@ -248,6 +248,8 @@ return [
         'ArticlePoModel' => Patriot\Models\ArticlePo::class,
         'RfidArticleModel' => Patriot\Models\RfidArticle::class,
         'ConfigModel' => Patriot\Models\Config::class,
+        'MovementArticleModel' => Patriot\Models\MovementArticle::class,
+        'MovementQuotaLevelModel' => Patriot\Models\MovementQuotaLevel::class,
         // 'UserModel' => Patriot\Models\User::class,
 
         // 'PDF' => Barryvdh\DomPDF\Facade::class,

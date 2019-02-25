@@ -182,6 +182,18 @@ Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () 
 	Route::any('config/delete', 'Client\ClientConfigController@delete');
 	Route::any('config/bulk', 'Client\ClientConfigController@bulk');
 	
+	Route::get('movement-article', 'Client\ClientMovementArticleController@movement_article');
+	Route::any('movement-article/insert', 'Client\ClientMovementArticleController@insert');
+	Route::any('movement-article/update', 'Client\ClientMovementArticleController@update');
+	Route::any('movement-article/delete', 'Client\ClientMovementArticleController@delete');
+	Route::any('movement-article/bulk', 'Client\ClientMovementArticleController@bulk');
+	
+	Route::get('movement-quota-level', 'Client\ClientMovementQuotaLevelController@movement_quota_level');
+	Route::any('movement-quota-level/insert', 'Client\ClientMovementQuotaLevelController@insert');
+	Route::any('movement-quota-level/update', 'Client\ClientMovementQuotaLevelController@update');
+	Route::any('movement-quota-level/delete', 'Client\ClientMovementQuotaLevelController@delete');
+	Route::any('movement-quota-level/bulk', 'Client\ClientMovementQuotaLevelController@bulk');
+	
 	// Route::get('reason_type', 'Client\ClientController@reason_type');
 	// Route::any('reason_type/insert', 'Client\ClientController@insert');
 	// Route::any('reason_type/update', 'Client\ClientController@update');
