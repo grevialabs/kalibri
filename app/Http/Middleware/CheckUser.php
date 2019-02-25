@@ -73,8 +73,8 @@ class CheckUser
 						foreach ($list_unavail_menu as $rsu) {
 							if ($rsu['capability'] == $uri[2]) {
 								// redirect to no access page
-								return redirect('client/no_access');
-								die;
+								// return redirect('client/no_access');
+								// die;
 								// $this->no_access();
 								// die;
 								// echo $no_access = $this->no_access();
@@ -149,23 +149,23 @@ class CheckUser
 			if (isset($list_access_current_menu)) {
 				if (isset($urido) && in_array($urido,array('insert','edit','delete'))) {
 
-					if ($list_access_current_menu['create'] != 1) {
-						// echo "you cannot do this action";
-						echo $this->no_access();
-						die;
-					}
+					// if ($list_access_current_menu['create'] != 1) {
+					// 	// echo "you cannot do this action";
+					// 	echo $this->no_access();
+					// 	die;
+					// }
 
-					if ($list_access_current_menu['update'] != 1) {
-						// echo "you cannot do this action";
-						echo $this->no_access();
-						die;
-					}
+					// if ($list_access_current_menu['update'] != 1) {
+					// 	// echo "you cannot do this action";
+					// 	echo $this->no_access();
+					// 	die;
+					// }
 
-					if ($list_access_current_menu['delete'] != 1) {
-						// echo "you cannot do this action";
-						echo $this->no_access();
-						die;
-					}
+					// if ($list_access_current_menu['delete'] != 1) {
+					// 	// echo "you cannot do this action";
+					// 	echo $this->no_access();
+					// 	die;
+					// }
 				}
 			}
 			

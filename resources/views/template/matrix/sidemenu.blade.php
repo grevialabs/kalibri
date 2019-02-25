@@ -347,58 +347,48 @@ $('#charts').parent('li').addClass('selected')
 $(document).ready(function(){
 	// disable all menu
 	// $('li.sidebar-item').addClass('hide');
+	$('li.sidebar-item').removeClass('hide');
 
 	<?php 
-	// Hide menu when not avail
-	if (! empty($list_unavail_menu)) {
-		foreach ($list_unavail_menu as $key => $menu) {
-			// if ($menu['read'] == 1 || ($menu['create'] == 1 || $menu['update'] == 1 || $menu['delete'] == 1)) {
-				
-			// } else {
-		?>
-			// $('#client_<?php echo $menu['capability'] ?>').parent('.sidebar-item').hide();
-			// $("a[href*=<?php echo $menu['capability'] ?>").parent('.sidebar-item').hide();
+	// [NOT_USED]Hide menu when not avail
+	// if (! empty($list_unavail_menu)) {
 
-		<?php 
-			// $('#client_dashboard').parent('.sidebar-item').hide();
-			// $('#client_user-attribute').parent('.sidebar-item').hide();
-			
-		}
-	}
+	// }
 	?>
 
 	<?php 
-	// Activate when menu avail
-	if (! empty($list_avail_menu)) {
-		foreach ($list_avail_menu as $key => $menu) {
+	// [READY_DEPLOY] Activate when menu avail
+	// if (! empty($list_avail_menu)) {
+		// foreach ($list_avail_menu as $key => $menu) {
 
 		?>
-		// mantabjowos
-	$("a[href*=<?php echo $menu['capability'] ?>").parents('.sidebar-item').removeClass('hide');
+		// open menu
+	// $("a[href*=<?php // echo $menu['capability'] ?>").parents('.sidebar-item').removeClass('hide');
 
 		<?php 
 
-		}
-	}
+		// }
+	// }
 
-	if (! empty($list_access_current_menu)) 
-	{
-		if ($list_access_current_menu['create'] != 1) {
-			echo "$('.btncreate').hide();";
-		}
+	// [READY_DEPLOY], inactive due to open all limitation
+	// if (! empty($list_access_current_menu)) 
+	// {
+	// 	if ($list_access_current_menu['create'] != 1) {
+	// 		echo "$('.btncreate').hide();";
+	// 	}
 
-		if ($list_access_current_menu['read'] != 1) {
-			echo "$('.btnread').hide();";
-		}
+	// 	if ($list_access_current_menu['read'] != 1) {
+	// 		echo "$('.btnread').hide();";
+	// 	}
 
-		if ($list_access_current_menu['update'] != 1) {
-			echo "$('.btnupdate').hide();";
-		}
+	// 	if ($list_access_current_menu['update'] != 1) {
+	// 		echo "$('.btnupdate').hide();";
+	// 	}
 
-		if ($list_access_current_menu['delete'] != 1) {
-			echo "$('.btndelete').hide();";
-		}
-	}
+	// 	if ($list_access_current_menu['delete'] != 1) {
+	// 		echo "$('.btndelete').hide();";
+	// 	}
+	// }
 	?>
 
 	//disable bulk action but this is no effect
