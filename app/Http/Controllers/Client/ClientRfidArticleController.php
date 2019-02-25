@@ -88,7 +88,7 @@ class ClientRfidArticleController extends ClientController
 			$api_url = env('API_URL').'rfid_article';
 			$api_method = 'post';
 			
-			// $api_header['debug'] = 1;
+			 $api_header['debug'] = 1;
 			$api_header['token'] = env('API_KEY');
 
 			$save = curl_api_liquid($api_url, $api_method, $api_header, $param);

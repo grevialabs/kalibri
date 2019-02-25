@@ -28,6 +28,7 @@ return [
     'rfid' => 'Rfid',
     'picktime' => 'Picktime',
     'user_id' => 'UserID',
+    'sync_date' => 'SyncDate'
     // '' => '',
     
 ];

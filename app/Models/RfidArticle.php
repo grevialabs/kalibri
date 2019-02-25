@@ -9,14 +9,14 @@ class RfidArticle extends Model
     // getorder_allowed_list
 	public static function column_list()
     {
-	   static $str = array('rfid_article_id','site_id','outbound_delivery','article','description','rfid', 'picktime','user_id');
+	   static $str = array('rfid_article_id','site_id','outbound_delivery','article','description','rfid', 'picktime','user_id','sync_date');
        return $str;
 	}
 	
 	// getorder_allowed_list
 	public static function getorder_allowed_list()
     {
-	   static $str = array('rfid_article_id','site_id','outbound_delivery','article','description','rfid', 'picktime','user_id');
+	   static $str = array('rfid_article_id','site_id','outbound_delivery','article','description','rfid', 'picktime','user_id','sync_date');
        return $str;
     }
 	
