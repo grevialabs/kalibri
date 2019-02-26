@@ -84,7 +84,7 @@ class ModularLoginController extends ModularController
 			// $url = 'http://www.grevia.com/api/member';
 			$url = env('API_URL').'user/get?user_code='.$post['username'];
 			$obj = curl_api_liquid($url);
-			// debug($obj,1);
+			debug($obj,1);
 
 			if (empty($obj)) {
 				// $message = 'Mohon maaf terjadi kesalahan. Silakan coba lagi';
