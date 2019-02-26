@@ -250,6 +250,10 @@ return [
         'ConfigModel' => Patriot\Models\Config::class,
         'MovementArticleModel' => Patriot\Models\MovementArticle::class,
         'MovementQuotaLevelModel' => Patriot\Models\MovementQuotaLevel::class,
+        'ArticleLogisticSiteModel' => Patriot\Models\ArticleLogisticSite::class,
+        'ArticleLogisticSiteDetailModel' => Patriot\Models\ArticleLogisticSiteDetail::class,
+        'PrepackBundlingHeaderModel' => Patriot\Models\PrepackBundlingHeader::class,
+        'PrepackBundlingDetailModel' => Patriot\Models\PrepackBundlingDetail::class,
         // 'UserModel' => Patriot\Models\User::class,
 
         // 'PDF' => Barryvdh\DomPDF\Facade::class,

@@ -194,6 +194,30 @@ Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () 
 	Route::any('movement-quota-level/delete', 'Client\ClientMovementQuotaLevelController@delete');
 	Route::any('movement-quota-level/bulk', 'Client\ClientMovementQuotaLevelController@bulk');
 	
+	Route::get('article-logistic-site', 'Client\ClientArticleLogisticSiteController@article_logistic_site');
+	Route::any('article-logistic-site/insert', 'Client\ClientArticleLogisticSiteController@insert');
+	Route::any('article-logistic-site/update', 'Client\ClientArticleLogisticSiteController@update');
+	Route::any('article-logistic-site/delete', 'Client\ClientArticleLogisticSiteController@delete');
+	Route::any('article-logistic-site/bulk', 'Client\ClientArticleLogisticSiteController@bulk');
+	
+	Route::get('article-logistic-site-detail', 'Client\ClientArticleLogisticSiteDetailController@article_logistic_site_detail');
+	Route::any('article-logistic-site-detail/insert', 'Client\ClientArticleLogisticSiteDetailController@insert');
+	Route::any('article-logistic-site-detail/update', 'Client\ClientArticleLogisticSiteDetailController@update');
+	Route::any('article-logistic-site-detail/delete', 'Client\ClientArticleLogisticSiteDetailController@delete');
+	Route::any('article-logistic-site-detail/bulk', 'Client\ClientArticleLogisticSiteDetailController@bulk');
+	
+	Route::get('prepack-bundling-header', 'Client\ClientPrepackBundlingHeaderController@prepack_bundling_header');
+	Route::any('prepack-bundling-header/insert', 'Client\ClientPrepackBundlingHeaderController@insert');
+	Route::any('prepack-bundling-header/update', 'Client\ClientPrepackBundlingHeaderController@update');
+	Route::any('prepack-bundling-header/delete', 'Client\ClientPrepackBundlingHeaderController@delete');
+	Route::any('prepack-bundling-header/bulk', 'Client\ClientPrepackBundlingHeaderController@bulk');
+	
+	Route::get('prepack-bundling-detail', 'Client\ClientPrepackBundlingDetailController@prepack_bundling_detail');
+	Route::any('prepack-bundling-detail/insert', 'Client\ClientPrepackBundlingDetailController@insert');
+	Route::any('prepack-bundling-detail/update', 'Client\ClientPrepackBundlingDetailController@update');
+	Route::any('prepack-bundling-detail/delete', 'Client\ClientPrepackBundlingDetailController@delete');
+	Route::any('prepack-bundling-detail/bulk', 'Client\ClientPrepackBundlingDetailController@bulk');
+	
 	// Route::get('reason_type', 'Client\ClientController@reason_type');
 	// Route::any('reason_type/insert', 'Client\ClientController@insert');
 	// Route::any('reason_type/update', 'Client\ClientController@update');
