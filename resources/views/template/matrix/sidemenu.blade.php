@@ -253,8 +253,21 @@ $list_access_current_menu = \Request::get('list_access_current_menu');
 					</ul>
 				</li>
 							
-				<li class="sidebar-item"> <a class="sidebar-link" id="client_transaction" href="transaction"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Transaction</span></a></li>
-
+				<!-- <li class="sidebar-item"> <a class="sidebar-link" id="client_transaction" href="transaction"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Transaction</span></a></li> -->
+				
+				<li class="sidebar-item hide"> 
+					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Transaction</span></a>
+					<ul aria-expanded="false" class="collapse  first-level">
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_transaction" href="transaction"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Transaction</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_article_logistic_site" href="article-logistic-site"><i class="mdi mdi-chart-bar"></i><span>Article Logistic Site</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_article_logistic_site_detail" href="article-logistic-site-detail"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Logistic Site Detail</span></a></li>						
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_movement_article" href="movement-article"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement Article</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_movement_quota_level" href="movement-quota-level"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement Quota Level</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_prepack_bundling_header" href="prepack-bundling-header"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Prepack Bundling Header</span></a></li>
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_prepack_bundling_detail" href="prepack-bundling-detail"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Prepack Bundling Detail</span></a></li>	
+					</ul>
+				</li>
+				
 				
 				<li class="sidebar-item hide"> 
 					<a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-note-plus"></i><span class="hide-menu">Access Role</span></a>
