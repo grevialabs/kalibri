@@ -62,8 +62,8 @@ Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () 
 	
 	// DONE
 	Route::get('company', 'Client\ClientCompanyController@company');
-	Route::post('company/insert', 'Client\ClientCompanyController@insert');
-	Route::post('company/update', 'Client\ClientCompanyController@update');
+	Route::any('company/insert', 'Client\ClientCompanyController@insert');
+	Route::any('company/update', 'Client\ClientCompanyController@update');
 	Route::any('company/delete', 'Client\ClientCompanyController@delete');
 	Route::any('company/bulk', 'Client\ClientCompanyController@bulk');
 
@@ -217,6 +217,18 @@ Route::group(['prefix' => 'client/', 'middleware' => 'check.user'], function () 
 	Route::any('prepack-bundling-detail/update', 'Client\ClientPrepackBundlingDetailController@update');
 	Route::any('prepack-bundling-detail/delete', 'Client\ClientPrepackBundlingDetailController@delete');
 	Route::any('prepack-bundling-detail/bulk', 'Client\ClientPrepackBundlingDetailController@bulk');
+	
+	Route::get('user-role', 'Client\ClientUserRoleController@user_role');
+	Route::any('user-role/insert', 'Client\ClientUserRoleController@insert');
+	Route::any('user-role/update', 'Client\ClientUserRoleController@update');
+	Route::any('user-role/delete', 'Client\ClientUserRoleController@delete');
+	Route::any('user-role/bulk', 'Client\ClientUserRoleController@bulk');
+	
+	Route::get('article-po-history', 'Client\ClientArticlePoHistoryController@article_po_history');
+	Route::any('article-po-history/insert', 'Client\ClientArticlePoHistoryController@insert');
+	Route::any('article-po-history/update', 'Client\ClientArticlePoHistoryController@update');
+	Route::any('article-po-history/delete', 'Client\ClientArticlePoHistoryController@delete');
+	Route::any('article-po-history/bulk', 'Client\ClientArticlePoHistoryController@bulk');
 	
 	// Route::get('reason_type', 'Client\ClientController@reason_type');
 	// Route::any('reason_type/insert', 'Client\ClientController@insert');

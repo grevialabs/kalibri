@@ -254,6 +254,8 @@ return [
         'ArticleLogisticSiteDetailModel' => Patriot\Models\ArticleLogisticSiteDetail::class,
         'PrepackBundlingHeaderModel' => Patriot\Models\PrepackBundlingHeader::class,
         'PrepackBundlingDetailModel' => Patriot\Models\PrepackBundlingDetail::class,
+        'UserRoleModel' => Patriot\Models\UserRole::class,
+        'ArticlePoHistoryModel' => Patriot\Models\ArticlePoHistory::class,
         // 'UserModel' => Patriot\Models\User::class,
 
         // 'PDF' => Barryvdh\DomPDF\Facade::class,

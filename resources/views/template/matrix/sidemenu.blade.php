@@ -261,6 +261,7 @@ $list_access_current_menu = \Request::get('list_access_current_menu');
 						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_transaction" href="transaction"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Transaction</span></a></li>
 						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_article_logistic_site" href="article-logistic-site"><i class="mdi mdi-chart-bar"></i><span>Article Logistic Site</span></a></li>
 						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_article_logistic_site_detail" href="article-logistic-site-detail"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article Logistic Site Detail</span></a></li>						
+						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_article_po_history" href="article-po-history"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Article PO History</span></a></li>						
 						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_movement_article" href="movement-article"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement Article</span></a></li>
 						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_movement_quota_level" href="movement-quota-level"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Movement Quota Level</span></a></li>
 						<li class="sidebar-item hide"> <a class="sidebar-link" id="client_prepack_bundling_header" href="prepack-bundling-header"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Prepack Bundling Header</span></a></li>
