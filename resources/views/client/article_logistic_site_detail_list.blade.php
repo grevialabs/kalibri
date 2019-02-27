@@ -80,7 +80,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm btninsert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $article_logistic_site_detail_lang['add_new'] }}</a><br/><br/>
+				<!-- <a href="<?php //echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm btninsert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $article_logistic_site_detail_lang['add_new'] }}</a><br/><br/> -->
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -126,7 +126,7 @@ $base_url = base_url();
 								<td width="150px"><a class="{{ $arrsort['chamber_disc_plus']['class'] }}" title="{{ $arrsort['chamber_disc_plus']['title'] }}" href="{{ $arrsort['chamber_disc_plus']['url'] }}">{{ $article_logistic_site_detail_lang['chamber_disc_plus'] }} {!! $arrsort['chamber_disc_plus']['icon'] !!}</a></td>
 								
 								<td width="2">Status</td>
-								<td width="30px" class="talCnt">Option</td>
+								<!-- <td width="30px" class="talCnt">Option</td> -->
 							</tr>
 							<?php 
 							if (! empty($listdata)) 
@@ -165,7 +165,7 @@ $base_url = base_url();
                                 
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
-								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
+								<!-- <a href="<?php //echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a> -->
 								</td>
 							</tr>
 							<?php

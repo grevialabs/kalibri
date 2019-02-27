@@ -51,7 +51,7 @@ class ClientMovementArticleController extends ClientController
 				$param['form_url'] = $current_url.DS.'update';
 			}
 			
-			// $viewtarget = 'client.movement_article_form';
+			$viewtarget = 'client.movement_article_form';
 		} else {
 			$param['ACTION'] = $lang['list'];
 			$viewtarget = 'client.movement_article_list';

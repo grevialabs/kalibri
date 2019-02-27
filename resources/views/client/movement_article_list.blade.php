@@ -76,7 +76,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $movement_article_lang['add_new'] }}</a><br/><br/>
+				<!-- <a href="<?php //echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $movement_article_lang['add_new'] }}</a><br/><br/> -->
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -111,7 +111,7 @@ $base_url = base_url();
 								<td width="180px"><a class="{{ $arrsort['qty']['class'] or '' }}" title="{{ $arrsort['qty']['title'] or '' }}" href="{{ $arrsort['qty']['url'] or '' }}">{{ $movement_article_lang['qty'] or '' }} {!! $arrsort['qty']['icon'] or '' !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['movement_type']['class'] or '' }}" title="{{ $arrsort['movement_type']['title'] or '' }}" href="{{ $arrsort['movement_type']['url'] or '' }}">{{ $movement_article_lang['movement_type'] or '' }} {!! $arrsort['movement_type']['icon'] or '' !!}</a></td>
 								<td width="2">Status</td>
-								<td width="50px" class="talCnt">Option</td>
+								<!-- <td width="50px" class="talCnt">Option</td> -->
 							</tr>
 							<?php 
 							if (! empty($listdata)) 
@@ -140,7 +140,7 @@ $base_url = base_url();
 								<td>{{ $rs['movement_type'] or '' }}</td>
 								<td class="talCnt">{!! $status or '' !!}</td>
 								<td class="talCnt">
-								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
+								<!-- <a href="<?php //echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a> -->
 								</td>
 							</tr>
 							<?php

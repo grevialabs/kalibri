@@ -218,7 +218,7 @@ function validate_column($arrsource,$arrtarget) {
 							<?php 
 							} else if ($get['do'] == 'edit') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md">{{ $lang['update'] }}</button>
+							<!-- <button type="submit" class="btn btn-primary btn-md">{{ $lang['update'] }}</button> -->
 							<?php 
 							}
 							?>

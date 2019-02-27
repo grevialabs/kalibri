@@ -77,7 +77,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $prepack_bundling_detail_lang['add_new'] }}</a><br/><br/>
+				<!-- <a href="<?php //echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $prepack_bundling_detail_lang['add_new'] }}</a><br/><br/> -->
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -113,7 +113,7 @@ $base_url = base_url();
 								<td width="180px"><a class="{{ $arrsort['qty_dashboard']['class'] or '' }}" title="{{ $arrsort['qty_dashboard']['title'] or '' }}" href="{{ $arrsort['qty_dashboard']['url'] or '' }}">{{ $prepack_bundling_detail_lang['qty_dashboard'] or '' }} {!! $arrsort['qty_dashboard']['icon'] or '' !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['reference']['class'] or '' }}" title="{{ $arrsort['reference']['title'] or '' }}" href="{{ $arrsort['reference']['url'] or '' }}">{{ $prepack_bundling_detail_lang['reference'] or '' }} {!! $arrsort['reference']['icon'] or '' !!}</a></td>
 								<td width="2">Status</td>
-								<td width="50px" class="talCnt">Option</td>
+								<!-- <td width="50px" class="talCnt">Option</td> -->
 							</tr>
 							<?php 
 							if (! empty($listdata)) 
@@ -126,8 +126,8 @@ $base_url = base_url();
 								foreach ($listdata as $key => $rs) 
 								{
 									$i++;
-									$id = $rs['prepack_id'];
-									$idcol = 'prepack_id';
+									$id = $rs['prepack_bundling_detail_id'];
+									$idcol = 'prepack_bundling_detail_id';
 									$status = (isset($rs['status'])) ? $general_model->show_record_status($rs['status']) : '';
 							?>
 							
@@ -143,7 +143,7 @@ $base_url = base_url();
 								<td>{{ $rs['reference'] or '' }}</td>
 								<td class="talCnt">{!! $status or '' !!}</td>
 								<td class="talCnt">
-								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
+								<!-- <a href="<?php //echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a> -->
 								</td>
 							</tr>
 							<?php

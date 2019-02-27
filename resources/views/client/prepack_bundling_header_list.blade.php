@@ -77,7 +77,7 @@ $base_url = base_url();
 					{!! session('message') !!}
 				@endif
 				
-				<a href="<?php echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $prepack_bundling_header_lang['add_new'] }}</a><br/><br/>
+				<!-- <a href="<?php //echo $base_url.Request::segment(1).DS.Request::segment(2) . '?do=insert' ?>" class="btn btn-primary btn-sm insert"><i class="fa fa-plus" aria-hidden="true"></i> {{ $prepack_bundling_header_lang['add_new'] }}</a><br/><br/> -->
 
 				<form method="get" action="{{ $current_url }}">
 					<input type="search" name="keyword" class="input wdt30-pct display-inline"  placeholder="{{ $lang['search_input'] }}" value="<?php echo (isset($getkeyword) ? $getkeyword : NULL ); ?>" />
@@ -113,7 +113,7 @@ $base_url = base_url();
 								<td width="180px"><a class="{{ $arrsort['combine_qty']['class'] or '' }}" title="{{ $arrsort['combine_qty']['title'] or '' }}" href="{{ $arrsort['combine_qty']['url'] or '' }}">{{ $prepack_bundling_header_lang['combine_qty'] or '' }} {!! $arrsort['combine_qty']['icon'] or '' !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['combine_qty']['class'] or '' }}" title="{{ $arrsort['combine_qty']['title'] or '' }}" href="{{ $arrsort['combine_qty']['url'] or '' }}">{{ $prepack_bundling_header_lang['combine_qty'] or '' }} {!! $arrsort['combine_qty']['icon'] or '' !!}</a></td>
 								<td width="2">Status</td>
-								<td width="50px" class="talCnt">Option</td>
+								<!-- <td width="50px" class="talCnt">Option</td> -->
 							</tr>
 							<?php 
 							if (! empty($listdata)) 
@@ -142,7 +142,7 @@ $base_url = base_url();
 								<td>{{ $rs['combine_qty'] or '' }}</td>
 								<td class="talCnt">{!! $status or '' !!}</td>
 								<td class="talCnt">
-								<a href="<?php echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a>
+								<!-- <a href="<?php //echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a> -->
 								</td>
 							</tr>
 							<?php
