@@ -113,12 +113,13 @@ class ClientRoleCapabilityController extends ClientController
 		$url_back = Request::segment(1).DS.Request::segment(2);
 		if ($_POST)
 		{
-			$post = $_POST;
-			unset($post['_token']);
+            $post = $_POST;
+			// unset($post['_token']);
+            // debug($post,1);
 			
             // Do validation here with model
-            if (! isset($post['role_capability_id'])) {
-                $message = 'role_capability_id not exist';
+            if (! isset($post['role_id'])) {
+                $message = 'role_id not exist';
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
@@ -129,10 +130,10 @@ class ClientRoleCapabilityController extends ClientController
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
 			
-			$api_url = env('API_URL').'role_capability';
-			$api_method = 'put';
+			$api_url = env('API_URL').'role_capability/update_bulk';
+			$api_method = 'post';
 			
-			// $api_header['debug'] = 1;
+			$api_header['debug'] = 1;
 			$api_header['token'] = env('API_KEY');
 
 			$update = curl_api_liquid($api_url, $api_method, $api_header, $param);
