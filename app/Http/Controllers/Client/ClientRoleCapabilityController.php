@@ -133,7 +133,7 @@ class ClientRoleCapabilityController extends ClientController
 			$api_url = env('API_URL').'role_capability/update_bulk';
 			$api_method = 'post';
 			
-			$api_header['debug'] = 1;
+			// $api_header['debug'] = 1;
 			$api_header['token'] = env('API_KEY');
 
 			$update = curl_api_liquid($api_url, $api_method, $api_header, $param);
@@ -143,7 +143,8 @@ class ClientRoleCapabilityController extends ClientController
 				
 				if ($update['is_success']) $message = 'Update success';
 				else $message = 'Update failed. Please try again';
-
+				
+				$message .= " <a href='" . Request::server('HTTP_REFERER') . "' class='btn btn-secondary btn-sm'><i class='fa fa-arrow-circle-left'></i> Back to last edit page</a>";
 			}
 		}
 		
@@ -188,7 +189,8 @@ class ClientRoleCapabilityController extends ClientController
 				
 				if ($delete['is_success']) $message = 'Delete success';
 				else $message = 'Delete failed. Please try again';
-
+				
+				$message .= " <a href='" . Request::server('HTTP_REFERER') . "' class='btn btn-secondary btn-sm'><i class='fa fa-arrow-circle-left'></i> Back to last edit page</a>";
 			}
 		}
 		

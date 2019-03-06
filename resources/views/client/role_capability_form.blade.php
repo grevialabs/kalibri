@@ -135,12 +135,12 @@ if (! empty($list_role['data'])) $list_role = $list_role['data'];
 							<td class="talCnt">{{ $i }}</td>
 							<td>{{ $rs['capability'] or '' }}</td>
                             <td class="talCnt"><div class="custom-control custom-checkbox ">
-                            <input type="hidden" name="rcid[{{ $rs['role_capability_id'] }}]['capability_id']" value="{{ $rs['capability_id'] }}" class="custom-control-input" />
+                            <input type="hidden" name="rcid[{{ $rs['role_capability_id'] }}][capability_id]" value="{{ $rs['capability_id'] }}" class="custom-control-input" />
                                 
-                                <input type="checkbox" name="rcid[{{ $rs['role_capability_id'] }}]['create']" class="custom-control-input" id="createCheck{{ $i }}" <?php if ($rs['create']) echo "checked"; ?> value="1" /> <label class="custom-control-label" for="createCheck{{ $i }}"></label></div></td>
-							<td class="talCnt"><div class="custom-control custom-checkbox "><input type="checkbox" name="rcid[{{ $rs['role_capability_id'] }}]['read']" class="custom-control-input" id="readCheck{{ $i }}" <?php if ($rs['read']) echo "checked"; ?> value="1" /> <label class="custom-control-label" for="readCheck{{ $i }}"></label></div></td>
-							<td class="talCnt"><div class="custom-control custom-checkbox "><input type="checkbox" name="rcid[{{ $rs['role_capability_id'] }}]['edit']" class="custom-control-input" id="updateCheck{{ $i }}" <?php if ($rs['update']) echo "checked"; ?> value="1" /> <label class="custom-control-label" for="updateCheck{{ $i }}"></label></div></td>
-							<td class="talCnt"><div class="custom-control custom-checkbox "><input type="checkbox" name="rcid[{{ $rs['role_capability_id'] }}]['delete']" class="custom-control-input" id="deleteCheck{{ $i }}" <?php if ($rs['delete']) echo "checked"; ?> value="1" /> <label class="custom-control-label" for="deleteCheck{{ $i }}"></label></div></td>
+                                <input type="checkbox" name="rcid[{{ $rs['role_capability_id'] }}][create]" class="custom-control-input" id="createCheck{{ $i }}" <?php if ($rs['create']) echo "checked"; ?> value="1" /> <label class="custom-control-label" for="createCheck{{ $i }}"></label></div></td>
+							<td class="talCnt"><div class="custom-control custom-checkbox "><input type="checkbox" name="rcid[{{ $rs['role_capability_id'] }}][read]" class="custom-control-input" id="readCheck{{ $i }}" <?php if ($rs['read']) echo "checked"; ?> value="1" /> <label class="custom-control-label" for="readCheck{{ $i }}"></label></div></td>
+							<td class="talCnt"><div class="custom-control custom-checkbox "><input type="checkbox" name="rcid[{{ $rs['role_capability_id'] }}][edit]" class="custom-control-input" id="updateCheck{{ $i }}" <?php if ($rs['update']) echo "checked"; ?> value="1" /> <label class="custom-control-label" for="updateCheck{{ $i }}"></label></div></td>
+							<td class="talCnt"><div class="custom-control custom-checkbox "><input type="checkbox" name="rcid[{{ $rs['role_capability_id'] }}][delete]" class="custom-control-input" id="deleteCheck{{ $i }}" <?php if ($rs['delete']) echo "checked"; ?> value="1" /> <label class="custom-control-label" for="deleteCheck{{ $i }}"></label></div></td>
 						</tr>
 						<?php 
 							}
