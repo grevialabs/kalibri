@@ -80,6 +80,7 @@ class ClientUserController extends ClientController
 			// Action start here
 			$param = NULL;
 			$param = $post;
+			$param['token'] = env('API_KEY');
 			$param['created_at'] = get_datetime();
 			$param['created_by'] = 1;
 			$param['created_ip'] = get_ip();
@@ -88,7 +89,7 @@ class ClientUserController extends ClientController
 			$api_url = env('API_URL').'user';
 			$api_method = 'post';
 			
-			// $api_header['debug'] = 1;
+			$api_header['debug'] = 1;
 			$api_header['token'] = env('API_KEY');
 
 			$save = curl_api_liquid($api_url, $api_method, $api_header, $param);
@@ -96,7 +97,7 @@ class ClientUserController extends ClientController
 			if (isset($save)) {
 				$save = json_decode($save,1);
 				
-				if ($save['is_success']) $message = 'Save success';
+				if (isset($save['is_success']) && $save['is_success']) $message = 'Save success';
 				else $message = 'Save failed';
 			} else {
 				$message = 'Save error. Please try again';
