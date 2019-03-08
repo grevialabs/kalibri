@@ -19,21 +19,6 @@ if (isset($get['article_attribute_id'])) {
 
 $base_url = base_url();
 
-// Insert log
-// $postlog = NULL;
-// $postlog['name'] = current_url();
-// $postlog['url'] = current_url();
-// $postlog['data'] = json_encode(array('name' => 'ujang'));
-// $postlog['json'] = json_encode(array('name' => 'ujang'));
-// $log = new GeneralModel();
-// $log = $log->insert_log($postlog);
-// debug($postlog,1);
-
-// if ($get['do'] == 'insert') $action = $lang['add'];
-// else if ($get['do'] == 'edit') $action = $lang['edit'];
-
-// $PAGE_TITLE = $action .' '. $article_attribute_lang['module']; 
-
 function validate_column($arrsource,$arrtarget) {
 	
 	if (empty($arrsource) || empty($arrtarget)) {
@@ -48,12 +33,6 @@ function validate_column($arrsource,$arrtarget) {
 	return $temp;
 }
 
-// $source = array('article_attribute_id', 'attribute_name', 'company_address', 'company_phone', 'company_pic', 'status', 'created_at', 'created_by','created_ip','updated_at','updated_by','updated_ip');
-// $target = array('mantap' => 'gokil', 'attribute_name' => 'harusmasuknih');
-// // $test = array('ayam','bebek');
-// // $target = array('ayam' => 'goreng', 'kambing' => 'guling', 'semut' => 'rebus');
-// $a = validate_column($source,$target);
-// debug($a,1);
 ?>
 
 <!-- Article AREA -->
@@ -71,33 +50,9 @@ function validate_column($arrsource,$arrtarget) {
 					{!! session('message') !!}
 				@endif
 				
-				<form method="post" action="{{ $form_url }}" class="form-horizontal">
-
-					
-					<!--
-					<div class="row mb-3 align-items-center">
-						<div class="col-lg-3 col-md-12">
-							<span>Tooltip Input</span>
-						</div>
-						<div class="col-lg-6 col-lg-offset-3 col-md-12">
-							<input type="text" data-toggle="tooltip" title="" class="form-control" id="validationDefault05" placeholder="Hover For tooltip" required="" data-original-title="A Tooltip for the input !">
-						</div>
-					</div>
-					-->
-					
+				<form method="post" action="{{ $form_url }}" class="form-horizontal form_submit">
 				
 					<?php if (isset($data['article_attribute_id'])) { ?>
-					
-					<!--
-					<div class="col-lg-12 col-sm-12">
-						<div class="md-form">
-							<input type="text" id="article_attribute_id" class="form-control" value="{{ $data['article_attribute_id'] }}" disabled />
-							<input type="hidden" name="article_attribute_id" value="{{ $data['article_attribute_id'] }}" />
-							
-							<label for="article_attribute_id" >Company ID</label>
-						</div>
-					</div>
-					-->
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="article_attribute_id" class="control-label col-form-label">{!! $article_attribute_lang['article_attribute_id'] !!}</label>
@@ -119,16 +74,17 @@ function validate_column($arrsource,$arrtarget) {
 					</div>
 					
 					<div class="form-group row">
+					
 						<div class="col-sm-12">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<?php 
 							if ($get['do'] == 'insert') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md">{{ $lang['save'] }}</button>
+							<button type="submit" class="btn btn-primary btn-md btn_submit btncreate">{{ $lang['save'] }}</button>
 							<?php 
 							} else if ($get['do'] == 'edit') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md">{{ $lang['update'] }}</button>
+							<button type="submit" class="btn btn-primary btn-md btn_submit btnupdate">{{ $lang['update'] }}</button>
 							<?php 
 							}
 							?>

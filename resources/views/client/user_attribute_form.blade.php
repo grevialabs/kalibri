@@ -169,11 +169,11 @@ function validate_column($arrsource,$arrtarget) {
 							<?php 
 							if ($get['do'] == 'insert') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md btninsert btn_submit">{{ $lang['save'] }}</button>
+							<button type="submit" class="btn btn-primary btn-md btn_submit btncreate">{{ $lang['save'] }}</button>
 							<?php 
 							} else if ($get['do'] == 'edit') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md btnedit btn_submit">{{ $lang['update'] }}</button>
+							<button type="submit" class="btn btn-primary btn-md btn_submit btnupdate">{{ $lang['update'] }}</button>
 							<?php 
 							}
 							?>

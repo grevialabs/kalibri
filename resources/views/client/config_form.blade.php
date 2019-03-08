@@ -84,7 +84,7 @@ function validate_column($arrsource,$arrtarget) {
 					{!! session('message') !!}
 				@endif
 				
-				<form method="post" action="{{ $form_url }}" class="form-horizontal">
+				<form method="post" action="{{ $form_url }}" class="form-horizontal form_submit">
 
 					
 					<!--

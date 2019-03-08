@@ -90,7 +90,7 @@ function validate_column($arrsource,$arrtarget) {
 					{!! session('message') !!}
 				@endif
 				
-				<form method="post" action="{{ $form_url }}" class="form-horizontal">
+				<form method="post" action="{{ $form_url }}" class="form-horizontal form_submit">
 
 					
 					<!--
@@ -218,11 +218,11 @@ function validate_column($arrsource,$arrtarget) {
 							<?php 
 							if ($get['do'] == 'insert') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md">{{ $lang['save'] }}</button>
+							<button type="submit" class="btn btn-primary btn-md btn_submit btncreate">{{ $lang['save'] }}</button>
 							<?php 
 							} else if ($get['do'] == 'edit') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md">{{ $lang['update'] }}</button>
+							<button type="submit" class="btn btn-primary btn-md btn_submit btnupdate">{{ $lang['update'] }}</button>
 							<?php 
 							}
 							?>

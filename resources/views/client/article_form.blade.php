@@ -33,21 +33,6 @@ $temp = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 if (! empty($temp)) $temp = json_decode($temp,1);
 $list_site = $temp['data'];
 
-
-// Insert log
-// $postlog = NULL;
-// $postlog['name'] = current_url();
-// $postlog['url'] = current_url();
-// $postlog['data'] = json_encode(array('name' => 'ujang'));
-// $postlog['json'] = json_encode(array('name' => 'ujang'));
-// $log = new GeneralModel();
-// $log = $log->insert_log($postlog);
-// debug($postlog,1);
-
-// if ($get['do'] == 'insert') $action = $lang['add'];
-// else if ($get['do'] == 'edit') $action = $lang['edit'];
-
-// $PAGE_TITLE = $action .' '. $articlelang['module']; 
 function validate_column($arrsource,$arrtarget) {
 	
 	if (empty($arrsource) || empty($arrtarget)) {
@@ -79,7 +64,7 @@ function validate_column($arrsource,$arrtarget) {
 					{!! session('message') !!}
 				@endif
 				
-				<form method="post" action="{{ $form_url }}" class="form-horizontal">
+				<form method="post" action="{{ $form_url }}" class="form-horizontal form_submit">
 
 					
 					<!--
@@ -252,11 +237,11 @@ function validate_column($arrsource,$arrtarget) {
 							<?php 
 							if ($get['do'] == 'insert') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md">{{ $lang['save'] }}</button>
+							<button type="submit" class="btn btn-primary btn-md btn_submit btncreate">{{ $lang['save'] }}</button>
 							<?php 
 							} else if ($get['do'] == 'edit') {
 							?>
-							<button type="submit" class="btn btn-primary btn-md">{{ $lang['update'] }}</button>
+							<button type="submit" class="btn btn-primary btn-md btn_submit btnupdate">{{ $lang['update'] }}</button>
 							<?php 
 							}
 							?>
