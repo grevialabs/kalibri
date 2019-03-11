@@ -25,15 +25,21 @@ function debug($data,$die = 0)
 function curl_api_liquid($url, $method = 'get', $attr = NULL, $data = NULL)
 {
 	$httpheader = $param = array();
-	$httpheader[] = 'Secretkey: macbook';
+	// $httpheader[] = 'Token: macbook';
+	
+	// Get all API_KEY from config .env files
+	if (env('API_KEY')) {
+		$httpheader[] = 'Token: '.env('API_KEY');
+	} else {
+		if (isset($attr['token'])) $httpheader[] = 'Token: '.$attr['token'];
+	}
 	// $httpheader[] = 'Secretkey: grevia';
 	
-	// $data['secretkey'] = 'grevia';
 	
-	//
+	// Activate debug
 	if (isset($attr['debug'])) $param['debug'] = $attr['debug'];
 	// if (isset($attr['method'])) $param['method'] = $attr['method'];
-		
+
 	$param['httpheader'] = $httpheader;
 	$param['useragent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/32.0.1700.107 Chrome/32.0.1700.107 Safari/537.36';
 	
@@ -43,7 +49,6 @@ function curl_api_liquid($url, $method = 'get', $attr = NULL, $data = NULL)
 	// debug($data);
 	
 	$return = curl($url, $method, $param, $data);
-	// debug('start bro');
 	// debug($return,1);
 	
 	// if (isset($attr['debug'])) debug($return,1);
@@ -255,6 +260,8 @@ function curl($url, $method = 'get', $attr = NULL, $data = NULL)
 		$resp['output'] = curl_exec($ch);
 		$resp['info'] = curl_getinfo($ch);
 		$resp['error'] = curl_error($ch);
+		$resp['info']['passing_header'] = $attr['httpheader'];
+		$resp['info']['passing_data'] = $data;
 		debug($resp,1);
 	} else {
 		

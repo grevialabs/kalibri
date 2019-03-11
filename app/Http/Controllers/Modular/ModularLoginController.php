@@ -81,10 +81,13 @@ class ModularLoginController extends ModularController
 				return redirect('login')->with('message', print_message($message));
 			}
 			
-			// $url = 'http://www.grevia.com/api/member';
-			$url = env('API_URL').'user/get?user_code='.$post['username'];
-			$obj = curl_api_liquid($url);
-			// debug($obj,1);
+			// Action start here
+			$param = $api_header = NULL;
+			$param['user_code'] = $post['username'];
+			$api_url = env('API_URL').'user/get';
+			$api_method = 'get';
+			// $api_header['debug'] = 1;
+			$obj = curl_api_liquid($api_url, $api_method, $api_header, $param);
 
 			if (empty($obj)) {
 				// $message = 'Mohon maaf terjadi kesalahan. Silakan coba lagi';
@@ -94,23 +97,39 @@ class ModularLoginController extends ModularController
 
 			$obj = json_decode($obj,1);
 			if (isset($obj['is_error'])) {
-				$message = 'Mohon maaf, terjadi kesalahan';
-				return redirect('login')->with('message', print_message($message));
+				$message = 'Mohon maaf, terjadi kesalahan. Silakan ulangi.';
+				return redirect('login')->with('message', print_message($message,'error'));
 			}
 			
 			$decrypt_password = NULL;
 			if (isset($obj['password'])) $decrypt_password = Crypt::decryptString($obj['password']);
+			
+			// Check if banned or not
+			// if ($obj['counter_wrong_pass'] > 3) {
+				// $message = 'Mohon maaf, terjadi kesalahan';
+				// return redirect('login')->with('message', print_message($message,'error'));
+			// }
+			
+			// Check if banned or not
+			if ($obj['status_lock']) {
+				$message = 'Mohon maaf, user anda sedang terkunci. Silakan hubungi administrator';
+				return redirect('login')->with('message', print_message($message,'error'));
+			}
+			
+			// not a validation suppose tobe
+			// if (isset($obj['locked_time']) && time() < strtotime($obj['locked_time'])) {
+				// $message = 'Mohon maaf, user anda sedang terkunci. Silakan hubungi administrator';
+				// return redirect('login')->with('message', print_message($message,'error'));
+			// }
 			
 			// valid
 			if (isset($obj['password']) && $post['password'] == $decrypt_password) {
 				
 				// --------------------------
 				// check access group and insert if not exist
-				$api_url = $api_url_capability = $api_method = $api_param = $api_header = NULL;
-				$api_param['token'] = env('API_KEY');
-				$api_param['role_id'] = get_user_cookie('role_id');
-
+				$api_url = $api_method = $api_param = $api_header = NULL;
 				$api_url = env('API_URL').'role_capability/cron_insert_role';
+				$api_param['role_id'] = get_user_cookie('role_id');
 				$api_method = 'get';
 				// $api_header['debug'] = 1;
 				$list_role = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
@@ -140,6 +159,9 @@ class ModularLoginController extends ModularController
 				if (isset($_GET['uri'])) $targeturl = urldecode($_GET['uri']);
 				
 			} else {
+				
+				// Add +1 error
+				
 				$targeturl = 'login';
 				$message = 'Email / Password tidak sesuai';
 			}
