@@ -1,4 +1,5 @@
 <?php 
+// $arr_
 // ---------------------------
 // Get data 
 $data = NULL;
@@ -15,7 +16,18 @@ if (isset($get['user_id'])) {
 
 	if (! empty($data)) $data = json_decode($data,1);
 }
-// debug($data,1);
+
+// Get list user parent
+$list_user = NULL;
+$api_url = $api_method = $api_param = $api_header = NULL;
+$api_url = env('API_URL').'user/get_list_dropdown';
+$api_method = 'get';
+// $api_header['debug'] = 1;
+
+$list_user = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+if (! empty($list_user)) $list_user = json_decode($list_user,1); 
+if (! empty($list_user['data'])) $list_user = $list_user['data']; 
+// debug($list_user,1);
 
 $base_url = base_url();
 
@@ -231,7 +243,19 @@ $get_user_category_list = UserModel::get_user_category_list();
 							<label for="parent_user_id" class="control-label col-form-label">{!! $userlang['parent_user_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['parent_user_id'] }}" title="{{ $userlang['parent_user_id'] }}" class="form-control numeric" id="parent_user_id" name="parent_user_id" placeholder="{{ $userlang['parent_user_id'] }}" required="" data-original-title="" />
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="parent_user_id" id="parent_user_id" placeholder="{{ $userlang['parent_user_id'] }} ">
+							<?php 
+							if (!empty($list_user)) { ?>
+								<option value="" /> {{ $lang['please_select'] }} </>
+								<?php
+								foreach ($list_user as $k => $rs) {
+								?>
+								<option value="{{ $rs['user_id'] }}">{{ $rs['fullname'] . ' - ID ' . $rs['user_id']}}</option>
+								<?php 
+								} 
+							}
+							?>
+							</select>
 						</div>
 					</div>
 										
@@ -264,25 +288,6 @@ $get_user_category_list = UserModel::get_user_category_list();
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="password" class="control-label col-form-label">{!! $userlang['password'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['password'] }}" title="{{ $userlang['password'] }}" class="form-control" id="password" name="password" placeholder="{{ $userlang['password'] }}" required="" data-original-title="" />
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="counter_wrong_pass" class="control-label col-form-label">{!! $userlang['counter_wrong_pass'] !!}</label>
-						</div>
-						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input checked="checked" data-toggle="{{ $userlang['counter_wrong_pass'] }}" title="{{ $userlang['counter_wrong_pass'] }}" name="counter_wrong_pass" id="counter_wrong_pass" type="checkbox" value="yes" placeholder="{{ $userlang['counter_wrong_pass'] }}" required="" data-original-title="" >
-							<!-- <input type="text" data-toggle="{{ $userlang['counter_wrong_pass'] }}" title="{{ $userlang['counter_wrong_pass'] }}" class="form-control" id="counter_wrong_pass" name="counter_wrong_pass" placeholder="{{ $userlang['counter_wrong_pass'] }}" required="" data-original-title="" /> -->
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="status_lock" class="control-label col-form-label">{!! $userlang['status_lock'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
@@ -300,6 +305,7 @@ $get_user_category_list = UserModel::get_user_category_list();
 						</div>
 					</div>
 					
+					<!--
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="reset_by" class="control-label col-form-label">{!! $userlang['reset_by'] !!}</label>
@@ -317,6 +323,7 @@ $get_user_category_list = UserModel::get_user_category_list();
 							<input type="text" data-toggle="{{ $userlang['reset_time'] }}" title="{{ $userlang['reset_time'] }}" class="form-control" id="reset_time" name="reset_time" placeholder="{{ $userlang['reset_time'] }}" required="" data-original-title="" />
 						</div>
 					</div>
+					-->
 					
 					<div class="form-group row">
 						<div class="col-sm-12">
@@ -334,7 +341,34 @@ $get_user_category_list = UserModel::get_user_category_list();
 							?>
 						</div>
 					</div>
-
+				</form>
+				
+				<div class="" style="padding-top:25px"></div>
+				<h3>Change Password</h3>
+				<form method="post" action="{{ $form_url }}" class="form-horizontal form_submit">
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="password" class="control-label col-form-label">{!! $userlang['password'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $userlang['password'] }}" title="{{ $userlang['password'] }}" class="form-control" id="password" name="password" placeholder="{{ $userlang['password'] }}" required="" data-original-title="" />
+						</div>
+					
+						<div class="col-sm-12">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<?php 
+							if ($get['do'] == 'insert') {
+							?>
+							<button type="submit" class="btn btn-primary btn-md btn_submit btncreate">{{ $lang['save'] }}</button>
+							<?php 
+							} else if ($get['do'] == 'edit') {
+							?>
+							<button type="submit" class="btn btn-primary btn-md btn_submit btnupdate">{{ $lang['update'] }}</button>
+							<?php 
+							}
+							?>
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>

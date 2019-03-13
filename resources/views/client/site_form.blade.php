@@ -1,4 +1,5 @@
-<?php 
+<?php
+$arr_method_calc = array('bottom_up','top_down'); 
 // ---------------------------
 // Get data 
 $data = NULL;
@@ -50,6 +51,7 @@ if (! empty($list_company)) {
 	$list_company = $list_company['data'];
 }
 
+debug($data);
 ?>
 
 
@@ -68,7 +70,7 @@ if (! empty($list_company)) {
 					{!! session('message') !!}
 				@endif
 				
-				<form method="post" action="{{ $form_url }}" class="form-horizontal form_submit">
+				<form method="post" action="{{ $form_url }}" class="form-horizontal form_submit" enctype="multipart/form-data">
 
 					
 					<!--
@@ -171,7 +173,20 @@ if (! empty($list_company)) {
 							<label for="method_calc" class="control-label col-form-label">{!! $sitelang['method_calc'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="" title="" class="form-control" id="method_calc" name="method_calc" placeholder="{{ $sitelang['method_calc'] }}" required="" data-original-title="" />
+							<!--
+							<input type="radio" data-toggle="" value="{{ $arr_method_calc[0] }}" class="form-control" id="method_calc" name="method_calc" placeholder="{{ $sitelang['method_calc'] }}" required="" /> {{ str_replace('_',' ',$arr_method_calc[0]) }}
+							<input type="radio" data-toggle="" value="{{ $arr_method_calc[1] }}" class="form-control" id="method_calc" name="method_calc" placeholder="{{ $sitelang['method_calc'] }}" required="" /> {{ str_replace('_',' ',$arr_method_calc[1]) }}
+							-->
+							
+							<div class="custom-control custom-radio">
+								<input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" value="{{ $arr_method_calc[0] }}" required>
+								<label class="custom-control-label" for="customControlValidation1">{{ str_replace('_',' ',$arr_method_calc[0]) }}</label>
+							</div>
+							<div class="custom-control custom-radio">
+								<input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" value="{{ $arr_method_calc[1] }}" required>
+								<label class="custom-control-label" for="customControlValidation2">{{ str_replace('_',' ',$arr_method_calc[1]) }}</label>
+							</div>
+							
 						</div>
 					</div>
 					
@@ -199,6 +214,9 @@ if (! empty($list_company)) {
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
 							<input type="file" data-toggle="" title="" class="form-control" id="logo_file_name" name="logo_file_name" placeholder="{{ $sitelang['logo_file_name'] }}" data-original-title="{{ $sitelang['logo_file_name'] }}" />
+							<?php if (isset($data['logo_file_name'])) { ?>
+							<img src="<?php echo base_url().'public/images/' . $data['logo_file_name']; ?>" />
+							<?php } ?>
 						</div>
 					</div>
 					

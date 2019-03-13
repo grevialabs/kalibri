@@ -12,7 +12,9 @@ use Patriot\Http\Controllers\Client\ClientController;
 
 use Cookie;
 use Lang;
-use Request;
+// use Request;
+// use Patriot\Http\Controllers\Client\Request;
+use Illuminate\Http\Request;
 
 class ClientSiteController extends ClientController
 {	
@@ -134,11 +136,15 @@ class ClientSiteController extends ClientController
 		return redirect($url_back)->with('message', print_message($message));
 	}
 	
-	public function update()
+	public function update(Request $request)
 	{
 		$post = $message = $url_back = NULL;
 		$message = 'No data update';
-		$url_back = Request::segment(1).DS.Request::segment(2);
+		$url_back = $request->segment(1).DS.$request->segment(2);
+		// $request = Request::all();
+		
+		// debug($request->file('logo_file_name'));
+		// debug(HR.'ayam',1);
 		if ($_POST)
 		{
 			$post = $_POST;
@@ -150,9 +156,25 @@ class ClientSiteController extends ClientController
                 return redirect($url_back)->with('message', print_message($message));
             } 
 			
+			// Check image upload 
+			$logo_file_name = NULL;
+			if ($request->hasFile('logo_file_name')) {
+				$image = $request->file('logo_file_name');
+				$logo_file_name = time().'_'.mt_rand(1000,9999).'.'.$image->getClientOriginalExtension();
+				$destinationPath = public_path('/images');
+				$saveimage = $image->move($destinationPath, $logo_file_name);
+				
+				if ($saveimage) {
+					$message .= BR." Save images successful.";
+				} else {
+					$message .= BR." Save images failed.";
+				}
+			}
+			
 			// Action start here
 			$param = NULL;
 			$param = $post;
+			if (isset($logo_file_name)) $param['logo_file_name'] = $logo_file_name;
 			$param['updated_at'] = get_datetime();
 			$param['updated_by'] = 1;
 			$param['updated_ip'] = get_ip();
@@ -168,10 +190,18 @@ class ClientSiteController extends ClientController
 			if (isset($update)) {
 				$update = json_decode($update,1);
 				
-				if ($update['is_success']) $message = 'Update success';
-				else $message = 'Update failed. Please try again';
-
+				if ($update['is_success'])
+					$message = 'Update success';
+				else 
+					$message = 'Update failed. Please try again';
 			}
+			
+			// Validation image
+			// $this->validate($request, [
+				// 'logo_file_name' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+			// ]);
+
+			
 		}
 		
 		return redirect($url_back)->with('message', print_message($message));
