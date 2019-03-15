@@ -51,41 +51,49 @@ $form_url = base_url().'login';
         <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bgRed">
             <div class="auth-box bgRed border-top border-secondary">
                 <div id="loginform">
-                    <div class="text-center p-t-20 p-b-20">
+                    <!--
+					<div class="text-center p-t-20 p-b-20">
                         <span class="db"><img src="./public/matrix/assets/images/logo.png" alt="logo" /></span>
                     </div>
+					-->
 					
 					@if (session('message'))
 						{!! session('message') !!}
 					@endif
 					
                     <!-- Form -->
-                    <form class="form-horizontal m-t-20 form_submit" id="loginform" action="{{ current_full_url() }}" method="post" >
+					<div align="center" class="text-light">
+						<h2 class="">Reset password</h2>
+						
+						Reset password for email <?php if (isset($_GET['email'])) echo $_GET['email']  ?>
+					</div>
+                    <form class="form-horizontal m-t-20 form_submit" id="resetform" action="{{ current_full_url() }}" method="post" >
                         <div class="row p-b-30">
                             <div class="col-12">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
+                                        <span class="input-group-text bg-info text-white" id="basic-addon1"><i class="ti-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required="">
+                                    <input type="password" class="form-control form-control-lg" name="new_password" placeholder="New Password" aria-label="New Password" aria-describedby="basic-addon1" required="">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
+                                        <span class="input-group-text bg-info text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
                                     </div>
-                                    <input type="password" class="form-control form-control-lg" name="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="">
+                                    <input type="password" class="form-control form-control-lg" name="confirm_new_password" placeholder="Confirm New Password" aria-label="Confirm New Password" aria-describedby="basic-addon1" required="">
 									<input type="hidden" name="uri" value="{{ $_GET['uri'] or '' }}">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<input type="hidden" name="token" value="{{ $_GET['token'] }}">
+									<input type="hidden" name="email" value="{{ $_GET['email'] or '' }}">
                                 </div>
                             </div>
                         </div>
                         <div class="row border-top border-secondary">
                             <div class="col-12">
-                                <div class="form-group">
+                                <div class="form-group" align="center">
                                     <div class="p-t-20">
                                         <!-- <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Lost password?</button> -->
-                                        <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Lost password?</button>
-                                        <button class="btn btn-success float-right btn_submit" type="submit" name="btn_submit">Login</button>
+                                        <button class="btn btn-success btn_submit" type="submit" name="btn_submit">Reset Password</button>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +112,7 @@ $form_url = base_url().'login';
                                 <div class="input-group-prepend">
                                     <span class="input-group-text bg-danger text-white" id="basic-addon1"><i class="ti-email"></i></span>
                                 </div>
-                                <input type="text" class="form-control form-control-lg" placeholder="Email Address" aria-label="Email" aria-describedby="basic-addon1" name="email" required>
+                                <input type="text" class="form-control form-control-lg" placeholder="Email Address" aria-label="Email" aria-describedby="basic-addon1" name="email">
                             </div>
                             <!-- pwd -->
                             <div class="row m-t-20 p-t-20 border-top border-secondary">
@@ -170,8 +178,8 @@ $form_url = base_url().'login';
 	});
 
 	
-	// $('.frmlogin').submit(function(){
-		
+	// $('#resetform').submit(function(){
+		// alert('kirim');
 	// })
     </script>
 

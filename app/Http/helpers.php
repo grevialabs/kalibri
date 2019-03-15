@@ -8,9 +8,11 @@ define('HR','</hr>');
 define('ASC','asc');
 define('DESC','desc');
 
-function get_datetime()
+function get_datetime($date = NULL, $format_date='Y-m-d H:i:s')
 {
-	return date('Y-m-d H:i:s');
+	$return = date($format_date);
+	if (isset($date)) $return = date($format_date,strtotime($date));
+	return $return;
 }
 
 function debug($data,$die = 0)
@@ -555,4 +557,15 @@ function is_member($param = NULL)
 	if (isset($temp) && $temp != '') $return = true;
 	return $return;
 }
+
+function generateRandomString($length = 10) {
+    $characters = '123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
 ?>

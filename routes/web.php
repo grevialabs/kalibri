@@ -25,10 +25,10 @@ Route::any('/dologin', 'Modular\ModularLoginController@dologin');
 Route::get('/login', 'Modular\ModularLoginController@login_get');
 Route::post('/login', 'Modular\ModularLoginController@login_post');
 Route::get('/logout', 'Modular\ModularController@logout');
+Route::post('/forgotpass', 'Modular\ModularForgotpassController@forgotpass');
+Route::get('/resetpass', 'Modular\ModularResetpassController@resetpass_get');
+Route::post('/resetpass', 'Modular\ModularResetpassController@resetpass_post');
 Route::any('/article-vue', 'Modular\ModularController@article_vue');
-
-Route::any('/forgotpass', 'Modular\ModularForgotpassController@forgotpass');
-
 
 Route::prefix('modular')->group(function () {
 	
