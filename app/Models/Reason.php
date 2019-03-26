@@ -9,14 +9,14 @@ class Reason extends Model
     // getorder_allowed_list
 	public static function column_list()
     {
-	   static $str = array('reason_id','reason_value','status', 'created_at','created_by','created_ip','updated_at','updated_by','updated_ip');
+	   static $str = array('reason_id','reason_value','is_replenish','status', 'created_at','created_by','created_ip','updated_at','updated_by','updated_ip');
        return $str;
 	}
 	
 	// getorder_allowed_list
 	public static function getorder_allowed_list()
     {
-	   static $str = array('reason_id','reason_value','status', 'created_at','created_ip','updated_at','updated_by');
+	   static $str = array('reason_id','reason_value','is_replenish','status', 'created_at','created_ip','updated_at','updated_by');
        return $str;
     }
 	
