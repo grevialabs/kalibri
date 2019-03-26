@@ -108,6 +108,7 @@ $base_url = base_url();
 								<td width="150px"><a class="{{ $arrsort['reason_type_id']['class'] }}" title="{{ $arrsort['reason_type_id']['title'] }}" href="{{ $arrsort['reason_type_id']['url'] }}">{{ $reason_type_lang['reason_type_id'] }} {!! $arrsort['reason_type_id']['icon'] !!}</a></td>
 								<td width=""><a class="{{ $arrsort['article_attribute_id']['class'] }}" title="{{ $arrsort['article_attribute_id']['title'] }}" href="{{ $arrsort['article_attribute_id']['url'] }}">{{ $reason_type_lang['article_attribute_id'] }} {!! $arrsort['article_attribute_id']['icon'] !!}</a></td>
 								<td width=""><a class="{{ $arrsort['site_id']['class'] }}" title="{{ $arrsort['site_id']['title'] }}" href="{{ $arrsort['site_id']['url'] }}">{{ $reason_type_lang['site_id'] }} {!! $arrsort['site_id']['icon'] !!}</a></td>
+								<td width=""><a class="{{ $arrsort['attribute']['class'] }}" title="{{ $arrsort['attribute']['title'] }}" href="{{ $arrsort['attribute']['url'] }}">{{ $reason_type_lang['attribute'] }} {!! $arrsort['attribute']['icon'] !!}</a></td>
 								<td width=""><a class="{{ $arrsort['attribute_value']['class'] }}" title="{{ $arrsort['attribute_value']['title'] }}" href="{{ $arrsort['attribute_value']['url'] }}">{{ $reason_type_lang['attribute_value'] }} {!! $arrsort['attribute_value']['icon'] !!}</a></td>
 								<td width="200px">{{ $lang['created_at'] }}</td>
 								<td width="200px">{{ $lang['updated_at'] }}</td>
@@ -135,6 +136,7 @@ $base_url = base_url();
 								<td>{{ $rs['reason_type_id'] }}  <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
 								<td>{{ $rs['article_attribute_id'] }}</td>
 								<td>{{ $rs['site_id'] }}</td>
+								<td>{{ $rs['attribute'] }}</td>
 								<td>{{ $rs['attribute_value'] }}</td>
 								<td>{{ $rs['created_at'] or null }}</td>
 								<td>{{ $rs['updated_at'] or null }}</td>

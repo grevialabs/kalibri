@@ -173,6 +173,15 @@ function validate_column($arrsource,$arrtarget) {
 
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="attribute" class="control-label col-form-label">{!! $reason_type_lang['attribute'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $reason_type_lang['attribute'] }}" title="{{ $reason_type_lang['attribute'] }}" class="form-control" id="attribute" name="attribute" placeholder="{{ $reason_type_lang['attribute'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="attribute_value" class="control-label col-form-label">{!! $reason_type_lang['attribute_value'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">

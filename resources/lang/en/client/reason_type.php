@@ -22,6 +22,7 @@ return [
 	
     'reason_type_id' => 'ReasonTypeID',
     'article_attribute_id' => 'ArticleAttributeID',
+    'attribute' => 'Attribute',
     'attribute_value' => 'AttributeValue',
     'site_id' => 'SiteID',
     // '' => '',

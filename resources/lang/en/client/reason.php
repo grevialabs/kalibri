@@ -22,6 +22,7 @@ return [
 	
     'reason_id' => 'ReasonID',
     'reason_value' => 'ReasonValue',
+    'is_replenish' => 'IsReplenish',
     // '' => '',
     
 ];

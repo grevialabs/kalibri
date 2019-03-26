@@ -119,6 +119,16 @@ function validate_column($arrsource,$arrtarget) {
 					</div>
 					
 					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="is_replenish" class="control-label col-form-label">{!! $reasonlang['is_replenish'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $reasonlang['is_replenish'] }}" title="{{ $reasonlang['is_replenish'] }}" class="form-control" id="is_replenish" name="is_replenish" placeholder="{{ $reasonlang['is_replenish'] }}" required="" data-original-title="" />
+							<input checked="checked" data-toggle="{{ $reasonlang['is_replenish'] }}" title="{{ $reasonlang['is_replenish'] }}" name="is_replenish" id="is_replenish" type="checkbox" value="yes" placeholder="{{ $reasonlang['is_replenish'] }}" required="" data-original-title="" >
+						</div>
+					</div>
+
+					<div class="form-group row">
 						<div class="col-sm-12">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<?php 

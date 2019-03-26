@@ -159,6 +159,24 @@ $get_user_category_list = UserModel::get_user_category_list();
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="article_attribute_reason" class="control-label col-form-label">{!! $userlang['article_attribute_reason'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $userlang['article_attribute_reason'] }}" title="{{ $userlang['article_attribute_reason'] }}" class="form-control" id="article_attribute_reason" name="article_attribute_reason" placeholder="{{ $userlang['article_attribute_reason'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
+							<label for="attribute_value" class="control-label col-form-label">{!! $userlang['attribute_value'] !!}</label>
+						</div>
+						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
+							<input type="text" data-toggle="{{ $userlang['attribute_value'] }}" title="{{ $userlang['attribute_value'] }}" class="form-control" id="attribute_value" name="attribute_value" placeholder="{{ $userlang['attribute_value'] }}" required="" data-original-title="" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-lg-2 col-md-3 col-sm-12">
 							<label for="email" class="control-label col-form-label">{!! $userlang['email'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">

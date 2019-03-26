@@ -107,6 +107,7 @@ $base_url = base_url();
 								<td width=1>#</td>
 								<td width="150px"><a class="{{ $arrsort['reason_id']['class'] }}" title="{{ $arrsort['reason_id']['title'] }}" href="{{ $arrsort['reason_id']['url'] }}">{{ $reasonlang['reason_id'] }} {!! $arrsort['reason_id']['icon'] !!}</a></td>
 								<td width=""><a class="{{ $arrsort['reason_value']['class'] }}" title="{{ $arrsort['reason_value']['title'] }}" href="{{ $arrsort['reason_value']['url'] }}">{{ $reasonlang['reason_value'] }} {!! $arrsort['reason_value']['icon'] !!}</a></td>
+								<td width=""><a class="{{ $arrsort['is_replenish']['class'] }}" title="{{ $arrsort['is_replenish']['title'] }}" href="{{ $arrsort['is_replenish']['url'] }}">{{ $reasonlang['is_replenish'] }} {!! $arrsort['is_replenish']['icon'] !!}</a></td>
 								<td width="200px">{{ $lang['created_at'] }}</td>
 								<td width="200px">{{ $lang['updated_at'] }}</td>
 								<td width="2">{{ $lang['status'] }}</td>
@@ -132,6 +133,7 @@ $base_url = base_url();
 								<td>{{ $i }}</td>
 								<td>{{ $rs['reason_id'] }}  <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>
 								<td>{{ $rs['reason_value'] }}</td>
+								<td>{{ $rs['is_replenish'] }}</td>
 								<td>{{ $rs['created_at'] or null }}</td>
 								<td>{{ $rs['updated_at'] or null }}</td>
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>

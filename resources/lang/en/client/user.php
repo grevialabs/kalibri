@@ -32,6 +32,8 @@ return [
     'quota_remaining' => 'Quota remaining',
     'job_title' => 'JobTitle',
     'division' => 'Division',
+    'article_attribute_reason' => 'ArticleAttributeReason',
+    'atribute_value' => 'AttributeValue',
     'email' => 'Email',
     'user_category' => 'User Category',
     'password' => 'Password',

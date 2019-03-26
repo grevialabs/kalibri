@@ -74,7 +74,6 @@ class ClientLevelController extends ClientController
 			$post = $_POST;
 			
 			// Do validation here
-			
 			// Action start here
 			$param = NULL;
 			$param = $post;

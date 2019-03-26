@@ -110,6 +110,8 @@ $base_url = base_url();
 								<td width="180px"><a class="{{ $arrsort['lastname']['class'] or '' }}" title="{{ $arrsort['lastname']['title'] }}" href="{{ $arrsort['lastname']['url'] }}">{{ $userlang['lastname'] }} {!! $arrsort['lastname']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['job_title']['class'] or '' }}" title="{{ $arrsort['job_title']['title'] }}" href="{{ $arrsort['job_title']['url'] }}">{{ $userlang['job_title'] }} {!! $arrsort['job_title']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['division']['class'] or '' }}" title="{{ $arrsort['division']['title'] }}" href="{{ $arrsort['division']['url'] }}">{{ $userlang['division'] }} {!! $arrsort['division']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['article_attribute_reason']['class'] or '' }}" title="{{ $arrsort['article_attribute_reason']['title'] }}" href="{{ $arrsort['article_attribute_reason']['url'] }}">{{ $userlang['article_attribute_reason'] }} {!! $arrsort['article_attribute_reason']['icon'] !!}</a></td>
+								<td width="180px"><a class="{{ $arrsort['attribute_value']['class'] or '' }}" title="{{ $arrsort['attribute_value']['title'] }}" href="{{ $arrsort['attribute_value']['url'] }}">{{ $userlang['attribute_value'] }} {!! $arrsort['attribute_value']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['email']['class'] }}" title="{{ $arrsort['email']['title'] }}" href="{{ $arrsort['email']['url'] }}">{{ $userlang['email'] }} {!! $arrsort['email']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['user_category']['class'] or '' }}" title="{{ $arrsort['user_category']['title'] or '' }}" href="{{ $arrsort['user_category']['url'] or '' }}">{{ $userlang['user_category'] or '' }} {!! $arrsort['user_category']['icon'] or '' !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['role_name']['class'] or '' }}" title="{{ $arrsort['role_name']['title'] or '' }}" href="{{ $arrsort['role_name']['url'] or '' }}">{{ $userlang['role_name'] or '' }} {!! $arrsort['role_name']['icon'] or '' !!}</a></td>
@@ -152,8 +154,10 @@ $base_url = base_url();
 								<td>{{ $rs['user_id'] }} <br/> <a style="margin-right:6px" href="<?php echo Request::segment(2).'?do=edit&'.$idcol.'='.$id; ?>" title="Edit data" alt="Edit data"><i class="clrBlu fa fa-pencil-square-o fa-lg btnedit"></i></a> </td>								
 								<td>{{ $rs['firstname'] or '' }}</td>
 								<td>{{ $rs['lastname'] or '' }}</td>								
-								<td>{{ $rs['job_title'] or '' }}</td>
+								<td>{{ $rs['job_title'] or '' }}</td>								
 								<td>{{ $rs['division'] or '' }}</td>
+								<td>{{ $rs['article_attribute_reason'] or '' }}</td>
+								<td>{{ $rs['attribute_value'] or '' }}</td>
 								<td>{{ $rs['email'] or '' }}</td>
 								<td>{{ $rs['user_category'] or '' }}</td>
 								<td>{{ $rs['role_name'] or '' }}</td>
