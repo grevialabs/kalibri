@@ -33,7 +33,7 @@ return [
     'job_title' => 'JobTitle',
     'division' => 'Division',
     'article_attribute_reason' => 'ArticleAttributeReason',
-    'atribute_value' => 'AttributeValue',
+    'attribute_value' => 'AttributeValue',
     'email' => 'Email',
     'user_category' => 'User Category',
     'password' => 'Password',

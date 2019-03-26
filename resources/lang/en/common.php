@@ -44,6 +44,7 @@ return [
     'update' => 'update',
     'delete' => 'delete',
     'back' => 'back',
+    'status' => 'status',
     'please_select' => '--Please Select--',
     'back_icon' => '<i class="fa fa-arrow-left" aria-hidden="true"></i>',
 

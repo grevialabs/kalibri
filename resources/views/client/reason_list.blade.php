@@ -36,13 +36,14 @@ $arrsort = $general_model->arrsort($get,$getorder,$getorderby,$getorder_allowed_
 
 $api_url = env('API_URL').'reason/get_list';
 $api_method = 'get';
-// $api_header['debug'] = 1;
+//  $api_header['debug'] = 1;
+ 
 $data = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 
 if (! empty($data)) $data = json_decode($data,1);
 if (isset($data['data'])) $listdata = $data['data'];
 if (isset($data['total_rows'])) $total_rows = $data['total_rows'];
-
+// debug ($listdata,1);
 $reget = NULL;
 if (! empty($get)) {
 	$reget = $get;
