@@ -107,8 +107,8 @@ $base_url = base_url();
 								<td width="150px"><a class="{{ $arrsort['level_id']['class'] }}" title="{{ $arrsort['level_id']['title'] }}" href="{{ $arrsort['level_id']['url'] }}">{{ $levellang['level_id'] }} {!! $arrsort['level_id']['icon'] !!}</a></td>
 								<td width=""><a class="{{ $arrsort['level_hierarchy']['class'] }}" title="{{ $arrsort['level_hierarchy']['title'] }}" href="{{ $arrsort['level_hierarchy']['url'] }}">{{ $levellang['level_hierarchy'] }} {!! $arrsort['level_hierarchy']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['level_name']['class'] }}" title="{{ $arrsort['level_name']['title'] }}" href="{{ $arrsort['level_name']['url'] }}">{{ $levellang['level_name'] }} {!! $arrsort['level_name']['icon'] !!}</a></td>
-								<td width="2">Status</td>
-								<td width="50px" class="talCnt">Option</td>
+								<td width="2">{{ $lang['status'] }}</td>
+								<td width="30px" class="talCnt">{{ $lang['option'] }}</td>
 							</tr>
 							<?php 
 							if (! empty($listdata)) 

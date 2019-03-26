@@ -107,10 +107,10 @@ $base_url = base_url();
 								<td width=1>#</td>
 								<td width="150px"><a class="{{ $arrsort['reason_id']['class'] }}" title="{{ $arrsort['reason_id']['title'] }}" href="{{ $arrsort['reason_id']['url'] }}">{{ $reasonlang['reason_id'] }} {!! $arrsort['reason_id']['icon'] !!}</a></td>
 								<td width=""><a class="{{ $arrsort['reason_value']['class'] }}" title="{{ $arrsort['reason_value']['title'] }}" href="{{ $arrsort['reason_value']['url'] }}">{{ $reasonlang['reason_value'] }} {!! $arrsort['reason_value']['icon'] !!}</a></td>
-								<td width="200px">Created</td>
-								<td width="200px">Updated</td>
-								<td width="2">Status</td>
-								<td width="50px" class="talCnt">Option</td>
+								<td width="200px">{{ $lang['created_at'] }}</td>
+								<td width="200px">{{ $lang['updated_at'] }}</td>
+								<td width="2">{{ $lang['status'] }}</td>
+								<td width="30px" class="talCnt">{{ $lang['option'] }}</td>
 							</tr>
 							<?php 
 							if (! empty($listdata)) 

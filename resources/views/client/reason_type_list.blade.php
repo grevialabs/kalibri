@@ -109,10 +109,10 @@ $base_url = base_url();
 								<td width=""><a class="{{ $arrsort['article_attribute_id']['class'] }}" title="{{ $arrsort['article_attribute_id']['title'] }}" href="{{ $arrsort['article_attribute_id']['url'] }}">{{ $reason_type_lang['article_attribute_id'] }} {!! $arrsort['article_attribute_id']['icon'] !!}</a></td>
 								<td width=""><a class="{{ $arrsort['site_id']['class'] }}" title="{{ $arrsort['site_id']['title'] }}" href="{{ $arrsort['site_id']['url'] }}">{{ $reason_type_lang['site_id'] }} {!! $arrsort['site_id']['icon'] !!}</a></td>
 								<td width=""><a class="{{ $arrsort['attribute_value']['class'] }}" title="{{ $arrsort['attribute_value']['title'] }}" href="{{ $arrsort['attribute_value']['url'] }}">{{ $reason_type_lang['attribute_value'] }} {!! $arrsort['attribute_value']['icon'] !!}</a></td>
-								<td width="200px">Created</td>
-								<td width="200px">Updated</td>
-								<td width="2">Status</td>
-								<td width="50px" class="talCnt">Option</td>
+								<td width="200px">{{ $lang['created_at'] }}</td>
+								<td width="200px">{{ $lang['updated_at'] }}</td>
+								<td width="2">{{ $lang['status'] }}</td>
+								<td width="30px" class="talCnt">{{ $lang['option'] }}</td>
 							</tr>
 							<?php 
 							if (! empty($listdata)) 

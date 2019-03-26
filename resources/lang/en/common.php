@@ -21,7 +21,12 @@ return [
 	// 'sorry_error_try_again' => 'Mohon maaf terjadi kesalahan. Mohon coba beberapa saat lagi.',
     'sorry_error_try_again' => 'Sorry error occurred. Please try again.',
 	
+    'created_at' => 'CreatedDate',
+    'updated_at' => 'lastUpdate',
+    'created_by' => 'Created',
+    'updated_by' => 'Updated',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'option' => 'option',
     'success' => 'success',
     'page' => 'page',
     'data_not_found' => 'Data not found',

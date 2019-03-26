@@ -109,8 +109,8 @@ $base_url = base_url();
 								<td><a class="{{ $arrsort['site_address']['class'] or '' }}" title="{{ $arrsort['site_address']['title'] or '' }}" href="{{ $arrsort['site_address']['url'] or '' }}">{{ $sitelang['site_address'] or '' }} {!! $arrsort['site_address']['icon'] or '' !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['site_qty_value']['class'] or '' }}" title="{{ $arrsort['site_qty_value']['title'] or '' }}" href="{{ $arrsort['site_qty_value']['url'] or '' }}">{{ $sitelang['site_qty_value'] or '' }}  {!! $arrsort['site_qty_value']['icon'] or '' !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['reset_days']['class'] or '' }}" title="{{ $arrsort['reset_days']['title'] or '' }}" href="{{ $arrsort['reset_days']['url'] or '' }}">{{ $sitelang['reset_days'] or '' }} {!! $arrsort['reset_days']['icon'] or '' !!}</a></td>
-								<td width="2">Status</td>
-								<td width="50px" class="talCnt">Option</td>
+								<td width="2">{{ $lang['status'] }}</td>
+								<td width="30px" class="talCnt">{{ $lang['option'] }}</td>
 							</tr>
 							<?php 
 							if (! empty($listdata)) 

@@ -112,8 +112,8 @@ $base_url = base_url();
                                 <td width="180px"><a class="{{ $arrsort['po_blanket_number']['class'] }}" title="{{ $arrsort['po_blanket_number']['title'] }}" href="{{ $arrsort['po_blanket_number']['url'] }}">{{ $article_po_lang['po_blanket_number'] }} {!! $arrsort['po_blanket_number']['icon'] !!}</a></td>
                                 <td width="180px"><a class="{{ $arrsort['po_blanket_qty']['class'] }}" title="{{ $arrsort['po_blanket_qty']['title'] }}" href="{{ $arrsort['po_blanket_qty']['url'] }}">{{ $article_po_lang['po_blanket_qty'] }} {!! $arrsort['po_blanket_qty']['icon'] !!}</a></td>
                                 <td width="180px"><a class="{{ $arrsort['po_created_date']['class'] }}" title="{{ $arrsort['po_created_date']['title'] }}" href="{{ $arrsort['po_created_date']['url'] }}">{{ $article_po_lang['po_created_date'] }} {!! $arrsort['po_created_date']['icon'] !!}</a></td>
-								<td width="2">Status</td>
-								<td width="50px" class="talCnt">Option</td>
+								<td width="2">{{ $lang['status'] }}</td>
+								<td width="30px" class="talCnt">{{ $lang['option'] }}</td>
 							</tr>
 							<?php 
 							if (! empty($listdata)) 

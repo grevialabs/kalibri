@@ -113,6 +113,8 @@ $base_url = base_url();
 								<td width="180px"><a class="{{ $arrsort['outbound_delivery']['class'] }}" title="{{ $arrsort['outbound_delivery']['title'] }}" href="{{ $arrsort['outbound_delivery']['url'] }}">{{ $article_logistic_site_lang['outbound_delivery'] }} {!! $arrsort['outbound_delivery']['icon'] !!}</a></td>
 								
 								<td width="2">Status</td>
+								<td>{{ $lang['created_at'] }}</td>
+								<td>{{ $lang['option'] }}</td>
 								<!-- <td width="30px" class="talCnt">Option</td> -->
 							</tr>
 							<?php 
@@ -142,7 +144,9 @@ $base_url = base_url();
 								<td>{{ $rs['price'] or '' }}</td> -->
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
 								<td class="talCnt">
-								<!-- <a href="<?php //echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a> -->
+                                    <!-- <a href="<?php //echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a> -->
+								</td>
+                                <td class="talCnt">
 								</td>
 							</tr>
 							<?php

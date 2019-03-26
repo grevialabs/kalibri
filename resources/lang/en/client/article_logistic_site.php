@@ -13,15 +13,15 @@ return [
     |
     */
 
-    'page_title' => 'Artile Logistic Site',
-    'module' => 'Artile Logistic Site',
+    'page_title' => 'Article Logistic Site',
+    'module' => 'Article Logistic Site',
     // 'forgotpass' => 'Lupa Password',
-    'add_new' => 'Add new Artile Logistic Site',
+    'add_new' => 'Add new Article Logistic Site',
     'p1' => '',
     'success' => 'success',
 	
-    'article_logistic_site_id' => 'ArticleLogisticSiteID',
-    'site_id' => 'SiteID',
-    'outbound_delivery' => 'OutboundDelivery',
+    'article_logistic_site_id' => 'Article Logistic Site ID',
+    'site_id' => 'Site ID',
+    'outbound_delivery' => 'Outbound Delivery',
 
 ];

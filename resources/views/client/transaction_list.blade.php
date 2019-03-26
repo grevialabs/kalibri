@@ -115,8 +115,10 @@ $base_url = base_url();
 								<td width="150px"><a class="{{ $arrsort['wo_wbs']['class'] or '' }}" title="{{ $arrsort['wo_wbs']['title'] or '' }}" href="{{ $arrsort['wo_wbs']['url'] or '' }}">{{ $transactionlang['wo_wbs'] or '' }} {!! $arrsort['wo_wbs']['icon'] or '' !!}</a></td>
 								<td width="150px"><a class="{{ $arrsort['article']['class'] or '' }}" title="{{ $arrsort['article']['title'] or '' }}" href="{{ $arrsort['article']['url'] or '' }}">{{ $transactionlang['article'] or '' }} {!! $arrsort['article']['icon'] or '' !!}</a></td>
 								<td width="150px"><a class="{{ $arrsort['customer_article']['class'] or '' }}" title="{{ $arrsort['customer_article']['title'] or '' }}" href="{{ $arrsort['customer_article']['url'] or '' }}">{{ $transactionlang['customer_article'] or '' }} {!! $arrsort['customer_article']['icon'] or '' !!}</a></td>
+							    <td width="200px">{{ $lang['created_at'] }}</td>
+								<td width="200px">{{ $lang['updated_at'] }}</td>
 								<td width="2">Status</td>
-								<!-- <td width="50px" class="talCnt">Option</td> -->
+								<td width="50px" class="talCnt">{{ $lang['option'] }}</td>
 							</tr>
 							<?php 
 							if (! empty($listdata)) 
@@ -144,8 +146,10 @@ $base_url = base_url();
 								<td>{{ $rs['wo_wbs'] or '' }}</td>
 								<td>{{ $rs['article'] or '' }}</td>
 								<td>{{ $rs['customer_article'] or '' }}</td>							
+								<td>{{ $rs['created_at'] or '' }}</td>							
+								<td>{{ $rs['updated_at'] or '' }}</td>							
 								<td class="talCnt">{!! $general_model->show_record_status($rs['status']) !!}</td>
-								<td class="talCnt">
+                                <td class="talCnt">
 								<!-- <a href="<?php //echo Request::segment(2).DS.'delete?'.$idcol.'='.$id; ?>" onclick=""><i class="clrRed fa fa-trash fa-lg btndelete" title="Delete data" alt="Delete data"  onclick="return doConfirm()"></i></a> -->
 								</td>
 							</tr>

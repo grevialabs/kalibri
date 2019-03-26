@@ -113,8 +113,8 @@ $base_url = base_url();
 								<td><a class="{{ $arrsort['company_address']['class'] }}" title="{{ $arrsort['company_address']['title'] }}" href="{{ $arrsort['company_address']['url'] }}">{{ $companylang['company_address'] }} {!! $arrsort['company_address']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['company_phone']['class'] }}" title="{{ $arrsort['company_phone']['title'] }}" href="{{ $arrsort['company_phone']['url'] }}">{{ $companylang['company_phone'] }} {!! $arrsort['company_phone']['icon'] !!}</a></td>
 								<td width="180px"><a class="{{ $arrsort['company_pic']['class'] }}" title="{{ $arrsort['company_pic']['title'] }}" href="{{ $arrsort['company_pic']['url'] }}">{{ $companylang['company_pic'] }} {!! $arrsort['company_pic']['icon'] !!}</a></td>
-								<td width="2">Status</td>
-								<td width="30px" class="talCnt">Option</td>
+								<td width="2">{{ $lang['status'] }}</td>
+								<td width="30px" class="talCnt">{{ $lang['option'] }}</td>
 							</tr>
 							<?php 
 							if (! empty($listdata)) 
