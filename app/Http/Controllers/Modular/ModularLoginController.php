@@ -139,7 +139,7 @@ class ModularLoginController extends ModularController
 				$update = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
 				
 				$targeturl = 'login';
-				$message = 'Email / Password not match. '. $obj['counter_wrong_pass'] . ' of 3 max times';
+				$message = 'Email / Password not match. '. $obj['counter_wrong_pass'] . ' of max 3 times';
 				
 				if ($obj['counter_wrong_pass'] >= 3) {
 					$message = 'Your username has been locked due to 3 times wrong password. Please reset password to continue login';
@@ -161,8 +161,19 @@ class ModularLoginController extends ModularController
 				$api_method = 'get';
 				// $api_header['debug'] = 1;
 				$list_role = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
-				// --------------------------
 				
+				// check user if need update counter_wrong_pass
+				if ($obj['counter_wrong_pass'] > 0) {
+					
+					$api_url = $api_method = $api_param = $api_header = NULL;
+					$api_url = env('API_URL').'user';
+					$api_param['user_id'] = get_user_cookie('user_id');
+					$api_param['counter_wrong_pass'] = 0;
+					$api_method = 'put';
+					// $api_header['debug'] = 1;
+					$update = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+				}
+
 				// create cookie or session 
 				$cname = $cvalue = $cminutes = NULL;
 				$cname = 'tokenhash';
