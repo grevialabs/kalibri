@@ -40,7 +40,7 @@ $api_param['token'] = env('API_KEY');
 $api_param['paging'] = false;
 
 $api_url = env('API_URL').'site/get_list';
-$api_url_article_attribute = env('API_URL').'article_attribute/get_list';
+$api_url_article_attribute = env('API_URL').'article/get_list';
 $api_method = 'get';
 // $api_header['debug'] = 1;
 
@@ -131,17 +131,17 @@ function validate_column($arrsource,$arrtarget) {
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="article_attribute_id" class="control-label col-form-label">{!! $reason_type_lang['article_attribute_id'] !!}</label>
+							<label for="article_id" class="control-label col-form-label">{!! $reason_type_lang['article_id'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">							
-							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="article_attribute_id" id="article_attribute_id">
+							<select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="article_id" id="article_id">
 							<?php 
 							if (!empty($list_article_attribute)) {?>
 								<option value="" /> {{ $lang['please_select'] }} </>
 								<?php
 								foreach ($list_article_attribute as $k => $rs) {
 								?>
-								<option value="{{ $rs['article_attribute_id']}}">{{ $rs['attribute_name'] . ' - ID ' . $rs['article_attribute_id']}}</option>
+								<option value="{{ $rs['article_id']}}">{{ $rs['attribute_name'] . ' - ID ' . $rs['article_id']}}</option>
 								<?php 
 								} 
 							}
