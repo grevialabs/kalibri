@@ -69,35 +69,38 @@ class ModularLoginController extends ModularController
 			$post = $message = NULL;
 			$post = $_POST;
 			
+			$targeturl = 'login';
+			
 			// debug($post,1);
 			
 			if (! isset($post['username'])) {
-				$message = 'Email harus diisi';
+				$message = 'Email must be filled';
 				return redirect('login')->with('message', print_message($message));
 			}
 			
 			if (! isset($post['password'])) {
-				$message = 'Password harus diisi';
+				$message = 'Password must be filled';
 				return redirect('login')->with('message', print_message($message));
 			}
 			
 			// Action start here
 			$param = $api_header = NULL;
 			$param['user_code'] = $post['username'];
-			$api_url = env('API_URL').'user/get';
+			$api_url = env('API_URL').'user';
 			$api_method = 'get';
 			// $api_header['debug'] = 1;
 			$obj = curl_api_liquid($api_url, $api_method, $api_header, $param);
-
-			if (empty($obj)) {
+			$obj = json_decode($obj,1);
+			
+			if (empty($obj) || ! isset($obj['user_id'])) {
+				
 				// $message = 'Mohon maaf terjadi kesalahan. Silakan coba lagi';
-				$message = 'Data anda tidak ditemukan';
+				$message = 'Your username is not found. Please register.';
 				return redirect('login')->with('message', print_message($message));
 			}
 
-			$obj = json_decode($obj,1);
 			if (isset($obj['is_error'])) {
-				$message = 'Mohon maaf, terjadi kesalahan. Silakan ulangi.';
+				$message = 'Sorry error occured. Please try again';
 				return redirect('login')->with('message', print_message($message,'error'));
 			}
 			
@@ -112,19 +115,44 @@ class ModularLoginController extends ModularController
 			
 			// Check if banned or not
 			if ($obj['status_lock']) {
-				$message = 'Mohon maaf, user anda sedang terkunci. Silakan hubungi administrator';
+				$message = 'Sorry your username has been locked since ' . date('d M Y, H:i',strtotime($obj['locked_time'])). '. Please reset password to continue login';
 				return redirect('login')->with('message', print_message($message,'error'));
 			}
-			
-			// not a validation suppose tobe
-			// if (isset($obj['locked_time']) && time() < strtotime($obj['locked_time'])) {
-				// $message = 'Mohon maaf, user anda sedang terkunci. Silakan hubungi administrator';
-				// return redirect('login')->with('message', print_message($message,'error'));
-			// }
+
+			if (isset($obj['password']) && $post['password'] != $decrypt_password) {
+				// Add +1 error
+				
+				$obj['counter_wrong_pass'] += 1;
+				
+				// Action start here
+				$api_param = $api_header = NULL;
+				$api_param['user_id'] = $obj['user_id'];
+				$api_param['counter_wrong_pass'] = $obj['counter_wrong_pass'];
+				
+				if ($obj['counter_wrong_pass'] >= 3) {
+					$api_param['status_lock'] = 1;
+					$api_param['locked_time'] = get_datetime();
+				}
+				
+				$api_url = env('API_URL').'user';
+				$api_method = 'put';
+				$update = curl_api_liquid($api_url, $api_method, $api_header, $api_param);
+				
+				$targeturl = 'login';
+				$message = 'Email / Password not match. '. $obj['counter_wrong_pass'] . ' of 3 max times';
+				
+				if ($obj['counter_wrong_pass'] >= 3) {
+					$message = 'Your username has been locked due to 3 times wrong password. Please reset password to continue login';
+					
+				}
+				return redirect($targeturl)->with('message', print_message($message,'error'));
+			}
 			
 			// valid
-			if (isset($obj['password']) && $post['password'] == $decrypt_password) {
-				
+			// debug($post['password'] . ' == ' . $decrypt_password,1);
+			if (isset($obj['password']) && $post['password'] == $decrypt_password) 
+			{
+				// debug('benernih',1);
 				// --------------------------
 				// check access group and insert if not exist
 				$api_url = $api_method = $api_param = $api_header = NULL;
@@ -158,14 +186,8 @@ class ModularLoginController extends ModularController
 				// check if uri last page exist
 				if (isset($_GET['uri'])) $targeturl = urldecode($_GET['uri']);
 				
-			} else {
-				
-				// Add +1 error
-				
-				$targeturl = 'login';
-				$message = 'Email / Password tidak sesuai';
+				return redirect($targeturl)->with('message', print_message($message));
 			}
-			return redirect($targeturl)->with('message', print_message($message));
 		}
 	}
 }
