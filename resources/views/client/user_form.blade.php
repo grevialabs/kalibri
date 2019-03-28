@@ -159,10 +159,10 @@ $get_user_category_list = UserModel::get_user_category_list();
 					
 					<div class="form-group row">
 						<div class="col-lg-2 col-md-3 col-sm-12">
-							<label for="article_attribute_reason" class="control-label col-form-label">{!! $userlang['article_attribute_reason'] !!}</label>
+							<label for="attribute" class="control-label col-form-label">{!! $userlang['attribute'] !!}</label>
 						</div>
 						<div class="col-lg-7 col-lg-offset-3 col-md-9 col-sm-12">
-							<input type="text" data-toggle="{{ $userlang['article_attribute_reason'] }}" title="{{ $userlang['article_attribute_reason'] }}" class="form-control" id="article_attribute_reason" name="article_attribute_reason" placeholder="{{ $userlang['article_attribute_reason'] }}" required="" data-original-title="" />
+							<input type="text" data-toggle="{{ $userlang['attribute'] }}" title="{{ $userlang['attribute'] }}" class="form-control" id="attribute" name="attribute" placeholder="{{ $userlang['attribute'] }}" required="" data-original-title="" />
 						</div>
 					</div>
 					
