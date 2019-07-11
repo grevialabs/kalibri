@@ -13,6 +13,8 @@ use Cookie;
 use Exception;
 use Lang;
 // use Redirect;
+use Response;
+use Storage;
 use Illuminate\Support\Facades\Redirect;
 
 // define('GET','Getois');
@@ -106,5 +108,38 @@ class ModularController extends Controller
 		$param['PAGE_TITLE'] = 'Halaman Artikel Vue';
 		$param['CONTENT'] = view('modular.article_vue',$param);
 		return view('template.general.index',$param);
+	}
+	
+	public function ftp(){
+		$dir = '/var/public/devklbox.kawanlama.com/public/list_od_issued/archieve/';
+		// $dir = '/home/ftpkawanlama.com/DEV/ECOMMERCE_CSV/KLGBOX/ARCHV/';
+		$regFile = 'LIST_OD_ISSUED_20181109_174235';
+		$ext = '.csv';
+		$file = $dir.$regFile.$ext;
+		if(empty($file)){
+			return Response::json('path not valid',400);
+		}
+		$filename = basename($file);
+		$ftp = Storage::createFtpDriver([
+					'host' => 'devklbox.kawanlama.com', // hostname
+					'username' => 'devodsap', // username (credentials)
+					'password' => 'devodsap123!', // password (credentials)
+					// 'port' => '80', // port ftp
+					'port' => '21', // port ftp
+					'timeout' => '30', // timeout setting
+					
+					// 'host' => 'ftp-content.klgsys.com', // hostname
+					// 'username' => 'ftpkawanlama.com', // username (credentials)
+					// 'password' => 'jakarta.kesatu', // password (credentials)
+					// 'port' => '21', // port ftp
+					// 'timeout' => '30', // timeout setting
+					]);
+		// read file content
+		$filecontent = $ftp->get($file);
+		// download file
+		return Response::make($filecontent, '200', array(
+			'Content-Type' => 'application/octet-stream',
+			'Content-Disposition' => 'attachment; filename="'.$filename.'"',
+		));
 	}
 }

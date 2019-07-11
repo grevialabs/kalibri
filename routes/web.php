@@ -22,6 +22,7 @@ Route::any('/dologin', 'Modular\ModularLoginController@dologin');
 Route::any('/article-vue', 'Modular\ModularController@article_vue');
 
 Route::any('/forgotpass', 'Modular\ModularForgotpassController@forgotpass');
+Route::any('/ftp', 'Modular\ModularController@ftp');
 
 
 Route::prefix('modular')->group(function () {
